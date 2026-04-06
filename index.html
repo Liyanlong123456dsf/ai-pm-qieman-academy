@@ -3638,26 +3638,19 @@ function nhRenderDeepDive(){
   nhRenderDayView();
 }
 
-// ---- Swimlane Flow Chart (泳道图) — Vertical stage-by-stage layout ----
+// ---- Swimlane Flow Chart (泳道图) — Grid table with role columns ----
 let nhSwimlaneHighlight=null;
 function nhRenderSwimlane(){
   const mc=document.getElementById('nh-main-content');if(!mc)return;
   const dk=isDark;
   const roles=SWIMLANE_ROLES;
   const stages=SWIMLANE_STAGES;
-  const roleMap={};roles.forEach(r=>{roleMap[r.key]=r});
-  // pill builder
-  function pill(p,big){
-    const r=roleMap[p.role]||{};
-    const dimmed=nhSwimlaneHighlight&&nhSwimlaneHighlight!==p.role;
-    const sz=big?'padding:8px 18px;font-size:13px;':'padding:6px 14px;font-size:11px;';
-    return '<div style="display:inline-flex;align-items:center;justify-content:center;'+sz+'border-radius:980px;font-weight:600;letter-spacing:-.1px;white-space:nowrap;text-align:center;line-height:1.35;border:1.5px solid '+p.color+'50;background:'+p.color+'14;color:'+p.color+';cursor:default;transition:all .25s;opacity:'+(dimmed?.2:1)+'" title="'+((r.icon||'')+' '+(r.label||''))+'">'
-      +p.text.replace(/\n/g,' ')+'</div>';
-  }
-  // arrow SVG between pills
-  const arrowSvg='<svg width="28" height="14" viewBox="0 0 28 14" style="flex-shrink:0;margin:0 2px"><line x1="0" y1="7" x2="18" y2="7" stroke="'+(dk?'rgba(255,255,255,.25)':'rgba(0,0,0,.18)')+'" stroke-width="1.5" stroke-dasharray="4,3"/><polygon points="28,7 19,3 19,11" fill="'+(dk?'rgba(255,255,255,.35)':'rgba(0,0,0,.25)')+'"/></svg>';
-  // down arrow between stages
-  const downArrow='<div style="display:flex;justify-content:center;padding:6px 0"><svg width="14" height="24" viewBox="0 0 14 24"><line x1="7" y1="0" x2="7" y2="16" stroke="'+(dk?'rgba(255,255,255,.15)':'rgba(0,0,0,.1)')+'" stroke-width="1.5"/><polygon points="7,24 2,16 12,16" fill="'+(dk?'rgba(255,255,255,.2)':'rgba(0,0,0,.15)')+'"/></svg></div>';
+  const roleMap={};const roleIdx={};
+  roles.forEach((r,i)=>{roleMap[r.key]=r;roleIdx[r.key]=i});
+  const numR=roles.length; // 8
+  const colTpl='88px repeat('+numR+',1fr)';
+  const border=dk?'rgba(255,255,255,.06)':'rgba(0,0,0,.07)';
+  const hlKey=nhSwimlaneHighlight;
 
   let h='<div class="nh-animate">';
   // Breadcrumb
@@ -3666,80 +3659,135 @@ function nhRenderSwimlane(){
   h+='<span class="text-[11px] '+(dk?'text-gray-600':'text-gray-300')+'">›</span>';
   h+='<span class="text-[11px] font-semibold '+(dk?'text-white':'text-gray-900')+'" style="letter-spacing:-.2px">流程图</span></div>';
   // Title
-  h+='<div style="text-align:center;margin-bottom:36px">';
+  h+='<div style="text-align:center;margin-bottom:32px">';
   h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px" class="'+(dk?'text-amber-400':'text-amber-600')+'">CROSS-FUNCTIONAL FLOWCHART</div>';
   h+='<div style="font-size:clamp(26px,4.5vw,40px);font-weight:800;line-height:1.06;letter-spacing:-.8px;margin-bottom:8px" class="'+(dk?'text-white':'text-gray-900')+'">AI 产品经理协作泳道图</div>';
-  h+='<div style="font-size:14px;line-height:1.5;letter-spacing:-.15px;max-width:480px;margin:0 auto" class="'+(dk?'text-gray-400':'text-gray-500')+'">从需求到迭代，8 个角色的全流程协作一目了然。</div>';
+  h+='<div style="font-size:14px;line-height:1.5;letter-spacing:-.15px;max-width:520px;margin:0 auto" class="'+(dk?'text-gray-400':'text-gray-500')+'">纵列 = 角色，横行 = 阶段。节点在谁的列中，就由谁负责。<br><span style="font-size:12px">点击顶部角色名称可高亮筛选。</span></div>';
   h+='</div>';
-  // Role filter bar (sticky feel)
-  h+='<div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:28px;padding:12px 16px;border-radius:14px;background:'+(dk?'rgba(255,255,255,.03)':'rgba(0,0,0,.025)')+'">';
+  // ====== SWIMLANE TABLE ======
+  h+='<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:8px">';
+  h+='<div style="min-width:860px">';
+
+  // ---- Sticky header row: role columns ----
+  h+='<div style="display:grid;grid-template-columns:'+colTpl+';gap:0;position:sticky;top:0;z-index:2;padding:0 0 4px">';
+  // Corner: "阶段" label
+  h+='<div style="padding:10px 6px;display:flex;align-items:center;justify-content:center;border-bottom:2px solid '+border+'"><span style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase" class="'+(dk?'text-gray-500':'text-gray-400')+'">阶段</span></div>';
+  // Role headers
   roles.forEach(r=>{
-    const hl=nhSwimlaneHighlight===r.key;
+    const hl=hlKey===r.key;
+    const colBg=hl?(r.color+'18'):(dk?'rgba(255,255,255,.02)':'rgba(0,0,0,.015)');
     h+='<button onclick="nhSwimlaneHighlight=nhSwimlaneHighlight===\''+r.key+'\'?null:\''+r.key+'\';nhRenderSwimlane()" ';
-    h+='style="display:flex;align-items:center;gap:5px;padding:6px 14px;border-radius:980px;border:1.5px solid '+(hl?r.color+'60':dk?'rgba(255,255,255,.08)':'rgba(0,0,0,.08)')+';background:'+(hl?r.color+'18':'transparent')+';cursor:pointer;transition:all .2s">';
-    h+='<span style="font-size:13px">'+r.icon+'</span>';
-    h+='<span style="font-size:11px;font-weight:600;letter-spacing:-.1px;'+(hl?'color:'+r.color:'')+'" class="'+(hl?'':(dk?'text-gray-300':'text-gray-600'))+'">'+r.label+'</span>';
+    h+='style="padding:10px 4px;text-align:center;border:none;cursor:pointer;border-bottom:3px solid '+(hl?r.color:border)+';background:'+colBg+';transition:all .2s" class="group">';
+    h+='<div style="font-size:18px;margin-bottom:3px">'+r.icon+'</div>';
+    h+='<div style="font-size:11px;font-weight:700;letter-spacing:-.2px;transition:color .2s;color:'+(hl?r.color:'')+'" class="'+(hl?'':(dk?'text-gray-200':'text-gray-700'))+'">'+r.label+'</div>';
     h+='</button>';
   });
   h+='</div>';
-  // ======== STAGES (vertical flow) ========
+
+  // ---- Stage rows ----
   stages.forEach((stage,si)=>{
-    const isAlt=si%2===1;
-    const secBg=isAlt?(dk?'rgba(255,255,255,.02)':'rgba(0,0,0,.018)'):'transparent';
-    // Stage section
-    h+='<div style="background:'+secBg+';border-radius:16px;padding:24px 20px;margin:0 -8px">';
-    // Stage header
-    h+='<div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">';
-    h+='<div style="width:4px;height:28px;border-radius:2px;background:'+stage.color+';flex-shrink:0"></div>';
-    h+='<div style="font-size:16px;font-weight:700;letter-spacing:-.3px" class="'+(dk?'text-white':'text-gray-900')+'">'+stage.label+'</div>';
-    h+='<div style="flex:1;height:1px;background:'+(dk?'rgba(255,255,255,.06)':'rgba(0,0,0,.06)')+'"></div>';
+    // Collect all pills per role for this stage
+    const pillsByRole={};
+    if(stage.nodes) stage.nodes.forEach(n=>{if(n.type!=='arrow'&&n.role){if(!pillsByRole[n.role])pillsByRole[n.role]=[];pillsByRole[n.role].push(n)}});
+    if(stage.sub) stage.sub.forEach(n=>{if(n.role){if(!pillsByRole[n.role])pillsByRole[n.role]=[];pillsByRole[n.role].push(n)}});
+
+    const isAlt=si%2===0;
+    const rowBg=isAlt?(dk?'rgba(255,255,255,.015)':'rgba(0,0,0,.012)'):'transparent';
+
+    // --- Main node row ---
+    h+='<div style="display:grid;grid-template-columns:'+colTpl+';gap:0;background:'+rowBg+';min-height:72px;align-items:stretch;border-bottom:1px solid '+border+'">';
+    // Stage label cell
+    h+='<div style="display:flex;align-items:center;gap:6px;padding:12px 8px;border-right:1px solid '+border+'">';
+    h+='<div style="width:4px;align-self:stretch;border-radius:2px;background:'+stage.color+';flex-shrink:0"></div>';
+    h+='<div style="font-size:14px;font-weight:700;letter-spacing:-.2px;white-space:nowrap" class="'+(dk?'text-white':'text-gray-900')+'">'+stage.label+'</div>';
     h+='</div>';
-    // Nodes row: pills with arrows
-    if(stage.nodes&&stage.nodes.length){
-      h+='<div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;padding:4px 0 4px 14px">';
-      stage.nodes.forEach((n,ni)=>{
-        if(n.type==='arrow'){
-          h+=arrowSvg;
-        } else {
-          h+=pill(n,true);
-        }
+    // Role cells
+    roles.forEach((r,ri)=>{
+      const pills=pillsByRole[r.key]||[];
+      const isHl=hlKey===r.key;
+      const isDimmed=hlKey&&hlKey!==r.key;
+      const cellBg=isHl?(r.color+'08'):'transparent';
+      // Column separator + highlight background
+      h+='<div style="padding:10px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;'
+        +'border-right:'+(ri<numR-1?'1px solid '+border:'none')
+        +';background:'+cellBg
+        +';transition:background .25s,opacity .25s'
+        +';opacity:'+(isDimmed?'.2':'1')
+        +'">';
+      pills.forEach(p=>{
+        // Pill node
+        h+='<div style="display:flex;flex-direction:column;align-items:center;gap:2px;width:100%;max-width:120px">';
+        h+='<div style="width:100%;padding:7px 6px;border-radius:10px;text-align:center;font-size:11px;font-weight:600;letter-spacing:-.1px;line-height:1.35;border:1.5px solid '+p.color+'45;background:'+p.color+'12;color:'+p.color+'">';
+        h+=p.text.replace(/\n/g,'<br>')+'</div>';
+        h+='</div>';
       });
       h+='</div>';
-    }
-    // Sub-items (parallel tasks shown indented)
-    if(stage.sub&&stage.sub.length){
-      h+='<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:8px 0 4px 14px">';
-      h+='<span style="font-size:10px;font-weight:500;letter-spacing:.3px" class="'+(dk?'text-gray-600':'text-gray-400')+'">同步 ·</span>';
-      stage.sub.forEach(s=>{h+=pill(s,false)});
-      h+='</div>';
-    }
-    // Full-width bars (collaborative checkpoints)
+    });
+    h+='</div>';
+
+    // --- Full-width bars (collaborative checkpoints) ---
     if(stage.bars&&stage.bars.length){
       stage.bars.forEach(bar=>{
-        const dimmed=nhSwimlaneHighlight&&bar.roles&&!bar.roles.includes(nhSwimlaneHighlight);
-        // Role dots
-        const dots=bar.roles?bar.roles.map(rk=>{const r=roleMap[rk];return r?'<span style="width:8px;height:8px;border-radius:50%;background:'+r.color+';display:inline-block" title="'+r.label+'"></span>':''}).join(''):'';
-        h+='<div style="margin:12px 0 4px 14px;padding:12px 20px;border-radius:10px;border:1.5px solid '+bar.color+'30;background:'+bar.color+'08;display:flex;align-items:center;gap:12px;transition:opacity .3s;opacity:'+(dimmed?.2:1)+'">';
-        h+='<div style="display:flex;gap:3px;flex-shrink:0">'+dots+'</div>';
-        h+='<div style="font-size:13px;font-weight:600;letter-spacing:-.15px;color:'+bar.color+'">'+bar.text+'</div>';
+        const startIdx=bar.roles?Math.min(...bar.roles.map(rk=>roleIdx[rk]!==undefined?roleIdx[rk]:0)):0;
+        const endIdx=bar.roles?Math.max(...bar.roles.map(rk=>roleIdx[rk]!==undefined?roleIdx[rk]:numR-1)):numR-1;
+        const isDimmed=hlKey&&bar.roles&&!bar.roles.includes(hlKey);
+        h+='<div style="display:grid;grid-template-columns:'+colTpl+';gap:0;min-height:44px;align-items:center;border-bottom:1px solid '+border+';opacity:'+(isDimmed?.15:1)+';transition:opacity .25s">';
+        // Empty stage cell
+        h+='<div style="border-right:1px solid '+border+'"></div>';
+        // Place spanning bar
+        for(let ri=0;ri<numR;ri++){
+          if(ri===startIdx){
+            const span=endIdx-startIdx+1;
+            h+='<div style="grid-column:span '+span+';padding:6px 10px;display:flex;align-items:center;justify-content:center;gap:8px">';
+            // Role dots
+            if(bar.roles){
+              h+='<div style="display:flex;gap:3px;flex-shrink:0">';
+              bar.roles.forEach(rk=>{const rl=roleMap[rk];if(rl)h+='<span style="width:7px;height:7px;border-radius:50%;background:'+rl.color+'" title="'+rl.label+'"></span>'});
+              h+='</div>';
+            }
+            h+='<div style="flex:1;padding:8px 16px;border-radius:8px;text-align:center;font-size:12px;font-weight:600;letter-spacing:-.1px;border:1.5px dashed '+bar.color+'40;background:'+bar.color+'08;color:'+bar.color+'">'+bar.text+'</div>';
+            h+='</div>';
+            ri=endIdx;
+          } else {
+            h+='<div style="border-right:'+(ri<numR-1?'1px solid '+border:'none')+'"></div>';
+          }
+        }
         h+='</div>';
       });
     }
-    h+='</div>';
-    // Down arrow between stages
-    if(si<stages.length-1) h+=downArrow;
+
+    // --- Down arrow between stages ---
+    if(si<stages.length-1){
+      h+='<div style="display:grid;grid-template-columns:'+colTpl+';gap:0;height:28px">';
+      h+='<div style="border-right:1px solid '+border+'"></div>';
+      // Find center column
+      const midCol=Math.floor(numR/2);
+      for(let ri=0;ri<numR;ri++){
+        if(ri===midCol){
+          h+='<div style="display:flex;align-items:center;justify-content:center;border-right:'+(ri<numR-1?'1px solid '+border:'none')+'">';
+          h+='<svg width="12" height="20" viewBox="0 0 12 20"><line x1="6" y1="0" x2="6" y2="13" stroke="'+(dk?'rgba(255,255,255,.2)':'rgba(0,0,0,.15)')+'" stroke-width="1.5"/><polygon points="6,20 1,13 11,13" fill="'+(dk?'rgba(255,255,255,.25)':'rgba(0,0,0,.2)')+'"/></svg>';
+          h+='</div>';
+        } else {
+          h+='<div style="border-right:'+(ri<numR-1?'1px solid '+border:'none')+'"></div>';
+        }
+      }
+      h+='</div>';
+    }
   });
+
+  h+='</div></div>'; // end min-width + overflow
+
   // Legend
-  h+='<div style="margin-top:28px;padding:20px;border-radius:14px;background:'+(dk?'rgba(255,255,255,.02)':'rgba(0,0,0,.02)')+'">';
-  h+='<div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px" class="'+(dk?'text-gray-500':'text-gray-400')+'">图例</div>';
-  h+='<div style="display:flex;flex-wrap:wrap;gap:14px">';
+  h+='<div style="margin-top:24px;padding:16px 20px;border-radius:14px;background:'+(dk?'rgba(255,255,255,.02)':'rgba(0,0,0,.02)')+'">';
+  h+='<div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px" class="'+(dk?'text-gray-500':'text-gray-400')+'">图例</div>';
+  h+='<div style="display:flex;flex-wrap:wrap;gap:12px">';
   roles.forEach(r=>{
-    h+='<div style="display:flex;align-items:center;gap:6px">';
+    h+='<div style="display:flex;align-items:center;gap:5px">';
     h+='<div style="width:10px;height:10px;border-radius:50%;background:'+r.color+'"></div>';
-    h+='<span style="font-size:12px;font-weight:500;letter-spacing:-.1px" class="'+(dk?'text-gray-400':'text-gray-500')+'">'+r.icon+' '+r.label+'</span></div>';
+    h+='<span style="font-size:11px;font-weight:500;letter-spacing:-.1px" class="'+(dk?'text-gray-400':'text-gray-500')+'">'+r.icon+' '+r.label+'</span></div>';
   });
   h+='</div>';
-  h+='<div style="margin-top:10px;font-size:11px;letter-spacing:-.1px" class="'+(dk?'text-gray-600':'text-gray-400')+'">💡 点击上方角色胶囊可高亮该角色参与的所有环节</div>';
+  h+='<div style="margin-top:8px;font-size:11px;letter-spacing:-.1px" class="'+(dk?'text-gray-600':'text-gray-400')+'">💡 节点在哪一列，就由该角色负责。点击角色名称可高亮筛选。</div>';
   h+='</div>';
   h+='</div>';
   mc.innerHTML=h;
