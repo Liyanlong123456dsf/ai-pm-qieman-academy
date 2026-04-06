@@ -3085,6 +3085,65 @@ const SWIMLANE_STAGES=[
 ]}
 ];
 
+// ---- Week 2 泳道图: RAG Pipeline × Agent × Workflow ----
+const SWIMLANE_ROLES_W2=[
+{key:'user',label:'用户',icon:'👤',color:'#3b82f6'},
+{key:'pm',label:'AI产品',icon:'💡',color:'#f59e0b'},
+{key:'data',label:'数据工程',icon:'💾',color:'#10b981'},
+{key:'algo',label:'算法',icon:'🧪',color:'#ec4899'},
+{key:'dev',label:'研发',icon:'✏️',color:'#8b5cf6'},
+{key:'ops',label:'运维/运营',icon:'🔧',color:'#f97316'}
+];
+const SWIMLANE_STAGES_W2=[
+{key:'collect',label:'数据采集',color:'#10b981',nodes:[
+  {text:'定义数据源\n& 采集标准',role:'pm',type:'pill',color:'#f59e0b'},
+  {text:'→',type:'arrow'},
+  {text:'原始数据采集\n(Pipeline A)',role:'data',type:'pill',color:'#10b981'}
+],bars:[]},
+{key:'parse',label:'文档解析',color:'#3b82f6',nodes:[
+  {text:'文档解析\n(Pipeline B)',role:'data',type:'pill',color:'#10b981'},
+  {text:'→',type:'arrow'},
+  {text:'数据清洗\n(Pipeline C)',role:'data',type:'pill',color:'#10b981'}
+],bars:[
+  {text:'PM 输出《文档解析质量标准》，组织抽样校验',roles:['pm','data'],color:'#f59e0b'}
+]},
+{key:'chunk',label:'分割 & 向量化',color:'#8b5cf6',nodes:[
+  {text:'文本分割策略\n(Pipeline D)',role:'pm',type:'pill',color:'#f59e0b'},
+  {text:'→',type:'arrow'},
+  {text:'Embedding 向量化\n(Pipeline E)',role:'algo',type:'pill',color:'#ec4899'},
+  {text:'→',type:'arrow'},
+  {text:'向量索引构建\n(Pipeline F)',role:'data',type:'pill',color:'#10b981'}
+],bars:[]},
+{key:'retrieval',label:'在线检索',color:'#06b6d4',nodes:[
+  {text:'用户提问',role:'user',type:'pill',color:'#3b82f6'},
+  {text:'→',type:'arrow'},
+  {text:'Query 改写\n(Pipeline G)',role:'algo',type:'pill',color:'#ec4899'},
+  {text:'→',type:'arrow'},
+  {text:'多路召回 & 重排\n(Pipeline H)',role:'algo',type:'pill',color:'#ec4899'}
+],bars:[]},
+{key:'generate',label:'增强 & 生成',color:'#f59e0b',nodes:[
+  {text:'上下文增强\n& Prompt 组装',role:'pm',type:'pill',color:'#f59e0b'},
+  {text:'→',type:'arrow'},
+  {text:'LLM 生成回答',role:'algo',type:'pill',color:'#ec4899'}
+],bars:[
+  {text:'质量评估：召回率≥90% · 准确率≥85% · 延迟 P95',roles:['pm','algo'],color:'#06b6d4'}
+]},
+{key:'agent',label:'智能体开发',color:'#ec4899',nodes:[
+  {text:'人设与回复\n逻辑设计',role:'pm',type:'pill',color:'#f59e0b'},
+  {text:'→',type:'arrow'},
+  {text:'知识库接入\n& 模型调参',role:'algo',type:'pill',color:'#ec4899'},
+  {text:'→',type:'arrow'},
+  {text:'Coze 平台\n构建发布',role:'dev',type:'pill',color:'#8b5cf6'}
+],bars:[]},
+{key:'workflow',label:'工作流自动化',color:'#f97316',nodes:[
+  {text:'SOP 梳理\n& 场景拆解',role:'pm',type:'pill',color:'#f59e0b'},
+  {text:'→',type:'arrow'},
+  {text:'工作流编排\n(节点/触发器)',role:'dev',type:'pill',color:'#8b5cf6'}
+],bars:[
+  {text:'运营数据监控 · 效果迭代 · 持续优化',roles:['pm','ops'],color:'#f97316'}
+]}
+];
+
 function toggleNotesHub(){
   AudioSys.play('notes-hub');
   const el=document.getElementById('notes-hub');
@@ -3651,14 +3710,19 @@ let nhSwimlaneHighlight=null;
 function nhRenderSwimlane(){
   const mc=document.getElementById('nh-main-content');if(!mc)return;
   const dk=isDark;
-  const roles=SWIMLANE_ROLES;
-  const stages=SWIMLANE_STAGES;
+  const isW2=nhWeek===1;
+  const roles=isW2?SWIMLANE_ROLES_W2:SWIMLANE_ROLES;
+  const stages=isW2?SWIMLANE_STAGES_W2:SWIMLANE_STAGES;
   const roleMap={};const roleIdx={};
   roles.forEach((r,i)=>{roleMap[r.key]=r;roleIdx[r.key]=i});
-  const numR=roles.length; // 8
+  const numR=roles.length;
   const colTpl='88px repeat('+numR+',1fr)';
   const border=dk?'rgba(255,255,255,.06)':'rgba(0,0,0,.07)';
   const hlKey=nhSwimlaneHighlight;
+
+  const fTitle=isW2?'RAG Pipeline × Agent × Workflow':'AI 产品经理协作泳道图';
+  const fTag=isW2?'RAG & AGENT FLOWCHART':'CROSS-FUNCTIONAL FLOWCHART';
+  const fDesc=isW2?'从数据采集到智能体发布的完整 RAG 开发流程':'纵列 = 角色，横行 = 阶段。节点在谁的列中，就由谁负责。';
 
   let h='<div class="nh-animate">';
   // Breadcrumb
@@ -3668,9 +3732,9 @@ function nhRenderSwimlane(){
   h+='<span class="text-[11px] font-semibold '+(dk?'text-white':'text-gray-900')+'" style="letter-spacing:-.2px">流程图</span></div>';
   // Title
   h+='<div style="text-align:center;margin-bottom:32px">';
-  h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px" class="'+(dk?'text-amber-400':'text-amber-600')+'">CROSS-FUNCTIONAL FLOWCHART</div>';
-  h+='<div style="font-size:clamp(26px,4.5vw,40px);font-weight:800;line-height:1.06;letter-spacing:-.8px;margin-bottom:8px" class="'+(dk?'text-white':'text-gray-900')+'">AI 产品经理协作泳道图</div>';
-  h+='<div style="font-size:14px;line-height:1.5;letter-spacing:-.15px;max-width:520px;margin:0 auto" class="'+(dk?'text-gray-400':'text-gray-500')+'">纵列 = 角色，横行 = 阶段。节点在谁的列中，就由谁负责。<br><span style="font-size:12px">点击顶部角色名称可高亮筛选。</span></div>';
+  h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px" class="'+(dk?'text-amber-400':'text-amber-600')+'">'+fTag+'</div>';
+  h+='<div style="font-size:clamp(26px,4.5vw,40px);font-weight:600;line-height:1.07;letter-spacing:-.5px;margin-bottom:8px" class="'+(dk?'text-white':'text-gray-900')+'">'+fTitle+'</div>';
+  h+='<div style="font-size:14px;line-height:1.5;letter-spacing:-.15px;max-width:520px;margin:0 auto" class="'+(dk?'text-gray-400':'text-gray-500')+'">'+fDesc+'<br><span style="font-size:12px">点击顶部角色名称可高亮筛选。</span></div>';
   h+='</div>';
   // ====== SWIMLANE TABLE ======
   h+='<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:8px">';
@@ -4296,7 +4360,7 @@ function nhRenderCourseware(){
   document.getElementById('nh-main').scrollTop=0;
 }
 
-function nhSwitchWeek(i){nhWeek=i;nhView='overview';nhCourse=null;nhExpandedDay=null;nhRenderSidebar();nhRenderMain()}
+function nhSwitchWeek(i){nhWeek=i;nhView='overview';nhCourse=null;nhExpandedDay=null;nhSwimlaneHighlight=null;nhRenderSidebar();nhRenderMain()}
 function nhShowOverview(){nhView='overview';nhCourse=null;nhRenderSidebar();nhRenderMain()}
 function nhShowFlowchart(){nhView='flowchart';nhCourse=null;nhRenderSidebar();nhRenderMain()}
 function nhShowGlossary(){nhView='glossary';nhCourse=null;nhRenderSidebar();nhRenderMain()}
