@@ -1422,7 +1422,7 @@ function celebrateNode(){
 // ==========================================
 // THEME
 // ==========================================
-function toggleTheme(){isDark=!isDark;AudioSys.play('theme',{dark:isDark});applyTheme();saveState();if(!document.getElementById('app').classList.contains('hidden')){buildTimeline();buildTopNodes();renderContent(false)}}
+function toggleTheme(){isDark=!isDark;AudioSys.play('theme',{dark:isDark});applyTheme();saveState();if(!document.getElementById('app').classList.contains('hidden')){buildTimeline();buildTopNodes();renderContent(false)}if(nhActive){nhRenderSidebar();nhRenderMain()}}
 function applyTheme(){
   const h=document.documentElement,b=document.body;
   if(isDark){h.classList.add('dark');h.classList.remove('light');b.classList.add('dark','bg-black','text-white');b.classList.remove('light','bg-white','text-gray-900')}
@@ -3398,17 +3398,33 @@ function nhGenViz(point, col, idx){
     const raw=point.slice(point.indexOf('：')!==-1?point.indexOf('：')+1:point.indexOf(':')+1).trim();
     const steps=raw.split(/\s*[→➜>]\s*/).map(s=>s.trim()).filter(Boolean);
     if(steps.length>=3&&steps.length<=8){
-      const w=Math.min(steps.length*110,600);
-      let s='<svg viewBox="0 0 '+w+' 64" class="w-full max-w-['+w+'px] mx-auto my-3" style="overflow:visible">';
-      const sw=80, gap=(w-steps.length*sw)/(steps.length-1||1);
+      // Responsive: wider boxes, bigger text, proper multi-line
+      const maxCharsPerLine=7;
+      const sw=Math.max(100, 120);
+      const arrowW=36;
+      const totalW=steps.length*sw+(steps.length-1)*arrowW;
+      const boxH=56;
+      const svgH=boxH+16;
+      let s='<svg viewBox="0 0 '+totalW+' '+svgH+'" class="w-full mx-auto my-3" style="overflow:visible;max-width:'+Math.min(totalW,720)+'px">';
       steps.forEach((st,i)=>{
-        const x=i*(sw+gap);
-        s+='<rect x="'+x+'" y="8" width="'+sw+'" height="48" rx="8" fill="'+_hexRgba(col,.08)+'" stroke="'+_hexRgba(col,.25)+'" stroke-width="1"/>';
-        s+='<text x="'+(x+sw/2)+'" y="36" text-anchor="middle" fill="'+txt+'" font-size="9" font-weight="600" font-family="system-ui">'+st.slice(0,8)+'</text>';
-        if(st.length>8) s+='<text x="'+(x+sw/2)+'" y="48" text-anchor="middle" fill="'+sub+'" font-size="7" font-family="system-ui">'+st.slice(8,16)+'</text>';
+        const x=i*(sw+arrowW);
+        const cy=svgH/2;
+        // Box
+        s+='<rect x="'+x+'" y="'+((svgH-boxH)/2)+'" width="'+sw+'" height="'+boxH+'" rx="10" fill="'+_hexRgba(col,.08)+'" stroke="'+_hexRgba(col,.3)+'" stroke-width="1.5"/>';
+        // Multi-line text: split into lines of maxCharsPerLine
+        const lines=[];
+        for(let ci2=0;ci2<st.length;ci2+=maxCharsPerLine) lines.push(st.slice(ci2,ci2+maxCharsPerLine));
+        const lineH=14;
+        const textStartY=cy - ((lines.length-1)*lineH)/2;
+        lines.forEach((ln,li)=>{
+          s+='<text x="'+(x+sw/2)+'" y="'+(textStartY+li*lineH)+'" text-anchor="middle" dominant-baseline="central" fill="'+txt+'" font-size="11" font-weight="600" font-family="system-ui,sans-serif">'+ln+'</text>';
+        });
+        // Arrow to next
         if(i<steps.length-1){
-          const ax=x+sw+2, aw=gap-4;
-          if(aw>6) s+='<line x1="'+ax+'" y1="32" x2="'+(ax+aw-6)+'" y2="32" stroke="'+_hexRgba(col,.6)+'" stroke-width="1.5" stroke-dasharray="3,2"/><polygon points="'+(ax+aw)+',32 '+(ax+aw-6)+',28 '+(ax+aw-6)+',36" fill="'+col+'"/>';
+          const ax1=x+sw+4;
+          const ax2=ax1+arrowW-8;
+          s+='<line x1="'+ax1+'" y1="'+cy+'" x2="'+(ax2-5)+'" y2="'+cy+'" stroke="'+_hexRgba(col,.5)+'" stroke-width="1.5" stroke-dasharray="4,3"/>';
+          s+='<polygon points="'+ax2+','+cy+' '+(ax2-7)+','+(cy-4)+' '+(ax2-7)+','+(cy+4)+'" fill="'+col+'"/>';
         }
       });
       s+='</svg>';
@@ -3622,138 +3638,108 @@ function nhRenderDeepDive(){
   nhRenderDayView();
 }
 
-// ---- Swimlane Flow Chart (泳道图) ----
-let nhSwimlaneHighlight=null; // highlighted role key
+// ---- Swimlane Flow Chart (泳道图) — Vertical stage-by-stage layout ----
+let nhSwimlaneHighlight=null;
 function nhRenderSwimlane(){
   const mc=document.getElementById('nh-main-content');if(!mc)return;
   const dk=isDark;
   const roles=SWIMLANE_ROLES;
   const stages=SWIMLANE_STAGES;
-  const roleIdx={};roles.forEach((r,i)=>{roleIdx[r.key]=i});
+  const roleMap={};roles.forEach(r=>{roleMap[r.key]=r});
+  // pill builder
+  function pill(p,big){
+    const r=roleMap[p.role]||{};
+    const dimmed=nhSwimlaneHighlight&&nhSwimlaneHighlight!==p.role;
+    const sz=big?'padding:8px 18px;font-size:13px;':'padding:6px 14px;font-size:11px;';
+    return '<div style="display:inline-flex;align-items:center;justify-content:center;'+sz+'border-radius:980px;font-weight:600;letter-spacing:-.1px;white-space:nowrap;text-align:center;line-height:1.35;border:1.5px solid '+p.color+'50;background:'+p.color+'14;color:'+p.color+';cursor:default;transition:all .25s;opacity:'+(dimmed?.2:1)+'" title="'+((r.icon||'')+' '+(r.label||''))+'">'
+      +p.text.replace(/\n/g,' ')+'</div>';
+  }
+  // arrow SVG between pills
+  const arrowSvg='<svg width="28" height="14" viewBox="0 0 28 14" style="flex-shrink:0;margin:0 2px"><line x1="0" y1="7" x2="18" y2="7" stroke="'+(dk?'rgba(255,255,255,.25)':'rgba(0,0,0,.18)')+'" stroke-width="1.5" stroke-dasharray="4,3"/><polygon points="28,7 19,3 19,11" fill="'+(dk?'rgba(255,255,255,.35)':'rgba(0,0,0,.25)')+'"/></svg>';
+  // down arrow between stages
+  const downArrow='<div style="display:flex;justify-content:center;padding:6px 0"><svg width="14" height="24" viewBox="0 0 14 24"><line x1="7" y1="0" x2="7" y2="16" stroke="'+(dk?'rgba(255,255,255,.15)':'rgba(0,0,0,.1)')+'" stroke-width="1.5"/><polygon points="7,24 2,16 12,16" fill="'+(dk?'rgba(255,255,255,.2)':'rgba(0,0,0,.15)')+'"/></svg></div>';
+
   let h='<div class="nh-animate">';
   // Breadcrumb
   h+='<div style="display:flex;align-items:center;gap:6px;margin-bottom:24px">';
   h+='<button onclick="nhShowOverview()" class="text-[11px] '+(dk?'text-gray-500 hover:text-white':'text-gray-400 hover:text-gray-900')+' transition-colors" style="letter-spacing:-.2px">笔记总览</button>';
   h+='<span class="text-[11px] '+(dk?'text-gray-600':'text-gray-300')+'">›</span>';
   h+='<span class="text-[11px] font-semibold '+(dk?'text-white':'text-gray-900')+'" style="letter-spacing:-.2px">流程图</span></div>';
-  // Title (Apple-style: tight, cinematic)
-  h+='<div style="text-align:center;margin-bottom:40px">';
+  // Title
+  h+='<div style="text-align:center;margin-bottom:36px">';
   h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px" class="'+(dk?'text-amber-400':'text-amber-600')+'">CROSS-FUNCTIONAL FLOWCHART</div>';
   h+='<div style="font-size:clamp(26px,4.5vw,40px);font-weight:800;line-height:1.06;letter-spacing:-.8px;margin-bottom:8px" class="'+(dk?'text-white':'text-gray-900')+'">AI 产品经理协作泳道图</div>';
-  h+='<div style="font-size:14px;line-height:1.5;letter-spacing:-.15px;max-width:480px;margin:0 auto" class="'+(dk?'text-gray-400':'text-gray-500')+'">从需求提出到持续迭代，8 个角色的全流程协作关系一目了然。<br>点击角色名称高亮其参与环节。</div>';
+  h+='<div style="font-size:14px;line-height:1.5;letter-spacing:-.15px;max-width:480px;margin:0 auto" class="'+(dk?'text-gray-400':'text-gray-500')+'">从需求到迭代，8 个角色的全流程协作一目了然。</div>';
   h+='</div>';
-  // Chart container with horizontal scroll
-  h+='<div style="overflow-x:auto;padding-bottom:16px;-webkit-overflow-scrolling:touch">';
-  h+='<div style="min-width:800px">';
-  // ---- Header row: role columns ----
-  h+='<div style="display:grid;grid-template-columns:72px repeat('+roles.length+',1fr);gap:0;margin-bottom:2px">';
-  // Corner cell
-  h+='<div style="padding:8px 4px;text-align:center"><span style="font-size:10px;font-weight:600;letter-spacing:.5px" class="'+(dk?'text-gray-500':'text-gray-400')+'">阶段</span></div>';
-  // Role headers
+  // Role filter bar (sticky feel)
+  h+='<div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:28px;padding:12px 16px;border-radius:14px;background:'+(dk?'rgba(255,255,255,.03)':'rgba(0,0,0,.025)')+'">';
   roles.forEach(r=>{
     const hl=nhSwimlaneHighlight===r.key;
     h+='<button onclick="nhSwimlaneHighlight=nhSwimlaneHighlight===\''+r.key+'\'?null:\''+r.key+'\';nhRenderSwimlane()" ';
-    h+='style="padding:10px 4px;text-align:center;border:none;cursor:pointer;border-radius:8px;transition:all .2s;background:'+(hl?r.color+'15':'transparent')+'" class="group">';
-    h+='<div style="font-size:16px;margin-bottom:2px">'+r.icon+'</div>';
-    h+='<div style="font-size:10px;font-weight:600;letter-spacing:-.2px;transition:color .2s;'+(hl?'color:'+r.color:'')+'" class="'+(hl?'':(dk?'text-gray-300':'text-gray-600'))+'">'+r.label+'</div>';
+    h+='style="display:flex;align-items:center;gap:5px;padding:6px 14px;border-radius:980px;border:1.5px solid '+(hl?r.color+'60':dk?'rgba(255,255,255,.08)':'rgba(0,0,0,.08)')+';background:'+(hl?r.color+'18':'transparent')+';cursor:pointer;transition:all .2s">';
+    h+='<span style="font-size:13px">'+r.icon+'</span>';
+    h+='<span style="font-size:11px;font-weight:600;letter-spacing:-.1px;'+(hl?'color:'+r.color:'')+'" class="'+(hl?'':(dk?'text-gray-300':'text-gray-600'))+'">'+r.label+'</span>';
     h+='</button>';
   });
   h+='</div>';
-  // ---- Stage rows ----
+  // ======== STAGES (vertical flow) ========
   stages.forEach((stage,si)=>{
     const isAlt=si%2===1;
-    const rowBg=isAlt?(dk?'rgba(255,255,255,.015)':'rgba(0,0,0,.015)'):'transparent';
-    h+='<div style="display:grid;grid-template-columns:72px repeat('+roles.length+',1fr);gap:0;background:'+rowBg+';border-radius:8px;position:relative;min-height:52px;align-items:center">';
-    // Stage label (left column)
-    h+='<div style="padding:8px 4px;text-align:center;position:relative">';
-    h+='<div style="position:absolute;left:0;top:8px;bottom:8px;width:3px;border-radius:2px;background:'+stage.color+'"></div>';
-    h+='<div style="font-size:10px;font-weight:700;letter-spacing:-.1px" class="'+(dk?'text-gray-300':'text-gray-700')+'">'+stage.label+'</div>';
+    const secBg=isAlt?(dk?'rgba(255,255,255,.02)':'rgba(0,0,0,.018)'):'transparent';
+    // Stage section
+    h+='<div style="background:'+secBg+';border-radius:16px;padding:24px 20px;margin:0 -8px">';
+    // Stage header
+    h+='<div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">';
+    h+='<div style="width:4px;height:28px;border-radius:2px;background:'+stage.color+';flex-shrink:0"></div>';
+    h+='<div style="font-size:16px;font-weight:700;letter-spacing:-.3px" class="'+(dk?'text-white':'text-gray-900')+'">'+stage.label+'</div>';
+    h+='<div style="flex:1;height:1px;background:'+(dk?'rgba(255,255,255,.06)':'rgba(0,0,0,.06)')+'"></div>';
     h+='</div>';
-    // Place pill nodes in their role columns
+    // Nodes row: pills with arrows
     if(stage.nodes&&stage.nodes.length){
-      // Find which role columns have pills
-      const pillsByRole={};
-      let lastRole=null;
-      stage.nodes.forEach(n=>{
-        if(n.type==='arrow')return;
-        if(n.role){lastRole=n.role;if(!pillsByRole[n.role])pillsByRole[n.role]=[];pillsByRole[n.role].push(n)}
-      });
-      roles.forEach(r=>{
-        const pills=pillsByRole[r.key]||[];
-        const dimmed=nhSwimlaneHighlight&&nhSwimlaneHighlight!==r.key;
-        h+='<div style="padding:4px 3px;display:flex;flex-wrap:wrap;gap:4px;justify-content:center;opacity:'+(dimmed?.25:1)+';transition:opacity .3s">';
-        pills.forEach(p=>{
-          h+='<div style="display:inline-flex;align-items:center;justify-content:center;padding:5px 12px;border-radius:980px;font-size:10px;font-weight:600;letter-spacing:-.1px;white-space:pre-line;text-align:center;line-height:1.3;border:1px solid '+p.color+'40;background:'+p.color+'12;color:'+p.color+';cursor:default;transition:all .2s" class="hover:scale-105">';
-          h+=p.text.replace(/\n/g,'<br>')+'</div>';
-        });
-        h+='</div>';
-      });
-      // Draw arrows between pills (using CSS pseudo-elements is hard, so use overlay)
-      // We'll place small → between connected role columns
-    } else {
-      // Empty role cells for non-node stages
-      roles.forEach(()=>{h+='<div></div>'});
-    }
-    h+='</div>';
-    // Sub-items (offset pills that appear between rows)
-    if(stage.sub&&stage.sub.length){
-      h+='<div style="display:grid;grid-template-columns:72px repeat('+roles.length+',1fr);gap:0;min-height:36px;align-items:center">';
-      h+='<div></div>'; // empty stage cell
-      roles.forEach(r=>{
-        const sub=stage.sub.find(s=>s.role===r.key);
-        const dimmed=nhSwimlaneHighlight&&nhSwimlaneHighlight!==r.key;
-        if(sub){
-          h+='<div style="padding:2px 3px;display:flex;justify-content:center;opacity:'+(dimmed?.25:1)+';transition:opacity .3s">';
-          h+='<div style="display:inline-flex;align-items:center;padding:4px 10px;border-radius:980px;font-size:9px;font-weight:600;letter-spacing:-.1px;border:1px solid '+sub.color+'30;background:'+sub.color+'08;color:'+sub.color+'">';
-          h+=sub.text+'</div></div>';
+      h+='<div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;padding:4px 0 4px 14px">';
+      stage.nodes.forEach((n,ni)=>{
+        if(n.type==='arrow'){
+          h+=arrowSvg;
         } else {
-          h+='<div></div>';
+          h+=pill(n,true);
         }
       });
       h+='</div>';
     }
-    // Full-width bars
+    // Sub-items (parallel tasks shown indented)
+    if(stage.sub&&stage.sub.length){
+      h+='<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:8px 0 4px 14px">';
+      h+='<span style="font-size:10px;font-weight:500;letter-spacing:.3px" class="'+(dk?'text-gray-600':'text-gray-400')+'">同步 ·</span>';
+      stage.sub.forEach(s=>{h+=pill(s,false)});
+      h+='</div>';
+    }
+    // Full-width bars (collaborative checkpoints)
     if(stage.bars&&stage.bars.length){
       stage.bars.forEach(bar=>{
-        // Determine which columns to span
-        const startIdx=bar.roles?Math.min(...bar.roles.map(r=>roleIdx[r]||0)):0;
-        const endIdx=bar.roles?Math.max(...bar.roles.map(r=>roleIdx[r]||0)):roles.length-1;
         const dimmed=nhSwimlaneHighlight&&bar.roles&&!bar.roles.includes(nhSwimlaneHighlight);
-        h+='<div style="display:grid;grid-template-columns:72px repeat('+roles.length+',1fr);gap:0;min-height:40px;align-items:center;opacity:'+(dimmed?.25:1)+';transition:opacity .3s">';
-        h+='<div></div>'; // empty stage cell
-        // Place empty cells before bar start, then spanning bar, then empty after
-        for(let ri=0;ri<roles.length;ri++){
-          if(ri===startIdx){
-            const span=endIdx-startIdx+1;
-            h+='<div style="grid-column:span '+span+';padding:4px 8px;display:flex;justify-content:center">';
-            h+='<div style="width:100%;padding:8px 16px;border-radius:8px;text-align:center;font-size:11px;font-weight:600;letter-spacing:-.1px;border:1px solid '+bar.color+'35;background:'+bar.color+'0c;color:'+bar.color+'">';
-            // Checkbox icon
-            h+='<span style="margin-right:4px">☑</span>'+bar.text+'</div></div>';
-            ri=endIdx; // skip spanned cells
-          } else {
-            h+='<div></div>';
-          }
-        }
+        // Role dots
+        const dots=bar.roles?bar.roles.map(rk=>{const r=roleMap[rk];return r?'<span style="width:8px;height:8px;border-radius:50%;background:'+r.color+';display:inline-block" title="'+r.label+'"></span>':''}).join(''):'';
+        h+='<div style="margin:12px 0 4px 14px;padding:12px 20px;border-radius:10px;border:1.5px solid '+bar.color+'30;background:'+bar.color+'08;display:flex;align-items:center;gap:12px;transition:opacity .3s;opacity:'+(dimmed?.2:1)+'">';
+        h+='<div style="display:flex;gap:3px;flex-shrink:0">'+dots+'</div>';
+        h+='<div style="font-size:13px;font-weight:600;letter-spacing:-.15px;color:'+bar.color+'">'+bar.text+'</div>';
         h+='</div>';
       });
     }
-    // Row separator
-    if(si<stages.length-1){
-      h+='<div style="height:1px;margin:2px 0;background:'+(dk?'rgba(255,255,255,.04)':'rgba(0,0,0,.04)')+'"></div>';
-    }
+    h+='</div>';
+    // Down arrow between stages
+    if(si<stages.length-1) h+=downArrow;
   });
-  h+='</div></div>'; // end min-width + overflow wrapper
-  // Arrow connections note
-  h+='<div style="margin-top:24px;padding:16px 20px;border-radius:12px;background:'+(dk?'rgba(255,255,255,.02)':'rgba(0,0,0,.02)')+'">';
-  h+='<div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px" class="'+(dk?'text-gray-500':'text-gray-400')+'">图例说明</div>';
-  h+='<div style="display:flex;flex-wrap:wrap;gap:12px">';
+  // Legend
+  h+='<div style="margin-top:28px;padding:20px;border-radius:14px;background:'+(dk?'rgba(255,255,255,.02)':'rgba(0,0,0,.02)')+'">';
+  h+='<div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px" class="'+(dk?'text-gray-500':'text-gray-400')+'">图例</div>';
+  h+='<div style="display:flex;flex-wrap:wrap;gap:14px">';
   roles.forEach(r=>{
     h+='<div style="display:flex;align-items:center;gap:6px">';
     h+='<div style="width:10px;height:10px;border-radius:50%;background:'+r.color+'"></div>';
-    h+='<span style="font-size:11px;font-weight:500;letter-spacing:-.1px" class="'+(dk?'text-gray-400':'text-gray-500')+'">'+r.icon+' '+r.label+'</span></div>';
+    h+='<span style="font-size:12px;font-weight:500;letter-spacing:-.1px" class="'+(dk?'text-gray-400':'text-gray-500')+'">'+r.icon+' '+r.label+'</span></div>';
   });
   h+='</div>';
-  h+='<div style="margin-top:8px;font-size:10px;letter-spacing:-.1px" class="'+(dk?'text-gray-600':'text-gray-400')+'">💡 点击顶部角色名称可高亮该角色参与的所有环节</div>';
+  h+='<div style="margin-top:10px;font-size:11px;letter-spacing:-.1px" class="'+(dk?'text-gray-600':'text-gray-400')+'">💡 点击上方角色胶囊可高亮该角色参与的所有环节</div>';
   h+='</div>';
   h+='</div>';
   mc.innerHTML=h;
