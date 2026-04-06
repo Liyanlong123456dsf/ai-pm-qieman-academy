@@ -4296,6 +4296,13 @@ function nhRenderCourseware(){
   document.getElementById('nh-main').scrollTop=0;
 }
 
+function nhSwitchWeek(i){nhWeek=i;nhView='overview';nhCourse=null;nhExpandedDay=null;nhRenderSidebar();nhRenderMain()}
+function nhShowOverview(){nhView='overview';nhCourse=null;nhRenderSidebar();nhRenderMain()}
+function nhShowFlowchart(){nhView='flowchart';nhCourse=null;nhRenderSidebar();nhRenderMain()}
+function nhShowGlossary(){nhView='glossary';nhCourse=null;nhRenderSidebar();nhRenderMain()}
+function nhToggleDay(di){nhExpandedDay=nhExpandedDay===di?null:di;nhRenderSidebar()}
+function nhShowDayOverview(di){nhView='day';nhExpandedDay=di;nhCourse=null;nhRenderSidebar();nhRenderMain()}
+function nhShowCourse(key){nhView='course';nhCourse=key;nhExpandedDay=parseInt(key.split('-')[0]);nhRenderSidebar();nhRenderMain()}
 function nhShowCourseware(){nhView='courseware';nhCourse=null;nhRenderSidebar();nhRenderMain()}
 // Cross-link: jump from Notes Hub → PM flow node
 function nhJumpToNode(nodeIdx){
