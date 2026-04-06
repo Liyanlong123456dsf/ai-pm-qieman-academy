@@ -2948,48 +2948,48 @@ const NH_WEEKS=[
 // ---- Glossary (名词释义) ----
 const NH_GLOSSARY=[
 // === 大模型与AI基础 ===
-{term:'LLM',full:'Large Language Model',zh:'大型语言模型',cat:'AI基础',week:[1],desc:'通过海量文本数据训练的深度学习模型，能理解和生成自然语言。代表产品：GPT、Claude、DeepSeek、Kimi。'},
+{term:'LLM',full:'Large Language Model',zh:'大型语言模型',cat:'AI基础',week:[1],desc:'通过海量文本数据训练的深度学习模型，能理解和生成自然语言。代表产品：GPT、Claude、DeepSeek、Kimi。',refs:['Vaswani et al. "Attention Is All You Need." NeurIPS 2017']},
 {term:'VLM',full:'Vision Language Model',zh:'视觉语言模型',cat:'AI基础',week:[1],desc:'在LLM基础上增加图像理解能力的多模态模型，可同时处理文本和图像输入。'},
 {term:'NLP',full:'Natural Language Processing',zh:'自然语言处理',cat:'AI基础',week:[1],desc:'让机器"听懂人话、说出人话"的技术领域，是LLM的底层学科基础。'},
-{term:'Transformer',full:'',zh:'变换器架构',cat:'AI基础',week:[1],desc:'Google 2017年提出的神经网络架构，通过自注意力机制实现并行计算，是所有现代LLM的基础。演进路线：CNN → RNN → Transformer。'},
+{term:'Transformer',full:'',zh:'变换器架构',cat:'AI基础',week:[1],desc:'Google 2017年提出的神经网络架构，通过自注意力机制实现并行计算，是所有现代LLM的基础。演进路线：CNN → RNN → Transformer。',refs:['Vaswani et al. "Attention Is All You Need." Google Brain, NeurIPS 2017']},
 {term:'Tokenization',full:'',zh:'分词/令牌化',cat:'AI基础',week:[1],desc:'将输入文本拆解为Token（词语单元）的过程。LLM推理流程：Query → Tokenization → Token → Embedding → Semantics。'},
 {term:'Token',full:'',zh:'令牌/词元',cat:'AI基础',week:[1],desc:'文本的最小处理单位，可以是一个字、词或子词。模型的输入输出以Token计量，也是计费单位。'},
 {term:'Embedding',full:'',zh:'嵌入/向量化',cat:'AI基础',week:[1,2],desc:'将文本、图像等非结构化数据转换为高维数值向量的过程，使计算机能进行语义计算和相似度比较。'},
-{term:'COT',full:'Chain of Thought',zh:'思维链',cat:'AI基础',week:[1,2],desc:'让模型展示思考过程的推理方式，通过分步骤推理提升复杂问题的回答准确率。是涌现能力的子能力之一，DeepSeek-r1即采用此技术。'},
+{term:'COT',full:'Chain of Thought',zh:'思维链',cat:'AI基础',week:[1,2],desc:'让模型展示思考过程的推理方式，通过分步骤推理提升复杂问题的回答准确率。是涌现能力的子能力之一，DeepSeek-r1即采用此技术。',refs:['Wei et al. "Chain-of-Thought Prompting." Google Research, NeurIPS 2022']},
 {term:'Context Window',full:'',zh:'上下文窗口',cat:'AI基础',week:[1,2],desc:'模型单次能处理的最大Token数量。包含 query + system prompt + ICL + chat history + summary。模型注意力呈U型分布：开头和结尾易记，中间容易遗忘。'},
-{term:'Prompt',full:'',zh:'提示词',cat:'AI基础',week:[1,2],desc:'人与AI之间对话的桥梁语言。设计原则：简洁明了+正向描述+逐步引导+提供ICL样本。效果公式：大模型能力 × 任务设计 × Prompt质量。'},
+{term:'Prompt',full:'',zh:'提示词',cat:'AI基础',week:[1,2],desc:'人与AI之间对话的桥梁语言。设计原则：简洁明了+正向描述+逐步引导+提供ICL样本。效果公式：大模型能力 × 任务设计 × Prompt质量。',refs:['DAIR.AI "Prompt Engineering Guide." 2023','Ouyang et al. "InstructGPT." OpenAI, 2022']},
 {term:'端到端学习',full:'End-to-End Learning',zh:'',cat:'AI基础',week:[1],desc:'输入端直达输出端，中间全部自动学习，一步到位。无需人工设计中间特征提取步骤。'},
 {term:'预训练',full:'Pre-training',zh:'',cat:'AI基础',week:[1],desc:'大模型训练第一阶段。通过无监督方式用大量未标注公开数据（维基百科/论文/图书）训练基础模型，获得基本的文本补全和样本学习能力。'},
-{term:'SFT',full:'Supervised Fine-Tuning',zh:'有监督微调',cat:'AI基础',week:[1],desc:'大模型训练第二阶段。针对特定任务进行人工标注数据的有监督训练，提升模型在垂直领域的表现。也称二次训练/微调。'},
+{term:'SFT',full:'Supervised Fine-Tuning',zh:'有监督微调',cat:'AI基础',week:[1],desc:'大模型训练第二阶段。针对特定任务进行人工标注数据的有监督训练，提升模型在垂直领域的表现。也称二次训练/微调。',refs:['Ouyang et al. "Training language models to follow instructions (RLHF/InstructGPT)." OpenAI, 2022']},
 {term:'欠拟合',full:'Underfitting',zh:'',cat:'AI基础',week:[1],desc:'模型在训练数据上学习不足，无法有效泛化，做不到举一反三。需增加训练数据或模型复杂度来改善。'},
 {term:'过拟合',full:'Overfitting',zh:'',cat:'AI基础',week:[1],desc:'模型过度学习训练数据的细节和噪声，对未见数据表现差、逻辑混乱。需通过正则化、数据增强等方法控制。'},
 {term:'泛化能力',full:'Generalization',zh:'',cat:'AI基础',week:[1],desc:'模型从大量数据中学到抽象知识，并能将所学迁移应用到类似但未见过的任务或问题上的能力。是模型核心评估指标。'},
 {term:'涌现能力',full:'Emergence',zh:'',cat:'AI基础',week:[1],desc:'模型在训练过程中突然涌现出解决之前无法解决的新任务的能力。包含三个子能力：小样本ICL、指令跟随、思维链推理(COT)。'},
-{term:'ICL',full:'In-Context Learning',zh:'上下文学习',cat:'AI基础',week:[1,2],desc:'将样本置于上下文窗口中，使模型在特定环境中学习并参考模板作答的技术。是涌现能力的子能力之一，也称Few-shot Learning。'},
-{term:'乔哈里视窗',full:'Johari Window',zh:'',cat:'产品方法论',week:[1],desc:'人机协作四象限模型：①公开象限(我知AI知)→AI作助理 ②隐私象限(我知AI不知)→投喂上下文 ③盲点象限(AI知我不知)→AI作知识库 ④潜能象限(都不知)→共创探索。'},
+{term:'ICL',full:'In-Context Learning',zh:'上下文学习',cat:'AI基础',week:[1,2],desc:'将样本置于上下文窗口中，使模型在特定环境中学习并参考模板作答的技术。是涌现能力的子能力之一，也称Few-shot Learning。',refs:['Brown et al. "Language Models are Few-Shot Learners (GPT-3)." OpenAI, NeurIPS 2020']},
+{term:'乔哈里视窗',full:'Johari Window',zh:'',cat:'产品方法论',week:[1],desc:'人机协作四象限模型：①公开象限(我知AI知)→AI作助理 ②隐私象限(我知AI不知)→投喂上下文 ③盲点象限(AI知我不知)→AI作知识库 ④潜能象限(都不知)→共创探索。',refs:['Luft, J. & Ingham, H. (1955). "The Johari Window."']},
 {term:'上下文工程',full:'Context Engineering',zh:'',cat:'AI基础',week:[1],desc:'系统化管理和优化输入给模型的上下文信息的方法论，通过合理组织system prompt、ICL样本、chat history等提升输出质量。'},
 {term:'Markdown',full:'',zh:'轻量级标记语言',cat:'工具平台',week:[1],desc:'通过简单文本格式规则实现标题、列表、代码块等排版的标记语言。用Markdown语法编写Prompt已被证明能显著提升模型理解和回应质量。'},
 // === RAG技术 ===
-{term:'RAG',full:'Retrieval-Augmented Generation',zh:'检索增强生成',cat:'RAG技术',week:[1,2],desc:'给大模型装"外挂知识库"的技术架构。通过检索外部知识库补充LLM回答，解决时效性、幻觉和数据安全问题。'},
+{term:'RAG',full:'Retrieval-Augmented Generation',zh:'检索增强生成',cat:'RAG技术',week:[1,2],desc:'给大模型装"外挂知识库"的技术架构。通过检索外部知识库补充LLM回答，解决时效性、幻觉和数据安全问题。',refs:['Lewis et al. "RAG: Retrieval-Augmented Generation." Facebook AI Research, 2020']},
 {term:'Pipeline',full:'',zh:'管道/流水线',cat:'RAG技术',week:[2],desc:'数据处理的流水线架构。RAG离线Pipeline含6环节：数据采集(A)→文档解析(B)→数据清洗(C)→文本分割(D)→向量化(E)→索引构建(F)。'},
 {term:'Chunk',full:'',zh:'文本块/切片',cat:'RAG技术',week:[2],desc:'数据清洗后的基本存储和检索单位。文本分割策略决定Chunk质量，影响检索精度。'},
 {term:'向量数据库',full:'Vector Database',zh:'',cat:'RAG技术',week:[2],desc:'专门存储和检索高维向量的数据库，支持语义相似度搜索。vs RDBMS/NoSQL的精准匹配。核心指标：Recall@K、P95延迟、存储压缩率。'},
 {term:'Query改写',full:'Query Rewriting',zh:'',cat:'RAG技术',week:[2],desc:'优化用户查询以提升检索质量的六种方法：语义强化、歧义消除、上下文补全、意图拆解、领域术语适配、约束条件强化。'},
 {term:'多路检索',full:'Multi-path Retrieval',zh:'',cat:'RAG技术',week:[2],desc:'同时使用关键词搜索+向量搜索的混合检索策略，通过Score评分+TopK筛选合并去重，提升召回率。'},
-{term:'Graph RAG',full:'',zh:'图增强检索',cat:'RAG技术',week:[2],desc:'知识图谱增强的RAG技术，适用于需要关系推理的复杂场景：政策穿透、合规分析、科研追踪、故障因分析。'},
+{term:'Graph RAG',full:'',zh:'图增强检索',cat:'RAG技术',week:[2],desc:'知识图谱增强的RAG技术，适用于需要关系推理的复杂场景：政策穿透、合规分析、科研追踪、故障因分析。',refs:['Microsoft Research. "Graph RAG." 2024']},
 {term:'OCR',full:'Optical Character Recognition',zh:'光学字符识别',cat:'RAG技术',week:[2],desc:'从图像中识别和提取文字的技术，是文档解析Pipeline B的关键环节。'},
 {term:'ASR',full:'Automatic Speech Recognition',zh:'自动语音识别',cat:'RAG技术',week:[2],desc:'将语音转换为文本的技术，用于处理音频/视频类知识源。'},
 {term:'BGE-M3',full:'',zh:'多语言向量模型',cat:'RAG技术',week:[2],desc:'支持多语言的文本向量化模型，用于Embedding阶段将文本转换为向量表示。'},
 {term:'召回率',full:'Recall',zh:'',cat:'RAG技术',week:[2],desc:'检索结果中包含相关文档的比例。PM制定的质量标准通常要求召回率≥90%、准确率≥85%。'},
 // === 产品方法论 ===
-{term:'POC',full:'Proof of Concept',zh:'概念验证',cat:'产品方法论',week:[1],desc:'回答"做不做得出来"的快速验证。标准流程：想清楚验证什么→定义成功标准→快速试验→结果决策。技术成熟时可跳过。'},
+{term:'POC',full:'Proof of Concept',zh:'概念验证',cat:'产品方法论',week:[1],desc:'回答"做不做得出来"的快速验证。标准流程：想清楚验证什么→定义成功标准→快速试验→结果决策。技术成熟时可跳过。',refs:['CRISP-DM 1.0 — Chapman, P. et al. (2000). SPSS Inc.']},
 {term:'MVP',full:'Minimum Viable Product',zh:'最小可行产品',cat:'产品方法论',week:[1],desc:'回答"做出来有没有人用"的最小产品。市场需求已验证时可跳过。全新领域POC和MVP都不能跳过。'},
 {term:'PRD',full:'Product Requirements Document',zh:'产品需求文档',cat:'产品方法论',week:[1],desc:'传统产品经理的核心输出物，详细描述产品功能需求、交互逻辑、技术要求等。与原型图配合使用。'},
 {term:'BRD',full:'Business Requirements Document',zh:'商业需求文档',cat:'产品方法论',week:[1],desc:'从商业角度描述做什么与不做什么，明确技术路线和商业目标的文档。'},
 {term:'场景描述公式',full:'',zh:'',cat:'产品方法论',week:[1],desc:'用户[明确群体] + 场景[具体情境] + 痛点[详细说明]。场景=讲故事：主人公 + 情境 + 冲突 + 解决方案。'},
 {term:'场景梳理四层结构',full:'',zh:'',cat:'产品方法论',week:[1,2],desc:'行业→业务域→场景→AI落地方案。从宏观到微观逐层聚焦，最终落地为可执行的AI解决方案。'},
-{term:'SOP',full:'Standard Operating Procedure',zh:'标准操作流程',cat:'产品方法论',week:[2],desc:'工作流的前身。规范化→自动化的提效路径：先对齐成本建立SOP，再通过技术手段实现自动流转。'},
-{term:'双钻模型',full:'Double Diamond',zh:'',cat:'产品方法论',week:[2],desc:'设计思维框架。在AI辅助下的应用方式：AI发散（扩展可能性）→ 我收拢（聚焦决策）。'},
+{term:'SOP',full:'Standard Operating Procedure',zh:'标准操作流程',cat:'产品方法论',week:[2],desc:'工作流的前身。规范化→自动化的提效路径：先对齐成本建立SOP，再通过技术手段实现自动流转。',refs:['ISO 9001:2015 Quality Management Systems']},
+{term:'双钻模型',full:'Double Diamond',zh:'',cat:'产品方法论',week:[2],desc:'设计思维框架。在AI辅助下的应用方式：AI发散（扩展可能性）→ 我收拢（聚焦决策）。',refs:['British Design Council. "The Double Diamond." 2005']},
 // === 工具与平台 ===
 {term:'Coze(扣子)',full:'',zh:'字节跳动智能体平台',cat:'工具平台',week:[1,2],desc:'智能体开发平台，支持三种角色：创建者(Builder)、用户(User)、协作开发者。全流程：创建→人设配置→预览调试→发布。'},
 {term:'Dify',full:'',zh:'开源LLM应用开发平台',cat:'工具平台',week:[2],desc:'支持工作流(Workflow)和对话流(Chatflow)两种模式。Workspace工作空间管理，团队共享项目。'},
@@ -2999,17 +2999,90 @@ const NH_GLOSSARY=[
 // === 工作流与自动化 ===
 {term:'工作流',full:'Workflow',zh:'',cat:'工作流',week:[2],desc:'有明确开始和结束的流程化任务执行方式。构建要素：触发器→开始节点(输入变量)→处理节点(业务逻辑)→结束节点(输出结果)。适合自动化任务。'},
 {term:'对话流',full:'Chatflow',zh:'',cat:'工作流',week:[2],desc:'围绕话题持续交流的多轮对话模式，支持记忆和上下文管理。适合群组交互和咨询问答场景。'},
-{term:'RPA',full:'Robotic Process Automation',zh:'机器人流程自动化',cat:'工作流',week:[2],desc:'通过软件机器人模拟人类操作，自动执行重复性业务流程。是自动化工具矩阵中的流程自动化分支。'},
+{term:'RPA',full:'Robotic Process Automation',zh:'机器人流程自动化',cat:'工作流',week:[2],desc:'通过软件机器人模拟人类操作，自动执行重复性业务流程。是自动化工具矩阵中的流程自动化分支。',refs:['Gartner. "Market Guide for Robotic Process Automation." 2023']},
 {term:'触发器',full:'Trigger',zh:'',cat:'工作流',week:[2],desc:'启动工作流的条件机制。类型包括：用户输入触发、定时触发、事件触发。'},
 // === 模型与服务 ===
 {term:'模型服务化',full:'Model as a Service',zh:'',cat:'模型服务',week:[1],desc:'四种商业模式：自研+自营、自营+分销、外采+转售、开源+托管。核心解决算力、迭代成本、效果稳定性、合规性问题。'},
 {term:'API Key',full:'Application Programming Interface Key',zh:'应用程序接口密钥',cat:'模型服务',week:[1],desc:'调用模型服务的身份认证凭证。创建流程：登录平台→密钥创建→命名→选择模式→保存。'},
-{term:'DeepSeek',full:'',zh:'深度求索',cat:'模型服务',week:[2],desc:'国产大模型代表，r1版本在技术封锁下实现了思考能力(COT)，具备推理链展示功能。'},
+{term:'DeepSeek',full:'',zh:'深度求索',cat:'模型服务',week:[2],desc:'国产大模型代表，r1版本在技术封锁下实现了思考能力(COT)，具备推理链展示功能。',refs:['DeepSeek-AI. "DeepSeek-R1." 2024']},
 {term:'Kimi',full:'',zh:'月之暗面大模型',cat:'模型服务',week:[2],desc:'弥补国内Agent能力空白的大模型产品，在智能体和长文本处理方面表现突出。'},
 // === 文档处理 ===
 {term:'pdfplumber',full:'',zh:'PDF解析工具',cat:'文档处理',week:[2],desc:'Python库，用于从PDF文件中提取表格和文本数据，是半结构化文档解析的常用工具。'},
 {term:'BeautifulSoup',full:'',zh:'HTML解析工具',cat:'文档处理',week:[2],desc:'Python库，用于解析HTML/XML文档，剥离标签提取纯文本内容。'},
 {term:'DREAM模型',full:'',zh:'腾讯文档解析模型',cat:'文档处理',week:[2],desc:'腾讯开发的复杂排版文档解析模型。三步走：图像特征提取→元素特征聚合→元素并行生成。处理多栏/图表环绕等复杂版面。'}
+];
+
+// ---- 参考文献与标准 (shown at bottom of glossary) ----
+const NH_REFERENCES=[
+{title:'CRISP-DM 1.0',author:'Chapman, P. et al. (2000)',desc:'Cross-Industry Standard Process for Data Mining. SPSS Inc.'},
+{title:'Google PAIR',author:'People + AI Research',desc:'People + AI Guidebook. Google, 2019.'},
+{title:'Google MLOps 白皮书',author:'Google Cloud',desc:'"MLOps: Continuous delivery and automation pipelines in ML." 2020.'},
+{title:'微软 MLOps 成熟度模型',author:'Azure Architecture Center',desc:'Microsoft, 2023.'},
+{title:'Hidden Technical Debt in ML Systems',author:'Sculley, D. et al.',desc:'NeurIPS 2015, Google.'},
+{title:'ISO/IEC 22989:2022',author:'ISO',desc:'AI — Concepts and terminology.'},
+{title:'ISO/IEC 23894:2023',author:'ISO',desc:'AI — Guidance on risk management.'},
+{title:'Attention Is All You Need',author:'Vaswani, A. et al.',desc:'Google Brain. NeurIPS 2017. Transformer 架构奠基论文。'},
+{title:'RLHF (InstructGPT)',author:'Ouyang, L. et al.',desc:'OpenAI, 2022. 人类反馈强化学习方法论。'},
+{title:'RAG: Retrieval-Augmented Generation',author:'Lewis, P. et al.',desc:'Facebook AI Research, 2020. 检索增强生成技术原始论文。'},
+{title:'Prompt Engineering Guide',author:'DAIR.AI',desc:'系统化 Prompt 工程方法论开源指南。'},
+{title:'乔哈里视窗',author:'Luft, J. & Ingham, H. (1955)',desc:'Johari Window 人际认知模型，应用于人机协作四象限。'}
+];
+
+// ---- 泳道图数据 (Cross-functional Swimlane Flowchart) ----
+const SWIMLANE_ROLES=[
+{key:'biz',label:'业务/用户',icon:'👤',color:'#3b82f6'},
+{key:'pm',label:'AI产品',icon:'💡',color:'#f59e0b'},
+{key:'algo',label:'算法',icon:'🧪',color:'#ec4899'},
+{key:'ui',label:'UI',icon:'🎨',color:'#8b5cf6'},
+{key:'dev',label:'研发',icon:'✏️',color:'#10b981'},
+{key:'qa',label:'测试',icon:'🧪',color:'#06b6d4'},
+{key:'ops',label:'运维',icon:'🔧',color:'#f97316'},
+{key:'biz_ops',label:'运营',icon:'📣',color:'#6366f1'}
+];
+const SWIMLANE_STAGES=[
+{key:'req',label:'需求',color:'#3b82f6',nodes:[
+  {text:'提出需求',role:'biz',type:'pill',color:'#3b82f6'},
+  {text:'→',type:'arrow'},
+  {text:'需求调研',role:'pm',type:'pill',color:'#f59e0b'}
+],bars:[
+  {text:'需求分析 & AI价值验证',roles:['pm','algo'],color:'#f59e0b'}
+]},
+{key:'tech',label:'技术预研',color:'#8b5cf6',nodes:[
+  {text:'数据验证',role:'algo',type:'pill',color:'#ec4899'}
+],bars:[],sub:[
+  {text:'模型选型',role:'algo',type:'pill',color:'#ec4899',offset:1}
+]},
+{key:'design',label:'设计',color:'#ec4899',nodes:[
+  {text:'Prompt 设计 &\nAgent 逻辑设计',role:'pm',type:'pill',color:'#f59e0b'},
+  {text:'→',type:'arrow'},
+  {text:'数据\n(评估/量化指标)',role:'algo',type:'pill',color:'#ec4899'},
+  {text:'→',type:'arrow'},
+  {text:'交互 & 界面设计',role:'ui',type:'pill',color:'#8b5cf6'},
+  {text:'→',type:'arrow'},
+  {text:'原型沟通',role:'ui',type:'pill',color:'#8b5cf6'}
+],bars:[]},
+{key:'review',label:'评审',color:'#f59e0b',bars:[
+  {text:'需求评审（全角色参与）',roles:['biz','pm','algo','ui','dev','qa','ops','biz_ops'],color:'#6b7280'}
+]},
+{key:'dev',label:'开发',color:'#10b981',nodes:[
+  {text:'开发',role:'dev',type:'pill',color:'#10b981'},
+  {text:'→',type:'arrow'},
+  {text:'AI 测试\n(质量保证)',role:'qa',type:'pill',color:'#06b6d4'}
+],sub:[
+  {text:'运营方案设计',role:'biz_ops',type:'pill',color:'#6366f1',offset:2}
+]},
+{key:'accept',label:'验收',color:'#06b6d4',bars:[
+  {text:'多维度体验验收（主观体验 + 客观指标）',roles:['pm','algo','ui','qa'],color:'#06b6d4'}
+]},
+{key:'launch',label:'上线',color:'#f97316',nodes:[
+  {text:'上线',role:'ops',type:'pill',color:'#f97316'},
+  {text:'运营方案上线',role:'biz_ops',type:'pill',color:'#6366f1'}
+],sub:[
+  {text:'模型监控优化',role:'algo',type:'pill',color:'#ec4899',offset:1}
+]},
+{key:'iter',label:'迭代',color:'#10b981',bars:[
+  {text:'运营数据 · 发现问题 · 持续优化',roles:['pm','algo','dev','biz_ops'],color:'#10b981'}
+]}
 ];
 
 function toggleNotesHub(){
@@ -3042,10 +3115,11 @@ function nhRenderSidebar(){
     h+='<button onclick="nhSwitchWeek('+i+')" class="flex-1 px-3 py-2 rounded-md text-xs font-bold transition-all '+(act?'dark:bg-white/10 bg-black/10 dark:text-white text-gray-900':'dark:text-gray-500 text-gray-400 hover:dark:text-gray-300 hover:text-gray-600')+'">'+wk.title+'</button>';
   });
   h+='</div>';
-  // Overview + Glossary quick nav
+  // Overview + Flowchart + Glossary quick nav
   h+='<div class="flex gap-1.5 mb-4">';
   h+='<button onclick="nhShowOverview()" class="flex-1 flex items-center justify-center gap-1.5 px-2 py-2 rounded-lg text-[11px] font-bold transition-all '+(nhView==='overview'?'dark:bg-white/10 bg-black/10 dark:text-white text-gray-900':'dark:text-gray-500 text-gray-400 dark:bg-white/[0.02] bg-black/[0.02] hover:dark:text-gray-300')+'"><svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>总览</button>';
-  h+='<button onclick="nhShowGlossary()" class="flex-1 flex items-center justify-center gap-1.5 px-2 py-2 rounded-lg text-[11px] font-bold transition-all '+(nhView==='glossary'?'dark:bg-cyan-500/15 bg-cyan-100 dark:text-cyan-400 text-cyan-600':'dark:text-gray-500 text-gray-400 dark:bg-white/[0.02] bg-black/[0.02] hover:dark:text-gray-300')+'"><svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>释义 <span class="text-[9px] px-1 rounded dark:bg-cyan-500/10 bg-cyan-100/80 dark:text-cyan-400 text-cyan-600">'+NH_GLOSSARY.length+'</span></button>';
+  h+='<button onclick="nhShowFlowchart()" class="flex-1 flex items-center justify-center gap-1.5 px-2 py-2 rounded-lg text-[11px] font-bold transition-all '+(nhView==='flowchart'?'dark:bg-amber-500/15 bg-amber-100 dark:text-amber-400 text-amber-600':'dark:text-gray-500 text-gray-400 dark:bg-white/[0.02] bg-black/[0.02] hover:dark:text-gray-300')+'"><svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/></svg>流程图</button>';
+  h+='<button onclick="nhShowGlossary()" class="flex-1 flex items-center justify-center gap-1.5 px-2 py-2 rounded-lg text-[11px] font-bold transition-all '+(nhView==='glossary'?'dark:bg-cyan-500/15 bg-cyan-100 dark:text-cyan-400 text-cyan-600':'dark:text-gray-500 text-gray-400 dark:bg-white/[0.02] bg-black/[0.02] hover:dark:text-gray-300')+'"><svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>释义</button>';
   h+='</div>';
   // Divider label
   h+='<div class="px-2 mb-2 text-[9px] font-bold uppercase tracking-[.15em] dark:text-gray-600 text-gray-400">📅 按日期浏览</div>';
@@ -3095,6 +3169,7 @@ function nhRenderMain(){
   else if(nhView==='course')nhRenderCourseDetail();
   else if(nhView==='detail')nhRenderDeepDive();
   else if(nhView==='glossary')nhRenderGlossary();
+  else if(nhView==='flowchart')nhRenderSwimlane();
 }
 
 function nhRenderOverview(){
@@ -3108,11 +3183,12 @@ function nhRenderOverview(){
     h+='<p class="text-sm dark:text-gray-500 text-gray-400">课程内容正在整理中，敬请期待</p></div>';
     mc.innerHTML=h;return;
   }
-  // Header
-  h+='<div class="mb-8 nh-animate">';
-  h+='<div class="flex items-center gap-3 mb-2"><span class="text-3xl">'+w.icon+'</span>';
-  h+='<div><h1 class="text-2xl md:text-3xl font-black dark:text-white text-gray-900">'+w.title+'总览</h1>';
-  h+='<p class="text-xs dark:text-gray-500 text-gray-400">'+w.dateRange+' · '+w.subtitle+'</p></div></div></div>';
+  // Header (Apple-style: tight, cinematic)
+  h+='<div class="mb-8 nh-animate" style="text-align:center">';
+  h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px" class="'+(isDark?'text-blue-400':'text-blue-600')+'">WEEK '+w.week+' OVERVIEW</div>';
+  h+='<div style="font-size:clamp(28px,5vw,44px);font-weight:800;line-height:1.06;letter-spacing:-1px;margin-bottom:8px" class="'+(isDark?'text-white':'text-gray-900')+'">'+w.title+'总览</div>';
+  h+='<div style="font-size:14px;letter-spacing:-.15px" class="'+(isDark?'text-gray-400':'text-gray-500')+'">'+w.dateRange+' · '+w.subtitle+'</div>';
+  h+='</div>';
   // Stats
   let totalCourses=0,totalPoints=0,totalHW=0;
   w.days.forEach(d=>d.courses.forEach(c=>{totalCourses++;totalPoints+=c.points.length;if(c.homework)totalHW++}));
@@ -3134,6 +3210,13 @@ function nhRenderOverview(){
     });
     h+='</div></div>';
   }
+  // Flowchart entry card
+  h+='<button onclick="nhShowFlowchart()" class="w-full glass-card rounded-2xl p-5 mb-8 nh-animate flex items-center gap-4 group hover:dark:bg-white/[0.06] hover:bg-black/[0.04] transition-all cursor-pointer text-left" style="animation-delay:.12s">';
+  h+='<div class="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center text-xl" style="background:rgba(245,158,11,.12)">🏊</div>';
+  h+='<div class="flex-1 min-w-0"><div class="text-sm font-bold dark:text-white text-gray-900 group-hover:underline" style="letter-spacing:-.2px">AI 产品经理工作流程图</div>';
+  h+='<div class="text-[11px] dark:text-gray-400 text-gray-500 mt-0.5" style="letter-spacing:-.1px">泳道图 · 8个角色 × 8个阶段 · 点击角色可高亮</div></div>';
+  h+='<svg class="w-5 h-5 dark:text-gray-500 text-gray-400 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>';
+  h+='</button>';
   // Day-by-day course cards
   w.days.forEach((day,di)=>{
     h+='<div class="mb-8 nh-animate" style="animation-delay:'+(.15+di*.05)+'s">';
@@ -3539,11 +3622,150 @@ function nhRenderDeepDive(){
   nhRenderDayView();
 }
 
+// ---- Swimlane Flow Chart (泳道图) ----
+let nhSwimlaneHighlight=null; // highlighted role key
+function nhRenderSwimlane(){
+  const mc=document.getElementById('nh-main-content');if(!mc)return;
+  const dk=isDark;
+  const roles=SWIMLANE_ROLES;
+  const stages=SWIMLANE_STAGES;
+  const roleIdx={};roles.forEach((r,i)=>{roleIdx[r.key]=i});
+  let h='<div class="nh-animate">';
+  // Breadcrumb
+  h+='<div style="display:flex;align-items:center;gap:6px;margin-bottom:24px">';
+  h+='<button onclick="nhShowOverview()" class="text-[11px] '+(dk?'text-gray-500 hover:text-white':'text-gray-400 hover:text-gray-900')+' transition-colors" style="letter-spacing:-.2px">笔记总览</button>';
+  h+='<span class="text-[11px] '+(dk?'text-gray-600':'text-gray-300')+'">›</span>';
+  h+='<span class="text-[11px] font-semibold '+(dk?'text-white':'text-gray-900')+'" style="letter-spacing:-.2px">流程图</span></div>';
+  // Title (Apple-style: tight, cinematic)
+  h+='<div style="text-align:center;margin-bottom:40px">';
+  h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px" class="'+(dk?'text-amber-400':'text-amber-600')+'">CROSS-FUNCTIONAL FLOWCHART</div>';
+  h+='<div style="font-size:clamp(26px,4.5vw,40px);font-weight:800;line-height:1.06;letter-spacing:-.8px;margin-bottom:8px" class="'+(dk?'text-white':'text-gray-900')+'">AI 产品经理协作泳道图</div>';
+  h+='<div style="font-size:14px;line-height:1.5;letter-spacing:-.15px;max-width:480px;margin:0 auto" class="'+(dk?'text-gray-400':'text-gray-500')+'">从需求提出到持续迭代，8 个角色的全流程协作关系一目了然。<br>点击角色名称高亮其参与环节。</div>';
+  h+='</div>';
+  // Chart container with horizontal scroll
+  h+='<div style="overflow-x:auto;padding-bottom:16px;-webkit-overflow-scrolling:touch">';
+  h+='<div style="min-width:800px">';
+  // ---- Header row: role columns ----
+  h+='<div style="display:grid;grid-template-columns:72px repeat('+roles.length+',1fr);gap:0;margin-bottom:2px">';
+  // Corner cell
+  h+='<div style="padding:8px 4px;text-align:center"><span style="font-size:10px;font-weight:600;letter-spacing:.5px" class="'+(dk?'text-gray-500':'text-gray-400')+'">阶段</span></div>';
+  // Role headers
+  roles.forEach(r=>{
+    const hl=nhSwimlaneHighlight===r.key;
+    h+='<button onclick="nhSwimlaneHighlight=nhSwimlaneHighlight===\''+r.key+'\'?null:\''+r.key+'\';nhRenderSwimlane()" ';
+    h+='style="padding:10px 4px;text-align:center;border:none;cursor:pointer;border-radius:8px;transition:all .2s;background:'+(hl?r.color+'15':'transparent')+'" class="group">';
+    h+='<div style="font-size:16px;margin-bottom:2px">'+r.icon+'</div>';
+    h+='<div style="font-size:10px;font-weight:600;letter-spacing:-.2px;transition:color .2s;'+(hl?'color:'+r.color:'')+'" class="'+(hl?'':(dk?'text-gray-300':'text-gray-600'))+'">'+r.label+'</div>';
+    h+='</button>';
+  });
+  h+='</div>';
+  // ---- Stage rows ----
+  stages.forEach((stage,si)=>{
+    const isAlt=si%2===1;
+    const rowBg=isAlt?(dk?'rgba(255,255,255,.015)':'rgba(0,0,0,.015)'):'transparent';
+    h+='<div style="display:grid;grid-template-columns:72px repeat('+roles.length+',1fr);gap:0;background:'+rowBg+';border-radius:8px;position:relative;min-height:52px;align-items:center">';
+    // Stage label (left column)
+    h+='<div style="padding:8px 4px;text-align:center;position:relative">';
+    h+='<div style="position:absolute;left:0;top:8px;bottom:8px;width:3px;border-radius:2px;background:'+stage.color+'"></div>';
+    h+='<div style="font-size:10px;font-weight:700;letter-spacing:-.1px" class="'+(dk?'text-gray-300':'text-gray-700')+'">'+stage.label+'</div>';
+    h+='</div>';
+    // Place pill nodes in their role columns
+    if(stage.nodes&&stage.nodes.length){
+      // Find which role columns have pills
+      const pillsByRole={};
+      let lastRole=null;
+      stage.nodes.forEach(n=>{
+        if(n.type==='arrow')return;
+        if(n.role){lastRole=n.role;if(!pillsByRole[n.role])pillsByRole[n.role]=[];pillsByRole[n.role].push(n)}
+      });
+      roles.forEach(r=>{
+        const pills=pillsByRole[r.key]||[];
+        const dimmed=nhSwimlaneHighlight&&nhSwimlaneHighlight!==r.key;
+        h+='<div style="padding:4px 3px;display:flex;flex-wrap:wrap;gap:4px;justify-content:center;opacity:'+(dimmed?.25:1)+';transition:opacity .3s">';
+        pills.forEach(p=>{
+          h+='<div style="display:inline-flex;align-items:center;justify-content:center;padding:5px 12px;border-radius:980px;font-size:10px;font-weight:600;letter-spacing:-.1px;white-space:pre-line;text-align:center;line-height:1.3;border:1px solid '+p.color+'40;background:'+p.color+'12;color:'+p.color+';cursor:default;transition:all .2s" class="hover:scale-105">';
+          h+=p.text.replace(/\n/g,'<br>')+'</div>';
+        });
+        h+='</div>';
+      });
+      // Draw arrows between pills (using CSS pseudo-elements is hard, so use overlay)
+      // We'll place small → between connected role columns
+    } else {
+      // Empty role cells for non-node stages
+      roles.forEach(()=>{h+='<div></div>'});
+    }
+    h+='</div>';
+    // Sub-items (offset pills that appear between rows)
+    if(stage.sub&&stage.sub.length){
+      h+='<div style="display:grid;grid-template-columns:72px repeat('+roles.length+',1fr);gap:0;min-height:36px;align-items:center">';
+      h+='<div></div>'; // empty stage cell
+      roles.forEach(r=>{
+        const sub=stage.sub.find(s=>s.role===r.key);
+        const dimmed=nhSwimlaneHighlight&&nhSwimlaneHighlight!==r.key;
+        if(sub){
+          h+='<div style="padding:2px 3px;display:flex;justify-content:center;opacity:'+(dimmed?.25:1)+';transition:opacity .3s">';
+          h+='<div style="display:inline-flex;align-items:center;padding:4px 10px;border-radius:980px;font-size:9px;font-weight:600;letter-spacing:-.1px;border:1px solid '+sub.color+'30;background:'+sub.color+'08;color:'+sub.color+'">';
+          h+=sub.text+'</div></div>';
+        } else {
+          h+='<div></div>';
+        }
+      });
+      h+='</div>';
+    }
+    // Full-width bars
+    if(stage.bars&&stage.bars.length){
+      stage.bars.forEach(bar=>{
+        // Determine which columns to span
+        const startIdx=bar.roles?Math.min(...bar.roles.map(r=>roleIdx[r]||0)):0;
+        const endIdx=bar.roles?Math.max(...bar.roles.map(r=>roleIdx[r]||0)):roles.length-1;
+        const dimmed=nhSwimlaneHighlight&&bar.roles&&!bar.roles.includes(nhSwimlaneHighlight);
+        h+='<div style="display:grid;grid-template-columns:72px repeat('+roles.length+',1fr);gap:0;min-height:40px;align-items:center;opacity:'+(dimmed?.25:1)+';transition:opacity .3s">';
+        h+='<div></div>'; // empty stage cell
+        // Place empty cells before bar start, then spanning bar, then empty after
+        for(let ri=0;ri<roles.length;ri++){
+          if(ri===startIdx){
+            const span=endIdx-startIdx+1;
+            h+='<div style="grid-column:span '+span+';padding:4px 8px;display:flex;justify-content:center">';
+            h+='<div style="width:100%;padding:8px 16px;border-radius:8px;text-align:center;font-size:11px;font-weight:600;letter-spacing:-.1px;border:1px solid '+bar.color+'35;background:'+bar.color+'0c;color:'+bar.color+'">';
+            // Checkbox icon
+            h+='<span style="margin-right:4px">☑</span>'+bar.text+'</div></div>';
+            ri=endIdx; // skip spanned cells
+          } else {
+            h+='<div></div>';
+          }
+        }
+        h+='</div>';
+      });
+    }
+    // Row separator
+    if(si<stages.length-1){
+      h+='<div style="height:1px;margin:2px 0;background:'+(dk?'rgba(255,255,255,.04)':'rgba(0,0,0,.04)')+'"></div>';
+    }
+  });
+  h+='</div></div>'; // end min-width + overflow wrapper
+  // Arrow connections note
+  h+='<div style="margin-top:24px;padding:16px 20px;border-radius:12px;background:'+(dk?'rgba(255,255,255,.02)':'rgba(0,0,0,.02)')+'">';
+  h+='<div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px" class="'+(dk?'text-gray-500':'text-gray-400')+'">图例说明</div>';
+  h+='<div style="display:flex;flex-wrap:wrap;gap:12px">';
+  roles.forEach(r=>{
+    h+='<div style="display:flex;align-items:center;gap:6px">';
+    h+='<div style="width:10px;height:10px;border-radius:50%;background:'+r.color+'"></div>';
+    h+='<span style="font-size:11px;font-weight:500;letter-spacing:-.1px" class="'+(dk?'text-gray-400':'text-gray-500')+'">'+r.icon+' '+r.label+'</span></div>';
+  });
+  h+='</div>';
+  h+='<div style="margin-top:8px;font-size:10px;letter-spacing:-.1px" class="'+(dk?'text-gray-600':'text-gray-400')+'">💡 点击顶部角色名称可高亮该角色参与的所有环节</div>';
+  h+='</div>';
+  h+='</div>';
+  mc.innerHTML=h;
+  document.getElementById('nh-main').scrollTop=0;
+}
+
 // ---- Navigation helpers ----
 function nhToggleDay(di){nhExpandedDay=nhExpandedDay===di?-1:di;nhRenderSidebar()}
 function nhShowDayOverview(di){nhExpandedDay=di;nhView='day';nhCourse=null;nhRenderSidebar();nhRenderMain()}
 function nhSwitchWeek(i){nhWeek=i;nhView='overview';nhCourse=null;nhExpandedDay=-1;nhRenderSidebar();nhRenderMain()}
 function nhShowOverview(){nhView='overview';nhCourse=null;nhRenderSidebar();nhRenderMain()}
+function nhShowFlowchart(){nhView='flowchart';nhCourse=null;nhRenderSidebar();nhRenderMain()}
 function nhShowCourse(key){nhView='course';nhCourse=key;nhExpandedDay=parseInt(key.split('-')[0]);nhRenderSidebar();nhRenderMain()}
 function nhShowDetail(key){nhView='detail';nhCourse=key;nhExpandedDay=parseInt(key.split('-')[0]);nhRenderSidebar();nhRenderMain()}
 function nhShowGlossary(){nhView='glossary';nhCourse=null;nhRenderSidebar();nhRenderMain()}
@@ -3592,10 +3814,12 @@ function nhRenderGlossary(){
   const grouped={};
   items.forEach(g=>{if(!grouped[g.cat])grouped[g.cat]=[];grouped[g.cat].push(g)});
   let h='<div class="nh-animate">';
-  // Header
-  h+='<div class="mb-6"><div class="flex items-center gap-3 mb-2"><span class="text-3xl">📖</span>';
-  h+='<div><h1 class="text-2xl md:text-3xl font-black dark:text-white text-gray-900">名词释义</h1>';
-  h+='<p class="text-xs dark:text-gray-500 text-gray-400">课程核心概念速查 · 共 '+NH_GLOSSARY.length+' 个术语 · 持续更新</p></div></div></div>';
+  // Header (Apple-style: tight, cinematic)
+  h+='<div style="text-align:center;margin-bottom:28px">';
+  h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px" class="'+(isDark?'text-cyan-400':'text-cyan-600')+'">GLOSSARY</div>';
+  h+='<div style="font-size:clamp(24px,4vw,36px);font-weight:800;line-height:1.06;letter-spacing:-.6px;margin-bottom:6px" class="'+(isDark?'text-white':'text-gray-900')+'">名词释义</div>';
+  h+='<div style="font-size:13px;letter-spacing:-.15px" class="'+(isDark?'text-gray-400':'text-gray-500')+'">课程核心概念速查 · 共 '+NH_GLOSSARY.length+' 个术语 · 持续更新</div>';
+  h+='</div>';
   // Stats bar
   const catCounts={};NH_GLOSSARY.forEach(g=>{catCounts[g.cat]=(catCounts[g.cat]||0)+1});
   h+='<div class="grid grid-cols-3 md:grid-cols-6 gap-2 mb-6 nh-animate" style="animation-delay:.05s">';
@@ -3665,11 +3889,35 @@ function nhRenderGlossary(){
         h+='<span class="text-[9px] font-bold px-1.5 py-0.5 rounded dark:bg-'+wclr+'-500/15 bg-'+wclr+'-100 dark:text-'+wclr+'-400 text-'+wclr+'-600">W'+w+'</span>';
       });
       h+='<span class="nh-tag dark:bg-'+clr+'-500/15 bg-'+clr+'-100 dark:text-'+clr+'-400 text-'+clr+'-600">'+g.cat+'</span>';
-      h+='</div></div></div></div>';
+      h+='</div>';
+      // Source references
+      if(g.refs&&g.refs.length){
+        h+='<div style="margin-top:6px;padding-top:6px;border-top:1px solid '+(isDark?'rgba(255,255,255,.05)':'rgba(0,0,0,.05)')+'">';
+        h+='<div style="font-size:9px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;margin-bottom:3px" class="'+(isDark?'text-gray-600':'text-gray-400')+'">来源</div>';
+        g.refs.forEach(ref=>{
+          h+='<div style="font-size:10px;font-style:italic;line-height:1.5;letter-spacing:-.1px" class="'+(isDark?'text-gray-500':'text-gray-400')+'">'+ref+'</div>';
+        });
+        h+='</div>';
+      }
+      h+='</div></div></div>';
     });
     h+='</div></div>';
     delay+=0.04;
   });
+  // ---- 参考文献与标准 section (Apple-style card) ----
+  h+='<div class="glass-card rounded-2xl p-6 mt-8 nh-animate" style="animation-delay:'+delay+'s">';
+  h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">';
+  h+='<span style="font-size:18px">📚</span>';
+  h+='<span style="font-size:clamp(16px,2.5vw,20px);font-weight:700;letter-spacing:-.3px" class="'+(isDark?'text-white':'text-gray-900')+'">参考文献与标准</span></div>';
+  h+='<div style="display:flex;flex-direction:column;gap:8px">';
+  NH_REFERENCES.forEach((ref,ri)=>{
+    h+='<div style="font-size:12px;line-height:1.6;letter-spacing:-.1px" class="'+(isDark?'text-gray-400':'text-gray-500')+'">';
+    h+='<span style="margin-right:6px;font-weight:400" class="'+(isDark?'text-gray-600':'text-gray-400')+'">'+(ri+1)+'.</span>';
+    h+='<strong style="font-weight:600" class="'+(isDark?'text-gray-200':'text-gray-700')+'">'+ref.title+'</strong>';
+    h+=' — '+ref.author+'. '+ref.desc;
+    h+='</div>';
+  });
+  h+='</div></div>';
   h+='</div>';
   mc.innerHTML=h;
   document.getElementById('nh-main').scrollTop=0;
