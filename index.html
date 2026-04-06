@@ -2905,7 +2905,7 @@ const NH_WEEKS=[
   quotes:['RAG就是给大模型装了一个外挂知识库','数据质量决定AI系统的天花板','Chunk是数据清洗后的基本单位','模型注意力呈U型分布：开头结尾易记，中间容易遗忘','工作流前身是SOP，标准化为提效，下一步是自动化','0到1项目PM应侧重构建核心功能，而非知识库层面技术细节','双钻模型：AI发散-我收拢','在实践中学习，出错是好事'],
   tools:[{n:'Dify',d:'工作流/对话流平台'},{n:'扣子(Coze)',d:'智能体开发平台'},{n:'Cherry Studio',d:'多模型测试工具'},{n:'飞书',d:'团队协作与文档'},{n:'pdfplumber',d:'PDF表格提取'},{n:'BeautifulSoup',d:'HTML标签剥离'},{n:'DREAM模型',d:'腾讯文档解析'},{n:'BGE-M3',d:'多语言向量模型'}],
   days:[
-    {date:'4月4日（周五）',title:'RAG离线阶段·知识库构建',icon:'🔧',color:'#8b5cf6',
+    {date:'4月4日（周六）',title:'RAG离线阶段·知识库构建',icon:'🔧',color:'#8b5cf6',
      summary:'系统学习RAG离线阶段6大Pipeline环节：从原始数据采集到向量索引构建，明确每个环节的PM职责与质量标准。',
      courses:[
       {id:'008',title:'RAG核心概念与离线Pipeline A-C',tags:['技术','核心'],
@@ -2917,7 +2917,7 @@ const NH_WEEKS=[
        points:['Pipeline D 文本分割：语义完整+长度适配，策略包括固定长度/语义感知/文档结构/关键词/多粒度混合','Pipeline E 文本向量化：Embedding Model核心，PM负责模型选型评估(精度vs成本vs延迟)+质量监控','Pipeline F 向量索引构建：向量数据库(语义检索) vs RDBMS/NoSQL(精准匹配)，核心指标Recall@K/P95延迟','COT思维链：Chain of Thought让模型展示思考过程，提升推理能力','多轮对话架构：Context Window包含query+system prompt+ICL+chat history+summary','模型注意力呈U型分布：开头和结尾容易记住，中间容易遗忘，需合理管理上下文','DeepSeek-r1封锁下有了思考能力；Kimi弥补国内Agent能力空白'],
        keyPoint:'文本分割策略决定检索精度，向量数据库是语义检索的核心基础设施',homework:'完成RAG离线Pipeline技术笔记整理'}
     ]},
-    {date:'4月5日（周六）',title:'RAG在线阶段·检索增强生成',icon:'🚀',color:'#06b6d4',
+    {date:'4月5日（周日）',title:'RAG在线阶段·检索增强生成',icon:'🚀',color:'#06b6d4',
      summary:'深入RAG在线阶段：Query改写→多路检索→增强→生成，以及Graph RAG、Dify平台实操与工作流开发。',
      courses:[
       {id:'009',title:'在线检索Pipeline G-H与增强生成',tags:['技术','核心'],
@@ -2929,7 +2929,7 @@ const NH_WEEKS=[
        points:['Dify两种模式：工作流(Workflow)有始有终适合自动化 vs 对话流(Chatflow)多轮记忆适合群组交互','Workspace工作空间：团队项目管理核心，成员可共享新建管理项目','工作流构建：触发器→开始节点(输入变量)→处理节点(业务逻辑)→结束节点(输出结果)','工作流前身是SOP，规范化→自动化，提效路径：对齐成本→流程自动流转','自动化工具矩阵：RPA(流程)/机器人(回复)/公众号(关键词)/飞书企微(工作流)','在线阶段工作流：用户Query→向量库召回→上下文结合→意图分析→LLM生成→返回答案','面试要点：避免纠结技术细节，挖掘个人亮点(业务匹配度/需求分析)，场景化表达项目'],
        keyPoint:'工作流vs对话流的选择取决于场景：任务执行用工作流，咨询问答用对话流',homework:'场景梳理文档(A4) + 岗位详情表(12城市) + 求职助手APP'}
     ]},
-    {date:'4月5日（周六）',title:'智能体开发与项目实战落地',icon:'🚀',color:'#06b6d4',
+    {date:'4月5日（周日）',title:'智能体开发与项目实战落地',icon:'🚀',color:'#06b6d4',
      summary:'聚焦实战落地，在扣子平台完成智能体全流程开发，掌握RAG知识库构建方法与场景梳理。',
      courses:[
       {id:'007',title:'扣子(Coze)平台与RAG知识库构建',tags:['实战','核心'],
@@ -3180,7 +3180,7 @@ function nhRenderSidebar(){
     {key:'flowchart',label:'流程图',onclick:'nhShowFlowchart()',ac:'dark:bg-amber-500/15 bg-amber-100 dark:text-amber-400 text-amber-600',svg:'<path stroke-linecap="round" stroke-linejoin="round" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/>'},
     {key:'glossary',label:'释义',onclick:'nhShowGlossary()',ac:'dark:bg-cyan-500/15 bg-cyan-100 dark:text-cyan-400 text-cyan-600',svg:'<path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>'}
   ];
-  if(nhWeek===0) _navItems.push({key:'courseware',label:'作业',onclick:'nhShowCourseware()',ac:'dark:bg-violet-500/15 bg-violet-100 dark:text-violet-400 text-violet-600',svg:'<path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>'});
+  _navItems.push({key:'courseware',label:'一周知识全览',onclick:'nhShowCourseware()',ac:'dark:bg-violet-500/15 bg-violet-100 dark:text-violet-400 text-violet-600',svg:'<path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>'});
   h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:16px">';
   _navItems.forEach(n=>{
     const act=nhView===n.key;
@@ -3866,9 +3866,9 @@ function nhRenderSwimlane(){
   document.getElementById('nh-main').scrollTop=0;
 }
 
-// ---- Courseware: Week 1 Full Knowledge (作业) ----
+// ---- Courseware: 一周知识全览 ----
 let cwSlide=0;
-const CW_SLIDES=[
+const CW_SLIDES_W1=[
   {key:'cover',title:'第一周总览',icon:'📘',day:0},
   {key:'tools',title:'IDE 与 AI 编程',icon:'🛠️',day:1},
   {key:'scene',title:'场景思维',icon:'🎬',day:1},
@@ -3886,11 +3886,28 @@ const CW_SLIDES=[
   {key:'diamond',title:'双钻模型',icon:'💎',day:3},
   {key:'summary',title:'总结与行动',icon:'🚀',day:0}
 ];
+const CW_SLIDES_W2=[
+  {key:'w2-cover',title:'第二周总览',icon:'📘',day:0},
+  {key:'w2-rag-intro',title:'RAG 核心概念',icon:'🔍',day:1},
+  {key:'w2-pipeline-abc',title:'离线 Pipeline A-C',icon:'💾',day:1},
+  {key:'w2-pipeline-def',title:'离线 Pipeline D-F',icon:'📊',day:1},
+  {key:'w2-online',title:'在线检索流程',icon:'🔎',day:2},
+  {key:'w2-query',title:'Query 改写六法',icon:'✏️',day:2},
+  {key:'w2-graph-rag',title:'Graph RAG',icon:'🕸️',day:2},
+  {key:'w2-dify',title:'Dify 与工作流',icon:'⚙️',day:2},
+  {key:'w2-agent',title:'智能体开发',icon:'🤖',day:3},
+  {key:'w2-scene',title:'场景梳理框架',icon:'🎯',day:3},
+  {key:'w2-interview',title:'面试实战要点',icon:'💼',day:3},
+  {key:'w2-summary',title:'总结与行动',icon:'🚀',day:0}
+];
 function nhRenderCourseware(){
   const mc=document.getElementById('nh-main-content');if(!mc)return;
   const dk=isDark;
-  const accent='#7c3aed';
-  const accent2='#06b6d4';
+  const isW2=nhWeek===1;
+  const CW_SLIDES=isW2?CW_SLIDES_W2:CW_SLIDES_W1;
+  if(cwSlide>=CW_SLIDES.length)cwSlide=0;
+  const accent=isW2?'#06b6d4':'#7c3aed';
+  const accent2=isW2?'#8b5cf6':'#06b6d4';
   const txt=dk?'#f5f5f7':'#1d1d1f';
   const sub=dk?'#a1a1aa':'rgba(0,0,0,.48)';
   const card=dk?'#1c1c1e':'#ffffff';
@@ -3898,7 +3915,7 @@ function nhRenderCourseware(){
   const secBg=dk?'#000000':'#f5f5f7';
   const shadow=dk?'none':'rgba(0,0,0,.22) 3px 5px 30px 0px';
   const slide=CW_SLIDES[cwSlide];
-  const dayLabel=slide.day===1?'Day 1 · 3月28日':slide.day===2?'Day 2 · 3月29日':slide.day===3?'Day 3 · 4月2日':'';
+  const dayLabel=isW2?(slide.day===1?'Day 1 · 4月4日(周六)':slide.day===2?'Day 2 · 4月5日(周日·上午)':slide.day===3?'Day 3 · 4月5日(周日·下午)':''):(slide.day===1?'Day 1 · 3月28日':slide.day===2?'Day 2 · 3月29日':slide.day===3?'Day 3 · 4月2日':'');
   let h='<div class="nh-animate">';
 
   // ======== TOP NAV ========
@@ -3906,7 +3923,7 @@ function nhRenderCourseware(){
   h+='<div style="display:flex;align-items:center;gap:6px">';
   h+='<button onclick="nhShowOverview()" class="text-[11px] '+(dk?'text-gray-500 hover:text-white':'text-gray-400 hover:text-gray-900')+' transition-colors">笔记总览</button>';
   h+='<span class="text-[11px] '+(dk?'text-gray-600':'text-gray-300')+'">›</span>';
-  h+='<span class="text-[11px] font-semibold" style="color:'+accent+'">作业 · 第一周课件</span></div>';
+  h+='<span class="text-[11px] font-semibold" style="color:'+accent+'">一周知识全览</span></div>';
   h+='<span style="font-size:11px;font-weight:600;letter-spacing:-.1px" class="'+(dk?'text-gray-500':'text-gray-400')+'">'+(cwSlide+1)+' / '+CW_SLIDES.length+'</span>';
   h+='</div>';
 
@@ -4306,6 +4323,324 @@ function nhRenderCourseware(){
     h+='<div style="font-size:13px;font-weight:600;color:'+txt+'">核心：<span style="color:'+accent+'">AI 发散可能性，人收拢决策。</span>潜能象限需紧密协作。</div>';
     h+='</div>';
 
+  // ======== WEEK 2 SLIDES ========
+  } else if(slide.key==='w2-cover'){
+    h+='<div style="text-align:center;padding:40px 0 32px">';
+    h+='<div style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;color:'+accent+'">WEEK 2 COURSEWARE</div>';
+    h+='<h1 style="font-size:clamp(32px,6vw,48px);font-weight:600;line-height:1.07;letter-spacing:-.5px;margin-bottom:16px;color:'+txt+'">第二周知识全景</h1>';
+    h+='<p style="font-size:17px;line-height:1.47;letter-spacing:-.37px;max-width:520px;margin:0 auto 40px;color:'+sub+'">4.4 – 4.5 · RAG 技术全栈 × 智能体实战<br>从知识库构建到智能体发布的完整链路</p>';
+    h+='</div>';
+    const w2days=[
+      {d:'Day 1 · 4/4(周六)',t:'RAG 离线阶段 · 知识库构建',icon:'🔧',color:'#8b5cf6',topics:['RAG核心概念与架构','Pipeline A-C: 采集→解析→清洗','Pipeline D-F: 分割→向量化→索引','大模型演进: COT/DeepSeek/Kimi']},
+      {d:'Day 2 · 4/5(周日·上午)',t:'RAG 在线阶段 · 检索增强生成',icon:'🔎',color:'#06b6d4',topics:['Query改写六法','多路召回与重排','Graph RAG 知识图谱','Dify/工作流开发']},
+      {d:'Day 3 · 4/5(周日·下午)',t:'智能体开发与项目实战',icon:'🤖',color:'#f59e0b',topics:['Coze平台智能体全流程','RAG知识库接入','场景梳理四层结构','面试高频真题准备']}
+    ];
+    h+='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:660px;margin:0 auto 40px">';
+    w2days.forEach(dy=>{
+      h+='<div style="padding:24px 16px;border-radius:12px;background:'+card+';box-shadow:'+shadow+'">';
+      h+='<div style="font-size:28px;margin-bottom:10px">'+dy.icon+'</div>';
+      h+='<div style="font-size:10px;font-weight:600;letter-spacing:.3px;color:'+dy.color+';margin-bottom:4px">'+dy.d+'</div>';
+      h+='<div style="font-size:14px;font-weight:700;letter-spacing:-.2px;line-height:1.14;color:'+txt+';margin-bottom:12px">'+dy.t+'</div>';
+      dy.topics.forEach(tp=>{
+        h+='<div style="display:flex;align-items:baseline;gap:6px;padding:3px 0;font-size:11px;line-height:1.4;color:'+sub+'"><span style="color:'+dy.color+'">›</span>'+tp+'</div>';
+      });
+      h+='</div>';
+    });
+    h+='</div>';
+    h+='<div style="display:flex;justify-content:center;gap:40px">';
+    [{n:'2',l:'课程日'},{n:'7',l:'节课程'},{n:'49',l:'知识要点'},{n:'7',l:'实战作业'}].forEach(s=>{
+      h+='<div style="text-align:center"><div style="font-size:28px;font-weight:600;letter-spacing:-.5px;color:'+accent+'">'+s.n+'</div><div style="font-size:11px;color:'+sub+';margin-top:2px">'+s.l+'</div></div>';
+    });
+    h+='</div>';
+
+  } else if(slide.key==='w2-rag-intro'){
+    h+='<div style="text-align:center;padding:24px 0 28px">';
+    h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;color:#8b5cf6">RETRIEVAL-AUGMENTED GENERATION</div>';
+    h+='<h2 style="font-size:clamp(24px,4vw,36px);font-weight:600;line-height:1.1;letter-spacing:-.5px;margin-bottom:12px;color:'+txt+'">RAG 核心概念</h2>';
+    h+='<p style="font-size:15px;color:'+sub+'">给大模型装一个<strong style="color:'+accent+'">外挂知识库</strong></p>';
+    h+='</div>';
+    h+='<div style="max-width:540px;margin:0 auto 24px;padding:24px;border-radius:12px;background:'+card+';box-shadow:'+shadow+'">';
+    h+='<div style="font-size:12px;font-weight:700;margin-bottom:16px;color:'+txt+'">大模型四大局限 → RAG 解法</div>';
+    [{lim:'时效性不足',sol:'可更新知识库',icon:'⏰',c:'#ef4444'},{lim:'幻觉问题',sol:'基于事实检索',icon:'👻',c:'#f59e0b'},{lim:'安全性风险',sol:'知识库权限控制',icon:'🔒',c:'#3b82f6'},{lim:'专业知识不足',sol:'领域RAG比微调更灵活',icon:'📚',c:'#8b5cf6'}].forEach(r=>{
+      h+='<div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid '+cardBd+'">';
+      h+='<span style="font-size:18px">'+r.icon+'</span>';
+      h+='<div style="flex:1"><span style="font-size:12px;font-weight:600;color:'+r.c+'">'+r.lim+'</span></div>';
+      h+='<svg width="20" height="12" viewBox="0 0 20 12" style="flex-shrink:0"><line x1="0" y1="6" x2="13" y2="6" stroke="'+sub+'" stroke-width="1.5"/><polygon points="20,6 14,2 14,10" fill="'+sub+'"/></svg>';
+      h+='<div style="font-size:12px;font-weight:600;color:#10b981">'+r.sol+'</div></div>';
+    });
+    h+='</div>';
+    h+='<div style="max-width:540px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap">';
+    ['知识库构建','检索','增强','生成'].forEach((s,i)=>{
+      const isOff=i===0;
+      h+='<div style="padding:12px 18px;border-radius:8px;background:'+(isOff?'#8b5cf6':'#06b6d4')+'10;text-align:center">';
+      h+='<div style="font-size:13px;font-weight:700;color:'+(isOff?'#8b5cf6':'#06b6d4')+'">'+s+'</div>';
+      h+='<div style="font-size:9px;color:'+sub+';margin-top:2px">'+(isOff?'离线':'在线')+'</div></div>';
+      if(i<3) h+='<svg width="24" height="14" viewBox="0 0 24 14" style="flex-shrink:0"><line x1="2" y1="7" x2="16" y2="7" stroke="'+sub+'" stroke-width="1.5" stroke-dasharray="3,2"/><polygon points="24,7 18,3 18,11" fill="'+sub+'"/></svg>';
+    });
+    h+='</div>';
+
+  } else if(slide.key==='w2-pipeline-abc'){
+    h+='<div style="text-align:center;padding:24px 0 28px">';
+    h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;color:#8b5cf6">OFFLINE PIPELINE A-C</div>';
+    h+='<h2 style="font-size:clamp(24px,4vw,36px);font-weight:600;line-height:1.1;letter-spacing:-.5px;margin-bottom:12px;color:'+txt+'">数据采集 · 解析 · 清洗</h2>';
+    h+='<p style="font-size:15px;color:'+sub+'">离线阶段前三步，构建高质量数据基座</p>';
+    h+='</div>';
+    [{title:'Pipeline A · 数据采集',color:'#3b82f6',items:['企业内部文档 / 外网公开数据 / 付费外采','多轮对话QA对 / 网盘与API系统','PM职责：只采集业务场景强相关数据，记录元数据'],tag:'面试：数据来源？量级？成本？'},
+     {title:'Pipeline B · 文档解析',color:'#8b5cf6',items:['OCR(图像) → ASR(语音) → Pandas(结构化)','pdfplumber(半结构化) → markdown(纯文本)','腾讯DREAM模型：图像特征→元素聚合→并行生成'],tag:'PM输出《文档解析质量标准》'},
+     {title:'Pipeline C · 数据清洗',color:'#10b981',items:['元数据绑定：来源、采集时间','复杂排版阅读顺序处理','Chunk = 数据清洗后的基本单位'],tag:'数据质量决定AI天花板'}
+    ].forEach(p=>{
+      h+='<div style="max-width:560px;margin:0 auto 12px;padding:18px;border-radius:12px;background:'+card+';box-shadow:'+shadow+'">';
+      h+='<div style="font-size:14px;font-weight:700;color:'+p.color+';margin-bottom:10px">'+p.title+'</div>';
+      p.items.forEach(it=>{
+        h+='<div style="display:flex;align-items:baseline;gap:8px;padding:3px 0;font-size:12px;color:'+sub+'"><span style="color:'+p.color+'">›</span>'+it+'</div>';
+      });
+      h+='<div style="margin-top:10px;padding:6px 12px;border-radius:8px;font-size:10px;font-weight:600;background:'+p.color+'08;color:'+p.color+'">💡 '+p.tag+'</div>';
+      h+='</div>';
+    });
+
+  } else if(slide.key==='w2-pipeline-def'){
+    h+='<div style="text-align:center;padding:24px 0 28px">';
+    h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;color:#8b5cf6">OFFLINE PIPELINE D-F</div>';
+    h+='<h2 style="font-size:clamp(24px,4vw,36px);font-weight:600;line-height:1.1;letter-spacing:-.5px;margin-bottom:12px;color:'+txt+'">分割 · 向量化 · 索引</h2>';
+    h+='<p style="font-size:15px;color:'+sub+'">离线阶段后三步，从文本到可检索向量</p>';
+    h+='</div>';
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;max-width:580px;margin:0 auto 20px">';
+    [{t:'Pipeline D',s:'文本分割',items:['语义完整+长度适配','固定/语义感知/文档结构','多粒度混合分块'],c:'#3b82f6'},
+     {t:'Pipeline E',s:'文本向量化',items:['Embedding Model','精度 vs 成本 vs 延迟','向量漂移检测'],c:'#8b5cf6'},
+     {t:'Pipeline F',s:'向量索引',items:['向量数据库(语义检索)','RDBMS/NoSQL(精准匹配)','Recall@K / P95延迟'],c:'#10b981'}
+    ].forEach(p=>{
+      h+='<div style="padding:18px 14px;border-radius:12px;background:'+card+';box-shadow:'+shadow+'">';
+      h+='<div style="font-size:10px;font-weight:600;color:'+p.c+';margin-bottom:2px">'+p.t+'</div>';
+      h+='<div style="font-size:14px;font-weight:700;color:'+txt+';margin-bottom:10px">'+p.s+'</div>';
+      p.items.forEach(it=>{
+        h+='<div style="display:flex;align-items:baseline;gap:6px;padding:2px 0;font-size:11px;color:'+sub+'"><span style="color:'+p.c+'">›</span>'+it+'</div>';
+      });
+      h+='</div>';
+    });
+    h+='</div>';
+    h+='<div style="max-width:580px;margin:0 auto;padding:16px 20px;border-radius:12px;background:'+secBg+'">';
+    h+='<div style="font-size:12px;font-weight:700;margin-bottom:6px;color:'+txt+'">PM 核心职责</div>';
+    ['业务导向的拆分需求 + Chunk长度协同','模型选型评估 + 向量质量监控体系','项目排期 + 业务连续性保障(全量重建/增量更新)'].forEach(p=>{
+      h+='<div style="display:flex;align-items:baseline;gap:6px;padding:3px 0;font-size:11px;color:'+sub+'"><span style="width:5px;height:5px;border-radius:50%;background:'+accent+';flex-shrink:0;margin-top:5px"></span>'+p+'</div>';
+    });
+    h+='</div>';
+
+  } else if(slide.key==='w2-online'){
+    h+='<div style="text-align:center;padding:24px 0 28px">';
+    h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;color:#06b6d4">ONLINE RETRIEVAL</div>';
+    h+='<h2 style="font-size:clamp(24px,4vw,36px);font-weight:600;line-height:1.1;letter-spacing:-.5px;margin-bottom:12px;color:'+txt+'">在线检索完整流程</h2>';
+    h+='<p style="font-size:15px;color:'+sub+'">从用户提问到生成回答的六步流水线</p>';
+    h+='</div>';
+    h+='<div style="max-width:500px;margin:0 auto 24px;display:flex;flex-direction:column;gap:6px;align-items:center">';
+    [{l:'用户提问',d:'User Query',c:'#3b82f6',w:'50%'},
+     {l:'Query 改写',d:'Pipeline G · 六种方法',c:'#8b5cf6',w:'60%'},
+     {l:'多路检索',d:'关键词 + 向量混合搜索',c:'#06b6d4',w:'70%'},
+     {l:'重排 Rerank',d:'Score评分 · TopK筛选',c:'#f59e0b',w:'80%'},
+     {l:'增强 Augment',d:'Chunks + Query → Prompt',c:'#10b981',w:'90%'},
+     {l:'生成 Generate',d:'LLM 输出最终回答',c:'#ef4444',w:'100%'}
+    ].forEach((s,i)=>{
+      h+='<div style="width:'+s.w+';padding:10px 16px;border-radius:8px;background:'+s.c+'10;display:flex;justify-content:space-between;align-items:center">';
+      h+='<span style="font-size:13px;font-weight:700;color:'+s.c+'">'+s.l+'</span>';
+      h+='<span style="font-size:10px;color:'+sub+'">'+s.d+'</span></div>';
+      if(i<5) h+='<svg width="14" height="14" viewBox="0 0 14 14"><polygon points="7,14 3,6 11,6" fill="'+sub+'"/></svg>';
+    });
+    h+='</div>';
+    h+='<div style="max-width:500px;margin:0 auto;padding:14px 20px;border-radius:12px;background:'+(dk?'rgba(6,182,212,.06)':'rgba(6,182,212,.04)')+'">';
+    h+='<div style="font-size:12px;font-weight:600;color:'+accent+'">PM 质量标准：<span style="color:'+txt+'">召回率 ≥ 90% · 准确率 ≥ 85% · 延迟 P95</span></div>';
+    h+='</div>';
+
+  } else if(slide.key==='w2-query'){
+    h+='<div style="text-align:center;padding:24px 0 28px">';
+    h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;color:#8b5cf6">QUERY REWRITING</div>';
+    h+='<h2 style="font-size:clamp(24px,4vw,36px);font-weight:600;line-height:1.1;letter-spacing:-.5px;margin-bottom:12px;color:'+txt+'">Query 改写六法</h2>';
+    h+='<p style="font-size:15px;color:'+sub+'">Pipeline G · 将用户口语化输入转为精准检索词</p>';
+    h+='</div>';
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:560px;margin:0 auto">';
+    [{n:'01',t:'语义强化',d:'补充同义词、上位概念，拓宽检索面',c:'#3b82f6'},
+     {n:'02',t:'歧义消除',d:'利用上下文消除一词多义',c:'#8b5cf6'},
+     {n:'03',t:'上下文补全',d:'从对话历史补充隐含条件',c:'#06b6d4'},
+     {n:'04',t:'意图拆解',d:'复杂问题分解为多个子查询',c:'#f59e0b'},
+     {n:'05',t:'领域术语适配',d:'口语映射为专业检索术语',c:'#10b981'},
+     {n:'06',t:'约束条件强化',d:'时间、范围等过滤条件补充',c:'#ef4444'}
+    ].forEach(q=>{
+      h+='<div style="padding:16px;border-radius:12px;background:'+card+';box-shadow:'+shadow+';display:flex;gap:12px;align-items:flex-start">';
+      h+='<div style="width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;background:'+q.c+'10;color:'+q.c+';flex-shrink:0">'+q.n+'</div>';
+      h+='<div><div style="font-size:13px;font-weight:700;color:'+q.c+'">'+q.t+'</div>';
+      h+='<div style="font-size:11px;line-height:1.5;color:'+sub+';margin-top:2px">'+q.d+'</div></div></div>';
+    });
+    h+='</div>';
+
+  } else if(slide.key==='w2-graph-rag'){
+    h+='<div style="text-align:center;padding:24px 0 28px">';
+    h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;color:#06b6d4">KNOWLEDGE GRAPH + RAG</div>';
+    h+='<h2 style="font-size:clamp(24px,4vw,36px);font-weight:600;line-height:1.1;letter-spacing:-.5px;margin-bottom:12px;color:'+txt+'">Graph RAG</h2>';
+    h+='<p style="font-size:15px;color:'+sub+'">知识图谱增强检索，应对复杂关联场景</p>';
+    h+='</div>';
+    h+='<div style="max-width:540px;margin:0 auto 24px;padding:24px;border-radius:12px;background:'+card+';box-shadow:'+shadow+'">';
+    h+='<div style="font-size:12px;font-weight:700;margin-bottom:16px;color:'+txt+'">Graph RAG 适用场景</div>';
+    [{s:'政策穿透分析',d:'跨文档法规关联与影响链追踪',icon:'📜',c:'#3b82f6'},
+     {s:'合规审查',d:'实体关系网络中的风险识别',icon:'⚖️',c:'#8b5cf6'},
+     {s:'科研文献追踪',d:'论文引用链、技术演进图谱',icon:'🔬',c:'#06b6d4'},
+     {s:'故障因分析',d:'设备故障→原因→解决方案的因果链',icon:'🔧',c:'#f59e0b'}
+    ].forEach(s=>{
+      h+='<div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid '+cardBd+'">';
+      h+='<span style="font-size:18px">'+s.icon+'</span>';
+      h+='<div style="flex:1"><div style="font-size:13px;font-weight:700;color:'+s.c+'">'+s.s+'</div>';
+      h+='<div style="font-size:11px;color:'+sub+'">'+s.d+'</div></div></div>';
+    });
+    h+='</div>';
+    h+='<div style="max-width:540px;margin:0 auto;padding:16px 20px;border-radius:12px;background:'+secBg+'">';
+    h+='<div style="font-size:12px;font-weight:600;color:'+txt+'">核心优势：<span style="color:'+accent+'">实体-关系-实体</span> 三元组结构，支持多跳推理与关联发现。</div>';
+    h+='</div>';
+
+  } else if(slide.key==='w2-dify'){
+    h+='<div style="text-align:center;padding:24px 0 28px">';
+    h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;color:#06b6d4">WORKFLOW & CHATFLOW</div>';
+    h+='<h2 style="font-size:clamp(24px,4vw,36px);font-weight:600;line-height:1.1;letter-spacing:-.5px;margin-bottom:12px;color:'+txt+'">Dify 平台与工作流</h2>';
+    h+='<p style="font-size:15px;color:'+sub+'">SOP → 自动化，两种模式覆盖全场景</p>';
+    h+='</div>';
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:540px;margin:0 auto 24px">';
+    [{title:'工作流 Workflow',desc:'有开始有结束，流程化执行',items:['触发器 → 开始节点 → 处理 → 结束','适合：任务执行、自动化流程','短期记忆，定时触发'],color:'#3b82f6',tag:'任务执行'},
+     {title:'对话流 Chatflow',desc:'围绕话题持续交流',items:['多轮对话历史记忆','适合：咨询问答、客服场景','支持群组和单聊交互'],color:'#8b5cf6',tag:'咨询问答'}
+    ].forEach(m=>{
+      h+='<div style="padding:20px;border-radius:12px;background:'+card+';box-shadow:'+shadow+'">';
+      h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">';
+      h+='<div style="font-size:15px;font-weight:700;color:'+m.color+'">'+m.title+'</div>';
+      h+='<span style="padding:3px 10px;border-radius:980px;font-size:9px;font-weight:600;background:'+m.color+'14;color:'+m.color+'">'+m.tag+'</span></div>';
+      h+='<div style="font-size:12px;color:'+sub+';margin-bottom:12px">'+m.desc+'</div>';
+      m.items.forEach(it=>{
+        h+='<div style="display:flex;align-items:center;gap:6px;padding:3px 0;font-size:11px;color:'+txt+'"><span style="color:'+m.color+'">›</span>'+it+'</div>';
+      });
+      h+='</div>';
+    });
+    h+='</div>';
+    h+='<div style="max-width:540px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:8px">';
+    [{n:'RPA',d:'流程自动化'},{n:'机器人',d:'自动回复'},{n:'公众号',d:'关键词回复'},{n:'飞书/企微',d:'工作流'}].forEach(t=>{
+      h+='<div style="padding:12px;border-radius:8px;background:'+secBg+';text-align:center">';
+      h+='<div style="font-size:12px;font-weight:700;color:'+txt+'">'+t.n+'</div>';
+      h+='<div style="font-size:10px;color:'+sub+';margin-top:2px">'+t.d+'</div></div>';
+    });
+    h+='</div>';
+
+  } else if(slide.key==='w2-agent'){
+    h+='<div style="text-align:center;padding:24px 0 28px">';
+    h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;color:#f59e0b">AGENT DEVELOPMENT</div>';
+    h+='<h2 style="font-size:clamp(24px,4vw,36px);font-weight:600;line-height:1.1;letter-spacing:-.5px;margin-bottom:12px;color:'+txt+'">智能体开发实战</h2>';
+    h+='<p style="font-size:15px;color:'+sub+'">扣子(Coze)平台，从创建到发布</p>';
+    h+='</div>';
+    h+='<div style="max-width:520px;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap">';
+    ['创建智能体','设定人设','知识库接入','预览调试','发布上线'].forEach((s,i)=>{
+      const colors=['#3b82f6','#8b5cf6','#06b6d4','#f59e0b','#10b981'];
+      h+='<div style="padding:10px 14px;border-radius:8px;background:'+colors[i]+'10;text-align:center">';
+      h+='<div style="font-size:11px;font-weight:700;color:'+colors[i]+'">'+s+'</div></div>';
+      if(i<4) h+='<svg width="20" height="14" viewBox="0 0 20 14" style="flex-shrink:0"><line x1="2" y1="7" x2="13" y2="7" stroke="'+sub+'" stroke-width="1.5" stroke-dasharray="3,2"/><polygon points="20,7 14,3 14,11" fill="'+sub+'"/></svg>';
+    });
+    h+='</div>';
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:520px;margin:0 auto 20px">';
+    [{t:'人设设计',items:['人物背景介绍','擅长领域定义','对话风格设定'],c:'#8b5cf6'},
+     {t:'回复逻辑',items:['梳理用户场景','识别用户痛点','One-shot/Few-shot示例'],c:'#06b6d4'}
+    ].forEach(b=>{
+      h+='<div style="padding:18px;border-radius:12px;background:'+card+';box-shadow:'+shadow+'">';
+      h+='<div style="font-size:14px;font-weight:700;color:'+b.c+';margin-bottom:10px">'+b.t+'</div>';
+      b.items.forEach(it=>{
+        h+='<div style="display:flex;align-items:baseline;gap:6px;padding:3px 0;font-size:12px;color:'+sub+'"><span style="color:'+b.c+'">›</span>'+it+'</div>';
+      });
+      h+='</div>';
+    });
+    h+='</div>';
+    h+='<div style="max-width:520px;margin:0 auto;padding:14px 20px;border-radius:12px;background:'+secBg+'">';
+    h+='<div style="font-size:12px;color:'+sub+'"><strong style="color:'+txt+'">Temperature 参数：</strong>调大增加随机性和创造性。精确模式 vs 创意模式按场景选择。</div>';
+    h+='</div>';
+
+  } else if(slide.key==='w2-scene'){
+    h+='<div style="text-align:center;padding:24px 0 28px">';
+    h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;color:#f59e0b">SCENARIO FRAMEWORK</div>';
+    h+='<h2 style="font-size:clamp(24px,4vw,36px);font-weight:600;line-height:1.1;letter-spacing:-.5px;margin-bottom:12px;color:'+txt+'">场景梳理四层结构</h2>';
+    h+='<p style="font-size:15px;color:'+sub+'">从行业到AI落地方案的系统化拆解</p>';
+    h+='</div>';
+    h+='<div style="max-width:420px;margin:0 auto 24px;display:flex;flex-direction:column;gap:6px;align-items:center">';
+    [{l:'行业',d:'大行业分类',c:'#3b82f6',w:'50%'},
+     {l:'业务域',d:'细分领域',c:'#8b5cf6',w:'65%'},
+     {l:'场景',d:'必须全面覆盖',c:'#f59e0b',w:'80%'},
+     {l:'AI 落地方案',d:'选做 · 可行性验证',c:'#10b981',w:'100%'}
+    ].forEach((s,i)=>{
+      h+='<div style="width:'+s.w+';padding:12px 18px;border-radius:8px;background:'+s.c+'10;display:flex;justify-content:space-between;align-items:center">';
+      h+='<span style="font-size:14px;font-weight:700;color:'+s.c+'">'+s.l+'</span>';
+      h+='<span style="font-size:10px;color:'+sub+'">'+s.d+'</span></div>';
+      if(i<3) h+='<svg width="14" height="14" viewBox="0 0 14 14"><polygon points="7,14 3,6 11,6" fill="'+sub+'"/></svg>';
+    });
+    h+='</div>';
+    h+='<div style="max-width:520px;margin:0 auto;padding:20px;border-radius:12px;background:'+card+';box-shadow:'+shadow+'">';
+    h+='<div style="font-size:12px;font-weight:700;margin-bottom:12px;color:'+txt+'">场景描述 = 讲故事</div>';
+    h+='<div style="display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:12px">';
+    [{l:'主人公',s:'用户',c:'#3b82f6'},{l:'情境',s:'场景',c:'#f59e0b'},{l:'冲突',s:'痛点',c:'#ef4444'},{l:'方案',s:'产品',c:'#10b981'}].forEach((f,i)=>{
+      h+='<div style="padding:10px 16px;border-radius:8px;background:'+f.c+'08;text-align:center">';
+      h+='<div style="font-size:14px;font-weight:700;color:'+f.c+'">'+f.l+'</div>';
+      h+='<div style="font-size:10px;color:'+sub+'">'+f.s+'</div></div>';
+      if(i<3) h+='<span style="font-size:16px;color:'+sub+'">→</span>';
+    });
+    h+='</div>';
+    h+='<div style="font-size:12px;color:'+sub+';text-align:center">痛点要足够痛 · 张口就能说出场景 · 用语言表达清楚</div>';
+    h+='</div>';
+
+  } else if(slide.key==='w2-interview'){
+    h+='<div style="text-align:center;padding:24px 0 28px">';
+    h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;color:#f59e0b">INTERVIEW PREP</div>';
+    h+='<h2 style="font-size:clamp(24px,4vw,36px);font-weight:600;line-height:1.1;letter-spacing:-.5px;margin-bottom:12px;color:'+txt+'">面试实战要点</h2>';
+    h+='<p style="font-size:15px;color:'+sub+'">高频真题 + 面试技巧</p>';
+    h+='</div>';
+    h+='<div style="max-width:560px;margin:0 auto 20px;padding:24px;border-radius:12px;background:'+card+';box-shadow:'+shadow+'">';
+    h+='<div style="font-size:12px;font-weight:700;margin-bottom:14px;color:'+txt+'">RAG 高频面试问题</div>';
+    ['你们项目的数据来源有哪些？','数据量级是多大？数据成本是多少？','怎么处理元数据和复杂排版？','检索召回率和准确率指标是多少？','Query改写用了什么方法？','工作流和对话流怎么选择？'].forEach((q,i)=>{
+      h+='<div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid '+cardBd+'">';
+      h+='<div style="width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;background:'+accent+'10;color:'+accent+';flex-shrink:0">Q'+(i+1)+'</div>';
+      h+='<span style="font-size:12px;color:'+txt+'">'+q+'</span></div>';
+    });
+    h+='</div>';
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:560px;margin:0 auto">';
+    [{t:'展现解决问题能力',d:'聚焦产品定位和痛点，避免叙述操作步骤',icon:'🎯',c:'#3b82f6'},
+     {t:'场景化表达项目',d:'用讲故事的方式，把项目经历场景化',icon:'📖',c:'#8b5cf6'},
+     {t:'挖掘个人亮点',d:'业务匹配度 + 需求分析能力是核心竞争力',icon:'✨',c:'#f59e0b'},
+     {t:'避免技术细节纠缠',d:'PM重点在产品视角，非算法实现细节',icon:'⚡',c:'#10b981'}
+    ].forEach(t=>{
+      h+='<div style="padding:14px;border-radius:8px;background:'+secBg+'">';
+      h+='<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px"><span>'+t.icon+'</span>';
+      h+='<span style="font-size:12px;font-weight:700;color:'+t.c+'">'+t.t+'</span></div>';
+      h+='<div style="font-size:11px;line-height:1.5;color:'+sub+'">'+t.d+'</div></div>';
+    });
+    h+='</div>';
+
+  } else if(slide.key==='w2-summary'){
+    h+='<div style="text-align:center;padding:32px 0 24px">';
+    h+='<div style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;color:'+accent+'">WEEK 2 SUMMARY</div>';
+    h+='<h2 style="font-size:clamp(24px,4vw,36px);font-weight:600;line-height:1.07;letter-spacing:-.5px;margin-bottom:24px;color:'+txt+'">第二周核心要点</h2>';
+    h+='</div>';
+    const w2pts=[
+      {n:'01',t:'RAG 核心概念',d:'给大模型装外挂知识库，解决四大局限',color:'#8b5cf6'},
+      {n:'02',t:'离线 Pipeline A-C',d:'数据采集→文档解析→数据清洗',color:'#8b5cf6'},
+      {n:'03',t:'离线 Pipeline D-F',d:'文本分割→向量化→索引构建',color:'#8b5cf6'},
+      {n:'04',t:'在线检索六步',d:'Query→改写→检索→重排→增强→生成',color:'#06b6d4'},
+      {n:'05',t:'Query 改写六法',d:'语义/歧义/上下文/意图/术语/约束',color:'#06b6d4'},
+      {n:'06',t:'Graph RAG',d:'知识图谱增强，多跳推理与关联发现',color:'#06b6d4'},
+      {n:'07',t:'Dify 工作流',d:'工作流 vs 对话流，SOP→自动化',color:'#06b6d4'},
+      {n:'08',t:'智能体全流程',d:'创建→人设→知识库→调试→发布',color:'#f59e0b'},
+      {n:'09',t:'场景梳理',d:'行业→业务域→场景→AI落地方案',color:'#f59e0b'},
+      {n:'10',t:'面试实战',d:'RAG高频真题 + 场景化表达技巧',color:'#f59e0b'}
+    ];
+    h+='<div style="max-width:560px;margin:0 auto 28px;columns:2;column-gap:20px">';
+    w2pts.forEach(p=>{
+      h+='<div style="break-inside:avoid;display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid '+cardBd+'">';
+      h+='<div style="width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;background:'+p.color+'10;color:'+p.color+';flex-shrink:0">'+p.n+'</div>';
+      h+='<div><div style="font-size:12px;font-weight:700;color:'+txt+'">'+p.t+'</div>';
+      h+='<div style="font-size:10px;color:'+sub+'">'+p.d+'</div></div></div>';
+    });
+    h+='</div>';
+    h+='<div style="text-align:center;padding:16px;border-radius:12px;background:'+secBg+'">';
+    h+='<div style="font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px;color:'+sub+'">课程来源</div>';
+    h+='<div style="font-size:12px;color:'+txt+'">且曼 AI 产品经理前瞻学院 · 第二周 · 2天7节课</div>';
+    h+='<div style="font-size:11px;color:'+sub+';margin-top:4px">RAG全栈技术 → 智能体实战 → 场景梳理</div>';
+    h+='</div>';
+
   } else if(slide.key==='summary'){
     h+='<div style="text-align:center;padding:32px 0 24px">';
     h+='<div style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;color:'+accent+'">WEEK 1 SUMMARY</div>';
@@ -4360,7 +4695,7 @@ function nhRenderCourseware(){
   document.getElementById('nh-main').scrollTop=0;
 }
 
-function nhSwitchWeek(i){nhWeek=i;nhView='overview';nhCourse=null;nhExpandedDay=null;nhSwimlaneHighlight=null;nhRenderSidebar();nhRenderMain()}
+function nhSwitchWeek(i){nhWeek=i;nhView='overview';nhCourse=null;nhExpandedDay=null;nhSwimlaneHighlight=null;cwSlide=0;nhRenderSidebar();nhRenderMain()}
 function nhShowOverview(){nhView='overview';nhCourse=null;nhRenderSidebar();nhRenderMain()}
 function nhShowFlowchart(){nhView='flowchart';nhCourse=null;nhRenderSidebar();nhRenderMain()}
 function nhShowGlossary(){nhView='glossary';nhCourse=null;nhRenderSidebar();nhRenderMain()}
