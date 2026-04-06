@@ -3120,6 +3120,7 @@ function nhRenderSidebar(){
   h+='<button onclick="nhShowOverview()" class="flex-1 flex items-center justify-center gap-1.5 px-2 py-2 rounded-lg text-[11px] font-bold transition-all '+(nhView==='overview'?'dark:bg-white/10 bg-black/10 dark:text-white text-gray-900':'dark:text-gray-500 text-gray-400 dark:bg-white/[0.02] bg-black/[0.02] hover:dark:text-gray-300')+'"><svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>总览</button>';
   h+='<button onclick="nhShowFlowchart()" class="flex-1 flex items-center justify-center gap-1.5 px-2 py-2 rounded-lg text-[11px] font-bold transition-all '+(nhView==='flowchart'?'dark:bg-amber-500/15 bg-amber-100 dark:text-amber-400 text-amber-600':'dark:text-gray-500 text-gray-400 dark:bg-white/[0.02] bg-black/[0.02] hover:dark:text-gray-300')+'"><svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/></svg>流程图</button>';
   h+='<button onclick="nhShowGlossary()" class="flex-1 flex items-center justify-center gap-1.5 px-2 py-2 rounded-lg text-[11px] font-bold transition-all '+(nhView==='glossary'?'dark:bg-cyan-500/15 bg-cyan-100 dark:text-cyan-400 text-cyan-600':'dark:text-gray-500 text-gray-400 dark:bg-white/[0.02] bg-black/[0.02] hover:dark:text-gray-300')+'"><svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>释义</button>';
+  h+='<button onclick="nhShowCourseware()" class="flex-1 flex items-center justify-center gap-1.5 px-2 py-2 rounded-lg text-[11px] font-bold transition-all '+(nhView==='courseware'?'dark:bg-violet-500/15 bg-violet-100 dark:text-violet-400 text-violet-600':'dark:text-gray-500 text-gray-400 dark:bg-white/[0.02] bg-black/[0.02] hover:dark:text-gray-300')+'"><svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>作业</button>';
   h+='</div>';
   // Divider label
   h+='<div class="px-2 mb-2 text-[9px] font-bold uppercase tracking-[.15em] dark:text-gray-600 text-gray-400">📅 按日期浏览</div>';
@@ -3170,6 +3171,7 @@ function nhRenderMain(){
   else if(nhView==='detail')nhRenderDeepDive();
   else if(nhView==='glossary')nhRenderGlossary();
   else if(nhView==='flowchart')nhRenderSwimlane();
+  else if(nhView==='courseware')nhRenderCourseware();
 }
 
 function nhRenderOverview(){
@@ -3794,6 +3796,303 @@ function nhRenderSwimlane(){
   document.getElementById('nh-main').scrollTop=0;
 }
 
+// ---- Courseware: Prompt Engineering & Context Engineering (作业) ----
+let cwSlide=0;
+const CW_SLIDES=[
+  {key:'intro',title:'什么是 Prompt',icon:'✍️'},
+  {key:'formula',title:'效果公式',icon:'📐'},
+  {key:'johari',title:'乔哈里视窗',icon:'🪟'},
+  {key:'principles',title:'设计原则',icon:'📋'},
+  {key:'icl',title:'ICL · COT · 涌现',icon:'🧠'},
+  {key:'context',title:'上下文工程',icon:'⚙️'},
+  {key:'diamond',title:'双钻模型',icon:'💎'},
+  {key:'summary',title:'总结与行动',icon:'🚀'}
+];
+function nhRenderCourseware(){
+  const mc=document.getElementById('nh-main-content');if(!mc)return;
+  const dk=isDark;
+  const accent='#7c3aed'; // violet
+  const accent2='#06b6d4'; // cyan
+  const txt=dk?'#f7f8f8':'#1d1d1f';
+  const sub=dk?'#a1a1aa':'#64748d';
+  const card=dk?'rgba(255,255,255,.03)':'#ffffff';
+  const cardBd=dk?'rgba(255,255,255,.06)':'rgba(0,0,0,.08)';
+  const shadow=dk?'none':'0 4px 18px rgba(50,50,93,.08),0 2px 7px rgba(0,0,0,.04)';
+  const slide=CW_SLIDES[cwSlide];
+  let h='<div class="nh-animate">';
+
+  // ======== TOP NAV: Breadcrumb + Slide dots ========
+  h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">';
+  h+='<div style="display:flex;align-items:center;gap:6px">';
+  h+='<button onclick="nhShowOverview()" class="text-[11px] '+(dk?'text-gray-500 hover:text-white':'text-gray-400 hover:text-gray-900')+' transition-colors">笔记总览</button>';
+  h+='<span class="text-[11px] '+(dk?'text-gray-600':'text-gray-300')+'">›</span>';
+  h+='<span class="text-[11px] font-semibold" style="color:'+accent+'">作业 · PE课件</span></div>';
+  // Slide counter
+  h+='<span style="font-size:11px;font-weight:600;letter-spacing:-.1px" class="'+(dk?'text-gray-500':'text-gray-400')+'">'+(cwSlide+1)+' / '+CW_SLIDES.length+'</span>';
+  h+='</div>';
+
+  // ======== SLIDE DOT NAV ========
+  h+='<div style="display:flex;gap:4px;justify-content:center;margin-bottom:28px">';
+  CW_SLIDES.forEach((s,i)=>{
+    const act=i===cwSlide;
+    h+='<button onclick="cwSlide='+i+';nhRenderCourseware()" style="width:'+(act?'28px':'8px')+';height:8px;border-radius:4px;border:none;cursor:pointer;transition:all .25s;background:'+(act?accent:dk?'rgba(255,255,255,.12)':'rgba(0,0,0,.1)')+'" title="'+s.title+'"></button>';
+  });
+  h+='</div>';
+
+  // ======== SLIDE CONTENT ========
+  if(slide.key==='intro'){
+    // --- Slide 1: What is Prompt ---
+    h+='<div style="text-align:center;padding:32px 0 40px">';
+    h+='<div style="font-size:48px;margin-bottom:12px">✍️</div>';
+    h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;color:'+accent+'">PROMPT ENGINEERING</div>';
+    h+='<h1 style="font-size:clamp(28px,5vw,44px);font-weight:800;line-height:1.06;letter-spacing:-1px;margin-bottom:16px;color:'+txt+'">Prompt 是什么？</h1>';
+    h+='<p style="font-size:17px;line-height:1.5;letter-spacing:-.2px;max-width:520px;margin:0 auto 32px;color:'+sub+'">一种语言，是人与 AI 之间对话的<strong style="color:'+accent+'">桥梁</strong>，<br>承担编码和解码的角色。</p>';
+    h+='</div>';
+    // Key visual: Human ↔ Prompt ↔ AI
+    h+='<div style="display:flex;align-items:center;justify-content:center;gap:0;max-width:560px;margin:0 auto 40px;padding:0 16px">';
+    [{emoji:'🧑',label:'人类意图',desc:'需求 · 指令 · 上下文'},{emoji:'✍️',label:'Prompt',desc:'编码 · 结构 · 约束'},{emoji:'🤖',label:'AI 理解',desc:'解码 · 推理 · 生成'}].forEach((item,i)=>{
+      h+='<div style="flex:1;text-align:center;padding:20px 8px;border-radius:12px;background:'+card+';border:1px solid '+cardBd+';box-shadow:'+shadow+'">';
+      h+='<div style="font-size:28px;margin-bottom:8px">'+item.emoji+'</div>';
+      h+='<div style="font-size:14px;font-weight:700;letter-spacing:-.2px;margin-bottom:4px;color:'+txt+'">'+item.label+'</div>';
+      h+='<div style="font-size:11px;color:'+sub+';line-height:1.4">'+item.desc+'</div>';
+      h+='</div>';
+      if(i<2){
+        h+='<div style="flex-shrink:0;width:40px;display:flex;align-items:center;justify-content:center">';
+        h+='<svg width="32" height="16" viewBox="0 0 32 16"><line x1="0" y1="8" x2="22" y2="8" stroke="'+accent+'" stroke-width="2" stroke-dasharray="4,3"/><polygon points="32,8 23,3 23,13" fill="'+accent+'"/></svg>';
+        h+='</div>';
+      }
+    });
+    h+='</div>';
+    // Callout
+    h+='<div style="max-width:480px;margin:0 auto;padding:20px 24px;border-radius:12px;border-left:4px solid '+accent+';background:'+(dk?'rgba(124,58,237,.08)':'rgba(124,58,237,.04)')+'">';
+    h+='<div style="font-size:13px;font-weight:600;line-height:1.5;color:'+txt+'">Markdown 语法编写 Prompt 已被证明能<strong style="color:'+accent+'">显著提升</strong>模型理解和回应质量。结构化格式让模型更容易解析意图。</div>';
+    h+='</div>';
+
+  } else if(slide.key==='formula'){
+    // --- Slide 2: Effect Formula ---
+    h+='<div style="text-align:center;padding:24px 0 36px">';
+    h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;color:'+accent+'">CORE FORMULA</div>';
+    h+='<h2 style="font-size:clamp(24px,4vw,36px);font-weight:800;line-height:1.1;letter-spacing:-.6px;margin-bottom:12px;color:'+txt+'">大模型效果公式</h2>';
+    h+='<p style="font-size:15px;color:'+sub+';letter-spacing:-.15px">三要素相乘，任一短板都会拖垮整体效果</p>';
+    h+='</div>';
+    // Formula visual
+    h+='<div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:36px">';
+    [{v:'大模型能力',desc:'基座模型的天花板',color:'#3b82f6',icon:'🏗️'},{v:'任务设计',desc:'场景拆解与流程编排',color:'#f59e0b',icon:'🎯'},{v:'Prompt 质量',desc:'指令清晰度与结构化',color:accent,icon:'✍️'}].forEach((f,i)=>{
+      h+='<div style="width:160px;padding:24px 16px;border-radius:14px;text-align:center;background:'+card+';border:1.5px solid '+f.color+'30;box-shadow:'+shadow+'">';
+      h+='<div style="font-size:28px;margin-bottom:8px">'+f.icon+'</div>';
+      h+='<div style="font-size:16px;font-weight:700;letter-spacing:-.2px;margin-bottom:4px;color:'+f.color+'">'+f.v+'</div>';
+      h+='<div style="font-size:11px;color:'+sub+';line-height:1.4">'+f.desc+'</div>';
+      h+='</div>';
+      if(i<2) h+='<div style="font-size:24px;font-weight:300;color:'+sub+'">×</div>';
+    });
+    h+='</div>';
+    // Result
+    h+='<div style="text-align:center;padding:20px;border-radius:14px;background:linear-gradient(135deg,'+accent+'12,'+accent2+'12);border:1.5px solid '+accent+'25;max-width:400px;margin:0 auto">';
+    h+='<div style="font-size:13px;font-weight:600;letter-spacing:-.1px;color:'+txt+'">效果 = 模型能力 × 任务设计 × Prompt 质量</div>';
+    h+='<div style="font-size:11px;color:'+sub+';margin-top:6px">⚠️ 三个因子是<strong>乘法关系</strong>——任何一项为零，结果为零</div>';
+    h+='</div>';
+
+  } else if(slide.key==='johari'){
+    // --- Slide 3: Johari Window ---
+    h+='<div style="text-align:center;padding:24px 0 28px">';
+    h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;color:'+accent+'">JOHARI WINDOW × AI</div>';
+    h+='<h2 style="font-size:clamp(24px,4vw,36px);font-weight:800;line-height:1.1;letter-spacing:-.6px;margin-bottom:12px;color:'+txt+'">乔哈里视窗 · 人机协作四象限</h2>';
+    h+='<p style="font-size:14px;color:'+sub+';letter-spacing:-.15px">基于知识分布定义四种人机协作模式</p>';
+    h+='</div>';
+    // 2×2 Grid
+    const quads=[
+      {title:'公开象限',sub:'我知 · AI知',desc:'AI 作助理，精准指令下发。明确告诉AI做什么，获得高效执行。',icon:'🤝',color:'#3b82f6',action:'精准指令'},
+      {title:'隐私象限',sub:'我知 · AI不知',desc:'需投喂上下文，让AI理解私有知识。提供背景、数据、约束条件。',icon:'📤',color:'#f59e0b',action:'投喂上下文'},
+      {title:'盲点象限',sub:'AI知 · 我不知',desc:'AI 作知识库，提问学习获取新知。利用AI的广度弥补自身盲区。',icon:'🔍',color:'#10b981',action:'提问学习'},
+      {title:'潜能象限',sub:'双方都不知',desc:'共创探索，先发散再收拢。进入未知领域，AI辅助发现新可能。',icon:'✨',color:'#8b5cf6',action:'共创探索'}
+    ];
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:560px;margin:0 auto 32px">';
+    // Axis labels
+    h+='<div style="grid-column:span 2;display:flex;justify-content:center;gap:32px;margin-bottom:-4px">';
+    h+='<span style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:'+accent+'">← 我知道 →</span>';
+    h+='</div>';
+    quads.forEach(q=>{
+      h+='<div style="padding:20px;border-radius:14px;background:'+card+';border:1.5px solid '+q.color+'25;box-shadow:'+shadow+';position:relative;overflow:hidden">';
+      h+='<div style="position:absolute;top:-10px;right:-10px;font-size:48px;opacity:.06">'+q.icon+'</div>';
+      h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">';
+      h+='<span style="font-size:18px">'+q.icon+'</span>';
+      h+='<div><div style="font-size:15px;font-weight:700;letter-spacing:-.2px;color:'+q.color+'">'+q.title+'</div>';
+      h+='<div style="font-size:10px;font-weight:600;color:'+sub+'">'+q.sub+'</div></div></div>';
+      h+='<div style="font-size:12px;line-height:1.5;color:'+sub+';margin-bottom:10px">'+q.desc+'</div>';
+      h+='<div style="display:inline-block;padding:4px 12px;border-radius:980px;font-size:10px;font-weight:600;background:'+q.color+'14;color:'+q.color+';border:1px solid '+q.color+'30">策略：'+q.action+'</div>';
+      h+='</div>';
+    });
+    h+='</div>';
+
+  } else if(slide.key==='principles'){
+    // --- Slide 4: Design Principles ---
+    h+='<div style="text-align:center;padding:24px 0 28px">';
+    h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;color:'+accent+'">DESIGN PRINCIPLES</div>';
+    h+='<h2 style="font-size:clamp(24px,4vw,36px);font-weight:800;line-height:1.1;letter-spacing:-.6px;margin-bottom:12px;color:'+txt+'">Prompt 设计四原则</h2>';
+    h+='</div>';
+    const principles=[
+      {title:'简洁明了',bad:'帮我写个东西，就是关于最近的那个项目，可能需要一些数据之类的',good:'撰写Q1产品上线复盘报告，包含：关键指标、问题与改进、下季度计划',icon:'✂️',color:'#3b82f6'},
+      {title:'正向肯定',bad:'不要写得太长，不要用太多专业术语，不要偏题',good:'控制在500字内，使用通俗易懂的语言，聚焦用户增长主题',icon:'✅',color:'#10b981'},
+      {title:'逐步引导',bad:'帮我做一个完整的竞品分析',good:'第一步：列出3个核心竞品\n第二步：对比功能矩阵\n第三步：总结差异化机会',icon:'📝',color:'#f59e0b'},
+      {title:'提供 ICL 样本',bad:'帮我写用户故事',good:'参考样本格式：\n作为[角色]，我想[行为]，以便[价值]\n示例：作为新用户，我想快速注册，以便体验核心功能',icon:'📋',color:'#8b5cf6'}
+    ];
+    h+='<div style="display:flex;flex-direction:column;gap:16px;max-width:600px;margin:0 auto">';
+    principles.forEach(p=>{
+      h+='<div style="padding:20px;border-radius:14px;background:'+card+';border:1px solid '+cardBd+';box-shadow:'+shadow+'">';
+      h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">';
+      h+='<span style="font-size:20px">'+p.icon+'</span>';
+      h+='<span style="font-size:15px;font-weight:700;letter-spacing:-.2px;color:'+p.color+'">'+p.title+'</span></div>';
+      // Bad vs Good comparison
+      h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">';
+      h+='<div style="padding:12px;border-radius:10px;background:'+(dk?'rgba(239,68,68,.06)':'rgba(239,68,68,.04)')+';border:1px solid rgba(239,68,68,.15)">';
+      h+='<div style="font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px;color:#ef4444">❌ 避免</div>';
+      h+='<div style="font-size:11px;line-height:1.5;color:'+sub+'">'+p.bad+'</div></div>';
+      h+='<div style="padding:12px;border-radius:10px;background:'+(dk?'rgba(16,185,129,.06)':'rgba(16,185,129,.04)')+';border:1px solid rgba(16,185,129,.15)">';
+      h+='<div style="font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px;color:#10b981">✅ 推荐</div>';
+      h+='<div style="font-size:11px;line-height:1.5;color:'+txt+';white-space:pre-line">'+p.good+'</div></div>';
+      h+='</div></div>';
+    });
+    h+='</div>';
+
+  } else if(slide.key==='icl'){
+    // --- Slide 5: ICL / COT / Emergence ---
+    h+='<div style="text-align:center;padding:24px 0 28px">';
+    h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;color:'+accent+'">EMERGENCE CAPABILITIES</div>';
+    h+='<h2 style="font-size:clamp(24px,4vw,36px);font-weight:800;line-height:1.1;letter-spacing:-.6px;margin-bottom:12px;color:'+txt+'">涌现三能力：ICL · 指令跟随 · COT</h2>';
+    h+='<p style="font-size:14px;color:'+sub+'">大模型训练中突然涌现的核心能力</p>';
+    h+='</div>';
+    const caps=[
+      {title:'ICL 上下文学习',full:'In-Context Learning',desc:'将样本置于上下文窗口中，模型参考模板学习作答。也称 Few-shot Learning。',example:'提供2-3个样例→模型学习格式→生成类似输出',icon:'📖',color:'#3b82f6'},
+      {title:'指令跟随',full:'Instruction Following',desc:'理解并执行人类的自然语言指令，是RLHF/InstructGPT训练的核心成果。',example:'"请用表格对比A和B" → 模型准确生成表格',icon:'🎯',color:'#f59e0b'},
+      {title:'COT 思维链',full:'Chain of Thought',desc:'让模型展示思考过程，通过分步骤推理提升复杂问题准确率。DeepSeek-r1采用此技术。',example:'问题 → 分析步骤1 → 步骤2 → … → 最终结论',icon:'🔗',color:'#8b5cf6'}
+    ];
+    h+='<div style="display:flex;flex-direction:column;gap:14px;max-width:560px;margin:0 auto">';
+    caps.forEach((c,i)=>{
+      h+='<div style="padding:20px;border-radius:14px;background:'+card+';border:1.5px solid '+c.color+'25;box-shadow:'+shadow+';display:flex;gap:16px;align-items:flex-start">';
+      h+='<div style="flex-shrink:0;width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;background:'+c.color+'12">'+c.icon+'</div>';
+      h+='<div style="flex:1;min-width:0">';
+      h+='<div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px">';
+      h+='<span style="font-size:15px;font-weight:700;letter-spacing:-.2px;color:'+c.color+'">'+c.title+'</span>';
+      h+='<span style="font-size:10px;font-weight:500;color:'+sub+'">'+c.full+'</span></div>';
+      h+='<div style="font-size:12px;line-height:1.5;color:'+sub+';margin-bottom:8px">'+c.desc+'</div>';
+      h+='<div style="padding:8px 12px;border-radius:8px;font-size:11px;font-weight:500;background:'+(dk?'rgba(255,255,255,.03)':'rgba(0,0,0,.02)')+';border:1px solid '+cardBd+';color:'+txt+'"><span style="color:'+c.color+';font-weight:600">示例：</span>'+c.example+'</div>';
+      h+='</div></div>';
+    });
+    h+='</div>';
+
+  } else if(slide.key==='context'){
+    // --- Slide 6: Context Engineering ---
+    h+='<div style="text-align:center;padding:24px 0 28px">';
+    h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;color:'+accent2+'">CONTEXT ENGINEERING</div>';
+    h+='<h2 style="font-size:clamp(24px,4vw,36px);font-weight:800;line-height:1.1;letter-spacing:-.6px;margin-bottom:12px;color:'+txt+'">上下文工程</h2>';
+    h+='<p style="font-size:14px;color:'+sub+'">系统化管理输入给模型的上下文信息，提升输出质量</p>';
+    h+='</div>';
+    // Context Window architecture diagram
+    h+='<div style="max-width:480px;margin:0 auto 28px;padding:24px;border-radius:16px;background:'+card+';border:1.5px solid '+accent2+'20;box-shadow:'+shadow+'">';
+    h+='<div style="font-size:12px;font-weight:700;letter-spacing:-.1px;margin-bottom:16px;color:'+txt+'">Context Window 组成结构</div>';
+    const layers=[
+      {label:'System Prompt',desc:'系统角色设定 · 行为约束',color:accent,w:'100%'},
+      {label:'ICL 样本',desc:'Few-shot 示例模板',color:'#3b82f6',w:'85%'},
+      {label:'Chat History',desc:'多轮对话记忆',color:'#f59e0b',w:'70%'},
+      {label:'Summary',desc:'历史摘要压缩',color:'#10b981',w:'55%'},
+      {label:'User Query',desc:'当前用户提问',color:'#ef4444',w:'40%'}
+    ];
+    layers.forEach(l=>{
+      h+='<div style="margin-bottom:8px;display:flex;align-items:center;gap:10px">';
+      h+='<div style="width:'+l.w+';padding:8px 14px;border-radius:8px;background:'+l.color+'12;border:1px solid '+l.color+'25;display:flex;justify-content:space-between;align-items:center">';
+      h+='<span style="font-size:12px;font-weight:600;color:'+l.color+'">'+l.label+'</span>';
+      h+='<span style="font-size:10px;color:'+sub+'">'+l.desc+'</span>';
+      h+='</div></div>';
+    });
+    h+='</div>';
+    // U-shape attention warning
+    h+='<div style="max-width:480px;margin:0 auto;padding:16px 20px;border-radius:12px;background:'+(dk?'rgba(239,68,68,.06)':'rgba(239,68,68,.04)')+';border:1px solid rgba(239,68,68,.15)">';
+    h+='<div style="font-size:12px;font-weight:600;color:#ef4444;margin-bottom:4px">⚠️ U 型注意力分布</div>';
+    h+='<div style="font-size:12px;line-height:1.5;color:'+sub+'">模型对<strong style="color:'+txt+'">开头和结尾</strong>的信息更敏感，中间内容容易被遗忘。因此：<br>• 关键指令放在 System Prompt（开头）<br>• 核心约束放在 Query 末尾<br>• 冗余信息放在中间，用 Summary 压缩</div>';
+    h+='</div>';
+
+  } else if(slide.key==='diamond'){
+    // --- Slide 7: Double Diamond ---
+    h+='<div style="text-align:center;padding:24px 0 28px">';
+    h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;color:'+accent+'">DOUBLE DIAMOND × AI</div>';
+    h+='<h2 style="font-size:clamp(24px,4vw,36px);font-weight:800;line-height:1.1;letter-spacing:-.6px;margin-bottom:12px;color:'+txt+'">双钻模型 · AI 协作方式</h2>';
+    h+='<p style="font-size:14px;color:'+sub+'">AI 负责发散，人负责收拢</p>';
+    h+='</div>';
+    // Two diamonds visual
+    h+='<div style="display:flex;gap:16px;max-width:560px;margin:0 auto 32px;flex-wrap:wrap;justify-content:center">';
+    [{title:'发现阶段',sub:'发散 → 收拢',desc:'探索问题空间',items:['AI 生成多种可能方向','AI 搜索相关案例与数据','人 判断核心问题'],diamond:'◇',color:'#3b82f6',role:'AI 主导发散'},
+     {title:'交付阶段',sub:'发散 → 收拢',desc:'探索解决方案',items:['AI 生成多套方案','AI 评估各方案利弊','人 拍板最终决策'],diamond:'◇',color:accent,role:'人 主导收拢'}
+    ].forEach(d=>{
+      h+='<div style="flex:1;min-width:220px;padding:24px;border-radius:14px;background:'+card+';border:1.5px solid '+d.color+'25;box-shadow:'+shadow+'">';
+      h+='<div style="text-align:center;margin-bottom:12px">';
+      h+='<div style="font-size:36px;color:'+d.color+';opacity:.6">'+d.diamond+'</div>';
+      h+='<div style="font-size:16px;font-weight:700;letter-spacing:-.2px;color:'+d.color+'">'+d.title+'</div>';
+      h+='<div style="font-size:11px;color:'+sub+'">'+d.sub+'</div></div>';
+      d.items.forEach(item=>{
+        const isAI=item.startsWith('AI');
+        h+='<div style="display:flex;align-items:center;gap:8px;padding:6px 0">';
+        h+='<div style="width:6px;height:6px;border-radius:50%;background:'+(isAI?'#06b6d4':'#f59e0b')+';flex-shrink:0"></div>';
+        h+='<span style="font-size:12px;color:'+txt+'">'+item+'</span></div>';
+      });
+      h+='<div style="margin-top:12px;text-align:center;padding:6px 12px;border-radius:980px;font-size:10px;font-weight:600;display:inline-block;background:'+d.color+'14;color:'+d.color+'">'+d.role+'</div>';
+      h+='</div>';
+    });
+    h+='</div>';
+    // Key takeaway
+    h+='<div style="max-width:480px;margin:0 auto;padding:16px 20px;border-radius:12px;border-left:4px solid '+accent+';background:'+(dk?'rgba(124,58,237,.06)':'rgba(124,58,237,.04)')+'">';
+    h+='<div style="font-size:13px;font-weight:600;line-height:1.5;color:'+txt+'">核心原则：<span style="color:'+accent+'">AI 发散探索可能性，人类收拢聚焦决策。</span><br>在潜能象限（双方都不知时），两个钻石都需要紧密协作。</div>';
+    h+='</div>';
+
+  } else if(slide.key==='summary'){
+    // --- Slide 8: Summary ---
+    h+='<div style="text-align:center;padding:32px 0 28px">';
+    h+='<div style="font-size:48px;margin-bottom:12px">🚀</div>';
+    h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;color:'+accent+'">SUMMARY & ACTION</div>';
+    h+='<h2 style="font-size:clamp(24px,4vw,36px);font-weight:800;line-height:1.1;letter-spacing:-.6px;margin-bottom:24px;color:'+txt+'">核心要点总结</h2>';
+    h+='</div>';
+    const points=[
+      {n:'01',t:'Prompt 本质',d:'人与AI对话的桥梁语言，承担编码与解码',color:'#3b82f6'},
+      {n:'02',t:'效果公式',d:'模型能力 × 任务设计 × Prompt 质量（乘法关系）',color:'#f59e0b'},
+      {n:'03',t:'乔哈里四象限',d:'公开/隐私/盲点/潜能 → 四种协作模式',color:'#10b981'},
+      {n:'04',t:'设计原则',d:'简洁 + 正向 + 逐步 + ICL 样本',color:'#8b5cf6'},
+      {n:'05',t:'涌现能力',d:'ICL + 指令跟随 + COT 思维链',color:'#ec4899'},
+      {n:'06',t:'上下文工程',d:'系统化管理 Context Window 五层结构',color:'#06b6d4'},
+      {n:'07',t:'双钻模型',d:'AI 发散 → 人收拢，探索与决策分工',color:accent}
+    ];
+    h+='<div style="max-width:520px;margin:0 auto 32px">';
+    points.forEach(p=>{
+      h+='<div style="display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid '+cardBd+'">';
+      h+='<div style="width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;background:'+p.color+'12;color:'+p.color+';flex-shrink:0">'+p.n+'</div>';
+      h+='<div style="flex:1"><div style="font-size:14px;font-weight:700;letter-spacing:-.2px;color:'+txt+'">'+p.t+'</div>';
+      h+='<div style="font-size:12px;color:'+sub+';margin-top:2px">'+p.d+'</div></div></div>';
+    });
+    h+='</div>';
+    // Source
+    h+='<div style="text-align:center;padding:16px;border-radius:12px;background:'+(dk?'rgba(255,255,255,.02)':'rgba(0,0,0,.02)')+'">';
+    h+='<div style="font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px;color:'+sub+'">课程来源</div>';
+    h+='<div style="font-size:12px;color:'+txt+'">且曼 AI 产品经理前瞻学院 · 第一周 · 课程 007-2</div>';
+    h+='<div style="font-size:11px;color:'+sub+';margin-top:4px">Prompt工程与人机协作模型</div>';
+    h+='</div>';
+  }
+
+  // ======== BOTTOM NAV: Prev / Next ========
+  h+='<div style="display:flex;justify-content:space-between;align-items:center;padding:32px 0 8px;margin-top:20px;border-top:1px solid '+cardBd+'">';
+  if(cwSlide>0){
+    h+='<button onclick="cwSlide='+(cwSlide-1)+';nhRenderCourseware()" style="display:flex;align-items:center;gap:8px;padding:10px 20px;border-radius:980px;border:1.5px solid '+cardBd+';background:transparent;cursor:pointer;transition:all .2s" class="hover:dark:bg-white/5 hover:bg-black/5">';
+    h+='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="'+sub+'" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>';
+    h+='<span style="font-size:12px;font-weight:600;color:'+txt+'">'+CW_SLIDES[cwSlide-1].icon+' '+CW_SLIDES[cwSlide-1].title+'</span></button>';
+  } else h+='<div></div>';
+  if(cwSlide<CW_SLIDES.length-1){
+    h+='<button onclick="cwSlide='+(cwSlide+1)+';nhRenderCourseware()" style="display:flex;align-items:center;gap:8px;padding:10px 20px;border-radius:980px;border:1.5px solid '+accent+'40;background:'+accent+'10;cursor:pointer;transition:all .2s" class="hover:opacity-80">';
+    h+='<span style="font-size:12px;font-weight:600;color:'+accent+'">'+CW_SLIDES[cwSlide+1].icon+' '+CW_SLIDES[cwSlide+1].title+'</span>';
+    h+='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="'+accent+'" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></button>';
+  } else h+='<div></div>';
+  h+='</div>';
+  h+='</div>';
+  mc.innerHTML=h;
+  document.getElementById('nh-main').scrollTop=0;
+}
+
 // ---- Navigation helpers ----
 function nhToggleDay(di){nhExpandedDay=nhExpandedDay===di?-1:di;nhRenderSidebar()}
 function nhShowDayOverview(di){nhExpandedDay=di;nhView='day';nhCourse=null;nhRenderSidebar();nhRenderMain()}
@@ -3803,6 +4102,7 @@ function nhShowFlowchart(){nhView='flowchart';nhCourse=null;nhRenderSidebar();nh
 function nhShowCourse(key){nhView='course';nhCourse=key;nhExpandedDay=parseInt(key.split('-')[0]);nhRenderSidebar();nhRenderMain()}
 function nhShowDetail(key){nhView='detail';nhCourse=key;nhExpandedDay=parseInt(key.split('-')[0]);nhRenderSidebar();nhRenderMain()}
 function nhShowGlossary(){nhView='glossary';nhCourse=null;nhRenderSidebar();nhRenderMain()}
+function nhShowCourseware(){nhView='courseware';nhCourse=null;nhRenderSidebar();nhRenderMain()}
 // Cross-link: jump from Notes Hub → PM flow node
 function nhJumpToNode(nodeIdx){
   toggleNotesHub();
