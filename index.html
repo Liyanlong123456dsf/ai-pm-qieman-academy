@@ -153,6 +153,8 @@ tailwind.config = {
       <button onclick="toggleNotesHub()" class="pointer-events-auto inline-flex items-center gap-2 px-6 py-3 ml-3 glass-card dark:text-gray-300 text-gray-600 hover:dark:text-white hover:text-gray-900 text-sm font-semibold rounded-2xl transition-all duration-300 ease-expo hover:scale-[1.02]"><span>📚</span><span>课程笔记</span></button>
       <button onclick="openObsidianVault()" class="pointer-events-auto inline-flex items-center gap-2 px-6 py-3 ml-3 glass-card dark:text-gray-300 text-gray-600 hover:dark:text-white hover:text-gray-900 text-sm font-semibold rounded-2xl transition-all duration-300 ease-expo hover:scale-[1.02] group" style="border-color:rgba(139,92,246,.3)"><span class="text-purple-400 group-hover:text-purple-300 transition-colors">💎</span><span>Obsidian 笔记库</span></button>
       <a href="rag-knowledge/index.html" class="pointer-events-auto inline-flex items-center gap-2 px-6 py-3 ml-3 glass-card dark:text-gray-300 text-gray-600 hover:dark:text-white hover:text-gray-900 text-sm font-semibold rounded-2xl transition-all duration-300 ease-expo hover:scale-[1.02] group no-underline" style="border-color:rgba(0,113,227,.3);text-decoration:none"><span class="text-blue-400 group-hover:text-blue-300 transition-colors">🧠</span><span>RAG 技术专题</span></a>
+      <a href="rag-pipeline/index.html" class="pointer-events-auto inline-flex items-center gap-2 px-6 py-3 ml-3 glass-card dark:text-gray-300 text-gray-600 hover:dark:text-white hover:text-gray-900 text-sm font-semibold rounded-2xl transition-all duration-300 ease-expo hover:scale-[1.02] group no-underline" style="border-color:rgba(6,182,212,.3);text-decoration:none"><span class="text-cyan-400 group-hover:text-cyan-300 transition-colors">🔗</span><span>RAG 全流程图谱</span></a>
+      <a href="pe-context/index.html" class="pointer-events-auto inline-flex items-center gap-2 px-6 py-3 ml-3 glass-card dark:text-gray-300 text-gray-600 hover:dark:text-white hover:text-gray-900 text-sm font-semibold rounded-2xl transition-all duration-300 ease-expo hover:scale-[1.02] group no-underline" style="border-color:rgba(139,92,246,.3);text-decoration:none"><span class="text-violet-400 group-hover:text-violet-300 transition-colors">✍️</span><span>Prompt & Context</span></a>
       <button onclick="AudioSys.toggleMute()" class="pointer-events-auto inline-flex items-center gap-2 px-5 py-3 ml-3 glass-card dark:text-gray-300 text-gray-600 hover:dark:text-white hover:text-gray-900 text-sm font-semibold rounded-2xl transition-all duration-300 ease-expo hover:scale-[1.02]" title="背景音乐 (M)"><svg class="w-4 h-4 audio-toggle-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/><path stroke-linecap="round" stroke-linejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/></svg></button>
       <p class="mt-4 text-xs dark:text-gray-500 text-gray-400">按 <kbd class="px-1.5 py-0.5 rounded glass-card text-[10px] font-mono">Enter</kbd> 快速进入 · <kbd class="px-1.5 py-0.5 rounded glass-card text-[10px] font-mono">W</kbd> 查看笔记 · <kbd class="px-1.5 py-0.5 rounded glass-card text-[10px] font-mono">M</kbd> 音乐</p>
     </div>
@@ -1156,6 +1158,19 @@ let currentNode = 0, currentTab = 'work', isDark = true, demoMode = false, demoT
 // ==========================================
 function init() {
   loadState(); loadNotes(); setupHeroAnimations(); setupParticles(); setupHeroGraph(); setupKeyboard(); setupStarfield(); setupLiquidCursor(); AudioSys.updateBtn();
+  // URL hash deep-link: #note=W{week}-{dayIdx}-{courseIdx}
+  handleDeepLink();
+}
+function handleDeepLink(){
+  const h=location.hash.replace('#','');
+  if(!h)return;
+  const m=h.match(/^note=W(\d+)-(\d+)-(\d+)$/);
+  if(m){
+    const wi=parseInt(m[1])-1,di=parseInt(m[2]),ci=parseInt(m[3]);
+    if(wi>=0&&wi<NH_WEEKS.length){
+      setTimeout(()=>{nhJumpToCourse(wi,di+'-'+ci)},800);
+    }
+  }
 }
 function loadState() {
   try { const s = JSON.parse(localStorage.getItem('pm-map-state')||'{}');
@@ -2892,6 +2907,7 @@ const NH_WEEKS=[
        points:['AI技术分层回顾：人工智能(AI) → 机器学习(ML) → 深度学习(DL) → Transformer → 大语言模型(LLM)','大模型训练两阶段：①预训练(Pre-training)——无监督学习，用网络公开数据(维基百科/论文/图书)训练基础模型','②微调(SFT, Supervised Fine-Tuning)——有监督训练，针对特定任务进行标注和优化','预训练三要素：数据采集与准备 + 注意力机制(算法) + 基础架构(Transformer)','Transformer编码器-解码器：编码器处理输入文本生成中间表示，解码器根据编码信息生成输出','欠拟合(Underfitting)：模型学习不足，无法有效泛化，做不到举一反三','过拟合(Overfitting)：模型过度学习训练数据，对未见数据表现差，逻辑混乱无法解决新问题','泛化能力(Generalization)：从大量数据中学到抽象知识，并迁移应用到类似但未见过的任务上','涌现能力(Emergence)：训练过程中突然涌现出解决之前无法解决的新任务的能力','涌现三子能力：小样本上下文学习(Few-shot ICL) + 指令跟随(Instruction Following) + 思维链推理(COT)','感官学习法：眼看→手写→脑思考→嘴说→耳听，五感协同将外部信息内化为个人知识体系'],
        keyPoint:'大模型两阶段训练：预训练(无监督基础能力) → 微调SFT(有监督特定任务优化)',homework:'理解大模型训练流程，整理技术概念笔记'},
       {id:'007-2',title:'Prompt工程与人机协作模型',tags:['方法论','核心'],
+       webUrl:'pe-context/index.html',webLabel:'Prompt & Context 交互课件',
        relatedNodes:[{id:3,title:'原型设计与交互设计',why:'Prompt设计=人机交互设计'},{id:6,title:'开发跟进与沟通',why:'人机沟通方法论提升协作效率'}],
        points:['Prompt本质：一种语言，是人与AI之间对话的桥梁，承担编码和解码的角色','大模型效果公式：效果 = 大模型能力 × 任务设计 × Prompt质量','乔哈里视窗(Johari Window)人机协作四象限：①公开象限(我知AI知)——AI作助理，精准指令下发','②隐私象限(我知AI不知)——需投喂上下文，让AI理解私有知识','③盲点象限(AI知我不知)——AI作知识库，提问学习获取新知','④潜能象限(双方都不知)——共创探索，先发散再收拢','双钻模型在AI协作中的应用：AI负责发散(扩展可能性)，人负责收拢(聚焦决策)','Prompt设计原则：简洁明了避免冗余 + 正向肯定性描述 + 引导逐步思考 + 提供ICL样本','Markdown语法提升Prompt效果：结构化格式已被证明能显著提升模型理解和回应质量','ICL(In-Context Learning)上下文学习：将样本置于上下文窗口中，使模型在特定环境中学习提升性能','提示词库的价值：提供模板化结构(通用结构/任务执行/角色扮演)，降低Prompt设计门槛','上下文工程(Context Engineering)：系统化管理和优化输入给模型的上下文信息，提升输出质量'],
        keyPoint:'乔哈里视窗四象限定义了人机协作的四种模式，Prompt是人机沟通的桥梁',homework:'上下文工程作业：制作课程讲义(大纲+内容+可视化方案)'}
@@ -2918,6 +2934,8 @@ const NH_WEEKS=[
      summary:'系统学习RAG离线阶段6大Pipeline环节：从原始数据采集到向量索引构建，明确每个环节的PM职责与质量标准。',
      courses:[
       {id:'008',title:'RAG核心概念与离线Pipeline A-C',tags:['技术','核心'],
+       webUrl:'rag-pipeline/index.html',webLabel:'RAG 全流程知识图谱',
+       extraLinks:[{url:'rag-knowledge/index.html#topic1',label:'RAG 技术专题 · 文档解析',icon:'🧠'}],
        relatedNodes:[{id:1,title:'需求收集与分析',why:'数据采集方法论复用'},{id:7,title:'测试与验收',why:'质量标准制定方法'}],
        points:['RAG = 检索增强生成，给大模型装外挂知识库，解决时效性/幻觉/安全性问题','离线Pipeline全景：数据采集(A)→文档解析(B)→数据清洗(C)→文本分割(D)→向量化(E)→索引构建(F)','Pipeline A 数据采集：企业内部/外网公开/付费外采/多轮对话QA/网盘API，只采集业务场景强相关数据','Pipeline B 文档解析：OCR(图像)→ASR(语音)→Pandas(结构化)→pdfplumber(半结构化)→markdown(纯文本)','Pipeline C 数据清洗：元数据绑定(来源/时间) + 复杂排版阅读顺序处理，Chunk是清洗后基本单位','腾讯DREAM模型：三步走处理复杂排版——图像特征提取→元素特征聚合→元素并行生成','PM职责：定义知识边界与优先级、输出《文档解析质量标准》、制定清洗规则与验收标准'],
        keyPoint:'RAG = 给大模型装外挂知识库，离线Pipeline六环节构建高质量知识库',homework:'产品全流程笔记（含RAG技术流程）提交飞书'},
@@ -2930,6 +2948,8 @@ const NH_WEEKS=[
      summary:'深入RAG在线阶段：Query改写→多路检索→增强→生成，以及Graph RAG、Dify平台实操与工作流开发。',
      courses:[
       {id:'009',title:'在线检索Pipeline G-H与增强生成',tags:['技术','核心'],
+       webUrl:'rag-pipeline/index.html',webLabel:'RAG 全流程知识图谱',
+       extraLinks:[{url:'rag-knowledge/index.html#topic2',label:'RAG 技术专题 · 检索优化',icon:'🧠'}],
        relatedNodes:[{id:1,title:'需求收集与分析',why:'Query改写=需求澄清方法论'},{id:8,title:'发布准备与上线',why:'在线系统上线流程'}],
        points:['Pipeline G Query改写六法：语义强化/歧义消除/上下文补全/意图拆解/领域术语适配/约束条件强化','Pipeline H 多路查询：关键词搜索+向量搜索混合，Score评分+TopK筛选合并去重','增强阶段：将检索到的知识片段(Chunks)与用户问题组装为完整Prompt送入LLM','生成阶段5步：提示词构建→LLM生成执行→内容优化后处理→多轮对话管理→复杂问题处理','复杂问题策略：问题分解(子问题链)→层次化推理(Least-to-Most)→多跳检索(二次检索补充)','Graph RAG：知识图谱增强检索，适用政策穿透/合规/科研追踪/故障因分析','PM检索阶段职责：明确检索目标、制定质量标准(召回率≥90%/准确率≥85%)、设计查询优化链'],
        keyPoint:'Query改写六法 + 混合搜索是提升检索质量的核心手段',homework:'理解并整理RAG在线检索流程笔记'},
@@ -3397,6 +3417,26 @@ function nhRenderCourseDetail(){
   h+='<div class="text-[11px] dark:text-gray-400 text-gray-500 mt-0.5">Apple 风格沉浸式阅读 · 可视化图表 · 连贯阅读体验</div></div>';
   h+='<svg class="w-5 h-5 dark:text-gray-500 text-gray-400 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>';
   h+='</button>';
+  // Web page link (if course has webUrl)
+  if(c.webUrl){
+    h+='<a href="'+c.webUrl+'" target="_blank" class="w-full mb-6 glass-card rounded-xl p-4 flex items-center gap-4 group hover:dark:bg-indigo-500/[0.07] hover:bg-indigo-50 transition-all cursor-pointer text-left no-underline" style="border-left:3px solid #6366f1;text-decoration:none">';
+    h+='<div class="shrink-0 w-10 h-10 rounded-xl flex items-center justify-center text-lg" style="background:rgba(99,102,241,.15)">🌐</div>';
+    h+='<div class="flex-1 min-w-0"><div class="text-sm font-bold dark:text-white text-gray-900 group-hover:underline">'+(c.webLabel||'查看交互网页')+'</div>';
+    h+='<div class="text-[11px] dark:text-gray-400 text-gray-500 mt-0.5">完整可视化课件 · 独立网页 · 新窗口打开</div></div>';
+    h+='<svg class="w-5 h-5 dark:text-gray-500 text-gray-400 group-hover:dark:text-indigo-400 group-hover:text-indigo-500 transition-colors shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>';
+    h+='</a>';
+  }
+  // Extra links (e.g. rag-knowledge sub-sections)
+  if(c.extraLinks&&c.extraLinks.length){
+    c.extraLinks.forEach(el=>{
+      h+='<a href="'+el.url+'" target="_blank" class="w-full mb-6 glass-card rounded-xl p-4 flex items-center gap-4 group hover:dark:bg-cyan-500/[0.07] hover:bg-cyan-50 transition-all cursor-pointer text-left no-underline" style="border-left:3px solid #06b6d4;text-decoration:none">';
+      h+='<div class="shrink-0 w-10 h-10 rounded-xl flex items-center justify-center text-lg" style="background:rgba(6,182,212,.15)">'+(el.icon||'📄')+'</div>';
+      h+='<div class="flex-1 min-w-0"><div class="text-sm font-bold dark:text-white text-gray-900 group-hover:underline">'+el.label+'</div>';
+      h+='<div class="text-[11px] dark:text-gray-400 text-gray-500 mt-0.5">腾讯云技术专题精读 · 点击跳转对应章节</div></div>';
+      h+='<svg class="w-5 h-5 dark:text-gray-500 text-gray-400 group-hover:dark:text-cyan-400 group-hover:text-cyan-500 transition-colors shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>';
+      h+='</a>';
+    });
+  }
   // Key point highlight
   if(c.keyPoint){
     h+='<div class="glass-card rounded-xl p-4 mb-6 border-l-4" style="border-left-color:'+day.color+'">';
@@ -3674,6 +3714,26 @@ function nhRenderDayView(){
         h+='</button>';
       });
       h+='</div>';
+    }
+
+    // Web page link (if course has webUrl)
+    if(c.webUrl){
+      h+='<a href="'+c.webUrl+'" target="_blank" style="display:flex;align-items:center;gap:12px;margin-top:20px;padding:16px;border-radius:12px;border:1px solid '+(dk?'rgba(99,102,241,.2)':'rgba(99,102,241,.15)')+';background:'+(dk?'rgba(99,102,241,.05)':'rgba(99,102,241,.03)')+';text-decoration:none;transition:all .2s;cursor:pointer" onmouseenter="this.style.background=\''+(dk?'rgba(99,102,241,.1)':'rgba(99,102,241,.06)')+'\'" onmouseleave="this.style.background=\''+(dk?'rgba(99,102,241,.05)':'rgba(99,102,241,.03)')+'\'">';
+      h+='<div style="width:36px;height:36px;border-radius:10px;background:rgba(99,102,241,.15);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">🌐</div>';
+      h+='<div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600;letter-spacing:-.2px" class="'+(dk?'text-white':'text-gray-900')+'">'+(c.webLabel||'查看交互网页')+'</div>';
+      h+='<div style="font-size:11px;margin-top:2px" class="'+(dk?'text-gray-400':'text-gray-500')+'">完整可视化课件 · 点击新窗口打开</div></div>';
+      h+='<span style="font-size:14px;color:'+col+'">↗</span></a>';
+    }
+
+    // Extra links (e.g. rag-knowledge sub-sections)
+    if(c.extraLinks&&c.extraLinks.length){
+      c.extraLinks.forEach(el=>{
+        h+='<a href="'+el.url+'" target="_blank" style="display:flex;align-items:center;gap:12px;margin-top:12px;padding:16px;border-radius:12px;border:1px solid '+(dk?'rgba(6,182,212,.2)':'rgba(6,182,212,.15)')+';background:'+(dk?'rgba(6,182,212,.04)':'rgba(6,182,212,.02)')+';text-decoration:none;transition:all .2s;cursor:pointer" onmouseenter="this.style.background=\''+(dk?'rgba(6,182,212,.1)':'rgba(6,182,212,.06)')+'\'" onmouseleave="this.style.background=\''+(dk?'rgba(6,182,212,.04)':'rgba(6,182,212,.02)')+'\'">';
+        h+='<div style="width:36px;height:36px;border-radius:10px;background:rgba(6,182,212,.15);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">'+(el.icon||'📄')+'</div>';
+        h+='<div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600;letter-spacing:-.2px" class="'+(dk?'text-white':'text-gray-900')+'">'+el.label+'</div>';
+        h+='<div style="font-size:11px;margin-top:2px" class="'+(dk?'text-gray-400':'text-gray-500')+'">腾讯云技术专题 · 点击跳转</div></div>';
+        h+='<span style="font-size:14px;color:#06b6d4">↗</span></a>';
+      });
     }
 
     h+='</div></div>';

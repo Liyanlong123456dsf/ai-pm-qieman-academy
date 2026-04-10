@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 产品经理 · RAG 全流程知识图谱</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Reading Progress Bar -->
+<div id="progress-bar"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">RAG 知识图谱</div>
+  <div class="nav-links">
+    <a href="#overview">总览</a>
+    <a href="#week2">RAG概述</a>
+    <a href="#pipeline">Pipeline</a>
+    <a href="#evolution">演进</a>
+    <a href="#tools">工具</a>
+    <a href="#pm">PM职责</a>
+    <a href="#glossary">术语表</a>
+    <a href="#interview">面试</a>
+  </div>
+  <button class="nav-hamburger" onclick="toggleMobileNav()" aria-label="菜单">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Drawer -->
+<div id="mobile-drawer" class="mobile-drawer">
+  <div class="drawer-overlay" onclick="toggleMobileNav()"></div>
+  <div class="drawer-panel">
+    <div class="drawer-header">
+      <span class="drawer-title">导航</span>
+      <button class="drawer-close" onclick="toggleMobileNav()">✕</button>
+    </div>
+    <div class="drawer-links">
+      <a href="#overview" onclick="toggleMobileNav()"><span class="drawer-icon">📋</span>内容总览</a>
+      <a href="#week2" onclick="toggleMobileNav()"><span class="drawer-icon">📕</span>RAG 概述</a>
+      <a href="#pipeline" onclick="toggleMobileNav()"><span class="drawer-icon">⚙️</span>Pipeline 全景</a>
+      <a href="#evolution" onclick="toggleMobileNav()"><span class="drawer-icon">🚀</span>模型演进</a>
+      <a href="#tools" onclick="toggleMobileNav()"><span class="drawer-icon">🧰</span>RAG 平台</a>
+      <a href="#pm" onclick="toggleMobileNav()"><span class="drawer-icon">👤</span>PM 职责</a>
+      <a href="#glossary" onclick="toggleMobileNav()"><span class="drawer-icon">📖</span>术语表</a>
+      <a href="#interview" onclick="toggleMobileNav()"><span class="drawer-icon">🎯</span>面试真题</a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="dot"></span> 且曼 AI 产品经理前瞻学院</div>
+    <h1><span class="line grad1">RAG 全流程</span><span class="line">知识图谱</span></h1>
+    <p class="hero-sub">从知识库构建到增强生成，系统掌握 RAG 全链路技术与产品落地<br>离线构建 · 在线检索 · 增强生成 · 平台实操</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num" data-target="8">0</div><div class="label">Pipeline</div></div>
+      <div class="hero-stat"><div class="num" data-target="4">0</div><div class="label">核心阶段</div></div>
+      <div class="hero-stat"><div class="num" data-target="12">0</div><div class="label">核心术语</div></div>
+      <div class="hero-stat"><div class="num" data-target="7">0</div><div class="label">PM职责</div></div>
+    </div>
+    <div class="hero-actions">
+      <a href="#pipeline" class="hero-btn primary">探索 Pipeline →</a>
+      <a href="#overview" class="hero-btn ghost">课程总览</a>
+    </div>
+  </div>
+  <div class="scroll-hint"><span>向下滚动</span><div class="arrow"></div></div>
+</div>
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <div class="section-label reveal">内容总览</div>
+  <h2 class="section-title reveal">RAG <span class="gt1">知识体系</span> 全景</h2>
+  <div class="week-grid">
+    <div class="week-card w1 reveal" onclick="document.getElementById('pipeline').scrollIntoView({behavior:'smooth'})">
+      <div class="week-num">CORE · 离线 + 在线</div>
+      <h3>Pipeline A → H 全流程</h3>
+      <p>8大Pipeline步骤 · 数据采集 → 文档解析 → 清洗 → 分割 → 向量化 → 索引 → 检索 → 生成</p>
+      <div class="tag-row">
+        <span class="tag">数据采集</span><span class="tag">文档解析</span><span class="tag pink">数据清洗</span><span class="tag teal">文本分割</span><span class="tag gold">向量化</span><span class="tag">索引构建</span>
+      </div>
+      <div class="card-arrow">→</div>
+    </div>
+    <div class="week-card w2 reveal" onclick="document.getElementById('tools').scrollIntoView({behavior:'smooth'})">
+      <div class="week-num">PRACTICE · 平台实操</div>
+      <h3>Dify & 扣子(Coze) 实战</h3>
+      <p>工作流编排 · 智能体开发 · RAG知识库构建 · Graph RAG</p>
+      <div class="tag-row">
+        <span class="tag">Dify</span><span class="tag pink">Coze</span><span class="tag teal">Workflow</span><span class="tag gold">Graph RAG</span><span class="tag">PM职责</span><span class="tag pink">面试真题</span>
+      </div>
+      <div class="card-arrow">→</div>
+    </div>
+  </div>
+</section>
+<div class="section-divider"></div>
+
+
+<!-- RAG OVERVIEW -->
+<section id="week2">
+  <div class="section-label reveal">核心概述</div>
+  <h2 class="section-title reveal">RAG 技术 <span class="gt3">深度拆解</span></h2>
+  <p class="section-desc reveal"><strong>RAG = 检索增强生成</strong>，给大模型装"知识外挂"，解决时效性·幻觉·安全性·专业知识四大局限</p>
+  <div class="k-card open reveal" style="margin-bottom:32px"><div class="k-header" onclick="toggleCard(this.parentElement)"><div><h4><span class="k-icon ki2">⚠️</span>大模型四大局限 & 三种解法对比</h4></div><div class="k-toggle">▾</div></div><div class="k-body"><div class="k-content">
+    <table class="mini-table"><tr><th>局限</th><th>说明</th><th>RAG解法</th></tr><tr><td><strong>滞</strong></td><td>训练数据有截止日期</td><td>可更新知识库</td></tr><tr><td><strong>幻</strong></td><td>生成不准确内容</td><td>基于事实检索</td></tr><tr><td><strong>惑</strong></td><td>来源不透明</td><td>知识库权限控制</td></tr><tr><td><strong>私</strong></td><td>缺乏领域专业性</td><td>领域RAG更灵活</td></tr></table>
+    <table class="mini-table"><tr><th>方案</th><th>优点</th><th>缺点</th></tr><tr><td><strong>SFT微调</strong></td><td>响应快；风格可训练</td><td>成本高、更新难</td></tr><tr><td><strong>超长提示词</strong></td><td>简单直接</td><td>不可扩展</td></tr><tr><td><strong>RAG✓</strong></td><td>灵活、可扩展、成本可控</td><td>需构建知识库流程</td></tr></table>
+  </div></div></div>
+</section>
+<div class="section-divider"></div>
+
+<!-- PIPELINE -->
+<section id="pipeline">
+  <div class="section-label reveal">核心流程</div>
+  <h2 class="section-title reveal">RAG <span class="gt1">Pipeline</span> 全景</h2>
+  <p class="section-desc reveal">知识库构建(离线) → 检索(Retrieval) → 增强(Augmentation) → 生成(Generation)</p>
+
+  <div class="pipeline-visual reveal">
+    <div class="pipeline-flow">
+      <div class="pipeline-stage s-offline"><div class="pipeline-stage-label"><div class="stage-name">离线阶段</div><div class="stage-en">Offline</div></div><div class="pipeline-connector"><div class="node"></div></div><div class="pipeline-steps">
+        <div class="p-step offline" onclick="openPipelineModal('A')"><div class="p-step-id">A</div><div class="p-step-name">数据采集</div><div class="p-step-desc">企业内部·外网·付费·QA·API</div></div>
+        <div class="p-step offline" onclick="openPipelineModal('B')"><div class="p-step-id">B</div><div class="p-step-name">文档解析</div><div class="p-step-desc">OCR·ASR·Pandas·pdfplumber</div></div>
+        <div class="p-step offline" onclick="openPipelineModal('C')"><div class="p-step-id">C</div><div class="p-step-name">数据清洗</div><div class="p-step-desc">冗余删除·改写·格式统一·脱敏</div></div>
+      </div></div>
+      <div class="pipeline-stage s-offline"><div class="pipeline-stage-label"><div class="stage-name"></div></div><div class="pipeline-connector"><div class="node"></div></div><div class="pipeline-steps">
+        <div class="p-step offline" onclick="openPipelineModal('D')"><div class="p-step-id">D</div><div class="p-step-name">文本分割</div><div class="p-step-desc">语义完整·长度适配·300-800字</div></div>
+        <div class="p-step offline" onclick="openPipelineModal('E')"><div class="p-step-id">E</div><div class="p-step-name">文本向量化</div><div class="p-step-desc">Embedding·BGE-M3·相似度</div></div>
+        <div class="p-step offline" onclick="openPipelineModal('F')"><div class="p-step-id">F</div><div class="p-step-name">向量索引构建</div><div class="p-step-desc">VectorDB·Milvus·语义检索</div></div>
+      </div></div>
+      <div class="pipeline-stage s-retrieval"><div class="pipeline-stage-label"><div class="stage-name">检索阶段</div><div class="stage-en">Retrieval</div></div><div class="pipeline-connector"><div class="node"></div></div><div class="pipeline-steps">
+        <div class="p-step online-r" onclick="openPipelineModal('G')"><div class="p-step-id">G</div><div class="p-step-name">Query改写</div><div class="p-step-desc">语义强化·歧义消解·上下文补全</div></div>
+        <div class="p-step online-r" onclick="openPipelineModal('H')"><div class="p-step-id">H</div><div class="p-step-name">多路查询</div><div class="p-step-desc">关键词+向量搜索·Score·TopK</div></div>
+      </div></div>
+      <div class="pipeline-stage s-augment"><div class="pipeline-stage-label"><div class="stage-name">增强阶段</div><div class="stage-en">Augment</div></div><div class="pipeline-connector"><div class="node"></div></div><div class="pipeline-steps">
+        <div class="p-step online-a"><div class="p-step-id">AUG</div><div class="p-step-name">上下文组装</div><div class="p-step-desc">Chunks + Query → 增强Prompt → LLM</div></div>
+      </div></div>
+      <div class="pipeline-stage s-generate"><div class="pipeline-stage-label"><div class="stage-name">生成阶段</div><div class="stage-en">Generation</div></div><div class="pipeline-connector"><div class="node"></div></div><div class="pipeline-steps">
+        <div class="p-step online-g"><div class="p-step-id">GEN</div><div class="p-step-name">LLM生成</div><div class="p-step-desc">构建→执行→后处理→多轮→复杂问题</div></div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- Detailed pipeline cards -->
+  <div class="topic-group reveal">
+    <div class="topic-group-title">离线Pipeline详解 · A → F</div>
+    <div class="k-card" onclick="toggleCard(this)"><div class="k-header"><div><h4><span class="k-icon ki1">A</span>数据采集</h4><div class="k-sub">五大来源·四类数据</div></div><div class="k-toggle">▾</div></div><div class="k-body"><div class="k-content">
+      <table class="mini-table"><tr><th>来源</th><th>内容</th></tr><tr><td><strong>企业内部</strong></td><td>PDF/Word/PPT·ERP/CRM/OA·飞书/语雀·FAQ·邮件</td></tr><tr><td><strong>外网公开</strong></td><td>爬虫·API(天气/财经)·数据集(Kaggle)</td></tr><tr><td><strong>付费外采</strong></td><td>行业报告(艾瑞)·专业DB(Wind/知网)·法律库</td></tr><tr><td><strong>对话QA</strong></td><td>客服记录·Chatbot日志·Query-Answer对</td></tr><tr><td><strong>网盘API</strong></td><td>文件服务器扫描·API拉取·知识管理平台</td></tr></table>
+      <div class="highlight"><strong>核心：</strong>只采集业务场景强相关数据，同时记录来源（溯源基础）</div>
+    </div></div></div>
+
+    <div class="k-card" onclick="toggleCard(this)"><div class="k-header"><div><h4><span class="k-icon ki2">B</span>文档解析</h4><div class="k-sub">格式识别→分类→技术匹配→执行</div></div><div class="k-toggle">▾</div></div><div class="k-body"><div class="k-content">
+      <table class="mini-table"><tr><th>类型</th><th>技术</th></tr><tr><td><strong>图像/视频</strong></td><td>OCR·ASR</td></tr><tr><td><strong>结构化</strong></td><td>Pandas+JSONPath</td></tr><tr><td><strong>半结构化</strong></td><td>pdfplumber·BeautifulSoup4</td></tr><tr><td><strong>纯文本</strong></td><td>python-markdown</td></tr></table>
+      <p>腾讯<strong>DREAM</strong>模型：图像特征提取→元素聚合→元素并行生成</p>
+    </div></div></div>
+
+    <div class="k-card" onclick="toggleCard(this)"><div class="k-header"><div><h4><span class="k-icon ki3">C</span>数据清洗</h4><div class="k-sub">保留语义核心，删除无关信息</div></div><div class="k-toggle">▾</div></div><div class="k-body"><div class="k-content">
+      <table class="mini-table"><tr><th>步骤</th><th>说明</th></tr><tr><td><strong>删除冗余</strong></td><td>重复·页码页眉·无意义内容</td></tr><tr><td><strong>内容改写</strong></td><td>错别字·语法·残缺标题</td></tr><tr><td><strong>格式标准化</strong></td><td>UTF-8·日期·表格→文本·LaTeX</td></tr><tr><td><strong>脱敏过滤</strong></td><td>正则过滤身份证·手机号·密码</td></tr></table>
+    </div></div></div>
+
+    <div class="k-card" onclick="toggleCard(this)"><div class="k-header"><div><h4><span class="k-icon ki4">D</span>文本分割</h4><div class="k-sub">语义边界优先·300-800字·10-20%重叠</div></div><div class="k-toggle">▾</div></div><div class="k-body"><div class="k-content">
+      <table class="mini-table"><tr><th>策略</th><th>说明</th></tr><tr><td><strong>固定长度</strong></td><td>500字符/200Token，支持重叠窗口</td></tr><tr><td><strong>语义感知</strong></td><td>BERT/spaCy识别语义边界</td></tr><tr><td><strong>文档结构</strong></td><td>PDF章节/Word标题/Markdown#</td></tr><tr><td><strong>关键词</strong></td><td>专业术语、主题词聚类</td></tr><tr><td><strong>多粒度</strong></td><td>父Chunk(章节)→子Chunk(语义)</td></tr><tr><td><strong>混合</strong></td><td>结构+语义+长度多维融合</td></tr></table>
+    </div></div></div>
+
+    <div class="k-card" onclick="toggleCard(this)"><div class="k-header"><div><h4><span class="k-icon ki1">E</span>文本向量化</h4><div class="k-sub">Embedding Model·BGE-M3</div></div><div class="k-toggle">▾</div></div><div class="k-body"><div class="k-content">
+      <ul><li><strong>什么？</strong>文本→数学向量</li><li><strong>为什么？</strong>计算语义相似度</li><li><strong>怎么做？</strong>Embedding Model(如BGE-M3多语言多粒度)</li></ul>
+      <div class="highlight">PM职责：<strong>模型选型</strong>(精度vs成本vs延迟)·<strong>质量监控</strong>(向量漂移检测)</div>
+    </div></div></div>
+
+    <div class="k-card" onclick="toggleCard(this)"><div class="k-header"><div><h4><span class="k-icon ki2">F</span>向量索引构建</h4><div class="k-sub">VectorDB·语义模糊检索</div></div><div class="k-toggle">▾</div></div><div class="k-body"><div class="k-content">
+      <table class="mini-table"><tr><th>数据库</th><th>示例</th><th>匹配</th></tr><tr><td><strong>RDBMS</strong></td><td>MySQL</td><td>精准匹配</td></tr><tr><td><strong>NoSQL</strong></td><td>MongoDB</td><td>精准匹配</td></tr><tr><td><strong>VectorDB</strong></td><td>Milvus/Pinecone</td><td>语义模糊</td></tr></table>
+      <div class="highlight">向量DB可通过语义相似度找到"红牛"和"乐虎"<br>指标：<strong>Recall@K / P95延迟 / 存储压缩率</strong></div>
+    </div></div></div>
+  </div>
+
+  <div class="topic-group reveal">
+    <div class="topic-group-title">在线Pipeline详解 · G → H → 增强 → 生成</div>
+    <div class="k-card" onclick="toggleCard(this)"><div class="k-header"><div><h4><span class="k-icon ki3">G</span>Query改写六法</h4><div class="k-sub">语义修复·指代消解·信息补全</div></div><div class="k-toggle">▾</div></div><div class="k-body"><div class="k-content">
+      <table class="mini-table"><tr><th>方法</th><th>说明</th><th>示例</th></tr><tr><td><strong>语义强化</strong></td><td>同义词扩展</td><td>"苹果下载软件"→"iPhone安装App"</td></tr><tr><td><strong>歧义消解</strong></td><td>消除多义</td><td>"Java怎么泡"→编程or咖啡？</td></tr><tr><td><strong>上下文补全</strong></td><td>补缺失信息</td><td>"哪种？"→"哪种甜品？"</td></tr><tr><td><strong>意图拆解</strong></td><td>复合→子查询</td><td>—</td></tr><tr><td><strong>术语适配</strong></td><td>口语→专业</td><td>—</td></tr><tr><td><strong>约束强化</strong></td><td>补充过滤条件</td><td>—</td></tr></table>
+    </div></div></div>
+
+    <div class="k-card" onclick="toggleCard(this)"><div class="k-header"><div><h4><span class="k-icon ki4">H</span>多路查询&查询分解</h4><div class="k-sub">关键词+向量混合搜索</div></div><div class="k-toggle">▾</div></div><div class="k-body"><div class="k-content">
+      <div class="highlight"><strong>混合搜索：</strong>Text-to-SQL(精准匹配) + Text-to-Embedding(语义匹配) → 合并去重(Score&TopK)</div>
+      <ul><li>PM质量标准：<strong>召回率≥90%·准确率≥85%</strong></li><li>优化链：Query改写→意图识别→多跳检索</li></ul>
+    </div></div></div>
+
+    <div class="k-card" onclick="toggleCard(this)"><div class="k-header"><div><h4><span class="k-icon ki2">⚡</span>增强&生成阶段</h4><div class="k-sub">Chunks+Query→Prompt→LLM→Answer</div></div><div class="k-toggle">▾</div></div><div class="k-body"><div class="k-content">
+      <h5>生成5步</h5>
+      <table class="mini-table"><tr><th>#</th><th>流程</th></tr><tr><td>01</td><td><strong>提示词构建</strong> Chunk+Query→Prompt</td></tr><tr><td>02</td><td><strong>LLM生成执行</strong></td></tr><tr><td>03</td><td><strong>内容优化后处理</strong> 格式化·去重·校验</td></tr><tr><td>04</td><td><strong>多轮对话管理</strong></td></tr><tr><td>05</td><td><strong>复杂问题处理</strong> 分解·推理·多跳</td></tr></table>
+      <h5>复杂问题策略</h5>
+      <ul><li><strong>问题分解</strong>：子问题链→并行检索→综合</li><li><strong>层次化推理</strong>：先宏观后细节(Least-to-Most)</li><li><strong>多跳检索</strong>：初步回答→识别缺口→二次检索→验证</li></ul>
+    </div></div></div>
+
+    <div class="k-card" onclick="toggleCard(this)"><div class="k-header"><div><h4><span class="k-icon ki1">🕸</span>Graph RAG·知识图谱</h4><div class="k-sub">实体-关系-实体三元组</div></div><div class="k-toggle">▾</div></div><div class="k-body"><div class="k-content">
+      <ul><li><strong>场景</strong>：政策穿透·合规审查·科研追踪·故障分析</li><li><strong>架构</strong>：Question→Encoder→Tool→Graph DB→Context→LLM→Answer</li><li><strong>BGE-M3</strong>：多语言多粒度向量模型</li><li><strong>Speculative RAG</strong>：高并发低费用SaaS场景</li></ul>
+    </div></div></div>
+  </div>
+
+  <div class="topic-group reveal">
+    <div class="topic-group-title">平台实操 · Dify & 扣子(Coze)</div>
+    <div class="k-card" onclick="toggleCard(this)"><div class="k-header"><div><h4><span class="k-icon ki3">🔧</span>Dify平台</h4><div class="k-sub">工作流vs对话流</div></div><div class="k-toggle">▾</div></div><div class="k-body"><div class="k-content">
+      <table class="mini-table"><tr><th>模式</th><th>特点</th><th>场景</th></tr><tr><td><strong>Workflow</strong></td><td>有始有终，流程化</td><td>任务执行·自动化</td></tr><tr><td><strong>Chatflow</strong></td><td>多轮对话记忆</td><td>咨询问答·客服</td></tr></table>
+      <div class="highlight">工作流前身是SOP：规范化→自动化<br>在线流程：Query→向量库召回→上下文→意图分析→LLM→答案</div>
+    </div></div></div>
+
+    <div class="k-card" onclick="toggleCard(this)"><div class="k-header"><div><h4><span class="k-icon ki4">🤖</span>扣子(Coze)智能体</h4><div class="k-sub">创建→配置→调试→发布</div></div><div class="k-toggle">▾</div></div><div class="k-body"><div class="k-content">
+      <ul><li><strong>Builder</strong>构建·<strong>User</strong>使用·<strong>协作开发者</strong>共建</li><li>RAG Pipeline：数据采集→FAQ→文档解析→分段→向量化→索引</li><li><strong>Temperature</strong>：调大=创意，调小=精确</li></ul>
+    </div></div></div>
+  </div>
+</section>
+<div class="section-divider"></div>
+
+<!-- EVOLUTION -->
+<section id="evolution">
+  <div class="section-label reveal">能力演进</div>
+  <h2 class="section-title reveal">大模型 <span class="gt4">能力演进</span> 路线</h2>
+  <div class="evo-timeline reveal">
+    <div class="evo-item"><div class="evo-content"><div class="evo-ver">1.0</div><h4>Chatbot</h4><p>Prompt → LLM → Response<br>有了基本对话能力</p><div class="evo-tag">单轮对话</div></div><div class="evo-node"></div></div>
+    <div class="evo-item"><div class="evo-content"><div class="evo-ver">2.0</div><h4>多轮短期记忆</h4><p>Query + System Prompt + Chat History<br>支持多轮对话，有了短期记忆</p><div class="evo-tag">短期记忆</div></div><div class="evo-node"></div></div>
+    <div class="evo-item"><div class="evo-content"><div class="evo-ver">3.0</div><h4>Reasoner 思考者</h4><p>+ ICL + Summary + CoT草稿<br>有了思维链推理能力（DeepSeek-R1）</p><div class="evo-tag">思维链</div></div><div class="evo-node"></div></div>
+    <div class="evo-item"><div class="evo-content"><div class="evo-ver">4.0</div><h4>RAG 外挂知识库</h4><p>+ Chunks（外部知识片段）<br>有了长期记忆（外部知识库）</p><div class="evo-tag">长期记忆</div></div><div class="evo-node"></div></div>
+  </div>
+</section>
+<div class="section-divider"></div>
+
+<!-- PM -->
+<section id="pm">
+  <div class="section-label reveal">产品经理</div>
+  <h2 class="section-title reveal">PM <span class="gt1">各阶段职责</span> 总览</h2>
+  <div class="pm-table-wrap reveal">
+    <table class="pm-table">
+      <tr><th>阶段</th><th>核心职责</th><th>协作对象</th></tr>
+      <tr><td>A 数据采集</td><td>定义知识边界·明确优先级·审核合规·标注规范</td><td>数据采集·业务部门·法务</td></tr>
+      <tr><td>B 文档解析</td><td>输出质量标准·协调格式说明·定义输出格式·抽样校验</td><td>数据处理·文档管理·技术开发</td></tr>
+      <tr><td>C 数据清洗</td><td>制定清洗规则·质量验收</td><td>数据处理负责人</td></tr>
+      <tr><td>D 文本分割</td><td>拆分要求·长度范围·元数据字段·验证方案·迭代机制</td><td>算法·内容架构师</td></tr>
+      <tr><td>E 向量化</td><td>模型选型评估·质量监控体系·跨部门协调</td><td>算法·运维·财务·数据</td></tr>
+      <tr><td>F 索引构建</td><td>排期管理·业务连续性·调优评估</td><td>算法·运维·财务·数据</td></tr>
+      <tr><td>G/H 检索</td><td>检索目标·质量标准·查询优化链</td><td>算法·AI工程·前后端</td></tr>
+    </table>
+  </div>
+</section>
+<div class="section-divider"></div>
+
+<!-- INTERVIEW -->
+<section id="interview">
+  <div class="section-label reveal">面试真题</div>
+  <h2 class="section-title reveal">高频 <span class="gt2">面试真题</span> 汇总</h2>
+  <div class="interview-list reveal">
+    <div class="interview-item" onclick="toggleInterview(this)"><div class="interview-q"><div class="q-text"><span class="q-badge">数据</span>项目数据来源有哪些？</div><div class="q-toggle">▾</div></div><div class="interview-a"><div class="interview-a-inner">企业内部/外网公开/付费外采/多轮对话QA/网盘与API系统，根据业务场景定义知识边界与优先级</div></div></div>
+    <div class="interview-item" onclick="toggleInterview(this)"><div class="interview-q"><div class="q-text"><span class="q-badge">元数据</span>怎么处理元数据的？</div><div class="q-toggle">▾</div></div><div class="interview-a"><div class="interview-a-inner">将解析后文本与采集阶段记录的元数据（来源、采集时间）绑定，确保检索结果可溯源</div></div></div>
+    <div class="interview-item" onclick="toggleInterview(this)"><div class="interview-q"><div class="q-text"><span class="q-badge">排版</span>复杂排版的阅读顺序怎么解决？</div><div class="q-toggle">▾</div></div><div class="interview-a"><div class="interview-a-inner">使用腾讯DREAM模型（图像特征提取→元素聚合→并行生成）或DocTR文档布局分析，按"左栏→右栏"顺序提取</div></div></div>
+    <div class="interview-item" onclick="toggleInterview(this)"><div class="interview-q"><div class="q-text"><span class="q-badge">成本</span>RAG中怎么有效降低成本？</div><div class="q-toggle">▾</div></div><div class="interview-a"><div class="interview-a-inner">Chunk切分成三级结构，通过检索二级片段，将Top-K中同属一级片段的进行替换合并，减少Token消耗</div></div></div>
+    <div class="interview-item" onclick="toggleInterview(this)"><div class="interview-q"><div class="q-text"><span class="q-badge">PM</span>0到1项目PM应侧重什么？</div><div class="q-toggle">▾</div></div><div class="interview-a"><div class="interview-a-inner">构建核心功能，而非知识库层面技术细节。PM应全程参与，与业务/技术/数据/工程紧密合作</div></div></div>
+  </div>
+</section>
+<div class="section-divider"></div>
+
+<!-- RAG PLATFORMS -->
+<section id="tools">
+  <div class="section-label reveal">平台实操</div>
+  <h2 class="section-title reveal">RAG 平台 <span class="gt4">对比</span></h2>
+  <p class="section-desc reveal">两大主流 RAG 平台能力速查，助力快速选型落地</p>
+
+  <div class="compare-grid reveal">
+    <div class="compare-card">
+      <div class="compare-header ch-teal"><span class="compare-icon">🔧</span><h4>Dify</h4></div>
+      <div class="compare-body">
+        <div class="compare-row"><span class="compare-label">模式</span><span>Workflow（任务流）· Chatflow（对话流）</span></div>
+        <div class="compare-row"><span class="compare-label">特点</span><span>开源·可视化编排·插件生态</span></div>
+        <div class="compare-row"><span class="compare-label">适用</span><span>技术团队·二次开发·私有化部署</span></div>
+        <div class="compare-row"><span class="compare-label">流程</span><span>Query→向量库召回→上下文→意图分析→LLM→答案</span></div>
+        <div class="compare-meter"><div class="meter-label">灵活度</div><div class="meter-bar"><div class="meter-fill" style="width:95%"></div></div><span class="meter-val">95%</span></div>
+        <div class="compare-meter"><div class="meter-label">上手难度</div><div class="meter-bar bar-orange"><div class="meter-fill orange" style="width:60%"></div></div><span class="meter-val">中等</span></div>
+      </div>
+    </div>
+    <div class="compare-card">
+      <div class="compare-header ch-gold"><span class="compare-icon">🤖</span><h4>扣子 Coze</h4></div>
+      <div class="compare-body">
+        <div class="compare-row"><span class="compare-label">模式</span><span>智能体 · Builder/User/协作</span></div>
+        <div class="compare-row"><span class="compare-label">特点</span><span>零代码·拖拽式·内置 RAG 管线</span></div>
+        <div class="compare-row"><span class="compare-label">适用</span><span>PM/运营·快速验证·无代码团队</span></div>
+        <div class="compare-row"><span class="compare-label">流程</span><span>数据采集→FAQ→文档解析→分段→向量化→索引</span></div>
+        <div class="compare-meter"><div class="meter-label">灵活度</div><div class="meter-bar"><div class="meter-fill" style="width:72%"></div></div><span class="meter-val">72%</span></div>
+        <div class="compare-meter"><div class="meter-label">上手难度</div><div class="meter-bar bar-green"><div class="meter-fill green" style="width:30%"></div></div><span class="meter-val">简单</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="section-divider"></div>
+
+<!-- GLOSSARY -->
+<section id="glossary">
+  <div class="section-label reveal">术语速查</div>
+  <h2 class="section-title reveal">核心 <span class="gt1">术语表</span></h2>
+  <p class="section-desc reveal">点击术语卡片查看详细解释，掌握 RAG 领域关键概念</p>
+  <div class="glossary-search-wrap reveal">
+    <input type="text" id="glossary-search" class="glossary-search" placeholder="搜索术语 (如: Embedding, RAG, Token ...)" oninput="filterGlossary(this.value)">
+  </div>
+  <div class="glossary-grid reveal" id="glossary-grid">
+    <div class="glossary-item" data-term="RAG" onclick="openGlossaryModal(this)">
+      <div class="glossary-term">RAG</div>
+      <div class="glossary-brief">检索增强生成</div>
+      <div class="glossary-detail">Retrieval-Augmented Generation，给大模型接入外部知识库。流程：构建知识库 → 检索相关片段 → 增强 Prompt → LLM 生成。解决时效性、幻觉、安全性、专业知识四大限制。</div>
+    </div>
+    <div class="glossary-item" data-term="Embedding" onclick="openGlossaryModal(this)">
+      <div class="glossary-term">Embedding</div>
+      <div class="glossary-brief">文本向量化</div>
+      <div class="glossary-detail">将文本转换为高维数学向量的过程，使计算机能够通过向量距离衡量语义相似度。推荐模型：BGE-M3（多语言多粒度）。是 RAG 离线阶段 Pipeline E 的核心步骤。</div>
+    </div>
+    <div class="glossary-item" data-term="Token" onclick="openGlossaryModal(this)">
+      <div class="glossary-term">Token</div>
+      <div class="glossary-brief">模型处理最小单元</div>
+      <div class="glossary-detail">LLM 的最小处理单元。1个中文字 ≈ 1.5-2个 Token，1个英文单词 ≈ 1个 Token。Token 数量直接影响 API 调用费用和上下文窗口限制。</div>
+    </div>
+    <div class="glossary-item" data-term="Chunk" onclick="openGlossaryModal(this)">
+      <div class="glossary-term">Chunk</div>
+      <div class="glossary-brief">文本切片</div>
+      <div class="glossary-detail">文本分割后的片段，推荐 300-800 字，重叠 10-20%。分割策略包括：固定长度、语义感知、文档结构、关键词、多粒度、混合策略。是 Pipeline D 的输出。</div>
+    </div>
+    <div class="glossary-item" data-term="VectorDB" onclick="openGlossaryModal(this)">
+      <div class="glossary-term">VectorDB</div>
+      <div class="glossary-brief">向量数据库</div>
+      <div class="glossary-detail">专门存储和检索向量数据的数据库（如 Milvus、Pinecone）。与传统 RDBMS/NoSQL 的精准匹配不同，VectorDB 支持语义模糊检索，能找到语义相似但文字不同的内容。</div>
+    </div>
+    <div class="glossary-item" data-term="CoT" onclick="openGlossaryModal(this)">
+      <div class="glossary-term">CoT</div>
+      <div class="glossary-brief">思维链推理</div>
+      <div class="glossary-detail">Chain of Thought，让 LLM 分步推理以提升准确率的技术。代表：DeepSeek-R1。属于模型演进 3.0 阶段的涌现能力，是 Prompt 工程的重要策略之一。</div>
+    </div>
+    <div class="glossary-item" data-term="ICL" onclick="openGlossaryModal(this)">
+      <div class="glossary-term">ICL</div>
+      <div class="glossary-brief">上下文学习</div>
+      <div class="glossary-detail">In-Context Learning，将示例放入 Prompt 上下文中，让模型参照模板作答。无需训练，通过 Few-shot 样本即可引导模型输出格式和风格。</div>
+    </div>
+    <div class="glossary-item" data-term="Transformer" onclick="openGlossaryModal(this)">
+      <div class="glossary-term">Transformer</div>
+      <div class="glossary-brief">自注意力架构</div>
+      <div class="glossary-detail">Google 2017 年提出的神经网络架构，通过自注意力机制实现并行计算，解决了 RNN 的序列依赖问题。是所有现代 LLM 的基础架构。</div>
+    </div>
+    <div class="glossary-item" data-term="SFT" onclick="openGlossaryModal(this)">
+      <div class="glossary-term">SFT</div>
+      <div class="glossary-brief">监督微调</div>
+      <div class="glossary-detail">Supervised Fine-Tuning，使用人工标注数据对预训练模型进行微调，使其适应特定任务。结合 RLHF 对齐后诞生了 ChatGPT。作为 RAG 的替代方案之一，成本高但响应快。</div>
+    </div>
+    <div class="glossary-item" data-term="TopK" onclick="openGlossaryModal(this)">
+      <div class="glossary-term">Top-K</div>
+      <div class="glossary-brief">检索结果排序截取</div>
+      <div class="glossary-detail">在检索阶段，根据相似度 Score 对结果排序后取前 K 个最相关的 Chunk。K 值的选择影响召回率和精度的平衡，PM 质量标准：召回率≥90%，准确率≥85%。</div>
+    </div>
+    <div class="glossary-item" data-term="GraphRAG" onclick="openGlossaryModal(this)">
+      <div class="glossary-term">Graph RAG</div>
+      <div class="glossary-brief">知识图谱增强</div>
+      <div class="glossary-detail">基于知识图谱（实体-关系-实体三元组）的 RAG 变体。适用于政策穿透、合规审查、科研追踪、故障分析等需要关系推理的场景。架构：Question → Encoder → Graph DB → LLM。</div>
+    </div>
+    <div class="glossary-item" data-term="Temperature" onclick="openGlossaryModal(this)">
+      <div class="glossary-term">Temperature</div>
+      <div class="glossary-brief">生成温度参数</div>
+      <div class="glossary-detail">控制 LLM 生成随机性的参数。调大（如 0.8-1.0）→ 输出更具创意和多样性；调小（如 0.1-0.3）→ 输出更精确和确定性。RAG 场景通常使用较低 Temperature。</div>
+    </div>
+  </div>
+</section>
+<div class="section-divider"></div>
+
+<!-- QUOTES -->
+<section id="quotes">
+  <div class="section-label reveal">金句集</div>
+  <h2 class="section-title reveal">课程 <span class="gt3">金句</span></h2>
+  <div class="quotes-grid reveal">
+    <div class="quote-card"><p>"RAG就是给大模型装了一个外挂知识库"</p><div class="quote-src">RAG 核心概念</div></div>
+    <div class="quote-card"><p>"数据质量决定AI系统的天花板"</p><div class="quote-src">数据工程</div></div>
+    <div class="quote-card"><p>"Chunk 切分的好坏，直接决定检索效果"</p><div class="quote-src">Pipeline D · 文本分割</div></div>
+    <div class="quote-card"><p>"召回率≥90%，准确率≥85%，是PM的质量红线"</p><div class="quote-src">检索阶段 · PM职责</div></div>
+    <div class="quote-card"><p>"向量数据库找的不是相同的字，而是相似的意思"</p><div class="quote-src">Pipeline F · 语义检索</div></div>
+    <div class="quote-card"><p>"在实践中学习，出错是好事"</p><div class="quote-src">项目实战</div></div>
+  </div>
+</section>
+
+<!-- Glossary Modal -->
+<div id="glossary-modal" class="modal-overlay" onclick="if(event.target===this)closeGlossaryModal()">
+  <div class="modal-panel">
+    <button class="modal-close" onclick="closeGlossaryModal()">✕</button>
+    <div class="modal-term" id="modal-term"></div>
+    <div class="modal-brief" id="modal-brief"></div>
+    <div class="modal-detail" id="modal-detail"></div>
+  </div>
+</div>
+
+<!-- Pipeline Detail Modal -->
+<div id="pipeline-modal" class="modal-overlay" onclick="if(event.target===this)closePipelineModal()">
+  <div class="modal-panel wide">
+    <button class="modal-close" onclick="closePipelineModal()">✕</button>
+    <div id="pipeline-modal-content"></div>
+  </div>
+</div>
+
+<!-- Back to top -->
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="回到顶部">↑</button>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand"><strong>且曼 AI 产品经理前瞻学院</strong></div>
+    <div class="footer-meta">RAG 全流程知识图谱 · 8大Pipeline · 4核心阶段 · 12术语 · 7项PM职责</div>
+    <div class="footer-links">
+      <a href="#overview">总览</a><a href="#pipeline">Pipeline</a><a href="#glossary">术语表</a><a href="#interview">面试真题</a>
+    </div>
+    <div class="footer-copy">Made with ❤️ for AI Product Managers</div>
+  </div>
+</footer>
+
+<script>
+/* ── Toggle cards ── */
+function toggleCard(el){el.classList.toggle('open')}
+function toggleInterview(el){el.classList.toggle('open')}
+
+/* ── Mobile nav drawer ── */
+function toggleMobileNav(){
+  const d=document.getElementById('mobile-drawer');
+  d.classList.toggle('open');
+  document.body.style.overflow=d.classList.contains('open')?'hidden':'';
+}
+
+/* ── Tab switcher ── */
+function switchToolTab(btn,tabId){
+  btn.closest('.tab-bar').querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  btn.closest('section').querySelectorAll('.tab-content').forEach(t=>t.classList.add('hidden'));
+  document.getElementById(tabId).classList.remove('hidden');
+}
+
+/* ── Glossary search ── */
+function filterGlossary(q){
+  const lc=q.toLowerCase();
+  document.querySelectorAll('.glossary-item').forEach(el=>{
+    const term=el.dataset.term.toLowerCase();
+    const brief=el.querySelector('.glossary-brief').textContent.toLowerCase();
+    el.style.display=(term.includes(lc)||brief.includes(lc))?'':'none';
+  });
+}
+
+/* ── Glossary modal ── */
+function openGlossaryModal(el){
+  document.getElementById('modal-term').textContent=el.querySelector('.glossary-term').textContent;
+  document.getElementById('modal-brief').textContent=el.querySelector('.glossary-brief').textContent;
+  document.getElementById('modal-detail').textContent=el.querySelector('.glossary-detail').textContent;
+  document.getElementById('glossary-modal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeGlossaryModal(){
+  document.getElementById('glossary-modal').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+/* ── Pipeline detail modal ── */
+const pipelineData={
+  A:{title:'A · 数据采集',color:'var(--accent)',detail:'<h5>五大数据来源</h5><ul><li><strong>企业内部</strong>：PDF/Word/PPT·ERP/CRM/OA·飞书/语雀·FAQ·邮件</li><li><strong>外网公开</strong>：爬虫·API(天气/财经)·数据集(Kaggle)</li><li><strong>付费外采</strong>：行业报告(艾瑞)·专业DB(Wind/知网)·法律库</li><li><strong>对话QA</strong>：客服记录·Chatbot日志·Query-Answer对</li><li><strong>网盘API</strong>：文件服务器扫描·API拉取·知识管理平台</li></ul><div class="highlight"><strong>核心原则：</strong>只采集业务场景强相关数据，同时记录来源（溯源基础）</div><h5>PM 职责</h5><ul><li>定义知识边界·明确优先级·审核合规·标注规范</li></ul>'},
+  B:{title:'B · 文档解析',color:'var(--accent)',detail:'<h5>解析流程</h5><p>格式识别 → 分类 → 技术匹配 → 执行</p><h5>技术方案</h5><ul><li><strong>图像/视频</strong> → OCR·ASR</li><li><strong>结构化</strong> → Pandas+JSONPath</li><li><strong>半结构化</strong> → pdfplumber·BeautifulSoup4</li><li><strong>纯文本</strong> → python-markdown</li></ul><div class="highlight">腾讯 <strong>DREAM</strong> 模型：图像特征提取→元素聚合→元素并行生成</div>'},
+  C:{title:'C · 数据清洗',color:'var(--accent)',detail:'<h5>清洗四步</h5><ul><li><strong>删除冗余</strong>：重复·页码页眉·无意义内容</li><li><strong>内容改写</strong>：错别字·语法·残缺标题</li><li><strong>格式标准化</strong>：UTF-8·日期·表格→文本·LaTeX</li><li><strong>脱敏过滤</strong>：正则过滤身份证·手机号·密码</li></ul><div class="highlight"><strong>核心原则：</strong>保留语义核心，删除无关信息</div>'},
+  D:{title:'D · 文本分割',color:'var(--accent)',detail:'<h5>推荐参数</h5><p>语义边界优先 · 300-800 字 · 10-20% 重叠</p><h5>六种策略</h5><ul><li><strong>固定长度</strong>：500字符/200Token，支持重叠窗口</li><li><strong>语义感知</strong>：BERT/spaCy 识别语义边界</li><li><strong>文档结构</strong>：PDF章节/Word标题/Markdown#</li><li><strong>关键词</strong>：专业术语、主题词聚类</li><li><strong>多粒度</strong>：父Chunk(章节)→子Chunk(语义)</li><li><strong>混合</strong>：结构+语义+长度多维融合</li></ul>'},
+  E:{title:'E · 文本向量化',color:'var(--accent)',detail:'<h5>核心三问</h5><ul><li><strong>什么？</strong> 文本 → 数学向量</li><li><strong>为什么？</strong> 计算语义相似度</li><li><strong>怎么做？</strong> Embedding Model（如 BGE-M3 多语言多粒度）</li></ul><div class="highlight"><strong>PM 职责：</strong>模型选型（精度 vs 成本 vs 延迟）·质量监控（向量漂移检测）</div>'},
+  F:{title:'F · 向量索引构建',color:'var(--accent)',detail:'<h5>数据库对比</h5><ul><li><strong>RDBMS</strong>（MySQL）→ 精准匹配</li><li><strong>NoSQL</strong>（MongoDB）→ 精准匹配</li><li><strong>VectorDB</strong>（Milvus/Pinecone）→ 语义模糊检索</li></ul><div class="highlight">向量 DB 可通过语义相似度找到"红牛"和"乐虎"<br>指标：<strong>Recall@K / P95延迟 / 存储压缩率</strong></div>'},
+  G:{title:'G · Query 改写',color:'var(--accent4)',detail:'<h5>六种改写方法</h5><ul><li><strong>语义强化</strong>：同义词扩展 — "苹果下载软件"→"iPhone安装App"</li><li><strong>歧义消解</strong>：消除多义 — "Java怎么泡"→编程 or 咖啡？</li><li><strong>上下文补全</strong>：补缺失信息 — "哪种？"→"哪种甜品？"</li><li><strong>意图拆解</strong>：复合 → 子查询</li><li><strong>术语适配</strong>：口语 → 专业</li><li><strong>约束强化</strong>：补充过滤条件</li></ul>'},
+  H:{title:'H · 多路查询',color:'var(--accent4)',detail:'<h5>混合搜索架构</h5><div class="highlight"><strong>Text-to-SQL</strong>（精准匹配）+ <strong>Text-to-Embedding</strong>（语义匹配）→ 合并去重（Score & TopK）</div><h5>PM 质量标准</h5><ul><li>召回率 ≥ 90%</li><li>准确率 ≥ 85%</li></ul><p>优化链：Query改写 → 意图识别 → 多跳检索</p>'}
+};
+function openPipelineModal(id){
+  const d=pipelineData[id];if(!d)return;
+  document.getElementById('pipeline-modal-content').innerHTML=
+    '<div class="modal-pipeline-title" style="border-left:3px solid '+d.color+';padding-left:16px"><h3>'+d.title+'</h3></div>'+d.detail;
+  document.getElementById('pipeline-modal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closePipelineModal(){
+  document.getElementById('pipeline-modal').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+/* ── Keyboard shortcuts ── */
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){closeGlossaryModal();closePipelineModal();
+    const d=document.getElementById('mobile-drawer');if(d.classList.contains('open'))toggleMobileNav();}
+});
+
+/* ── Scroll reveal ── */
+const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* ── Nav scroll + progress bar ── */
+window.addEventListener('scroll',()=>{
+  const nav=document.getElementById('navbar');
+  nav.classList.toggle('scrolled',window.scrollY>50);
+  // progress bar
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  const pct=h>0?(window.scrollY/h)*100:0;
+  document.getElementById('progress-bar').style.width=pct+'%';
+  // back to top
+  document.getElementById('back-to-top').classList.toggle('show',window.scrollY>600);
+});
+
+/* ── Active nav link ── */
+const sections=document.querySelectorAll('section[id]');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-200)cur=s.getAttribute('id')});
+  document.querySelectorAll('.nav-links a').forEach(a=>{
+    a.classList.toggle('active',a.getAttribute('href')==='#'+cur);
+  });
+});
+
+/* ── Animated counter ── */
+function animateCounters(){
+  document.querySelectorAll('.hero-stat .num[data-target]').forEach(el=>{
+    const target=+el.dataset.target;
+    const duration=1200;
+    const start=performance.now();
+    function step(now){
+      const progress=Math.min((now-start)/duration,1);
+      const eased=1-Math.pow(1-progress,3);
+      el.textContent=Math.round(eased*target);
+      if(progress<1)requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  });
+}
+const heroObs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){animateCounters();heroObs.unobserve(e.target)}})},{threshold:0.3});
+heroObs.observe(document.querySelector('.hero-stats'));
+
+/* ── Hero particle canvas ── */
+(function(){
+  const canvas=document.getElementById('hero-canvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  let w,h,particles=[];
+  function resize(){w=canvas.width=canvas.offsetWidth;h=canvas.height=canvas.offsetHeight;}
+  resize();window.addEventListener('resize',resize);
+  for(let i=0;i<60;i++){
+    particles.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.5+0.5,
+      dx:(Math.random()-0.5)*0.4,dy:(Math.random()-0.5)*0.4,
+      o:Math.random()*0.3+0.1});
+  }
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    particles.forEach(p=>{
+      p.x+=p.dx;p.y+=p.dy;
+      if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(108,92,231,'+p.o+')';ctx.fill();
+    });
+    // connection lines
+    for(let i=0;i<particles.length;i++){
+      for(let j=i+1;j<particles.length;j++){
+        const dx=particles[i].x-particles[j].x;
+        const dy=particles[i].y-particles[j].y;
+        const dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<120){
+          ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);
+          ctx.lineTo(particles[j].x,particles[j].y);
+          ctx.strokeStyle='rgba(108,92,231,'+(0.06*(1-dist/120))+')';
+          ctx.lineWidth=0.5;ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+</body>
+</html>

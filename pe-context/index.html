@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prompt Engineering & Context Engineering</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;600;700;900&display=swap');
+  :root{--black:#000;--near-black:#1d1d1f;--light-gray:#f5f5f7;--apple-blue:#0071e3;--bright-blue:#2997ff;--white:#fff;--surface:rgba(255,255,255,.06);--surface-border:rgba(255,255,255,.1);--dark-surface:#18181b;--expo:cubic-bezier(.16,1,.3,1)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter','Noto Sans SC',-apple-system,system-ui,sans-serif;background:#000;color:#fff;overflow:hidden;width:100vw;height:100vh}
+  /* Starfield canvas */
+  #starfield{position:fixed;inset:0;z-index:0;pointer-events:none}
+  /* Floating orbs */
+  .orb{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0;opacity:.25;animation:orbFloat 10s ease-in-out infinite}
+  .orb-1{width:400px;height:400px;background:radial-gradient(circle,#2997ff,transparent);top:-10%;left:-5%;animation-delay:0s}
+  .orb-2{width:350px;height:350px;background:radial-gradient(circle,#bf5af2,transparent);bottom:-10%;right:-5%;animation-delay:-4s}
+  .orb-3{width:250px;height:250px;background:radial-gradient(circle,#30d158,transparent);top:50%;left:60%;animation-delay:-7s}
+  @keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(30px,-20px) scale(1.05)}50%{transform:translate(-20px,30px) scale(.95)}75%{transform:translate(15px,15px) scale(1.02)}}
+  /* Slide system */
+  .presentation{width:100vw;height:100vh;position:relative;z-index:1;perspective:1200px}
+  .slide{width:100vw;height:100vh;display:none;flex-direction:column;justify-content:center;align-items:center;padding:50px 80px 100px;position:absolute;inset:0;opacity:0;transform:scale(.95) translateY(20px);transition:opacity .6s var(--expo),transform .6s var(--expo)}
+  .slide.active{display:flex;opacity:1;transform:scale(1) translateY(0)}
+  .slide.exit-left{display:flex;opacity:0;transform:scale(.93) translateX(-50px)}
+  .slide.exit-right{display:flex;opacity:0;transform:scale(.93) translateX(50px)}
+  /* Backgrounds */
+  .bg-black{background:transparent}
+  .bg-light{background:rgba(245,245,247,.97);color:var(--near-black)}
+  .bg-dark-surface{background:rgba(24,24,27,.95)}
+  .bg-gradient{background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(10,10,46,.5) 50%,rgba(0,0,0,0) 100%)}
+  /* Typography */
+  .slide-title{font-size:clamp(36px,5.5vw,64px);font-weight:800;line-height:1.05;letter-spacing:-1.5px;text-align:center;margin-bottom:24px;background:linear-gradient(135deg,#fff 0%,#2997ff 50%,#bf5af2 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .slide-subtitle{font-size:clamp(18px,2.5vw,28px);font-weight:300;line-height:1.14;letter-spacing:.2px;text-align:center;opacity:.6;margin-bottom:48px}
+  .section-label{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--bright-blue);margin-bottom:16px;text-align:center}
+  .bg-light .section-label{color:var(--apple-blue)}
+  .content-title{font-size:clamp(26px,3.5vw,42px);font-weight:700;line-height:1.1;letter-spacing:-.5px;text-align:center;margin-bottom:36px}
+  .content-body{font-size:clamp(15px,1.6vw,20px);font-weight:400;line-height:1.55;letter-spacing:-.1px;max-width:860px;text-align:center}
+  .highlight{color:var(--bright-blue);font-weight:600}
+  .bg-light .highlight{color:var(--apple-blue)}
+  /* Glass card with 3D tilt */
+  .card{background:var(--surface);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--surface-border);border-radius:16px;padding:28px 24px;text-align:left;transition:transform .5s var(--expo),box-shadow .5s var(--expo);will-change:transform}
+  .card:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 0 30px rgba(41,151,255,.1),0 20px 40px rgba(0,0,0,.25)}
+  .bg-light .card{background:rgba(255,255,255,.8);backdrop-filter:blur(20px);border:1px solid rgba(0,0,0,.06);box-shadow:0 4px 24px rgba(0,0,0,.05)}
+  .bg-light .card:hover{box-shadow:0 8px 40px rgba(0,0,0,.1);transform:translateY(-5px) scale(1.02)}
+  .card-icon{font-size:32px;margin-bottom:14px;display:block;transition:transform .4s var(--expo)}
+  .card:hover .card-icon{transform:scale(1.15) rotate(-5deg)}
+  .card-title{font-size:19px;font-weight:700;line-height:1.2;letter-spacing:-.2px;margin-bottom:8px}
+  .card-desc{font-size:13px;font-weight:400;line-height:1.6;opacity:.7}
+  .cards-grid{display:grid;gap:16px;max-width:1000px;width:100%}
+  .cards-grid.cols-2{grid-template-columns:1fr 1fr}
+  .cards-grid.cols-3{grid-template-columns:1fr 1fr 1fr}
+  .cards-grid.cols-4{grid-template-columns:repeat(4,1fr)}
+  /* Tag */
+  .tag{display:inline-block;background:rgba(41,151,255,.12);color:var(--bright-blue);font-size:11px;font-weight:700;padding:4px 14px;border-radius:980px;margin-bottom:8px;letter-spacing:.5px}
+  .bg-light .tag{background:rgba(0,113,227,.08);color:var(--apple-blue)}
+  /* Flow diagram */
+  .flow-diagram{display:flex;align-items:center;justify-content:center;gap:0;margin:28px 0;flex-wrap:wrap}
+  .flow-node{background:var(--surface);backdrop-filter:blur(16px);border:1px solid var(--surface-border);border-radius:14px;padding:20px 28px;text-align:center;min-width:130px;transition:all .4s var(--expo)}
+  .flow-node:hover{transform:translateY(-3px);box-shadow:0 0 20px rgba(41,151,255,.08)}
+  .bg-light .flow-node{background:rgba(255,255,255,.85);border:1px solid rgba(0,0,0,.06);box-shadow:0 2px 16px rgba(0,0,0,.05)}
+  .flow-node-title{font-size:16px;font-weight:700;margin-bottom:4px}
+  .flow-node-desc{font-size:11px;opacity:.55;line-height:1.4}
+  .flow-arrow{font-size:18px;color:var(--bright-blue);margin:0 8px;flex-shrink:0;animation:arrowPulse 2s ease-in-out infinite}
+  @keyframes arrowPulse{0%,100%{opacity:.4;transform:translateX(0)}50%{opacity:1;transform:translateX(3px)}}
+  .bg-light .flow-arrow{color:var(--apple-blue)}
+  /* Quadrant */
+  .quadrant{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:800px;width:100%}
+  .quadrant .card{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:24px 20px;cursor:pointer;position:relative;overflow:hidden}
+  .quadrant .card::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at center,rgba(41,151,255,.06),transparent 70%);opacity:0;transition:opacity .4s}
+  .quadrant .card:hover::after{opacity:1}
+  .quadrant .card-icon{margin-bottom:10px}
+  /* Formula */
+  .formula{background:var(--surface);backdrop-filter:blur(16px);border:1px solid var(--surface-border);border-radius:14px;padding:24px 40px;font-size:clamp(16px,2.2vw,26px);font-weight:500;letter-spacing:.5px;text-align:center;margin:20px 0}
+  .bg-light .formula{background:rgba(255,255,255,.85);border:1px solid rgba(0,0,0,.06);box-shadow:0 3px 20px rgba(0,0,0,.05)}
+  .formula .op{color:var(--bright-blue);margin:0 10px;font-weight:700}
+  .bg-light .formula .op{color:var(--apple-blue)}
+  /* List items */
+  .list-items{max-width:780px;width:100%;text-align:left}
+  .list-item{display:flex;align-items:flex-start;gap:14px;margin-bottom:16px;font-size:clamp(14px,1.5vw,18px);line-height:1.5;opacity:0;transform:translateX(-20px);transition:all .5s var(--expo)}
+  .slide.active .list-item{opacity:1;transform:translateX(0)}
+  .list-num{background:linear-gradient(135deg,var(--bright-blue),#bf5af2);color:#fff;width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0;margin-top:1px}
+  .bg-light .list-num{background:linear-gradient(135deg,var(--apple-blue),#5856d6)}
+  .list-text{flex:1;letter-spacing:-.1px}
+  .list-text strong{font-weight:700}
+  /* Two columns */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:960px;width:100%;align-items:stretch}
+  .col{text-align:left}
+  /* Timeline */
+  .timeline{max-width:780px;width:100%;position:relative;padding-left:36px}
+  .timeline::before{content:'';position:absolute;left:14px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--bright-blue),#bf5af2,transparent)}
+  .timeline-item{position:relative;margin-bottom:24px;padding-left:18px;opacity:0;transform:translateX(-16px);transition:all .6s var(--expo)}
+  .slide.active .timeline-item{opacity:1;transform:translateX(0)}
+  .timeline-item::before{content:'';position:absolute;left:-26px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--bright-blue);box-shadow:0 0 10px rgba(41,151,255,.5)}
+  .timeline-title{font-size:17px;font-weight:700;margin-bottom:3px}
+  .timeline-desc{font-size:14px;opacity:.55;line-height:1.5}
+  /* Stagger delays */
+  .slide.active .list-item:nth-child(1),.slide.active .timeline-item:nth-child(1){transition-delay:.08s}
+  .slide.active .list-item:nth-child(2),.slide.active .timeline-item:nth-child(2){transition-delay:.16s}
+  .slide.active .list-item:nth-child(3),.slide.active .timeline-item:nth-child(3){transition-delay:.24s}
+  .slide.active .list-item:nth-child(4),.slide.active .timeline-item:nth-child(4){transition-delay:.32s}
+  .slide.active .list-item:nth-child(5){transition-delay:.4s}
+  /* Entry animations */
+  @keyframes cardIn{from{opacity:0;transform:translateY(30px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+  .slide.active .card{animation:cardIn .55s var(--expo) forwards;opacity:0}
+  .slide.active .card:nth-child(1){animation-delay:.08s}
+  .slide.active .card:nth-child(2){animation-delay:.16s}
+  .slide.active .card:nth-child(3){animation-delay:.24s}
+  .slide.active .card:nth-child(4){animation-delay:.32s}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  .slide.active .section-label{animation:fadeUp .4s var(--expo) forwards}
+  .slide.active .content-title,.slide.active .slide-title{animation:fadeUp .5s var(--expo) .04s forwards;opacity:0}
+  .slide.active .slide-subtitle{animation:fadeUp .5s var(--expo) .1s forwards;opacity:0}
+  .slide.active .content-body{animation:fadeUp .5s var(--expo) .08s forwards;opacity:0}
+  .slide.active .formula{animation:cardIn .5s var(--expo) .18s forwards;opacity:0}
+  .slide.active .flow-node{animation:cardIn .4s var(--expo) forwards;opacity:0}
+  .slide.active .flow-node:nth-child(1){animation-delay:.06s}
+  .slide.active .flow-node:nth-child(3){animation-delay:.12s}
+  .slide.active .flow-node:nth-child(5){animation-delay:.18s}
+  .slide.active .flow-node:nth-child(7){animation-delay:.24s}
+  .slide.active .flow-arrow{animation:fadeUp .3s var(--expo) .12s forwards;opacity:0}
+  /* Navigation */
+  .nav-bar{position:fixed;bottom:0;left:0;right:0;height:52px;background:rgba(0,0,0,.55);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);display:flex;align-items:center;justify-content:space-between;padding:0 28px;z-index:100;border-top:1px solid rgba(255,255,255,.06)}
+  .nav-progress{display:flex;align-items:center;gap:4px}
+  .nav-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.18);transition:all .4s var(--expo);cursor:pointer}
+  .nav-dot:hover{background:rgba(255,255,255,.45);transform:scale(1.4)}
+  .nav-dot.active{background:var(--bright-blue);width:22px;border-radius:3px;box-shadow:0 0 8px rgba(41,151,255,.35)}
+  .nav-controls{display:flex;align-items:center;gap:14px}
+  .nav-btn{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.08);color:#fff;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;transition:all .3s var(--expo)}
+  .nav-btn:hover{background:rgba(255,255,255,.14);transform:scale(1.08)}
+  .nav-counter{font-size:11px;font-weight:500;color:rgba(255,255,255,.35);letter-spacing:1px;min-width:50px;text-align:center}
+  .spacer-sm{height:14px}.spacer-md{height:28px}
+  .pill-cta{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(41,151,255,.25);color:var(--bright-blue);border-radius:980px;padding:10px 24px;font-size:14px;font-weight:500;text-decoration:none;margin-top:16px;transition:all .4s var(--expo);cursor:default;backdrop-filter:blur(10px);background:rgba(41,151,255,.05)}
+  .pill-cta:hover{border-color:rgba(41,151,255,.5);background:rgba(41,151,255,.1);transform:scale(1.03)}
+  /* === INTERACTIVE DEMOS === */
+  .demo-prompt{max-width:680px;width:100%;margin-top:20px}
+  .demo-prompt-window{background:rgba(0,0,0,.35);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden}
+  .bg-light .demo-prompt-window{background:rgba(255,255,255,.8);border-color:rgba(0,0,0,.08)}
+  .demo-prompt-header{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.05);font-size:10px;font-weight:600;color:rgba(255,255,255,.3)}
+  .bg-light .demo-prompt-header{border-color:rgba(0,0,0,.05);color:rgba(0,0,0,.3)}
+  .demo-prompt-header .dot{width:8px;height:8px;border-radius:50%}
+  .demo-prompt-body{padding:16px;min-height:100px}
+  .demo-typing{font-family:'SF Mono',Monaco,'Fira Code',monospace;font-size:13px;line-height:1.7;color:rgba(255,255,255,.8);white-space:pre-wrap}
+  .bg-light .demo-typing{color:rgba(0,0,0,.75)}
+  .cursor-blink{display:inline-block;width:2px;height:14px;background:var(--bright-blue);margin-left:1px;vertical-align:text-bottom;animation:blink 1s step-end infinite}
+  .bg-light .cursor-blink{background:var(--apple-blue)}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+  .demo-response{margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.05);font-size:12px;line-height:1.6;color:rgba(255,255,255,.45);opacity:0;transform:translateY(8px);transition:all .5s var(--expo)}
+  .demo-response.show{opacity:1;transform:translateY(0)}
+  .bg-light .demo-response{color:rgba(0,0,0,.4);border-color:rgba(0,0,0,.05)}
+  .demo-response .ai-label{color:var(--bright-blue);font-weight:700;font-size:10px;letter-spacing:1px;margin-bottom:4px}
+  .bg-light .demo-response .ai-label{color:var(--apple-blue)}
+  .demo-tabs{display:flex;gap:6px;margin-bottom:14px;justify-content:center}
+  .demo-tab{padding:5px 14px;border-radius:980px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);color:rgba(255,255,255,.45);transition:all .3s var(--expo)}
+  .demo-tab:hover{border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.75)}
+  .demo-tab.active{border-color:var(--bright-blue);color:var(--bright-blue);background:rgba(41,151,255,.07)}
+  .bg-light .demo-tab{border-color:rgba(0,0,0,.08);background:rgba(0,0,0,.02);color:rgba(0,0,0,.35)}
+  .bg-light .demo-tab.active{border-color:var(--apple-blue);color:var(--apple-blue);background:rgba(0,113,227,.05)}
+  /* Context Window */
+  .ctx-window{max-width:680px;width:100%;margin-top:16px}
+  .ctx-bar{display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:10px;font-weight:600;color:rgba(255,255,255,.35)}
+  .bg-light .ctx-bar{color:rgba(0,0,0,.3)}
+  .ctx-bar-fill{flex:1;height:7px;border-radius:4px;background:rgba(255,255,255,.05);overflow:hidden}
+  .bg-light .ctx-bar-fill{background:rgba(0,0,0,.05)}
+  .ctx-bar-used{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--bright-blue),#bf5af2);transition:width .6s var(--expo)}
+  .ctx-tokens{display:flex;flex-wrap:wrap;gap:5px;padding:14px;background:var(--surface);backdrop-filter:blur(16px);border:1px solid var(--surface-border);border-radius:14px;min-height:70px}
+  .bg-light .ctx-tokens{background:rgba(255,255,255,.8);border-color:rgba(0,0,0,.06)}
+  .ctx-token{padding:3px 10px;border-radius:7px;font-size:10px;font-weight:600;cursor:pointer;transition:all .3s var(--expo);user-select:none}
+  .ctx-token.system{background:rgba(48,209,88,.1);color:#30d158;border:1px solid rgba(48,209,88,.15)}
+  .ctx-token.user{background:rgba(41,151,255,.1);color:var(--bright-blue);border:1px solid rgba(41,151,255,.15)}
+  .ctx-token.example{background:rgba(255,159,10,.1);color:#ff9f0a;border:1px solid rgba(255,159,10,.15)}
+  .ctx-token.history{background:rgba(191,90,242,.1);color:#bf5af2;border:1px solid rgba(191,90,242,.15)}
+  .ctx-token:hover{transform:scale(1.08)}
+  .ctx-token.removed{opacity:.25;transform:scale(.9);text-decoration:line-through}
+  .ctx-legend{display:flex;gap:14px;margin-top:8px;justify-content:center}
+  .ctx-legend-item{display:flex;align-items:center;gap:4px;font-size:9px;font-weight:600;color:rgba(255,255,255,.35)}
+  .bg-light .ctx-legend-item{color:rgba(0,0,0,.3)}
+  .ctx-legend-dot{width:7px;height:7px;border-radius:3px}
+  .ctx-hint{font-size:10px;color:rgba(255,255,255,.25);margin-top:8px;text-align:center}
+  .bg-light .ctx-hint{color:rgba(0,0,0,.2)}
+  /* Johari interactive */
+  .johari-detail{margin-top:12px;max-width:800px;width:100%;min-height:50px;text-align:center}
+  .johari-detail-inner{background:var(--surface);backdrop-filter:blur(16px);border:1px solid var(--surface-border);border-radius:14px;padding:16px 24px;font-size:13px;line-height:1.6;opacity:0;transform:translateY(8px);transition:all .4s var(--expo)}
+  .johari-detail-inner.show{opacity:1;transform:translateY(0)}
+  .bg-light .johari-detail-inner{background:rgba(255,255,255,.85);border-color:rgba(0,0,0,.06)}
+  .johari-hint{font-size:10px;color:rgba(255,255,255,.25);margin-top:8px;text-align:center}
+  .bg-light .johari-hint{color:rgba(0,0,0,.2)}
+  /* Emergence chart */
+  .emergence-chart{max-width:460px;width:100%;margin:16px auto 0}
+  .emergence-bar{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .emergence-label{font-size:11px;font-weight:700;width:50px;text-align:right;opacity:.5}
+  .emergence-track{flex:1;height:22px;border-radius:11px;background:rgba(255,255,255,.05);overflow:hidden;position:relative}
+  .bg-light .emergence-track{background:rgba(0,0,0,.04)}
+  .emergence-fill{height:100%;border-radius:11px;transform-origin:left;transform:scaleX(0);transition:transform 1s var(--expo)}
+  .slide.active .emergence-fill{transform:scaleX(1)}
+  .emergence-value{position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:9px;font-weight:700;color:rgba(255,255,255,.75)}
+  .bg-light .emergence-value{color:rgba(0,0,0,.5)}
+  /* Double diamond SVG */
+  .diamond-svg{max-width:660px;width:100%;margin:20px auto 0}
+  .diamond-path{fill:none;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s var(--expo)}
+  .slide.active .diamond-path{stroke-dashoffset:0}
+  .diamond-label{font-family:'Inter','Noto Sans SC',sans-serif;font-weight:700;font-size:11px;opacity:0;transition:opacity .5s var(--expo) .8s}
+  .slide.active .diamond-label{opacity:1}
+  .diamond-phase{font-size:9px;font-weight:600;opacity:0;transition:opacity .5s var(--expo) 1.2s}
+  .slide.active .diamond-phase{opacity:.6}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<div class="presentation" id="presentation">
+
+  <!-- Slide 01: Cover -->
+  <div class="slide bg-gradient active" id="slide-0">
+    <div class="section-label" style="letter-spacing:3px">AI PRODUCT MANAGER COURSE 007</div>
+    <div class="slide-title">Prompt Engineering<br>& Context Engineering</div>
+    <div class="slide-subtitle">提示词工程 & 上下文工程</div>
+    <div class="pill-cta">从大模型能力到人机协作的完整知识体系 →</div>
+  </div>
+
+  <!-- Slide 02: Overview -->
+  <div class="slide bg-light" id="slide-1">
+    <div class="section-label">Overview</div>
+    <div class="content-title">课程知识地图</div>
+    <div class="cards-grid cols-3">
+      <div class="card"><span class="card-icon">🧠</span><div class="card-title">大模型核心能力</div><div class="card-desc">泛化能力 · 涌现能力<br>模型局限性分析</div></div>
+      <div class="card"><span class="card-icon">💬</span><div class="card-title">Prompt Engineering</div><div class="card-desc">提示词本质 · 分类体系<br>设计原则与最佳实践</div></div>
+      <div class="card"><span class="card-icon">🤝</span><div class="card-title">人机协作框架</div><div class="card-desc">乔哈里视窗 · 四象限模型<br>上下文工程 · 双钻模型</div></div>
+    </div>
+  </div>
+
+  <!-- Slide 03: Core Capabilities + Animated Emergence Chart -->
+  <div class="slide bg-black" id="slide-2">
+    <div class="section-label">Part 01 — 大模型核心能力</div>
+    <div class="content-title">两大核心能力</div>
+    <div class="cards-grid cols-2">
+      <div class="card"><span class="tag">Generalization</span><div class="card-title">泛化能力</div><div class="card-desc">从大量数据中学习抽象知识，迁移应用到<span class="highlight">类似但未见过</span>的任务。需在欠拟合与过拟合之间找到平衡。</div></div>
+      <div class="card"><span class="tag">Emergence</span><div class="card-title">涌现能力</div><div class="card-desc">模型规模达到临界点时<span class="highlight">突然涌现</span>新能力。</div>
+        <div class="emergence-chart" style="margin-top:14px">
+          <div class="emergence-bar"><div class="emergence-label">1B</div><div class="emergence-track"><div class="emergence-fill" style="width:15%;background:linear-gradient(90deg,#2997ff,#2997ff)"></div><div class="emergence-value">基础</div></div></div>
+          <div class="emergence-bar"><div class="emergence-label">10B</div><div class="emergence-track"><div class="emergence-fill" style="width:40%;background:linear-gradient(90deg,#2997ff,#5856d6);transition-delay:.2s"></div><div class="emergence-value">ICL</div></div></div>
+          <div class="emergence-bar"><div class="emergence-label">100B</div><div class="emergence-track"><div class="emergence-fill" style="width:70%;background:linear-gradient(90deg,#5856d6,#bf5af2);transition-delay:.4s"></div><div class="emergence-value">CoT</div></div></div>
+          <div class="emergence-bar"><div class="emergence-label">1T+</div><div class="emergence-track"><div class="emergence-fill" style="width:95%;background:linear-gradient(90deg,#bf5af2,#ff375f);transition-delay:.6s"></div><div class="emergence-value">涌现 🚀</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 04: Emergent Abilities -->
+  <div class="slide bg-light" id="slide-3">
+    <div class="section-label">Emergent Abilities</div>
+    <div class="content-title">涌现能力的三大子能力</div>
+    <div class="cards-grid cols-3">
+      <div class="card"><span class="card-icon">📝</span><div class="card-title">小样本上下文学习</div><div class="card-desc">In-Context Learning (ICL)<br><br>给定少量示例，模型即可学习模式并参考模板作答。</div></div>
+      <div class="card"><span class="card-icon">🎯</span><div class="card-title">指令跟随</div><div class="card-desc">Instruction Following<br><br>理解多轮对话意图，根据指令执行多步骤任务。</div></div>
+      <div class="card"><span class="card-icon">🔗</span><div class="card-title">思维链推理</div><div class="card-desc">Chain-of-Thought (CoT)<br><br>逐步推导的深度推理，展示推理过程并自我检验。</div></div>
+    </div>
+  </div>
+
+  <!-- Slide 05: Limitations -->
+  <div class="slide bg-black" id="slide-4">
+    <div class="section-label">Limitations</div>
+    <div class="content-title">模型的四大局限性</div>
+    <div class="cards-grid cols-4">
+      <div class="card"><span class="card-icon">⏰</span><div class="card-title">时效性</div><div class="card-desc">训练截止时间限制，无法获取最新信息。</div></div>
+      <div class="card"><span class="card-icon">🌀</span><div class="card-title">幻觉</div><div class="card-desc">生成不准确甚至"编造"的内容。</div></div>
+      <div class="card"><span class="card-icon">🔒</span><div class="card-title">安全性</div><div class="card-desc">缺乏伦理底线，可能被滥用。</div></div>
+      <div class="card"><span class="card-icon">📚</span><div class="card-title">专业性 & 隐私</div><div class="card-desc">专业领域和隐私数据缺失。</div></div>
+    </div>
+  </div>
+
+  <!-- Slide 06: Prompt Essence + Flow -->
+  <div class="slide bg-light" id="slide-5">
+    <div class="section-label">Part 02 — Prompt Engineering</div>
+    <div class="content-title">Prompt 的本质</div>
+    <div class="content-body" style="margin-bottom:28px">Prompt 本质上是一种<span class="highlight">语言</span>，是人与 AI 之间对话的桥梁。</div>
+    <div class="flow-diagram">
+      <div class="flow-node"><div class="flow-node-title">👤 人类</div><div class="flow-node-desc">本意 / 意图</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node" style="border:2px solid var(--apple-blue)"><div class="flow-node-title" style="color:var(--apple-blue)">📝 Prompt</div><div class="flow-node-desc">编码 / 表达</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="flow-node-title">🤖 AI</div><div class="flow-node-desc">解码 / 解意</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="flow-node-title">📄 Response</div><div class="flow-node-desc">生成结果</div></div>
+    </div>
+    <div class="formula">AI 效果 <span class="op">=</span> 大模型能力 <span class="op">×</span> ( 任务 <span class="op">+</span> Prompt )</div>
+  </div>
+
+  <!-- Slide 07: ✨ Interactive Prompt Demo -->
+  <div class="slide bg-black" id="slide-6">
+    <div class="section-label">Interactive Demo</div>
+    <div class="content-title">Prompt 效果对比 · 点击体验</div>
+    <div class="demo-tabs" id="prompt-tabs">
+      <div class="demo-tab active" onclick="switchPrompt(0)">❌ 模糊提问</div>
+      <div class="demo-tab" onclick="switchPrompt(1)">✅ 精准提问</div>
+      <div class="demo-tab" onclick="switchPrompt(2)">🎭 角色提问</div>
+    </div>
+    <div class="demo-prompt">
+      <div class="demo-prompt-window">
+        <div class="demo-prompt-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div><span style="margin-left:8px">Prompt Terminal</span></div>
+        <div class="demo-prompt-body">
+          <div class="demo-typing" id="prompt-typing"></div>
+          <div class="demo-response" id="prompt-response"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 08: User vs System Prompt -->
+  <div class="slide bg-light" id="slide-7">
+    <div class="section-label">Prompt Classification</div>
+    <div class="content-title">提示词的两大分类</div>
+    <div class="two-col">
+      <div class="col"><div class="card" style="height:100%"><span class="tag">User Prompt</span><div class="card-title" style="margin-top:10px">用户提示词</div><div class="spacer-sm"></div><div class="card-desc" style="font-size:14px;line-height:1.6">用户对模型发出的<span class="highlight">具体指令或问题</span><br><br><strong>示例：</strong>"帮我推荐附近的餐厅"<br><br>• 随对话动态变化<br>• 表达具体需求与意图<br>• 每次交互可以不同</div></div></div>
+      <div class="col"><div class="card" style="height:100%"><span class="tag">System Prompt</span><div class="card-title" style="margin-top:10px">系统提示词</div><div class="spacer-sm"></div><div class="card-desc" style="font-size:14px;line-height:1.6">提供<span class="highlight">环境背景与角色定义</span><br><br><strong>示例：</strong>"你是专业的营养师"<br><br>• 定义 AI 的"人设"<br>• 减少重复信息输入<br>• 提高对话一致性</div></div></div>
+    </div>
+  </div>
+
+  <!-- Slide 09: Prompt Design 4 Principles -->
+  <div class="slide bg-black" id="slide-8">
+    <div class="section-label">Best Practices</div>
+    <div class="content-title">Prompt 设计四大原则</div>
+    <div class="list-items">
+      <div class="list-item"><div class="list-num">1</div><div class="list-text"><strong>简洁明了</strong> — 避免冗余语境，直击核心需求</div></div>
+      <div class="list-item"><div class="list-num">2</div><div class="list-text"><strong>正向提问</strong> — 告诉模型"要做什么"而非"不要做什么"</div></div>
+      <div class="list-item"><div class="list-num">3</div><div class="list-text"><strong>逐步引导</strong> — 引导分步思考，让推理过程更清晰</div></div>
+      <div class="list-item"><div class="list-num">4</div><div class="list-text"><strong>ICL 上下文学习</strong> — 提供少量示例，帮助模型泛化输出</div></div>
+    </div>
+    <div class="spacer-md"></div>
+    <div class="formula">推荐使用 <span class="highlight" style="font-weight:700">Markdown 语法</span> 格式化 Prompt</div>
+  </div>
+
+  <!-- Slide 10: Communication Model -->
+  <div class="slide bg-dark-surface" id="slide-9">
+    <div class="section-label">Part 03 — 人机协作框架</div>
+    <div class="content-title">人与AI沟通的底层模型</div>
+    <div class="content-body" style="margin-bottom:28px">沟通本质是<span class="highlight">编码</span>与<span class="highlight">解码</span>的过程。人与AI的交互也遵循同样的逻辑。</div>
+    <div class="flow-diagram">
+      <div class="flow-node"><div class="flow-node-title">本意</div><div class="flow-node-desc">经验 · 词汇量<br>知识边界</div></div>
+      <div class="flow-arrow">编码 →</div>
+      <div class="flow-node" style="border:2px solid var(--bright-blue)"><div class="flow-node-title" style="color:var(--bright-blue)">Prompt</div><div class="flow-node-desc">文字 · 符号<br>指令表达</div></div>
+      <div class="flow-arrow">解码 →</div>
+      <div class="flow-node"><div class="flow-node-title">解意</div><div class="flow-node-desc">AI理解<br>生成响应</div></div>
+    </div>
+    <div class="content-body" style="font-size:14px;opacity:.5;margin-top:16px">模型能力不足 → 更换模型 ｜ 表达不精准 → 优化 Prompt</div>
+  </div>
+
+  <!-- Slide 11: ✨ Interactive Johari Window -->
+  <div class="slide bg-light" id="slide-10">
+    <div class="section-label">Johari Window</div>
+    <div class="content-title">乔哈里视窗 → 点击探索四象限</div>
+    <div class="quadrant" id="johari-grid">
+      <div class="card" style="border-left:4px solid var(--apple-blue)" onclick="showJohari(0)"><span class="card-icon">🛎️</span><div class="card-title">象限一：助理</div><div class="tag">我知道 · AI知道</div></div>
+      <div class="card" style="border-left:4px solid #30d158" onclick="showJohari(1)"><span class="card-icon">🎓</span><div class="card-title">象限二：老师</div><div class="tag" style="background:rgba(48,209,88,.1);color:#30d158">我不知道 · AI知道</div></div>
+      <div class="card" style="border-left:4px solid #ff9f0a" onclick="showJohari(2)"><span class="card-icon">🔬</span><div class="card-title">象限三：共创</div><div class="tag" style="background:rgba(255,159,10,.1);color:#ff9f0a">我知道 · AI不知道</div></div>
+      <div class="card" style="border-left:4px solid #bf5af2" onclick="showJohari(3)"><span class="card-icon">🌌</span><div class="card-title">象限四：探索</div><div class="tag" style="background:rgba(191,90,242,.1);color:#bf5af2">我不知道 · AI不知道</div></div>
+    </div>
+    <div class="johari-detail"><div class="johari-detail-inner" id="johari-detail"></div></div>
+    <div class="johari-hint">👆 点击象限卡片查看详细协作策略</div>
+  </div>
+
+  <!-- Slide 12: Quadrant Deep Dive -->
+  <div class="slide bg-black" id="slide-11">
+    <div class="section-label">Quadrant Deep Dive</div>
+    <div class="content-title">四象限详解：协作策略</div>
+    <div class="two-col">
+      <div class="col"><div class="card"><div class="card-title">🛎️ 助理模式</div><div class="card-desc" style="font-size:14px;line-height:1.7"><strong>场景：</strong>日常执行类任务<br><br><span class="highlight">核心策略：</span><br>• 指令简洁直接<br>• 重点是<strong>精准派活</strong><br>• 明确边界和约束<br><br><strong>示例：</strong>"帮我生成一个贪吃蛇小游戏"</div></div></div>
+      <div class="col"><div class="card"><div class="card-title">🔬 共创模式</div><div class="card-desc" style="font-size:14px;line-height:1.7"><strong>场景：</strong>AI缺乏你的领域知识<br><br><span class="highlight">核心策略：</span><br>• 先发散后收拢（双钻模型）<br>• 人负责<strong>调研与收集</strong><br>• AI 负责<strong>提炼与总结</strong><br><br><strong>技巧：</strong>提供大量样本 → 上下文内学习</div></div></div>
+    </div>
+  </div>
+
+  <!-- Slide 13: ✨ Animated Double Diamond SVG -->
+  <div class="slide bg-light" id="slide-12">
+    <div class="section-label">Double Diamond</div>
+    <div class="content-title">双钻模型：共创的方法论</div>
+    <div class="content-body" style="margin-bottom:16px;font-size:16px">遵循<span class="highlight">先发散再收拢</span>的双钻模型原则</div>
+    <div class="diamond-svg">
+      <svg viewBox="0 0 660 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path class="diamond-path" d="M 30 100 L 165 30 L 300 100 L 165 170 Z" stroke="#0071e3" style="transition-delay:0s"/>
+        <path class="diamond-path" d="M 300 100 L 435 30 L 570 100 L 435 170 Z" stroke="#5856d6" style="transition-delay:.4s"/>
+        <circle cx="30" cy="100" r="5" fill="#0071e3" opacity=".8"/>
+        <circle cx="300" cy="100" r="6" fill="#0071e3" opacity=".8"/>
+        <circle cx="570" cy="100" r="5" fill="#5856d6" opacity=".8"/>
+        <text class="diamond-label" x="120" y="95" fill="#0071e3" text-anchor="middle">发散</text>
+        <text class="diamond-label" x="210" y="95" fill="#0071e3" text-anchor="middle">收拢</text>
+        <text class="diamond-label" x="390" y="95" fill="#5856d6" text-anchor="middle">再发散</text>
+        <text class="diamond-label" x="480" y="95" fill="#5856d6" text-anchor="middle">最终收拢</text>
+        <text class="diamond-phase" x="165" y="190" fill="#1d1d1f" text-anchor="middle">👤 人主导 · 调研走量</text>
+        <text class="diamond-phase" x="435" y="190" fill="#1d1d1f" text-anchor="middle">🤖 AI主导 · 提炼收拢</text>
+        <text class="diamond-phase" x="30" y="125" fill="#1d1d1f" text-anchor="middle" style="transition-delay:1.4s">问题</text>
+        <text class="diamond-phase" x="300" y="125" fill="#1d1d1f" text-anchor="middle" style="transition-delay:1.6s">定义</text>
+        <text class="diamond-phase" x="570" y="125" fill="#1d1d1f" text-anchor="middle" style="transition-delay:1.8s">方案</text>
+      </svg>
+    </div>
+    <div class="content-body" style="font-size:13px;opacity:.5;margin-top:12px">应用场景：产品设计 · 内容创作 · 技术方案 · 培训体系搭建</div>
+  </div>
+
+  <!-- Slide 14: Context Engineering -->
+  <div class="slide bg-black" id="slide-13">
+    <div class="section-label">Part 04 — Context Engineering</div>
+    <div class="content-title">上下文工程</div>
+    <div class="content-body" style="margin-bottom:28px">上下文 = <span class="highlight">聊天记录</span>　｜　上下文窗口 = <span class="highlight">聊天窗口</span></div>
+    <div class="cards-grid cols-3">
+      <div class="card"><span class="card-icon">📋</span><div class="card-title">上下文内容</div><div class="card-desc">历史对话、系统提示词、样本示例、外部文档等。</div></div>
+      <div class="card"><span class="card-icon">🪟</span><div class="card-title">上下文窗口</div><div class="card-desc">模型能"看到"的信息范围有限，早期对话会被遗忘。</div></div>
+      <div class="card"><span class="card-icon">⚙️</span><div class="card-title">上下文工程</div><div class="card-desc">系统性设计、管理和优化上下文信息。</div></div>
+    </div>
+  </div>
+
+  <!-- Slide 15: ✨ Interactive Context Window Demo -->
+  <div class="slide bg-dark-surface" id="slide-14">
+    <div class="section-label">Interactive Demo</div>
+    <div class="content-title">上下文窗口管理 · 点击体验</div>
+    <div class="ctx-window" id="ctx-demo">
+      <div class="ctx-bar"><span>上下文使用量</span><div class="ctx-bar-fill"><div class="ctx-bar-used" id="ctx-bar-used" style="width:85%"></div></div><span id="ctx-bar-pct">85%</span></div>
+      <div class="ctx-tokens" id="ctx-tokens"></div>
+      <div class="ctx-legend">
+        <div class="ctx-legend-item"><div class="ctx-legend-dot" style="background:#30d158"></div>System</div>
+        <div class="ctx-legend-item"><div class="ctx-legend-dot" style="background:#2997ff"></div>User</div>
+        <div class="ctx-legend-item"><div class="ctx-legend-dot" style="background:#ff9f0a"></div>Example</div>
+        <div class="ctx-legend-item"><div class="ctx-legend-dot" style="background:#bf5af2"></div>History</div>
+      </div>
+      <div class="ctx-hint">👆 点击 token 移除它，观察上下文窗口变化</div>
+    </div>
+  </div>
+
+  <!-- Slide 16: Context Techniques -->
+  <div class="slide bg-light" id="slide-15">
+    <div class="section-label">Context Techniques</div>
+    <div class="content-title">上下文工程核心技巧</div>
+    <div class="list-items">
+      <div class="list-item"><div class="list-num">1</div><div class="list-text"><strong>系统提示词定义人设</strong> — 通过 System Prompt 设定角色与规则</div></div>
+      <div class="list-item"><div class="list-num">2</div><div class="list-text"><strong>样本投喂 (Few-shot)</strong> — 提供示例让模型在上下文内学习</div></div>
+      <div class="list-item"><div class="list-num">3</div><div class="list-text"><strong>Markdown 结构化</strong> — 格式化输入提升模型理解</div></div>
+      <div class="list-item"><div class="list-num">4</div><div class="list-text"><strong>渐进式对话</strong> — 将复杂任务拆解为多轮逐步引导</div></div>
+      <div class="list-item"><div class="list-num">5</div><div class="list-text"><strong>窗口管理</strong> — 关键信息前置，避免被"遗忘"</div></div>
+    </div>
+  </div>
+
+  <!-- Slide 17: Prompt Library -->
+  <div class="slide bg-black" id="slide-16">
+    <div class="section-label">Prompt Library</div>
+    <div class="content-title">提示词库的分类体系</div>
+    <div class="cards-grid cols-3">
+      <div class="card"><span class="card-icon">📐</span><div class="card-title">通用结构类</div><div class="card-desc">标准化骨架模板，适用大多数场景。</div></div>
+      <div class="card"><span class="card-icon">⚡</span><div class="card-title">任务执行类</div><div class="card-desc">面向具体任务的专用 Prompt。</div></div>
+      <div class="card"><span class="card-icon">🎭</span><div class="card-title">角色扮演类</div><div class="card-desc">预设 AI 角色与人格定义。</div></div>
+    </div>
+  </div>
+
+  <!-- Slide 18: AI Growth Path -->
+  <div class="slide bg-light" id="slide-17">
+    <div class="section-label">Growth Mindset</div>
+    <div class="content-title">个人与AI的共同成长</div>
+    <div class="content-body" style="margin-bottom:28px;font-size:16px">让 AI <span class="highlight">辅助自己成长</span>，最终达到相辅相成的效果。</div>
+    <div class="timeline">
+      <div class="timeline-item"><div class="timeline-title">阶段一：学会使用 AI</div><div class="timeline-desc">掌握基础 Prompt 技巧（助理象限）</div></div>
+      <div class="timeline-item"><div class="timeline-title">阶段二：向 AI 学习</div><div class="timeline-desc">利用 AI 拓展知识边界（老师象限）</div></div>
+      <div class="timeline-item"><div class="timeline-title">阶段三：与 AI 共创</div><div class="timeline-desc">将领域知识注入 AI，发散-收拢协作（共创象限）</div></div>
+      <div class="timeline-item"><div class="timeline-title">阶段四：超越 AI</div><div class="timeline-desc">在未知领域共同探索，人机融合创新（探索象限）</div></div>
+    </div>
+  </div>
+
+  <!-- Slide 19: Key Takeaways -->
+  <div class="slide bg-black" id="slide-18">
+    <div class="section-label">Key Takeaways</div>
+    <div class="content-title">核心知识总结</div>
+    <div class="cards-grid cols-2">
+      <div class="card"><span class="tag">模型基础</span><div class="card-title" style="margin-top:8px">大模型 = 泛化 + 涌现</div><div class="card-desc">核心能力是泛化与涌现。涌现包含 ICL、指令跟随、CoT。但存在四大局限。</div></div>
+      <div class="card"><span class="tag">提示词</span><div class="card-title" style="margin-top:8px">Prompt = 编码意图的语言</div><div class="card-desc">分为用户提示词和系统提示词。设计遵循简洁、正向、逐步引导、ICL 四大原则。</div></div>
+      <div class="card"><span class="tag">协作框架</span><div class="card-title" style="margin-top:8px">四象限 = 助理/老师/共创/探索</div><div class="card-desc">基于乔哈里视窗，根据双方知识映射四种协作模式。</div></div>
+      <div class="card"><span class="tag">上下文</span><div class="card-title" style="margin-top:8px">Context = 聊天记录的系统工程</div><div class="card-desc">通过人设定义、样本投喂、结构化输入、渐进对话提升效果。</div></div>
+    </div>
+  </div>
+
+  <!-- Slide 20: Thank You -->
+  <div class="slide bg-gradient" id="slide-19">
+    <div class="section-label" style="letter-spacing:3px">THANK YOU</div>
+    <div class="slide-title">Prompt Engineering<br>& Context Engineering</div>
+    <div class="slide-subtitle">掌握提示词工程，解锁人机协作的无限可能</div>
+    <div class="pill-cta">AI 产品经理课程 · 2026 →</div>
+  </div>
+
+</div>
+
+<!-- Navigation Bar -->
+<div class="nav-bar">
+  <div class="nav-progress" id="nav-progress"></div>
+  <div class="nav-controls">
+    <button class="nav-btn" id="prevBtn" onclick="prevSlide()">‹</button>
+    <span class="nav-counter" id="navCounter">1 / 20</span>
+    <button class="nav-btn" id="nextBtn" onclick="nextSlide()">›</button>
+  </div>
+</div>
+
+<script>
+// === STARFIELD ===
+(function(){
+  const c=document.getElementById('starfield'),ctx=c.getContext('2d');
+  let W,H,stars=[];
+  function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;stars=[];for(let i=0;i<200;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.5+.3,a:Math.random(),da:Math.random()*.01+.003,speed:Math.random()*.15+.02})}
+  function draw(){ctx.clearRect(0,0,W,H);stars.forEach(s=>{s.a+=s.da;if(s.a>1)s.da=-Math.abs(s.da);if(s.a<0)s.da=Math.abs(s.da);s.y-=s.speed;if(s.y<-5){s.y=H+5;s.x=Math.random()*W}ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,'+s.a*.6+')';ctx.fill()});requestAnimationFrame(draw)}
+  resize();draw();window.addEventListener('resize',resize);
+})();
+
+// === SLIDE ENGINE ===
+const slides=document.querySelectorAll('.slide');
+let current=0;const total=slides.length;
+const navProgress=document.getElementById('nav-progress');
+for(let i=0;i<total;i++){const d=document.createElement('div');d.className='nav-dot'+(i===0?' active':'');d.onclick=()=>goToSlide(i);navProgress.appendChild(d)}
+
+function updateSlide(dir){
+  slides.forEach((s,i)=>{
+    if(i===current){s.classList.remove('exit-left','exit-right');s.classList.add('active')}
+    else{s.classList.remove('active');s.classList.remove('exit-left','exit-right')}
+  });
+  document.querySelectorAll('.nav-dot').forEach((d,i)=>d.classList.toggle('active',i===current));
+  document.getElementById('navCounter').textContent=(current+1)+' / '+total;
+  // Trigger interactive demos on their slides
+  if(current===6)startPromptDemo();
+  if(current===14)initCtxDemo();
+}
+
+function nextSlide(){if(current<total-1){const prev=current;current++;slides[prev].classList.add('exit-left');updateSlide(1)}}
+function prevSlide(){if(current>0){const prev=current;current--;slides[prev].classList.add('exit-right');updateSlide(-1)}}
+function goToSlide(n){current=n;updateSlide(0)}
+
+// Keyboard
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' '){e.preventDefault();nextSlide()}
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();prevSlide()}
+  if(e.key==='Home'){current=0;updateSlide(0)}
+  if(e.key==='End'){current=total-1;updateSlide(0)}
+});
+
+// Touch
+let tx=0;
+document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX});
+document.addEventListener('touchend',e=>{const d=tx-e.changedTouches[0].clientX;if(Math.abs(d)>50){d>0?nextSlide():prevSlide()}});
+
+// === INTERACTIVE PROMPT DEMO ===
+const promptDemos=[
+  {prompt:'帮我写个方案',response:'好的，请问您需要什么类型的方案？是商业计划书、项目方案还是其他类型？请提供更多细节。\n\n❌ 模糊提问导致 AI 无法精准执行，需要多轮追问'},
+  {prompt:'# 角色：产品方案专家\\n## 任务：为"校园二手交易平台"写 PRD\\n## 要求：\\n- 包含用户画像、核心功能、技术选型\\n- 使用表格对比竞品\\n- 字数 2000 字以内',response:'## 校园二手交易平台 PRD\\n\\n### 1. 用户画像\\n| 维度 | 描述 |\\n|------|------|\\n| 年龄 | 18-25岁在校大学生 |\\n| 核心需求 | 低价购买/快速出售闲置 |\\n\\n✅ 精准提问 → 一次命中，输出结构完整'},
+  {prompt:'你是一位有10年经验的高级产品经理。\\n请用你的专业视角，评审以下 PRD 并给出改进建议：\\n\\n[PRD 内容]\\n\\n请从可行性、用户体验、商业价值三个维度评分。',response:'## PRD 评审报告\\n\\n| 维度 | 评分 | 说明 |\\n|------|------|------|\\n| 可行性 | 8/10 | 技术栈合理 |\\n| 用户体验 | 6/10 | 缺少onboarding |\\n| 商业价值 | 7/10 | 变现模型待完善 |\\n\\n🎭 角色提示词 → 获得专家级深度反馈'}
+];
+let promptIdx=0,typeTimer=null;
+
+function switchPrompt(i){
+  promptIdx=i;
+  document.querySelectorAll('#prompt-tabs .demo-tab').forEach((t,j)=>t.classList.toggle('active',j===i));
+  startPromptDemo();
+}
+
+function startPromptDemo(){
+  clearTimeout(typeTimer);
+  const el=document.getElementById('prompt-typing');
+  const resp=document.getElementById('prompt-response');
+  if(!el||!resp)return;
+  resp.classList.remove('show');resp.innerHTML='';
+  const text=promptDemos[promptIdx].prompt.replace(/\\n/g,'\n');
+  let idx=0;el.innerHTML='';
+  function type(){
+    if(idx<text.length){el.innerHTML=text.substring(0,idx+1)+'<span class="cursor-blink"></span>';idx++;typeTimer=setTimeout(type,25)}
+    else{el.innerHTML=text;setTimeout(()=>{resp.innerHTML='<div class="ai-label">AI RESPONSE</div>'+promptDemos[promptIdx].response.replace(/\\n/g,'<br>');resp.classList.add('show')},300)}
+  }
+  type();
+}
+
+// === INTERACTIVE JOHARI ===
+const johariData=[
+  {color:'#0071e3',title:'🛎️ 助理模式',desc:'<strong>我知道 · AI知道</strong> — 双方都具备知识，AI 作为执行助手。<br>策略：指令简洁直接，精准派活，明确边界。<br><strong>示例：</strong>"帮我生成一个贪吃蛇小游戏" — 无需解释规则。'},
+  {color:'#30d158',title:'🎓 老师模式',desc:'<strong>我不知道 · AI知道</strong> — AI 拥有知识而我不具备。<br>策略：善于提问，获取新知，利用 AI 拓展知识边界。<br><strong>示例：</strong>"请解释量子计算的基本原理" — AI 是知识导师。'},
+  {color:'#ff9f0a',title:'🔬 共创模式',desc:'<strong>我知道 · AI不知道</strong> — 我有领域知识需要"投喂"AI。<br>策略：先发散后收拢（双钻模型），人负责调研，AI 负责提炼。<br><strong>技巧：</strong>提供大量样本示例 → 上下文窗口内学习。'},
+  {color:'#bf5af2',title:'🌌 探索模式',desc:'<strong>我不知道 · AI不知道</strong> — 双方都在未知领域。<br>策略：发散思维，实验迭代，共同探索创新边界。<br><strong>关键：</strong>保持开放心态，大胆假设，小心求证。'}
+];
+
+function showJohari(i){
+  const el=document.getElementById('johari-detail');
+  const d=johariData[i];
+  el.innerHTML='<div style="font-weight:700;margin-bottom:6px;color:'+d.color+'">'+d.title+'</div>'+d.desc;
+  el.classList.add('show');
+  document.querySelectorAll('#johari-grid .card').forEach((c,j)=>{c.style.transform=j===i?'scale(1.03)':'scale(.97)';c.style.opacity=j===i?'1':'.6'});
+  setTimeout(()=>{document.querySelectorAll('#johari-grid .card').forEach(c=>{c.style.transform='';c.style.opacity=''})},2000);
+}
+
+// === INTERACTIVE CONTEXT WINDOW ===
+const ctxTokenData=[
+  {label:'System: 你是产品经理',type:'system',size:12},
+  {label:'System: 使用专业术语',type:'system',size:8},
+  {label:'User: 分析需求',type:'user',size:10},
+  {label:'Example: PRD模板',type:'example',size:15},
+  {label:'Example: 竞品分析',type:'example',size:14},
+  {label:'History: 轮次1',type:'history',size:8},
+  {label:'History: 轮次2',type:'history',size:10},
+  {label:'History: 轮次3',type:'history',size:12},
+  {label:'History: 轮次4',type:'history',size:9},
+  {label:'History: 轮次5',type:'history',size:11},
+  {label:'User: 当前问题',type:'user',size:13},
+];
+let ctxRemoved=new Set();
+
+function initCtxDemo(){
+  ctxRemoved.clear();renderCtx();
+}
+
+function toggleCtxToken(i){
+  if(ctxRemoved.has(i))ctxRemoved.delete(i);else ctxRemoved.add(i);
+  renderCtx();
+}
+
+function renderCtx(){
+  const container=document.getElementById('ctx-tokens');
+  if(!container)return;
+  let totalSize=0,usedSize=0;
+  ctxTokenData.forEach((t,i)=>{totalSize+=t.size;if(!ctxRemoved.has(i))usedSize+=t.size});
+  const pct=Math.round(usedSize/totalSize*100);
+  document.getElementById('ctx-bar-used').style.width=pct+'%';
+  document.getElementById('ctx-bar-pct').textContent=pct+'%';
+  let html='';
+  ctxTokenData.forEach((t,i)=>{
+    html+='<div class="ctx-token '+t.type+(ctxRemoved.has(i)?' removed':'')+'" onclick="toggleCtxToken('+i+')">'+t.label+'</div>';
+  });
+  container.innerHTML=html;
+}
+
+// === 3D TILT ON CARDS (mouse parallax) ===
+document.addEventListener('mousemove',e=>{
+  const cards=document.querySelectorAll('.slide.active .card');
+  const cx=e.clientX/window.innerWidth-.5;
+  const cy=e.clientY/window.innerHeight-.5;
+  cards.forEach(card=>{
+    const rect=card.getBoundingClientRect();
+    const cardCx=(rect.left+rect.width/2)/window.innerWidth-.5;
+    const cardCy=(rect.top+rect.height/2)/window.innerHeight-.5;
+    const dx=(cx-cardCx)*8;
+    const dy=(cy-cardCy)*8;
+    card.style.transform=`perspective(800px) rotateY(${dx}deg) rotateX(${-dy}deg)`;
+  });
+  // Parallax orbs
+  document.querySelectorAll('.orb').forEach((orb,i)=>{
+    const f=(i+1)*15;
+    orb.style.transform=`translate(${cx*f}px,${cy*f}px)`;
+  });
+});
+
+// Reset card transforms on mouse leave
+document.addEventListener('mouseleave',()=>{
+  document.querySelectorAll('.card').forEach(c=>c.style.transform='');
+});
+
+// Init
+updateSlide(0);
+</script>
+</body>
+</html>
