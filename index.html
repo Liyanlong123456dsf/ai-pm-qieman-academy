@@ -5174,18 +5174,19 @@ async function aiSend(override){
   const msgs=aiHistory.map(m=>({role:m.role,content:m.content}));
   const isLocal=location.hostname==='localhost'||location.hostname==='127.0.0.1';
   const isNetlify=location.hostname.includes('netlify.app');
+  const PROXY_BASE=(isLocal||isNetlify)?'':'https://ai-pm-job-dashboard.netlify.app';
 
   let apiUrl,headers,body;
   if(apiType==='coze'){
     const token=aiGetCozeToken(),botId=aiGetCozeBotId();
-    apiUrl=(isLocal||isNetlify)?'https://api.coze.cn/v3/chat':'/api/coze/chat';
+    apiUrl=(isLocal||isNetlify)?'https://api.coze.cn/v3/chat':PROXY_BASE+'/api/coze/chat';
     headers={'Content-Type':'application/json','Authorization':'Bearer '+token};
     body={bot_id:botId,user_id:'academy_user',stream:true,auto_save_history:false,
       additional_messages:[{role:'user',content:text,content_type:'text'}]};
   }else{
     const key=aiGetKimiKey(),isKC=key.startsWith('sk-kimi-');
     if(isKC){
-      apiUrl=(isLocal||isNetlify)?'https://api.kimi.com/coding/v1/messages':'/api/kimi/messages';
+      apiUrl=(isLocal||isNetlify)?'https://api.kimi.com/coding/v1/messages':PROXY_BASE+'/api/kimi/messages';
       headers={'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01'};
       body={model:'kimi-for-coding',system:sysPr,messages:msgs,max_tokens:4096,stream:true};
     }else{
