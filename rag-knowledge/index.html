@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>腾讯云 RAG 技术应用与实践</title>
 <link rel="stylesheet" href="style.css">
+<style>
+.xlink{display:inline-flex;align-items:center;gap:4px;padding:3px 10px 3px 8px;border-radius:9999px;font-size:12px;font-weight:500;letter-spacing:-.1px;text-decoration:none;transition:all .15s ease;cursor:pointer;vertical-align:middle;line-height:1;white-space:nowrap}
+.xlink-dark{color:#828fff;background:rgba(94,106,210,.08);border:1px solid rgba(255,255,255,.08)}
+.xlink-dark:hover{background:rgba(94,106,210,.15);border-color:rgba(255,255,255,.12)}
+.xlink-light{color:#5e6ad2;background:rgba(94,106,210,.06);border:1px solid rgba(0,0,0,.08)}
+.xlink-light:hover{background:rgba(94,106,210,.1);border-color:rgba(0,0,0,.12)}
+.xlink-icon{font-size:11px;flex-shrink:0;opacity:.7}
+</style>
 </head>
 <body>
 
@@ -128,7 +136,7 @@
 
     <div class="explain-block">
       <h3>什么是文档解析？为什么要做？</h3>
-      <p>将 PDF、Word、图片等不可编辑的文档，转换为 <strong>Markdown 结构化形式</strong>，识别其中的段落、表格、公式、标题、图片等元素的内容及阅读顺序。</p>
+      <p>将 PDF、Word、图片等不可编辑的文档，转换为 <strong>Markdown 结构化形式</strong>，识别其中的段落、表格、公式、标题、图片等元素的内容及阅读顺序。 <a href="../index.html#note=W2-0-0" class="xlink xlink-dark" title="课程008·Pipeline B 文档解析"><span class="xlink-icon">📚</span>课程笔记: Pipeline B</a></p>
       <p style="margin-top:12px">普遍文档以 PDF 和图片形式存在，无法直接被大模型使用。传统 OCR 只能识别纯文字，远远不够：</p>
       <div class="compare-box">
         <div class="compare-item compare-bad">
@@ -161,7 +169,7 @@
     </div>
 
     <!-- Difficulty 1 -->
-    <h3 class="sub-heading">难点一：复杂排版的阅读顺序问题</h3>
+    <h3 class="sub-heading">难点一：复杂排版的阅读顺序问题 <a href="../index.html#note=W2-0-0" class="xlink xlink-dark" title="课程008·Pipeline C 数据清洗·阅读顺序处理"><span class="xlink-icon">📚</span>笔记: Pipeline C</a></h3>
     <p class="section-explain">文档解析结果要作为大模型输入，所以<strong>阅读顺序必须正确</strong>。但真实文档中存在图/表群组、跨栏段落、图表文环绕等复杂排版，传统解法搞不定。</p>
     <div class="vs-table">
       <table>
@@ -169,7 +177,7 @@
         <tbody>
           <tr class="tr-old"><td>版面分析 + 规则排序</td><td>检测版面元素后按规则排列</td><td>实现快捷，满足简单排版</td><td>无法处理图文表混排等复杂场景</td></tr>
           <tr class="tr-old"><td>自回归生成文本</td><td>输入无序内容，自回归生成有序文本</td><td>纯文字排序效果可以</td><td>无法处理非文字元素，细粒度性能差</td></tr>
-          <tr class="tr-new"><td><strong>DREAM 模型（腾讯云）</strong></td><td>自回归并行解码 + 语义感知</td><td>解决各种复杂排版</td><td>—</td></tr>
+          <tr class="tr-new"><td><strong>DREAM 模型（腾讯云）</strong> <a href="../index.html#note=W2-0-0" class="xlink xlink-dark" title="课程008·腾讯DREAM模型三步走"><span class="xlink-icon">📚</span>笔记</a></td><td>自回归并行解码 + 语义感知</td><td>解决各种复杂排版</td><td>—</td></tr>
         </tbody>
       </table>
     </div>
@@ -241,10 +249,6 @@
       <img src="pages/page_06.png" alt="DREAM模型" class="page-img" loading="lazy">
       <img src="pages/page_07.png" alt="GrabTab模型" class="page-img" loading="lazy">
     </div>
-    <div style="margin-top:32px;padding:16px 20px;border-radius:12px;border:1px solid rgba(139,92,246,.15);background:rgba(139,92,246,.04);display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-      <span style="font-size:12px;color:rgba(255,255,255,.4)">📚 关联课程笔记：</span>
-      <a href="../index.html#note=W2-0-0" style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:980px;font-size:12px;font-weight:500;color:#c4b5fd;border:1px solid rgba(139,92,246,.25);background:rgba(139,92,246,.08);text-decoration:none;transition:all .2s" onmouseenter="this.style.background='rgba(139,92,246,.18)'" onmouseleave="this.style.background='rgba(139,92,246,.08)'">008 · RAG离线Pipeline A-C →</a>
-    </div>
   </div>
 </section>
 
@@ -292,7 +296,7 @@
     </div>
 
     <!-- 1. Query Rewriting -->
-    <h3 class="sub-heading">一、查询改写：让不完整的问题变完整</h3>
+    <h3 class="sub-heading">一、查询改写：让不完整的问题变完整 <a href="../index.html#note=W2-1-0" class="xlink xlink-light" title="课程009·Query改写六法"><span class="xlink-icon">📚</span>笔记: Query改写六法</a></h3>
     <p class="section-explain">多轮对话中，用户经常省略主语或用代词。如果直接拿不完整的问题去检索，根本找不到有用信息。</p>
     <div class="strat-card strat-full">
       <div class="example-box">
@@ -348,7 +352,7 @@
     </div>
 
     <!-- 4. Document Splitting -->
-    <h3 class="sub-heading">四、文档语义切分：把知识库切成"刚好"的大小</h3>
+    <h3 class="sub-heading">四、文档语义切分：把知识库切成“刚好”的大小 <a href="../index.html#note=W2-0-1" class="xlink xlink-light" title="课程008-2·Pipeline D 文本分割"><span class="xlink-icon">📚</span>笔记: Pipeline D</a></h3>
     <p class="section-explain">文档太长大模型一次读不完；切太碎信息不完整。怎么切是个技术活。</p>
     <div class="vs-table">
       <table>
@@ -373,7 +377,7 @@
     </div>
 
     <!-- 5. Semantic Vector Retrieval -->
-    <h3 class="sub-heading">五、语义向量检索</h3>
+    <h3 class="sub-heading">五、语义向量检索 <a href="../index.html#note=W2-0-1" class="xlink xlink-light" title="课程008-2·Pipeline E 文本向量化"><span class="xlink-icon">📚</span>笔记: Pipeline E</a></h3>
     <p class="section-explain">将文本转为向量后在数据库中按相似度匹配。腾讯云在向量模型训练上做了三项关键优化：</p>
     <details class="collapse-panel">
       <summary class="collapse-trigger">深入了解：腾讯云向量模型训练方案 <span class="collapse-icon">+</span></summary>
@@ -390,7 +394,7 @@
     </details>
 
     <!-- 6. Three Search Strategies -->
-    <h3 class="sub-heading">六、三大搜索策略</h3>
+    <h3 class="sub-heading">六、三大搜索策略 <a href="../index.html#note=W2-1-0" class="xlink xlink-light" title="课程009·混合搜索+多路查询"><span class="xlink-icon">📚</span>笔记: 多路查询</a></h3>
     <div class="search-strats">
       <div class="ss-card">
         <h4>🔀 策略一：混合搜索</h4>
@@ -439,10 +443,6 @@
       <img src="pages/page_10.png" alt="查询改写" class="page-img" loading="lazy">
       <img src="pages/page_14.png" alt="混合搜索" class="page-img" loading="lazy">
       <img src="pages/page_16.png" alt="相关性排序" class="page-img" loading="lazy">
-    </div>
-    <div style="margin-top:32px;padding:16px 20px;border-radius:12px;border:1px solid rgba(6,182,212,.15);background:rgba(6,182,212,.04);display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-      <span style="font-size:12px;color:rgba(0,0,0,.4)">📚 关联课程笔记：</span>
-      <a href="../index.html#note=W2-1-0" style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:980px;font-size:12px;font-weight:500;color:#06b6d4;border:1px solid rgba(6,182,212,.25);background:rgba(6,182,212,.08);text-decoration:none;transition:all .2s" onmouseenter="this.style.background='rgba(6,182,212,.18)'" onmouseleave="this.style.background='rgba(6,182,212,.08)'">009 · 在线检索Pipeline →</a>
     </div>
   </div>
 </section>
@@ -506,7 +506,7 @@
     <div class="tab-container" id="sceneTabs">
       <div class="tab-nav">
         <button class="tab-btn active" data-tab="scene1">场景1：通用阅读理解</button>
-        <button class="tab-btn" data-tab="scene2">场景2：CoT 思维链</button>
+        <button class="tab-btn" data-tab="scene2">场景2：CoT 思维链 <a href="../index.html#note=W2-0-1" class="xlink xlink-dark" title="课程008-2·COT思维链" onclick="event.stopPropagation()"><span class="xlink-icon">📚</span>笔记</a></button>
         <button class="tab-btn" data-tab="scene3">场景3：表格理解</button>
         <button class="tab-btn" data-tab="scene4">场景4：指令遵循</button>
       </div>
@@ -606,10 +606,6 @@
       <img src="pages/page_19.png" alt="消除幻觉四解法" class="page-img" loading="lazy">
       <img src="pages/page_20.png" alt="通用阅读理解" class="page-img" loading="lazy">
       <img src="pages/page_21.png" alt="CoT思维链" class="page-img" loading="lazy">
-    </div>
-    <div style="margin-top:32px;padding:16px 20px;border-radius:12px;border:1px solid rgba(139,92,246,.15);background:rgba(139,92,246,.04);display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-      <span style="font-size:12px;color:rgba(255,255,255,.4)">📚 关联课程笔记：</span>
-      <a href="../index.html#note=W2-0-1" style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:980px;font-size:12px;font-weight:500;color:#c4b5fd;border:1px solid rgba(139,92,246,.25);background:rgba(139,92,246,.08);text-decoration:none;transition:all .2s" onmouseenter="this.style.background='rgba(139,92,246,.18)'" onmouseleave="this.style.background='rgba(139,92,246,.08)'">008-2 · 离线Pipeline D-F →</a>
     </div>
   </div>
 </section>
@@ -789,11 +785,6 @@
       <img src="pages/page_28.png" alt="三种方案对比" class="page-img" loading="lazy">
       <img src="pages/page_29.png" alt="训练策略" class="page-img" loading="lazy">
     </div>
-    <div style="margin-top:32px;padding:16px 20px;border-radius:12px;border:1px solid rgba(6,182,212,.15);background:rgba(6,182,212,.04);display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-      <span style="font-size:12px;color:rgba(0,0,0,.4)">📚 关联课程笔记：</span>
-      <a href="../index.html#note=W2-0-0" style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:980px;font-size:12px;font-weight:500;color:#06b6d4;border:1px solid rgba(6,182,212,.25);background:rgba(6,182,212,.08);text-decoration:none;transition:all .2s" onmouseenter="this.style.background='rgba(6,182,212,.18)'" onmouseleave="this.style.background='rgba(6,182,212,.08)'">008 · RAG离线Pipeline →</a>
-      <a href="../index.html#note=W2-1-0" style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:980px;font-size:12px;font-weight:500;color:#06b6d4;border:1px solid rgba(6,182,212,.25);background:rgba(6,182,212,.08);text-decoration:none;transition:all .2s" onmouseenter="this.style.background='rgba(6,182,212,.18)'" onmouseleave="this.style.background='rgba(6,182,212,.08)'">009 · 在线检索Pipeline →</a>
-    </div>
   </div>
 </section>
 
@@ -803,43 +794,6 @@
     <h2 class="section-title">原始文档页面</h2>
     <p class="section-sub">点击查看完整原始 PDF 页面</p>
     <div class="gallery-grid" id="galleryGrid"></div>
-  </div>
-</section>
-
-<!-- Cross-links to Course Notes -->
-<section class="section section-dark" id="course-links" style="padding:60px 20px">
-  <div class="container" style="max-width:900px">
-    <div style="text-align:center;margin-bottom:40px">
-      <span style="display:inline-block;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#6366f1;margin-bottom:8px">CROSS-LINKED NOTES</span>
-      <h2 class="section-title" style="margin-bottom:8px">关联课程笔记</h2>
-      <p style="font-size:15px;color:rgba(255,255,255,.45);max-width:480px;margin:0 auto">以下专题内容与「AI产品经理全流程」课程笔记双向关联，点击跳转至对应课程</p>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
-      <a href="../index.html#note=W2-0-0" style="display:flex;align-items:center;gap:14px;padding:18px 20px;border-radius:14px;border:1px solid rgba(139,92,246,.15);background:rgba(139,92,246,.04);text-decoration:none;transition:all .25s;cursor:pointer" onmouseenter="this.style.background='rgba(139,92,246,.1)';this.style.borderColor='rgba(139,92,246,.3)'" onmouseleave="this.style.background='rgba(139,92,246,.04)';this.style.borderColor='rgba(139,92,246,.15)'">
-        <div style="width:42px;height:42px;border-radius:10px;background:#8b5cf6;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex-shrink:0">008</div>
-        <div><div style="font-size:14px;font-weight:600;color:#fff;margin-bottom:2px">RAG核心概念与离线Pipeline</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.4)">第二周 · 4月4日 · 文档解析/数据清洗/文本分割</div></div>
-        <span style="margin-left:auto;font-size:16px;color:#8b5cf6;flex-shrink:0">→</span>
-      </a>
-      <a href="../index.html#note=W2-0-1" style="display:flex;align-items:center;gap:14px;padding:18px 20px;border-radius:14px;border:1px solid rgba(139,92,246,.15);background:rgba(139,92,246,.04);text-decoration:none;transition:all .25s;cursor:pointer" onmouseenter="this.style.background='rgba(139,92,246,.1)';this.style.borderColor='rgba(139,92,246,.3)'" onmouseleave="this.style.background='rgba(139,92,246,.04)';this.style.borderColor='rgba(139,92,246,.15)'">
-        <div style="width:42px;height:42px;border-radius:10px;background:#8b5cf6;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;flex-shrink:0">008-2</div>
-        <div><div style="font-size:14px;font-weight:600;color:#fff;margin-bottom:2px">离线Pipeline D-F与大模型演进</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.4)">第二周 · 4月4日 · 向量化/索引构建/COT思维链</div></div>
-        <span style="margin-left:auto;font-size:16px;color:#8b5cf6;flex-shrink:0">→</span>
-      </a>
-      <a href="../index.html#note=W2-1-0" style="display:flex;align-items:center;gap:14px;padding:18px 20px;border-radius:14px;border:1px solid rgba(6,182,212,.15);background:rgba(6,182,212,.04);text-decoration:none;transition:all .25s;cursor:pointer" onmouseenter="this.style.background='rgba(6,182,212,.1)';this.style.borderColor='rgba(6,182,212,.3)'" onmouseleave="this.style.background='rgba(6,182,212,.04)';this.style.borderColor='rgba(6,182,212,.15)'">
-        <div style="width:42px;height:42px;border-radius:10px;background:#06b6d4;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex-shrink:0">009</div>
-        <div><div style="font-size:14px;font-weight:600;color:#fff;margin-bottom:2px">在线检索Pipeline与增强生成</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.4)">第二周 · 4月5日 · Query改写/多路检索/Graph RAG</div></div>
-        <span style="margin-left:auto;font-size:16px;color:#06b6d4;flex-shrink:0">→</span>
-      </a>
-      <a href="../rag-pipeline/index.html" style="display:flex;align-items:center;gap:14px;padding:18px 20px;border-radius:14px;border:1px solid rgba(59,130,246,.15);background:rgba(59,130,246,.04);text-decoration:none;transition:all .25s;cursor:pointer" onmouseenter="this.style.background='rgba(59,130,246,.1)';this.style.borderColor='rgba(59,130,246,.3)'" onmouseleave="this.style.background='rgba(59,130,246,.04)';this.style.borderColor='rgba(59,130,246,.15)'">
-        <div style="width:42px;height:42px;border-radius:10px;background:#3b82f6;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">🔗</div>
-        <div><div style="font-size:14px;font-weight:600;color:#fff;margin-bottom:2px">RAG 全流程知识图谱</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.4)">完整 Pipeline 可视化 · 独立网页</div></div>
-        <span style="margin-left:auto;font-size:16px;color:#3b82f6;flex-shrink:0">→</span>
-      </a>
-    </div>
   </div>
 </section>
 
