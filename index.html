@@ -109,6 +109,72 @@ tailwind.config = {
   .dark .xlink-inline:hover{background:rgba(94,106,210,.15);border-color:rgba(255,255,255,.12)}
   .xlink-inline{color:#5e6ad2;background:rgba(94,106,210,.04);border:1px solid rgba(0,0,0,.06)}
   .xlink-inline:hover{background:rgba(94,106,210,.08);border-color:rgba(0,0,0,.1)}
+  /* AI Chat */
+  .ai-fab{width:32px;height:32px;border-radius:10px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s ease;flex-shrink:0;position:relative}
+  .ai-fab:hover{background:rgba(94,106,210,.12);border-color:rgba(94,106,210,.25)}
+  .ai-fab svg{width:16px;height:16px;fill:none;stroke:rgba(255,255,255,.5);stroke-width:1.8}
+  .ai-fab:hover svg{stroke:#828fff}
+  .ai-fab .ai-dot{position:absolute;top:5px;right:5px;width:6px;height:6px;border-radius:50%;background:#30d158;opacity:0;transition:opacity .2s}
+  .ai-fab.live .ai-dot{opacity:1;animation:aiPulse 2s infinite}
+  @keyframes aiPulse{0%,100%{opacity:1}50%{opacity:.3}}
+  .ai-drop{position:absolute;top:calc(100% + 8px);right:0;width:380px;max-height:520px;border-radius:14px;background:#111113;border:1px solid rgba(255,255,255,.08);box-shadow:0 16px 48px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.04) inset;display:none;flex-direction:column;z-index:200;overflow:hidden}
+  .ai-drop.open{display:flex}
+  @media(max-width:480px){.ai-drop{width:calc(100vw - 24px);right:-12px}}
+  .ai-drop-head{padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0}
+  .ai-drop-head h4{font-size:13px;font-weight:600;letter-spacing:-.2px;color:#f7f8f8;display:flex;align-items:center;gap:6px}
+  .ai-drop-head h4 .dot-live{width:6px;height:6px;border-radius:50%;background:#30d158;animation:aiPulse 2s infinite}
+  .ai-drop-btns{display:flex;gap:4px}
+  .ai-drop-btn{width:26px;height:26px;border-radius:6px;border:none;background:rgba(255,255,255,.04);color:rgba(255,255,255,.4);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+  .ai-drop-btn:hover{background:rgba(255,255,255,.08);color:#fff}
+  .ai-api-pill{padding:2px 8px;border-radius:980px;font-size:10px;font-weight:600;cursor:pointer;border:1px solid rgba(94,106,210,.25);background:rgba(94,106,210,.08);color:#828fff;transition:all .15s;white-space:nowrap}
+  .ai-api-pill:hover{background:rgba(94,106,210,.15);border-color:rgba(94,106,210,.4)}
+  .ai-body{flex:1;overflow-y:auto;padding:12px 14px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth;min-height:0}
+  .ai-body::-webkit-scrollbar{width:3px}
+  .ai-body::-webkit-scrollbar-thumb{background:rgba(255,255,255,.08);border-radius:2px}
+  .ai-msg{max-width:90%;animation:aiMsgIn .2s ease}
+  @keyframes aiMsgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+  .ai-msg-user{align-self:flex-end}
+  .ai-msg-ai{align-self:flex-start}
+  .ai-bub{padding:8px 12px;border-radius:12px;font-size:13px;line-height:1.5;letter-spacing:-.1px}
+  .ai-msg-user .ai-bub{background:#5e6ad2;color:#fff;border-bottom-right-radius:4px}
+  .ai-msg-ai .ai-bub{background:rgba(255,255,255,.04);color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.06);border-bottom-left-radius:4px}
+  .ai-msg-ai .ai-bub p{margin:3px 0}.ai-msg-ai .ai-bub strong{color:#f7f8f8}
+  .ai-msg-ai .ai-bub table{border-collapse:collapse;margin:6px 0;font-size:11px;width:100%}
+  .ai-msg-ai .ai-bub th,.ai-msg-ai .ai-bub td{border:1px solid rgba(255,255,255,.08);padding:3px 6px;text-align:left}
+  .ai-msg-ai .ai-bub th{background:rgba(255,255,255,.04);font-weight:600}
+  .ai-msg-ai .ai-bub ul,.ai-msg-ai .ai-bub ol{padding-left:16px;margin:3px 0}
+  .ai-msg-ai .ai-bub code{background:rgba(255,255,255,.06);padding:1px 4px;border-radius:3px;font-size:11px}
+  .ai-msg-ai .ai-bub pre{background:rgba(0,0,0,.3);padding:8px;border-radius:6px;overflow-x:auto;margin:4px 0}
+  .ai-msg-ai .ai-bub pre code{background:none;padding:0}
+  .ai-msg-ai .ai-bub h1,.ai-msg-ai .ai-bub h2,.ai-msg-ai .ai-bub h3{margin:6px 0 3px;font-size:13px;font-weight:700}
+  .ai-typing{display:flex;gap:3px;padding:8px 12px}
+  .ai-typing span{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.25);animation:aiBlink 1.4s infinite}
+  .ai-typing span:nth-child(2){animation-delay:.2s}
+  .ai-typing span:nth-child(3){animation-delay:.4s}
+  @keyframes aiBlink{0%,80%,100%{opacity:.25}40%{opacity:.8}}
+  .ai-qq{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+  .ai-qq-btn{background:rgba(94,106,210,.06);border:1px solid rgba(94,106,210,.12);color:#828fff;padding:7px 10px;border-radius:10px;font-size:12px;line-height:1.35;text-align:left;cursor:pointer;transition:all .15s}
+  .ai-qq-btn:hover{background:rgba(94,106,210,.12);border-color:rgba(94,106,210,.25)}
+  .ai-input{padding:10px 12px 14px;border-top:1px solid rgba(255,255,255,.06);flex-shrink:0;display:flex;gap:6px;align-items:flex-end}
+  .ai-input textarea{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:8px 12px;color:#f7f8f8;font-size:13px;line-height:1.4;resize:none;max-height:80px;outline:none;font-family:inherit;transition:border-color .15s}
+  .ai-input textarea:focus{border-color:rgba(94,106,210,.4)}
+  .ai-input textarea::placeholder{color:rgba(255,255,255,.2)}
+  .ai-send{width:30px;height:30px;border-radius:8px;background:#5e6ad2;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}
+  .ai-send:hover{background:#7170ff}
+  .ai-send:disabled{background:rgba(255,255,255,.06);cursor:not-allowed}
+  .ai-send svg{width:14px;height:14px;fill:#fff}
+  .ai-settings{position:absolute;inset:0;background:rgba(17,17,19,.97);z-index:10;display:none;flex-direction:column;align-items:center;justify-content:center;padding:28px;gap:12px;border-radius:14px}
+  .ai-settings.show{display:flex}
+  .ai-settings h4{font-size:14px;font-weight:600;margin-bottom:2px;color:#f7f8f8}
+  .ai-settings input{width:100%;max-width:280px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:8px 12px;color:#f7f8f8;font-size:13px;outline:none}
+  .ai-settings input:focus{border-color:rgba(94,106,210,.4)}
+  .ai-settings .ai-tab{display:flex;gap:0;width:100%;max-width:280px}
+  .ai-settings .ai-tab button{flex:1;padding:6px 0;border:1px solid rgba(255,255,255,.1);background:transparent;color:rgba(255,255,255,.4);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s}
+  .ai-settings .ai-tab button:first-child{border-radius:6px 0 0 6px}
+  .ai-settings .ai-tab button:last-child{border-radius:0 6px 6px 0}
+  .ai-settings .ai-tab button.on{background:#5e6ad2;color:#fff;border-color:#5e6ad2}
+  .ai-settings .ai-s-btn{padding:7px 20px;border-radius:980px;background:#5e6ad2;color:#fff;border:none;font-size:13px;font-weight:600;cursor:pointer;transition:background .15s}
+  .ai-settings .ai-s-btn:hover{background:#7170ff}
 </style>
 </head>
 <body class="dark bg-black text-white min-h-screen transition-colors duration-500">
@@ -267,6 +333,35 @@ tailwind.config = {
       </div>
       <div class="flex items-center gap-2">
         <input type="text" id="nh-search" class="nh-search w-40 md:w-56 rounded-lg dark:bg-white/5 bg-black/5 border dark:border-white/10 border-black/10 px-3 py-1.5 text-xs dark:text-white text-gray-900 focus:outline-none" placeholder="搜索知识点..." oninput="nhFilterSearch()">
+        <div style="position:relative">
+          <button class="ai-fab live" id="aiFab" onclick="aiToggle()" title="AI 课程顾问">
+            <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z"/></svg>
+            <span class="ai-dot"></span>
+          </button>
+          <div class="ai-drop" id="aiDrop">
+            <div class="ai-settings" id="aiSettings">
+              <h4>🔑 设置 AI 接口</h4>
+              <div class="ai-tab"><button class="on" data-api="coze" onclick="aiSwitchTab('coze')">扣子 Coze</button><button data-api="kimi" onclick="aiSwitchTab('kimi')">Kimi</button></div>
+              <div id="aiCozeForm"><p style="font-size:11px;color:rgba(255,255,255,.35);text-align:center">内置默认 Key，可直接使用</p><input type="password" id="aiCozeKey" placeholder="覆盖 Token (可选)"><input type="password" id="aiCozeBotId" placeholder="覆盖 Bot ID (可选)" style="margin-top:6px"></div>
+              <div id="aiKimiForm" style="display:none"><p style="font-size:11px;color:rgba(255,255,255,.35);text-align:center">支持 sk-kimi- 或 sk- 开头的 Key</p><input type="password" id="aiKimiKey" placeholder="覆盖 Key (可选)"></div>
+              <div style="display:flex;gap:6px"><button class="ai-s-btn" onclick="aiSaveKey()">保存并开始</button><button class="ai-s-btn" style="background:rgba(255,255,255,.06)" onclick="aiHideSettings()">取消</button></div>
+            </div>
+            <div class="ai-drop-head">
+              <h4><span class="dot-live"></span>AI 课程顾问</h4>
+              <div class="ai-drop-btns">
+                <button class="ai-api-pill" id="aiApiBadge" onclick="aiQuickSwitch()">扣子</button>
+                <button class="ai-drop-btn" onclick="aiClear()" title="清空">🗑</button>
+                <button class="ai-drop-btn" onclick="aiShowSettings()" title="设置">⚙</button>
+                <button class="ai-drop-btn" onclick="aiToggle()" title="关闭">✕</button>
+              </div>
+            </div>
+            <div class="ai-body" id="aiBody"></div>
+            <div class="ai-input">
+              <textarea id="aiTextarea" placeholder="问任何关于课程内容的问题..." rows="1"></textarea>
+              <button class="ai-send" id="aiSendBtn" onclick="aiSend()"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
+            </div>
+          </div>
+        </div>
         <button onclick="toggleTheme()" class="p-2 rounded-lg hover:dark:bg-white/5 hover:bg-black/5 transition-colors"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg></button>
       </div>
     </div>
@@ -4971,6 +5066,193 @@ function nhFilterSearch(){
 }
 
 document.addEventListener('DOMContentLoaded',init);
+
+// ========== AI CHAT SYSTEM ==========
+const AI_COZE_TOKEN='pat_KuvQgmKUDf89H3bsPMotmaBXlIUOT7aZmd8WFv8TbFAROgAuhxgy31dY2Rsq53lt';
+const AI_COZE_BOT='7624892981719957538';
+const AI_KIMI_KEY='sk-kimi-vwsB6fRIyz9zRVoLWnG9p2oRjNcsilN2EWqAAyIeJdOflxco3IeXTkmHeo7kKv1R';
+let aiHistory=[],aiStreaming=false;
+
+function aiGetType(){return localStorage.getItem('ai_chat_type')||'coze'}
+function aiGetCozeToken(){return localStorage.getItem('ai_coze_token')||AI_COZE_TOKEN}
+function aiGetCozeBotId(){return localStorage.getItem('ai_coze_bot')||AI_COZE_BOT}
+function aiGetKimiKey(){return localStorage.getItem('ai_kimi_key')||AI_KIMI_KEY}
+
+function aiBuildPrompt(){
+  let allPoints=[];
+  NH_WEEKS.forEach(w=>{w.days.forEach(d=>{d.courses.forEach(c=>{
+    allPoints.push('【'+c.id+' '+c.title+'】'+c.points.join('；'));
+  })})});
+  return `你是一位 AI 产品经理课程助教，名叫"AI课程顾问"。你掌握了以下课程笔记内容：\n\n${allPoints.join('\n\n')}\n\n你的职责：\n1. 基于课程内容回答学生提问，引用具体知识点\n2. 帮助学生理解 RAG、Prompt 工程、产品流程等概念\n3. 给出学习建议和知识点之间的联系\n4. 如超出课程范围，诚实说明\n\n回答要求：\n- Markdown 格式，善用列表和加粗\n- 简洁精准，每次≤250字\n- 语气专业友善`;
+}
+
+function aiToggle(){
+  const d=document.getElementById('aiDrop');
+  const isOpen=d.classList.toggle('open');
+  if(isOpen&&!document.getElementById('aiBody').children.length) aiWelcome();
+  if(isOpen) document.getElementById('aiTextarea').focus();
+}
+function aiShowSettings(){document.getElementById('aiSettings').classList.add('show');aiSwitchTab(aiGetType())}
+function aiHideSettings(){document.getElementById('aiSettings').classList.remove('show')}
+function aiSwitchTab(t){
+  localStorage.setItem('ai_chat_type',t);
+  document.querySelectorAll('.ai-settings .ai-tab button').forEach(b=>b.classList.toggle('on',b.dataset.api===t));
+  document.getElementById('aiCozeForm').style.display=t==='coze'?'':'none';
+  document.getElementById('aiKimiForm').style.display=t==='kimi'?'':'none';
+  aiUpdateBadge();
+}
+function aiUpdateBadge(){const b=document.getElementById('aiApiBadge');if(b)b.textContent=aiGetType()==='coze'?'扣子':'Kimi'}
+function aiQuickSwitch(){aiSwitchTab(aiGetType()==='coze'?'kimi':'coze');aiClear()}
+function aiSaveKey(){
+  const t=aiGetType();
+  if(t==='coze'){
+    const tk=document.getElementById('aiCozeKey').value.trim();
+    const bi=document.getElementById('aiCozeBotId').value.trim();
+    if(tk)localStorage.setItem('ai_coze_token',tk);
+    if(bi)localStorage.setItem('ai_coze_bot',bi);
+  }else{
+    const k=document.getElementById('aiKimiKey').value.trim();
+    if(k)localStorage.setItem('ai_kimi_key',k);
+  }
+  aiHideSettings();
+  if(!document.getElementById('aiBody').children.length) aiWelcome();
+}
+function aiClear(){aiHistory=[];aiWelcome()}
+function aiWelcome(){
+  const body=document.getElementById('aiBody');body.innerHTML='';
+  aiAddAiMsg('你好！我是你的 **AI 课程顾问** ✨\n\n我掌握了所有课程笔记内容，可以帮你理解知识点、梳理概念关系。\n\n试试下面的问题：');
+  const qd=document.createElement('div');qd.className='ai-qq';
+  ['RAG 的离线 Pipeline 有哪几步？','Query 改写六法分别是什么？','什么是 CoT 思维链？怎么提升推理能力？','PM 在 RAG 项目中负责什么？'].forEach(q=>{
+    const b=document.createElement('button');b.className='ai-qq-btn';b.textContent=q;
+    b.onclick=()=>{document.getElementById('aiTextarea').value=q;aiSend();qd.remove()};
+    qd.appendChild(b);
+  });
+  body.appendChild(qd);
+}
+function aiEsc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function aiMd(md){
+  if(!md)return'';let h=aiEsc(md);
+  h=h.replace(/```(\w*)\n([\s\S]*?)```/g,'<pre><code>$2</code></pre>');
+  h=h.replace(/`([^`]+)`/g,'<code>$1</code>');
+  h=h.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+  h=h.replace(/\*(.+?)\*/g,'<em>$1</em>');
+  h=h.replace(/^### (.+)$/gm,'<h3>$1</h3>');
+  h=h.replace(/^## (.+)$/gm,'<h2>$1</h2>');
+  h=h.replace(/^# (.+)$/gm,'<h1>$1</h1>');
+  h=h.replace(/^\|(.+)\|$/gm,m=>{const c=m.split('|').filter(x=>x.trim());if(c.every(x=>/^[\s-:]+$/.test(x)))return'<!--sep-->';return'<tr>'+c.map(x=>'<td>'+x.trim()+'</td>').join('')+'</tr>'});
+  h=h.replace(/((?:<tr>.*<\/tr>\n?)+)/g,m=>{let t=m.replace('<!--sep-->\n','').replace('<!--sep-->','');t=t.replace(/<tr>(.*?)<\/tr>/,(x,inner)=>'<thead><tr>'+inner.replace(/<td>/g,'<th>').replace(/<\/td>/g,'</th>')+'</tr></thead>');return'<table>'+t+'</table>'});
+  h=h.replace(/^- (.+)$/gm,'<li>$1</li>');
+  h=h.replace(/((?:<li>.*<\/li>\n?)+)/g,'<ul>$1</ul>');
+  h=h.replace(/^\d+\. (.+)$/gm,'<li>$1</li>');
+  h=h.replace(/\n\n/g,'</p><p>');h=h.replace(/\n/g,'<br>');
+  h='<p>'+h+'</p>';h=h.replace(/<p><\/p>/g,'');
+  h=h.replace(/<p>(<h[123]>)/g,'$1').replace(/(<\/h[123]>)<\/p>/g,'$1');
+  h=h.replace(/<p>(<ul>)/g,'$1').replace(/(<\/ul>)<\/p>/g,'$1');
+  h=h.replace(/<p>(<table>)/g,'$1').replace(/(<\/table>)<\/p>/g,'$1');
+  h=h.replace(/<p>(<pre>)/g,'$1').replace(/(<\/pre>)<\/p>/g,'$1');
+  return h;
+}
+function aiAddUser(t){const b=document.getElementById('aiBody');const d=document.createElement('div');d.className='ai-msg ai-msg-user';d.innerHTML='<div class="ai-bub">'+aiEsc(t)+'</div>';b.appendChild(d);b.scrollTop=b.scrollHeight}
+function aiAddAiMsg(md){const b=document.getElementById('aiBody');const d=document.createElement('div');d.className='ai-msg ai-msg-ai';d.innerHTML='<div class="ai-bub">'+aiMd(md)+'</div>';b.appendChild(d);b.scrollTop=b.scrollHeight;return d}
+function aiAddTyping(){const b=document.getElementById('aiBody');const d=document.createElement('div');d.className='ai-msg ai-msg-ai';d.id='aiTyping';d.innerHTML='<div class="ai-bub"><div class="ai-typing"><span></span><span></span><span></span></div></div>';b.appendChild(d);b.scrollTop=b.scrollHeight}
+function aiRemoveTyping(){document.getElementById('aiTyping')?.remove()}
+
+async function aiSend(override){
+  if(aiStreaming)return;
+  const ta=document.getElementById('aiTextarea');
+  const text=override||ta.value.trim();if(!text)return;
+  ta.value='';ta.style.height='auto';
+  document.querySelector('.ai-qq')?.remove();
+  aiAddUser(text);
+  aiHistory.push({role:'user',content:text});
+  if(aiHistory.length>30)aiHistory=aiHistory.slice(-30);
+  aiAddTyping();aiStreaming=true;
+  document.getElementById('aiSendBtn').disabled=true;
+
+  const apiType=aiGetType();
+  const sysPr=aiBuildPrompt();
+  const msgs=aiHistory.map(m=>({role:m.role,content:m.content}));
+  const isLocal=location.hostname==='localhost'||location.hostname==='127.0.0.1';
+  const isNetlify=location.hostname.includes('netlify.app');
+
+  let apiUrl,headers,body;
+  if(apiType==='coze'){
+    const token=aiGetCozeToken(),botId=aiGetCozeBotId();
+    apiUrl=(isLocal||isNetlify)?'https://api.coze.cn/v3/chat':'/api/coze/chat';
+    headers={'Content-Type':'application/json','Authorization':'Bearer '+token};
+    body={bot_id:botId,user_id:'academy_user',stream:true,auto_save_history:false,
+      additional_messages:[{role:'user',content:text,content_type:'text'}]};
+  }else{
+    const key=aiGetKimiKey(),isKC=key.startsWith('sk-kimi-');
+    if(isKC){
+      apiUrl=(isLocal||isNetlify)?'https://api.kimi.com/coding/v1/messages':'/api/kimi/messages';
+      headers={'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01'};
+      body={model:'kimi-for-coding',system:sysPr,messages:msgs,max_tokens:4096,stream:true};
+    }else{
+      apiUrl='https://api.moonshot.ai/v1/chat/completions';
+      headers={'Content-Type':'application/json','Authorization':'Bearer '+key};
+      body={model:'kimi-k2.5',messages:[{role:'system',content:sysPr},...msgs],max_tokens:4096,stream:true};
+    }
+  }
+
+  try{
+    const res=await fetch(apiUrl,{method:'POST',headers,body:JSON.stringify(body)});
+    if(!res.ok){
+      aiRemoveTyping();
+      let eb='';try{eb=await res.text()}catch(e){}
+      if(res.status===401)aiAddAiMsg('⚠️ **认证失败**\n\n'+(apiType==='coze'?'请确认扣子 Token 以 `pat_` 开头':'请确认 Kimi Key 以 `sk-` 开头')+'\n\n点击 ⚙ 重新设置');
+      else if(res.status===429)aiAddAiMsg('⚠️ **请求频率超限**，请稍后重试');
+      else aiAddAiMsg('⚠️ 请求失败 (HTTP '+res.status+')\n\n> '+eb.slice(0,150));
+      aiStreaming=false;document.getElementById('aiSendBtn').disabled=false;return;
+    }
+    aiRemoveTyping();
+    const aiDiv=aiAddAiMsg('');const bubble=aiDiv.querySelector('.ai-bub');
+    let fullText='';
+    const reader=res.body.getReader(),decoder=new TextDecoder();
+    let buffer='',sseEvent='';
+    while(true){
+      const{done,value}=await reader.read();if(done)break;
+      buffer+=decoder.decode(value,{stream:true});
+      const lines=buffer.split('\n');buffer=lines.pop()||'';
+      for(const line of lines){
+        const tr=line.trim();
+        if(tr.startsWith('event:')){sseEvent=tr.slice(6).trim();continue}
+        if(!tr.startsWith('data:'))continue;
+        const payload=tr.startsWith('data: ')?tr.slice(6):tr.slice(5);
+        if(!payload||payload==='[DONE]')continue;
+        try{
+          const evt=JSON.parse(payload);let chunk='';
+          if(sseEvent==='conversation.message.delta'&&evt.type==='answer'&&evt.content)chunk=evt.content;
+          if(!chunk&&evt.event==='conversation.message.delta'&&evt.message?.type==='answer')chunk=evt.message.content||'';
+          if(!chunk&&evt.choices?.[0]?.delta?.content)chunk=evt.choices[0].delta.content;
+          if(!chunk&&evt.type==='content_block_delta'&&evt.delta?.text)chunk=evt.delta.text;
+          if(chunk){fullText+=chunk;bubble.innerHTML=aiMd(fullText);document.getElementById('aiBody').scrollTop=document.getElementById('aiBody').scrollHeight}
+        }catch(e){}
+        sseEvent='';
+      }
+    }
+    aiHistory.push({role:'assistant',content:fullText});
+  }catch(err){
+    aiRemoveTyping();
+    if(err.name==='TypeError'&&err.message?.includes('Failed to fetch'))
+      aiAddAiMsg('⚠️ **CORS 跨域被拦截**\n\n请切换到 **扣子 Coze** 接口试试');
+    else aiAddAiMsg('⚠️ 网络错误：`'+(err.message||err)+'`');
+  }
+  aiStreaming=false;document.getElementById('aiSendBtn').disabled=false;
+}
+
+// Textarea auto-resize + Enter to send
+(function(){
+  const t=document.getElementById('aiTextarea');if(!t)return;
+  t.addEventListener('input',()=>{t.style.height='auto';t.style.height=Math.min(t.scrollHeight,80)+'px'});
+  t.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();aiSend()}});
+})();
+// Close on Escape
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('aiDrop')?.classList.contains('open'))aiToggle()});
+// Close on outside click
+document.addEventListener('click',e=>{const d=document.getElementById('aiDrop');const f=document.getElementById('aiFab');if(d?.classList.contains('open')&&!d.contains(e.target)&&!f.contains(e.target))aiToggle()});
+// Init badge
+setTimeout(aiUpdateBadge,0);
 </script>
 </body>
 </html>

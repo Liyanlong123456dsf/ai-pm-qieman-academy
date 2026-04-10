@@ -1,2 +1,26 @@
 [build]
   publish = "."
+
+# Coze API 代理
+[[redirects]]
+  from = "/api/coze/*"
+  to = "https://api.coze.cn/v3/:splat"
+  status = 200
+  force = true
+
+# Kimi Code API 代理
+[[redirects]]
+  from = "/api/kimi/*"
+  to = "https://api.kimi.com/coding/v1/:splat"
+  status = 200
+  force = true
+  headers = {X-From = "netlify-proxy"}
+
+# CORS Edge Function
+[[edge_functions]]
+  path = "/api/coze/*"
+  function = "cors-proxy"
+
+[[edge_functions]]
+  path = "/api/kimi/*"
+  function = "cors-proxy"
