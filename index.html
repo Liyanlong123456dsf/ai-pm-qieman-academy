@@ -1481,7 +1481,7 @@ function openObsidianVault(){
         <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-2xl">💎</div>
         <div>
           <h2 class="text-xl font-black ${isDk?'text-white':'text-gray-900'}">Obsidian 笔记库</h2>
-          <p class="text-xs ${isDk?'text-gray-400':'text-gray-500'}">第一周课程笔记已同步至 Obsidian Vault</p>
+          <p class="text-xs ${isDk?'text-gray-400':'text-gray-500'}">第一周 + 第二周课程笔记已同步至 Obsidian Vault</p>
         </div>
       </div>
       <div class="space-y-3 mb-6">
@@ -1513,6 +1513,13 @@ function openObsidianVault(){
             <div class="text-xs ${isDk?'text-gray-400':'text-gray-500'}">工具清单 · 金句集 · 名词释义（40+术语）</div>
           </div>
         </div>
+        <div class="flex items-start gap-3 p-3 rounded-xl" style="background:${isDk?'rgba(255,255,255,.05)':'rgba(0,0,0,.03)'}">
+          <span class="text-lg mt-0.5">🧠</span>
+          <div>
+            <div class="text-sm font-bold ${isDk?'text-white':'text-gray-900'}">RAG 技术专题精读</div>
+            <div class="text-xs ${isDk?'text-gray-400':'text-gray-500'}">07 腾讯云RAG技术应用与实践 — 四大专题完整解读</div>
+          </div>
+        </div>
       </div>
       <div class="flex items-center gap-3">
         <a href="${obsidianURI}" class="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-sm transition-all hover:scale-[1.02]" style="text-decoration:none">
@@ -1522,7 +1529,7 @@ function openObsidianVault(){
         <button onclick="this.closest('#obsidian-overlay').style.opacity='0';setTimeout(()=>document.getElementById('obsidian-overlay')?.remove(),300)" class="px-5 py-3 rounded-xl text-sm font-semibold ${isDk?'text-gray-400 hover:text-white':'text-gray-500 hover:text-gray-900'} transition-colors" style="background:${isDk?'rgba(255,255,255,.05)':'rgba(0,0,0,.05)'}">关闭</button>
       </div>
       <div class="mt-4 text-[10px] ${isDk?'text-gray-600':'text-gray-400'} text-center">
-        笔记路径：Obsidian Vault / 第一周 / · 共 24 个 Markdown 文件
+        笔记路径：Obsidian Vault / 第一周 + 第二周 / · 含 RAG 专题精读
       </div>
     </div>`;
     document.body.appendChild(overlay);
