@@ -16,6 +16,13 @@
   force = true
   headers = {X-From = "netlify-proxy"}
 
+# Moonshot API 代理
+[[redirects]]
+  from = "/api/moonshot/*"
+  to = "https://api.moonshot.ai/v1/:splat"
+  status = 200
+  force = true
+
 # CORS Edge Function
 [[edge_functions]]
   path = "/api/coze/*"
@@ -23,4 +30,8 @@
 
 [[edge_functions]]
   path = "/api/kimi/*"
+  function = "cors-proxy"
+
+[[edge_functions]]
+  path = "/api/moonshot/*"
   function = "cors-proxy"
