@@ -612,8 +612,10 @@ work:[
 "问卷设计：使用李克特量表（1-5分）量化态度，避免引导性提问，样本量≥100保证统计显著性",
 "可用性测试：让用户完成典型任务（Task-based Testing），记录完成率、出错率和SUS满意度量表评分",
 "招募策略：按用户画像分层抽样，覆盖核心用户+边缘用户+流失用户三类人群"]},
-{title:"竞品分析",desc:"功能对比/体验拆解",detail:[
-"竞品选择：直接竞品（同品类同市场）+间接竞品（不同品类满足同需求）+替代品（用户当前方案）",
+{title:"竞品分析",desc:"四步法/六层框架/体验拆解",detail:[
+"竞品分析四步法：①明确分析目的(产品阶段+核心问题)→②确定竞品范围→③收集分析数据(AI辅助)→④决策判断(PM主导)",
+"竞品分类四象限：直接竞品（业务+用户相同）+间接竞品（需求同方案异）+潜在竞品（跨行业入侵）+替代品（争夺用户时间）",
+"产品六层分析框架：市场层(TAM/SAM/SOM)→商业层(定价/护城河)→用户层(画像/旅程)→功能层→技术层→模型层",
 "功能对比矩阵：横轴为竞品，纵轴为功能模块，用✅/❌/🔶标记支持程度",
 "体验拆解法（UX Teardown）：以新用户视角完成核心流程，记录每步摩擦点和Aha Moment",
 "差异化定位：基于对比提炼自身产品独特价值主张（UVP），避免功能堆砌式竞争"]},
@@ -643,7 +645,9 @@ outputs:[
 "数量控制：主要画像2-3个，避免过多失焦；每个画像对应一个核心场景",
 "验证方法：画像需基于真实数据（访谈+数据分析），非团队臆想；定期回访更新"]},
 {title:"竞品分析报告",detail:[
-"报告结构：市场概况→竞品概览→功能对比→体验拆解→SWOT总结→产品建议",
+"分析目标5要素：决策类型+方向+用户假设+场景假设+成功标准",
+"报告结构：市场概况(TAM/SAM/SOM)→竞品概览→功能对比→体验拆解→SWOT总结→产品建议",
+"四大交付物闭环：竞品分析报告(分析层)→BRD(决策层)→MRD(规划层)→立项报告(执行层)",
 "更新频率：核心竞品每季度更新一次，重大版本更新时即时补充",
 "输出形式：PPT用于汇报，Wiki/Notion用于团队沉淀，确保信息可检索"]},
 {title:"数据洞察文档",detail:[
@@ -1642,7 +1646,7 @@ function openObsidianVault(){
         <button onclick="this.closest('#obsidian-overlay').style.opacity='0';setTimeout(()=>document.getElementById('obsidian-overlay')?.remove(),300)" class="px-5 py-3 rounded-xl text-sm font-semibold ${isDk?'text-gray-400 hover:text-white':'text-gray-500 hover:text-gray-900'} transition-colors" style="background:${isDk?'rgba(255,255,255,.05)':'rgba(0,0,0,.05)'}">关闭</button>
       </div>
       <div class="mt-4 text-[10px] ${isDk?'text-gray-600':'text-gray-400'} text-center">
-        笔记路径：Obsidian Vault / 第一周 + 第二周 / · 含 RAG 专题精读
+        笔记路径：Obsidian Vault / 第一周 + 第二周 / · 含 RAG 专题精读 + 竞品分析
       </div>
     </div>`;
     document.body.appendChild(overlay);
@@ -2965,7 +2969,7 @@ const NH_WEEKS=[
      summary:'首日课程聚焦AI开发工具的安装配置与场景思维的建立，通过实战小游戏开发感受AI辅助编程的魅力。',
      courses:[
       {id:'001',title:'IDE工具安装与AI编程初体验',tags:['工具','实战'],
-       relatedNodes:[{id:6,title:'开发跟进与沟通',why:'开发工具与效率提升'}],
+       relatedNodes:[{id:6,title:'开发跟进与迭代',why:'开发工具与效率提升'}],
        points:['IDE工具选型：Cursor（海外版）与 Trae（国内版）二选一安装配置','AI辅助编程实践：通过自然语言指令让AI生成贪吃蛇小游戏代码','模型选择建议：推荐 Claude 4.7（不带 Beta 后缀），根据需求选型','项目管理基础：每个项目创建独立文件夹，指定工作路径避免混乱','Bug反馈思维：明确描述问题现象（如"点击开始没反应"），不做模糊反馈','测试方法：在AI生成的HTML文件上右键→用浏览器打开即可测试'],
        keyPoint:'Bug反馈思维：明确描述问题现象，不做模糊反馈',homework:'小组比赛：用AI生成创意小游戏，组内评选前三名参加决赛'},
       {id:'002',title:'场景思维与产品分析框架',tags:['方法论','核心'],
@@ -2973,7 +2977,7 @@ const NH_WEEKS=[
        points:['场景描述公式：用户[明确群体] + 场景[具体情境] + 痛点[详细说明]','BRD文档要义：分清楚做什么与不做什么，明确技术路线','产品分析画布：结构化拆解产品的分析工具','传统产品经理核心输出物：原型图 + 产品需求文档（PRD）','技术评审：评估技术可行性是产品落地的关键环节','场景=讲故事：主人公 + 情境 + 冲突 + 解决方案'],
        keyPoint:'场景描述公式：用户 + 场景 + 痛点',homework:'收集30个目标岗位职责详情'},
       {id:'003',title:'模型选型与国产替代方案',tags:['工具','模型'],
-       relatedNodes:[{id:5,title:'项目排期与资源协调',why:'模型选型影响资源规划'}],
+       relatedNodes:[{id:5,title:'开发排期与立项',why:'模型选型影响资源规划'}],
        points:['国产模型推荐：GLM、KB12.5、MiniMax 2.5/2.7 等可作为替代','模型选择策略：根据项目需求和场景选择合适的模型版本','免费与付费工具的能力边界：了解各工具的适用范围','官网优先原则：利用模型官方平台完成作业和实践练习','问题解决导向：遇到工具问题时积极寻找替代方案而非等待'],
        keyPoint:'根据项目需求和场景选择合适的模型版本',homework:'完成IDE工具安装并完成基础配置'}
     ]},
@@ -2985,15 +2989,15 @@ const NH_WEEKS=[
        points:['POC回答"做不做得出来"，MVP回答"做出来有没有人用"——两者缺一不可','POC可跳过：技术方案已成熟｜MVP可跳过：市场需求已验证','全新领域探索：POC和MVP都不能跳过，必须双重验证','POC标准流程：想清楚验证什么→定义成功标准→快速试验→结果决策','提示词工程：理解提示词限制词，认知模型能力边界','需求挖掘渠道：问卷、社群、对话、业务方反馈等多维度收集'],
        keyPoint:'POC回答"做不做得出来"，MVP回答"做出来有没有人用"',homework:'AI产品协作全流程笔记（创新PRD格式）+ 小游戏迭代'},
       {id:'005',title:'LLM核心技术概念解析',tags:['技术','核心'],
-       relatedNodes:[{id:4,title:'需求评审与技术评审',why:'技术可行性评估基础'}],
+       relatedNodes:[{id:4,title:'需求评审与确认',why:'技术可行性评估基础'}],
        points:['OpenAI = 第一个把AI产品化的公司，开创性地将技术转化为产品','LLM = Large Language Model（大型语言模型），VLM = 视觉语言模型','NLP = 自然语言处理：让机器"听懂人话、说出人话"的技术','端到端学习：输入端直达输出端，中间全部自动学习，一步到位','技术演进路线：CNN（卷积神经网络）→ RNN → Transformer 架构','LLM推理流程：Query→Tokenization(拆解)→Token(词语)→Embedding→Semantics(语义)'],
        keyPoint:'LLM推理流程：Query→Tokenization→Token→Embedding→Semantics',homework:'理解并整理LLM技术原理笔记'},
       {id:'006',title:'模型服务化与商业模式',tags:['商业','模型'],
-       relatedNodes:[{id:5,title:'项目排期与资源协调',why:'模型成本与资源规划'},{id:8,title:'发布准备与上线',why:'服务化部署与上线'}],
+       relatedNodes:[{id:5,title:'开发排期与立项',why:'模型成本与资源规划'},{id:8,title:'上线前准备',why:'服务化部署与上线'}],
        points:['大模型训练成本极高：大量显卡购置 + 数月训练周期','模型服务化四种模式：自研+自营、自营+分销、外采+转售、开源+托管','服务商核心价值：解决算力、迭代成本、效果稳定性、合规性问题','技术路线对比：阿里云、火山引擎等平台能力与定位差异','向量模型选型：价格与性能综合评估，根据场景选择最优方案','Cherry Studio：支持客户端安装、多模型测试与效果对比的工具'],
        keyPoint:'模型服务化四种模式：自研+自营、自营+分销、外采+转售、开源+托管',homework:'完成模型横向对比与选型评估'},
       {id:'006-2',title:'API密钥管理与多平台接入',tags:['工具','实战'],
-       relatedNodes:[{id:6,title:'开发跟进与沟通',why:'API接入与开发协作'}],
+       relatedNodes:[{id:6,title:'开发跟进与迭代',why:'API接入与开发协作'}],
        points:['API密钥创建流程：登录平台→点击密钥创建→命名→选择模式→提交保存','多平台接入方法：通过 API Key 接入不同服务商的模型资源','Cherry Studio实操：客户端简化安装、知识库接入、模型效果对比','CC Switch配置：接入 KPIK 密钥，按需选择合适的调用模型','底层API优化：通过API转换释放模型潜能，表现优于官网环境'],
        keyPoint:'通过API转换释放模型潜能，表现优于官网环境',homework:'安装Cherry Studio并测试至少2个不同模型'}
     ]},
@@ -3001,32 +3005,34 @@ const NH_WEEKS=[
      summary:'系统回顾AI技术分层（AI→ML→DL→Transformer→LLM），深入大模型训练流程、核心能力（泛化/涌现），并引入Prompt工程与人机协作四象限模型。',
      courses:[
       {id:'007',title:'大模型训练流程与核心能力',tags:['技术','核心'],
-       relatedNodes:[{id:4,title:'需求评审与技术评审',why:'理解模型能力边界助力技术评审'},{id:1,title:'需求收集与分析',why:'模型能力认知指导需求可行性判断'}],
+       relatedNodes:[{id:4,title:'需求评审与确认',why:'理解模型能力边界助力技术评审'},{id:1,title:'需求收集与分析',why:'模型能力认知指导需求可行性判断'}],
        points:['AI技术分层回顾：人工智能(AI) → 机器学习(ML) → 深度学习(DL) → Transformer → 大语言模型(LLM)','大模型训练两阶段：①预训练(Pre-training)——无监督学习，用网络公开数据(维基百科/论文/图书)训练基础模型','②微调(SFT, Supervised Fine-Tuning)——有监督训练，针对特定任务进行标注和优化','预训练三要素：数据采集与准备 + 注意力机制(算法) + 基础架构(Transformer)','Transformer编码器-解码器：编码器处理输入文本生成中间表示，解码器根据编码信息生成输出','欠拟合(Underfitting)：模型学习不足，无法有效泛化，做不到举一反三','过拟合(Overfitting)：模型过度学习训练数据，对未见数据表现差，逻辑混乱无法解决新问题','泛化能力(Generalization)：从大量数据中学到抽象知识，并迁移应用到类似但未见过的任务上','涌现能力(Emergence)：训练过程中突然涌现出解决之前无法解决的新任务的能力','涌现三子能力：小样本上下文学习(Few-shot ICL) + 指令跟随(Instruction Following) + 思维链推理(COT)','感官学习法：眼看→手写→脑思考→嘴说→耳听，五感协同将外部信息内化为个人知识体系'],
        keyPoint:'大模型两阶段训练：预训练(无监督基础能力) → 微调SFT(有监督特定任务优化)',homework:'理解大模型训练流程，整理技术概念笔记'},
       {id:'007-2',title:'Prompt工程与人机协作模型',tags:['方法论','核心'],
        webUrl:'pe-context/index.html',webLabel:'Prompt & Context 交互课件',
-       relatedNodes:[{id:3,title:'原型设计与交互设计',why:'Prompt设计=人机交互设计'},{id:6,title:'开发跟进与沟通',why:'人机沟通方法论提升协作效率'}],
+       relatedNodes:[{id:3,title:'原型设计与交互设计',why:'Prompt设计=人机交互设计'},{id:6,title:'开发跟进与迭代',why:'人机沟通方法论提升协作效率'}],
        points:['Prompt本质：一种语言，是人与AI之间对话的桥梁，承担编码和解码的角色','大模型效果公式：效果 = 大模型能力 × 任务设计 × Prompt质量','乔哈里视窗(Johari Window)人机协作四象限：①公开象限(我知AI知)——AI作助理，精准指令下发','②隐私象限(我知AI不知)——需投喂上下文，让AI理解私有知识','③盲点象限(AI知我不知)——AI作知识库，提问学习获取新知','④潜能象限(双方都不知)——共创探索，先发散再收拢','双钻模型在AI协作中的应用：AI负责发散(扩展可能性)，人负责收拢(聚焦决策)','Prompt设计原则：简洁明了避免冗余 + 正向肯定性描述 + 引导逐步思考 + 提供ICL样本','Markdown语法提升Prompt效果：结构化格式已被证明能显著提升模型理解和回应质量','ICL(In-Context Learning)上下文学习：将样本置于上下文窗口中，使模型在特定环境中学习提升性能','提示词库的价值：提供模板化结构(通用结构/任务执行/角色扮演)，降低Prompt设计门槛','上下文工程(Context Engineering)：系统化管理和优化输入给模型的上下文信息，提升输出质量'],
        keyPoint:'乔哈里视窗四象限定义了人机协作的四种模式，Prompt是人机沟通的桥梁',homework:'上下文工程作业：制作课程讲义(大纲+内容+可视化方案)'}
     ]}
   ]
 },
 {
-  week:2, title:'第二周', subtitle:'RAG技术深潜 → 智能体开发 → 工作流实战',
-  dateRange:'4.4 – 4.5', color:'#8b5cf6', icon:'🧠',
+  week:2, title:'第二周', subtitle:'RAG技术深潜 → 智能体开发 → 竞品分析 → 项目立项',
+  dateRange:'4.4 – 4.9', color:'#8b5cf6', icon:'🧠',
   highlights:[
     {icon:'🔍',title:'RAG全流程',desc:'离线6环节Pipeline + 在线检索增强生成，完整技术链路'},
     {icon:'📋',title:'PM职责矩阵',desc:'每个Pipeline环节的PM核心职责、协作对象、质量标准'},
     {icon:'🧪',title:'Query改写六法',desc:'语义强化、歧义消除、上下文补全、意图拆解、术语适配、约束强化'},
     {icon:'⚙️',title:'工作流vs对话流',desc:'工作流有始有终流程化，对话流围绕话题持续交流'},
     {icon:'🗂️',title:'Graph RAG',desc:'知识图谱增强检索，适用政策穿透、科研追踪等复杂场景'},
-    {icon:'🎯',title:'面试实战',desc:'9+高频真题：数据来源、量级、成本、元数据处理等'},
+    {icon:'🏆',title:'竞品分析四步法',desc:'明确目的→选择竞品→收集分析→决策判断，AI辅助全流程'},
+    {icon:'📑',title:'四大交付物',desc:'竞品分析报告→BRD→MRD→立项报告，从分析到执行完整闭环'},
     {icon:'🤖',title:'智能体实战',desc:'扣子平台全流程：创建→人设→知识库→发布'},
-    {icon:'📊',title:'场景梳理',desc:'四层结构：行业→业务域→场景→AI落地方案'}
+    {icon:'📊',title:'场景梳理',desc:'四层结构：行业→业务域→场景→AI落地方案'},
+    {icon:'🧠',title:'知识管理',desc:'NotebookLM + Obsidian原子笔记，构建个人知识图谱'}
   ],
-  quotes:['RAG就是给大模型装了一个外挂知识库','数据质量决定AI系统的天花板','Chunk是数据清洗后的基本单位','模型注意力呈U型分布：开头结尾易记，中间容易遗忘','工作流前身是SOP，标准化为提效，下一步是自动化','0到1项目PM应侧重构建核心功能，而非知识库层面技术细节','双钻模型：AI发散-我收拢','在实践中学习，出错是好事'],
-  tools:[{n:'Dify',d:'工作流/对话流平台'},{n:'扣子(Coze)',d:'智能体开发平台'},{n:'Cherry Studio',d:'多模型测试工具'},{n:'飞书',d:'团队协作与文档'},{n:'pdfplumber',d:'PDF表格提取'},{n:'BeautifulSoup',d:'HTML标签剥离'},{n:'DREAM模型',d:'腾讯文档解析'},{n:'BGE-M3',d:'多语言向量模型'}],
+  quotes:['RAG就是给大模型装了一个外挂知识库','数据质量决定AI系统的天花板','Chunk是数据清洗后的基本单位','模型注意力呈U型分布：开头结尾易记，中间容易遗忘','工作流前身是SOP，标准化为提效，下一步是自动化','0到1项目PM应侧重构建核心功能，而非知识库层面技术细节','双钻模型：AI发散-我收拢','在实践中学习，出错是好事','竞品分析的关键不在于产出报告，而在于分析过程中的思维方式','做竞品分析时第一步是明确你要分析的目的','AI可以收集大量数据和撰写报告，但最终决策仍然需要产品经理来完成','学好AI能找到好工作，养成用AI记录和整理信息的习惯'],
+  tools:[{n:'Dify',d:'工作流/对话流平台'},{n:'扣子(Coze)',d:'智能体开发平台'},{n:'Cherry Studio',d:'多模型测试工具'},{n:'飞书',d:'团队协作与文档'},{n:'pdfplumber',d:'PDF表格提取'},{n:'BeautifulSoup',d:'HTML标签剥离'},{n:'DREAM模型',d:'腾讯文档解析'},{n:'BGE-M3',d:'多语言向量模型'},{n:'NotebookLM',d:'Google知识沉淀工具'},{n:'Obsidian',d:'原子笔记与知识图谱'},{n:'IT橘子/天眼查',d:'竞品融资与企查工具'},{n:'Product Hunt',d:'海外产品发现平台'}],
   days:[
     {date:'4月4日（周六）',title:'RAG离线阶段·知识库构建',icon:'🔧',color:'#8b5cf6',
      summary:'系统学习RAG离线阶段6大Pipeline环节：从原始数据采集到向量索引构建，明确每个环节的PM职责与质量标准。',
@@ -3034,11 +3040,11 @@ const NH_WEEKS=[
       {id:'008',title:'RAG核心概念与离线Pipeline A-C',tags:['技术','核心'],
        webUrl:'rag-pipeline/index.html',webLabel:'RAG 全流程知识图谱',
        extraLinks:[{url:'rag-knowledge/index.html#topic1',label:'RAG 技术专题 · 文档解析',icon:'🧠'}],
-       relatedNodes:[{id:1,title:'需求收集与分析',why:'数据采集方法论复用'},{id:7,title:'测试与验收',why:'质量标准制定方法'}],
+       relatedNodes:[{id:1,title:'需求收集与分析',why:'数据采集方法论复用'},{id:7,title:'测试验收与BUG修复',why:'质量标准制定方法'}],
        points:['RAG = 检索增强生成，给大模型装外挂知识库，解决时效性/幻觉/安全性问题','离线Pipeline全景：数据采集(A)→文档解析(B)→数据清洗(C)→文本分割(D)→向量化(E)→索引构建(F)','Pipeline A 数据采集：企业内部/外网公开/付费外采/多轮对话QA/网盘API，只采集业务场景强相关数据','Pipeline B 文档解析：OCR(图像)→ASR(语音)→Pandas(结构化)→pdfplumber(半结构化)→markdown(纯文本) <a href="rag-knowledge/index.html#topic1" class="xlink-inline" target="_blank">🧠 RAG专题·文档解析</a>','Pipeline C 数据清洗：元数据绑定(来源/时间) + 复杂排版阅读顺序处理，Chunk是清洗后基本单位 <a href="rag-knowledge/index.html#topic1" class="xlink-inline" target="_blank">🧠 RAG专题·阅读顺序</a>','腾讯DREAM模型：三步走处理复杂排版——图像特征提取→元素特征聚合→元素并行生成 <a href="rag-knowledge/index.html#topic1" class="xlink-inline" target="_blank">🧠 RAG专题·DREAM模型</a>','PM职责：定义知识边界与优先级、输出《文档解析质量标准》、制定清洗规则与验收标准'],
        keyPoint:'RAG = 给大模型装外挂知识库，离线Pipeline六环节构建高质量知识库',homework:'产品全流程笔记（含RAG技术流程）提交飞书'},
       {id:'008-2',title:'离线Pipeline D-F与大模型演进',tags:['技术','方法论'],
-       relatedNodes:[{id:5,title:'项目排期与资源协调',why:'向量索引构建需排期管理'},{id:6,title:'开发跟进与沟通',why:'跨部门协调模型选型'}],
+       relatedNodes:[{id:5,title:'开发排期与立项',why:'向量索引构建需排期管理'},{id:6,title:'开发跟进与迭代',why:'跨部门协调模型选型'}],
        points:['Pipeline D 文本分割：语义完整+长度适配，策略包括固定长度/语义感知/文档结构/关键词/多粒度混合 <a href="rag-knowledge/index.html#topic2" class="xlink-inline" target="_blank">🧠 RAG专题·文档切分</a>','Pipeline E 文本向量化：Embedding Model核心，PM负责模型选型评估(精度vs成本vs延迟)+质量监控 <a href="rag-knowledge/index.html#topic2" class="xlink-inline" target="_blank">🧠 RAG专题·向量检索</a>','Pipeline F 向量索引构建：向量数据库(语义检索) vs RDBMS/NoSQL(精准匹配)，核心指标Recall@K/P95延迟','COT思维链：Chain of Thought让模型展示思考过程，提升推理能力 <a href="rag-knowledge/index.html#topic3" class="xlink-inline" target="_blank">🧠 RAG专题·CoT思维链</a>','多轮对话架构：Context Window包含query+system prompt+ICL+chat history+summary','模型注意力呈U型分布：开头和结尾容易记住，中间容易遗忘，需合理管理上下文','DeepSeek-r1封锁下有了思考能力；Kimi弥补国内Agent能力空白'],
        keyPoint:'文本分割策略决定检索精度，向量数据库是语义检索的核心基础设施',homework:'完成RAG离线Pipeline技术笔记整理'}
     ]},
@@ -3048,11 +3054,11 @@ const NH_WEEKS=[
       {id:'009',title:'在线检索Pipeline G-H与增强生成',tags:['技术','核心'],
        webUrl:'rag-pipeline/index.html',webLabel:'RAG 全流程知识图谱',
        extraLinks:[{url:'rag-knowledge/index.html#topic2',label:'RAG 技术专题 · 检索优化',icon:'🧠'}],
-       relatedNodes:[{id:1,title:'需求收集与分析',why:'Query改写=需求澄清方法论'},{id:8,title:'发布准备与上线',why:'在线系统上线流程'}],
+       relatedNodes:[{id:1,title:'需求收集与分析',why:'Query改写=需求澄清方法论'},{id:8,title:'上线前准备',why:'在线系统上线流程'}],
        points:['Pipeline G Query改写六法：语义强化/歧义消除/上下文补全/意图拆解/领域术语适配/约束条件强化 <a href="rag-knowledge/index.html#topic2" class="xlink-inline" target="_blank">🧠 RAG专题·查询改写</a>','Pipeline H 多路查询：关键词搜索+向量搜索混合，Score评分+TopK筛选合并去重 <a href="rag-knowledge/index.html#topic2" class="xlink-inline" target="_blank">🧠 RAG专题·混合搜索</a>','增强阶段：将检索到的知识片段(Chunks)与用户问题组装为完整Prompt送入LLM','生成阶段5步：提示词构建→LLM生成执行→内容优化后处理→多轮对话管理→复杂问题处理','复杂问题策略：问题分解(子问题链)→层次化推理(Least-to-Most)→多跳检索(二次检索补充)','Graph RAG：知识图谱增强检索，适用政策穿透/合规/科研追踪/故障因分析','PM检索阶段职责：明确检索目标、制定质量标准(召回率≥90%/准确率≥85%)、设计查询优化链'],
        keyPoint:'Query改写六法 + 混合搜索是提升检索质量的核心手段',homework:'理解并整理RAG在线检索流程笔记'},
       {id:'009-2',title:'Dify平台实操与工作流开发',tags:['实战','工具'],
-       relatedNodes:[{id:3,title:'原型设计与交互设计',why:'工作流=交互流程设计'},{id:10,title:'运营监控与持续优化',why:'工作流自动化提效'}],
+       relatedNodes:[{id:3,title:'原型设计与交互设计',why:'工作流=交互流程设计'},{id:10,title:'数据监控与用户反馈',why:'工作流自动化提效'}],
        points:['Dify两种模式：工作流(Workflow)有始有终适合自动化 vs 对话流(Chatflow)多轮记忆适合群组交互','Workspace工作空间：团队项目管理核心，成员可共享新建管理项目','工作流构建：触发器→开始节点(输入变量)→处理节点(业务逻辑)→结束节点(输出结果)','工作流前身是SOP，规范化→自动化，提效路径：对齐成本→流程自动流转','自动化工具矩阵：RPA(流程)/机器人(回复)/公众号(关键词)/飞书企微(工作流)','在线阶段工作流：用户Query→向量库召回→上下文结合→意图分析→LLM生成→返回答案','面试要点：避免纠结技术细节，挖掘个人亮点(业务匹配度/需求分析)，场景化表达项目'],
        keyPoint:'工作流vs对话流的选择取决于场景：任务执行用工作流，咨询问答用对话流',homework:'场景梳理文档(A4) + 岗位详情表(12城市) + 求职助手APP'}
     ]},
@@ -3060,13 +3066,25 @@ const NH_WEEKS=[
      summary:'聚焦实战落地，在扣子平台完成智能体全流程开发，掌握RAG知识库构建方法与场景梳理。',
      courses:[
       {id:'007',title:'扣子(Coze)平台与RAG知识库构建',tags:['实战','核心'],
-       relatedNodes:[{id:3,title:'原型设计与交互设计',why:'智能体人设=交互设计'},{id:7,title:'测试与验收',why:'预览调试=测试验收'}],
+       relatedNodes:[{id:3,title:'原型设计与交互设计',why:'智能体人设=交互设计'},{id:7,title:'测试验收与BUG修复',why:'预览调试=测试验收'}],
        points:['三种角色：创建者(Builder) vs 用户(User) vs 协作开发者——看场景区分','智能体全流程：创建→配置人设与回复逻辑→预览调试→发布上线','人设配置要素：人物背景 + 对话风格 + 场景化回复策略','RAG知识库Pipeline：数据采集→FAQ整理→文档解析→分段策略→向量化→索引存储','分段策略要点：按层级自定义标识符，物理长度100左右可覆盖大部分场景','面试技巧：聚焦产品定位和解决的痛点，避免叙述操作步骤细节','项目命名原则：名称应直观反映服务对象、业务领域和目标'],
        keyPoint:'RAG知识库Pipeline：数据采集→FAQ整理→文档解析→分段策略→向量化→索引存储',homework:'创建并发布一个可用的智能问答助手（覆盖≥3个场景）'},
       {id:'008',title:'场景梳理与团队协作实战',tags:['实战','协作'],
-       relatedNodes:[{id:1,title:'需求收集与分析',why:'场景梳理四层结构'},{id:10,title:'运营监控与持续优化',why:'数据收集与质量管理'}],
+       relatedNodes:[{id:1,title:'需求收集与分析',why:'场景梳理四层结构'},{id:10,title:'数据监控与用户反馈',why:'数据收集与质量管理'}],
        points:['场景梳理四层结构：行业→业务域→场景→AI落地方案','场景描述格式：场景概括应体现产品定位和解决的具体问题','数据收集实战：覆盖12个城市（北京/上海/广州/深圳/杭州/厦门等）岗位数据','飞书协作规范：统一表格录入、正确设置权限、创建个人视图保护隐私','数据质量红线：统一字段顺序、城市名称规范化、公司名称全称/简称统一','手动采集保质量：避免直接爬虫，用小号防封，确保数据真实准确','求职助手APP：至少3个不雷同场景，小组合作完成'],
        keyPoint:'场景梳理四层结构：行业→业务域→场景→AI落地方案',homework:'场景梳理文档 + 岗位详情表（12城市）+ 求职助手APP'}
+    ]},
+    {date:'4月9日（周三）',title:'竞品分析方法论与项目立项',icon:'🏆',color:'#f59e0b',
+     summary:'系统学习竞品分析四步法与六层拆解框架，掌握AI辅助竞品分析全流程；明确四大交付物（竞品分析报告→BRD→MRD→立项报告）闭环体系，完成小组分组立项与知识管理工具实践。',
+     courses:[
+      {id:'010',title:'竞品分析方法论与AI辅助实践',tags:['方法论','核心'],
+       relatedNodes:[{id:1,title:'需求收集与分析',why:'竞品分析是需求分析的核心环节'},{id:2,title:'需求定义与PRD撰写',why:'竞品分析支撑PRD决策'}],
+       points:['竞品分析四步法：①明确分析目的(产品阶段+核心问题)→②确定竞品范围→③收集分析数据(AI辅助)→④决策判断(PM主导)','竞品分类四象限：直接竞品(业务+用户相同)、间接竞品(需求同方案异)、潜在竞品(跨行业入侵)、替代品(争夺用户时间)','产品六层分析框架：市场层(规模/增长/格局)→商业层(定价/成本/护城河)→用户层(画像/痛点/旅程)→功能层(差异化)→技术层(架构)→模型层(能力)','市场规模三层次：TAM(总市场)→SAM(可服务市场)→SOM(可获取市场)','竞品数量选择：单点功能分析1个、常规迭代2-4个、全行业调研4个以上','调研渠道矩阵：APP Store/Google Play/Product Hunt/AI工具集 + 清迈数据/艾瑞咨询/极光大数据 + IT橘子/天眼查/企查查','AI辅助竞品分析：设定目标与竞品范围→指导AI查找可靠数据源→审核关键信息→PM做最终决策','用户画像构建：应用商店评论+爬虫分析+行为数据+用户访谈+问卷调研，比凭空想象更落地','用户旅程图：梳理用户从接触到离开的全流程，分析每阶段行为/触点/情绪，识别关键痛点','PM核心价值：AI可收集数据和撰写报告，但目标设定/数据可信度判断/用户需求洞察/最终决策仍需PM完成'],
+       keyPoint:'竞品分析四步法：明确目的→选择竞品→收集分析→决策判断；PM负责决策，AI辅助执行',homework:'完成竞品分析报告（含市场层/商业层/用户层分析）'},
+      {id:'010-2',title:'四大交付物体系与项目立项',tags:['方法论','实战'],
+       relatedNodes:[{id:2,title:'需求定义与PRD撰写',why:'BRD/MRD/立项报告=需求文档体系'},{id:4,title:'需求评审与确认',why:'四大交付物每阶段需正式评审'},{id:5,title:'开发排期与立项',why:'立项报告含资源与排期规划'}],
+       points:['四大交付物闭环：竞品分析报告(分析层)→BRD(决策层)→MRD(规划层)→立项报告(执行层)','交付物1·竞品分析报告：分析目标5要素(决策类型+方向+用户假设+场景假设+成功标准) + 4-5个竞品 + 市场/商业/用户三层分析','交付物2·BRD商业需求文档：论证"为什么做"+"值不值得做"，含项目背景/市场机会/核心问题/建议方案/风险Top3','交付物3·MRD市场需求文档：细化市场需求，Kano模型分级(基本型/期望型/兴奋型) + MVP功能清单 + 成功指标(DAU/留存/转化率)','交付物4·立项报告：一句话定位 + 为什么做 + 凭什么是我们 + 能不能赚钱 + 风险 + 资源 + MVP清单 + 30天行动计划','知识管理工具链：飞书CLI→Obsidian原子笔记(拆解为细粒度结构化内容)→知识图谱双向关联','NotebookLM实践：YouTube to NotebookLM插件沉淀视频内容，50个笔记本×300篇文档','Skill封装方法：将经验封装为可复用技能，AI根据需求设计目录→MD文件说明资源与脚本调用','AI辅助写作流程：输出选题→大纲→章节内容→结构图，过程中给出修改意见，最后封装成skill','商业模式分类：免费+增值、订阅制、按量付费、买断制，AI产品通常采用订阅+按量付费','小组立项规则：5人一组+组长负责制，模拟真实团队立项，定期汇报确保方向正确'],
+       keyPoint:'四大交付物构成从分析→决策→规划→执行的完整闭环，每个阶段需正式汇报评审',homework:'赛道竞品分析报告 + BRD商业需求文档 + 小组组队与选题确认'}
     ]}
   ]
 }
@@ -3112,7 +3130,13 @@ const NH_GLOSSARY=[
 {term:'POC',full:'Proof of Concept',zh:'概念验证',cat:'产品方法论',week:[1],desc:'回答"做不做得出来"的快速验证。标准流程：想清楚验证什么→定义成功标准→快速试验→结果决策。技术成熟时可跳过。',refs:['CRISP-DM 1.0 — Chapman, P. et al. (2000). SPSS Inc.']},
 {term:'MVP',full:'Minimum Viable Product',zh:'最小可行产品',cat:'产品方法论',week:[1],desc:'回答"做出来有没有人用"的最小产品。市场需求已验证时可跳过。全新领域POC和MVP都不能跳过。'},
 {term:'PRD',full:'Product Requirements Document',zh:'产品需求文档',cat:'产品方法论',week:[1],desc:'传统产品经理的核心输出物，详细描述产品功能需求、交互逻辑、技术要求等。与原型图配合使用。'},
-{term:'BRD',full:'Business Requirements Document',zh:'商业需求文档',cat:'产品方法论',week:[1],desc:'从商业角度描述做什么与不做什么，明确技术路线和商业目标的文档。'},
+{term:'BRD',full:'Business Requirements Document',zh:'商业需求文档',cat:'产品方法论',week:[1,2],desc:'论证"为什么做"+"值不值得做"的商业决策文档。含项目背景、市场机会、核心问题、建议方案、竞争分析摘要、风险Top3、结论与建议。是四大交付物的第二层(决策层)。'},
+{term:'MRD',full:'Market Requirements Document',zh:'市场需求文档',cat:'产品方法论',week:[2],desc:'细化市场需求的规划文档。含市场概述、用户细分(按场景/付费意愿/频率)、Kano模型需求分级(基本型/期望型/兴奋型)、竞品功能差距、产品定位、MVP功能清单、成功指标(DAU/留存/转化率)。'},
+{term:'竞品分析',full:'Competitive Analysis',zh:'',cat:'产品方法论',week:[2],desc:'系统性识别、研究和评估竞争对手的产品策略和表现。四步法：明确目的→选择竞品→收集分析(AI辅助)→决策判断(PM主导)。竞品分类：直接/间接/潜在/替代品。'},
+{term:'TAM/SAM/SOM',full:'Total/Serviceable/Obtainable Market',zh:'市场规模三层次',cat:'产品方法论',week:[2],desc:'TAM=某赛道市场总价值；SAM=可服务的目标市场；SOM=能获取的付费用户规模及消费金额。用于评估市场机会和商业可行性。'},
+{term:'Kano模型',full:'Kano Model',zh:'',cat:'产品方法论',week:[2],desc:'需求分级框架：基本型需求(必须做，缺失则不满)、期望型需求(差异化竞争点)、兴奋型需求(亮点功能，超出预期)。用于MRD中的功能优先级排序。',refs:['Kano, N. et al. "Attractive Quality and Must-Be Quality." 1984']},
+{term:'用户画像',full:'User Persona',zh:'',cat:'产品方法论',week:[2],desc:'基于数据构建的目标用户典型特征描述。获取途径：应用商店评论+爬虫分析+行为数据+用户访谈+问卷调研。企业中一般半年更新一次。'},
+{term:'用户旅程图',full:'User Journey Map',zh:'',cat:'产品方法论',week:[2],desc:'展示用户从接触到离开产品全流程的可视化工具。分析每阶段的行为/触点/关键功能/情绪变化，识别痛点指导产品优化。'},
 {term:'场景描述公式',full:'',zh:'',cat:'产品方法论',week:[1],desc:'用户[明确群体] + 场景[具体情境] + 痛点[详细说明]。场景=讲故事：主人公 + 情境 + 冲突 + 解决方案。'},
 {term:'场景梳理四层结构',full:'',zh:'',cat:'产品方法论',week:[1,2],desc:'行业→业务域→场景→AI落地方案。从宏观到微观逐层聚焦，最终落地为可执行的AI解决方案。'},
 {term:'SOP',full:'Standard Operating Procedure',zh:'标准操作流程',cat:'产品方法论',week:[2],desc:'工作流的前身。规范化→自动化的提效路径：先对齐成本建立SOP，再通过技术手段实现自动流转。',refs:['ISO 9001:2015 Quality Management Systems']},
@@ -3123,6 +3147,10 @@ const NH_GLOSSARY=[
 {term:'Cherry Studio',full:'',zh:'多模型测试工具',cat:'工具平台',week:[1],desc:'支持客户端安装、知识库接入、多模型测试与效果对比的桌面工具。'},
 {term:'Cursor / Trae',full:'',zh:'AI辅助编程IDE',cat:'工具平台',week:[1],desc:'AI辅助编程工具。Cursor为海外版，Trae为国内版。通过自然语言指令生成代码。'},
 {term:'CC Switch',full:'',zh:'API多平台管理工具',cat:'工具平台',week:[1],desc:'API密钥管理工具，支持接入多服务商模型资源，通过底层API优化释放模型潜能。'},
+{term:'NotebookLM',full:'',zh:'Google知识沉淀工具',cat:'工具平台',week:[2],desc:'Google推出的AI笔记工具，支持文档上传与智能问答。可通过YouTube to NotebookLM插件沉淀视频内容，付费版支持50个笔记本×300篇文档。'},
+{term:'Obsidian',full:'',zh:'本地知识图谱笔记',cat:'工具平台',week:[2],desc:'本地化Markdown笔记工具，核心理念为原子笔记——将文档拆解为细粒度结构化内容，通过双向链接建立知识图谱。支持飞书CLI迁移文档并构建关联。'},
+{term:'Product Hunt',full:'',zh:'海外产品发现平台',cat:'工具平台',week:[2],desc:'海外新产品发布和发现平台，是竞品调研和市场分析的重要渠道。可用于了解AIGC等领域的最新产品动态。'},
+{term:'IT橘子/天眼查',full:'',zh:'企业信息查询平台',cat:'工具平台',week:[2],desc:'用于查询竞品融资阶段、企业资质、招投标项目等信息。天眼查/企查查可查看企业资质和违法信息，IT橘子专注互联网创投数据。'},
 // === 工作流与自动化 ===
 {term:'工作流',full:'Workflow',zh:'',cat:'工作流',week:[2],desc:'有明确开始和结束的流程化任务执行方式。构建要素：触发器→开始节点(输入变量)→处理节点(业务逻辑)→结束节点(输出结果)。适合自动化任务。'},
 {term:'对话流',full:'Chatflow',zh:'',cat:'工作流',week:[2],desc:'围绕话题持续交流的多轮对话模式，支持记忆和上下文管理。适合群组交互和咨询问答场景。'},
@@ -4066,6 +4094,12 @@ const CW_SLIDES_W2=[
   {key:'w2-agent',title:'智能体开发',icon:'🤖',day:3},
   {key:'w2-scene',title:'场景梳理框架',icon:'🎯',day:3},
   {key:'w2-interview',title:'面试实战要点',icon:'💼',day:3},
+  {key:'w2-compete',title:'竞品分析四步法',icon:'🏆',day:4},
+  {key:'w2-six-layer',title:'产品六层框架',icon:'📊',day:4},
+  {key:'w2-tam',title:'TAM/SAM/SOM',icon:'📈',day:4},
+  {key:'w2-deliverables',title:'四大交付物',icon:'📑',day:4},
+  {key:'w2-kano',title:'Kano 模型',icon:'🎯',day:4},
+  {key:'w2-knowledge',title:'知识管理工具链',icon:'🧠',day:4},
   {key:'w2-summary',title:'总结与行动',icon:'🚀',day:0}
 ];
 function nhRenderCourseware(){
@@ -4496,27 +4530,28 @@ function nhRenderCourseware(){
     h+='<div style="text-align:center;padding:40px 0 32px">';
     h+='<div style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;color:'+accent+'">WEEK 2 COURSEWARE</div>';
     h+='<h1 style="font-size:clamp(32px,6vw,48px);font-weight:600;line-height:1.07;letter-spacing:-.5px;margin-bottom:16px;color:'+txt+'">第二周知识全景</h1>';
-    h+='<p style="font-size:17px;line-height:1.47;letter-spacing:-.37px;max-width:520px;margin:0 auto 40px;color:'+sub+'">4.4 – 4.5 · RAG 技术全栈 × 智能体实战<br>从知识库构建到智能体发布的完整链路</p>';
+    h+='<p style="font-size:17px;line-height:1.47;letter-spacing:-.37px;max-width:560px;margin:0 auto 40px;color:'+sub+'">4.4 – 4.9 · RAG 技术全栈 × 智能体实战 × 竞品分析<br>从知识库构建到竞品分析再到项目立项的完整链路</p>';
     h+='</div>';
     const w2days=[
       {d:'Day 1 · 4/4(周六)',t:'RAG 离线阶段 · 知识库构建',icon:'🔧',color:'#8b5cf6',topics:['RAG核心概念与架构','Pipeline A-C: 采集→解析→清洗','Pipeline D-F: 分割→向量化→索引','大模型演进: COT/DeepSeek/Kimi']},
       {d:'Day 2 · 4/5(周日·上午)',t:'RAG 在线阶段 · 检索增强生成',icon:'🔎',color:'#06b6d4',topics:['Query改写六法','多路召回与重排','Graph RAG 知识图谱','Dify/工作流开发']},
-      {d:'Day 3 · 4/5(周日·下午)',t:'智能体开发与项目实战',icon:'🤖',color:'#f59e0b',topics:['Coze平台智能体全流程','RAG知识库接入','场景梳理四层结构','面试高频真题准备']}
+      {d:'Day 3 · 4/5(周日·下午)',t:'智能体开发与项目实战',icon:'🤖',color:'#f59e0b',topics:['Coze平台智能体全流程','RAG知识库接入','场景梳理四层结构','面试高频真题准备']},
+      {d:'Day 4 · 4/9(周三)',t:'竞品分析方法论与项目立项',icon:'🏆',color:'#ef4444',topics:['竞品分析四步法','产品六层分析框架','四大交付物闭环体系','知识管理工具链']}
     ];
-    h+='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:660px;margin:0 auto 40px">';
+    h+='<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;max-width:660px;margin:0 auto 40px">';
     w2days.forEach(dy=>{
-      h+='<div style="padding:24px 16px;border-radius:12px;background:'+card+';box-shadow:'+shadow+'">';
-      h+='<div style="font-size:28px;margin-bottom:10px">'+dy.icon+'</div>';
+      h+='<div style="padding:20px 16px;border-radius:12px;background:'+card+';box-shadow:'+shadow+'">';
+      h+='<div style="font-size:24px;margin-bottom:8px">'+dy.icon+'</div>';
       h+='<div style="font-size:10px;font-weight:600;letter-spacing:.3px;color:'+dy.color+';margin-bottom:4px">'+dy.d+'</div>';
-      h+='<div style="font-size:14px;font-weight:700;letter-spacing:-.2px;line-height:1.14;color:'+txt+';margin-bottom:12px">'+dy.t+'</div>';
+      h+='<div style="font-size:13px;font-weight:700;letter-spacing:-.2px;line-height:1.14;color:'+txt+';margin-bottom:10px">'+dy.t+'</div>';
       dy.topics.forEach(tp=>{
-        h+='<div style="display:flex;align-items:baseline;gap:6px;padding:3px 0;font-size:11px;line-height:1.4;color:'+sub+'"><span style="color:'+dy.color+'">›</span>'+tp+'</div>';
+        h+='<div style="display:flex;align-items:baseline;gap:6px;padding:2px 0;font-size:11px;line-height:1.4;color:'+sub+'"><span style="color:'+dy.color+'">›</span>'+tp+'</div>';
       });
       h+='</div>';
     });
     h+='</div>';
     h+='<div style="display:flex;justify-content:center;gap:40px">';
-    [{n:'2',l:'课程日'},{n:'7',l:'节课程'},{n:'49',l:'知识要点'},{n:'7',l:'实战作业'}].forEach(s=>{
+    [{n:'3',l:'课程日'},{n:'9',l:'节课程'},{n:'69',l:'知识要点'},{n:'9',l:'实战作业'}].forEach(s=>{
       h+='<div style="text-align:center"><div style="font-size:28px;font-weight:600;letter-spacing:-.5px;color:'+accent+'">'+s.n+'</div><div style="font-size:11px;color:'+sub+';margin-top:2px">'+s.l+'</div></div>';
     });
     h+='</div>';
@@ -4778,6 +4813,119 @@ function nhRenderCourseware(){
     });
     h+='</div>';
 
+  } else if(slide.key==='w2-compete'){
+    h+='<div style="text-align:center;padding:24px 0 20px">';
+    h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;color:#f59e0b">COMPETITIVE ANALYSIS</div>';
+    h+='<h2 style="font-size:clamp(24px,4vw,36px);font-weight:600;line-height:1.1;letter-spacing:-.5px;margin-bottom:12px;color:'+txt+'">竞品分析四步法</h2>';
+    h+='<p style="font-size:14px;color:'+sub+'">关键不在于产出报告，而在于分析过程中的思维方式</p>';
+    h+='</div>';
+    const steps=[{n:'01',t:'明确分析目的',d:'产品阶段+核心问题+目标用户+场景+成功标准',c:'#3b82f6'},{n:'02',t:'确定竞品范围',d:'直接竞品·间接竞品·潜在竞品·替代品',c:'#8b5cf6'},{n:'03',t:'收集分析数据',d:'AI辅助搜集 + 多渠道调研 + 数据可信度审核',c:'#06b6d4'},{n:'04',t:'决策判断',d:'PM主导最终决策，AI无法替代产品洞察',c:'#f59e0b'}];
+    h+='<div style="display:flex;flex-direction:column;gap:10px;max-width:520px;margin:0 auto 20px">';
+    steps.forEach(s=>{
+      h+='<div style="display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:10px;background:'+card+';box-shadow:'+shadow+'">';
+      h+='<div style="width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;background:'+s.c+'15;color:'+s.c+';flex-shrink:0">'+s.n+'</div>';
+      h+='<div><div style="font-size:13px;font-weight:700;color:'+txt+'">'+s.t+'</div>';
+      h+='<div style="font-size:11px;color:'+sub+';margin-top:2px">'+s.d+'</div></div></div>';
+    });
+    h+='</div>';
+    h+='<div style="max-width:520px;margin:0 auto;padding:14px;border-radius:10px;border-left:3px solid #f59e0b;background:'+secBg+'">';
+    h+='<div style="font-size:11px;font-weight:700;color:#f59e0b;margin-bottom:4px">💡 核心洞察</div>';
+    h+='<div style="font-size:12px;color:'+sub+';line-height:1.6">竞品分析在职场中极其重要，是解决工作中大部分问题及面试中常见问题的关键能力。无论是0→1新项目还是已有竞品的产品改进，都需要竞品分析确认产品方向、目标人群定位及功能差异化设计。</div>';
+    h+='</div>';
+
+  } else if(slide.key==='w2-six-layer'){
+    h+='<div style="text-align:center;padding:24px 0 20px">';
+    h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;color:#8b5cf6">PRODUCT ANALYSIS</div>';
+    h+='<h2 style="font-size:clamp(24px,4vw,36px);font-weight:600;line-height:1.1;letter-spacing:-.5px;margin-bottom:12px;color:'+txt+'">产品六层分析框架</h2>';
+    h+='</div>';
+    const layers=[{t:'市场层',d:'市场规模·增长趋势·竞争格局·主要玩家',c:'#ef4444',icon:'📊'},{t:'商业层',d:'定价策略·收费模式·成本结构·护城河',c:'#f59e0b',icon:'💰'},{t:'用户层',d:'用户画像·痛点Top5·决策因素·功能对比',c:'#10b981',icon:'👤'},{t:'功能层',d:'差异化设计·功能清单·空白机会识别',c:'#3b82f6',icon:'⚙️'},{t:'技术层',d:'架构选型·CopyUI/Multi-Agent·实现方案',c:'#8b5cf6',icon:'🔧'},{t:'模型层',d:'模型能力·数据来源·算力成本·壁垒',c:'#06b6d4',icon:'🧠'}];
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:540px;margin:0 auto">';
+    layers.forEach(l=>{
+      h+='<div style="padding:14px;border-radius:10px;background:'+card+';box-shadow:'+shadow+';border-left:3px solid '+l.c+'">';
+      h+='<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px"><span>'+l.icon+'</span>';
+      h+='<span style="font-size:12px;font-weight:700;color:'+l.c+'">'+l.t+'</span></div>';
+      h+='<div style="font-size:11px;color:'+sub+';line-height:1.5">'+l.d+'</div></div>';
+    });
+    h+='</div>';
+
+  } else if(slide.key==='w2-tam'){
+    h+='<div style="text-align:center;padding:24px 0 20px">';
+    h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;color:#10b981">MARKET SIZING</div>';
+    h+='<h2 style="font-size:clamp(24px,4vw,36px);font-weight:600;line-height:1.1;letter-spacing:-.5px;margin-bottom:12px;color:'+txt+'">TAM / SAM / SOM</h2>';
+    h+='<p style="font-size:14px;color:'+sub+'">市场规模三层次评估</p>';
+    h+='</div>';
+    h+='<div style="display:flex;flex-direction:column;align-items:center;gap:0;max-width:480px;margin:0 auto 20px">';
+    [{t:'TAM',f:'Total Addressable Market',d:'某赛道下市场的总价值',w:'100%',c:'#3b82f6'},{t:'SAM',f:'Serviceable Available Market',d:'与投资人有直接关系的可服务市场',w:'72%',c:'#8b5cf6'},{t:'SOM',f:'Serviceable Obtainable Market',d:'能获取的付费用户规模及消费金额',w:'44%',c:'#10b981'}].forEach(m=>{
+      h+='<div style="width:'+m.w+';padding:16px 20px;border-radius:12px;background:'+m.c+'12;border:1px solid '+m.c+'30;margin-bottom:-6px;text-align:center">';
+      h+='<div style="font-size:16px;font-weight:800;color:'+m.c+'">'+m.t+'</div>';
+      h+='<div style="font-size:10px;font-weight:600;color:'+sub+';margin:2px 0">'+m.f+'</div>';
+      h+='<div style="font-size:12px;color:'+txt+'">'+m.d+'</div></div>';
+    });
+    h+='</div>';
+    h+='<div style="max-width:480px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:10px">';
+    [{t:'调研渠道',d:'APP Store · Product Hunt · 艾瑞咨询 · 极光大数据',icon:'🔍'},{t:'企业信息',d:'IT橘子 · 天眼查 · 企查查 · 融资/招投标',icon:'🏢'}].forEach(c=>{
+      h+='<div style="padding:12px;border-radius:8px;background:'+secBg+'"><div style="display:flex;align-items:center;gap:4px;margin-bottom:4px"><span>'+c.icon+'</span><span style="font-size:11px;font-weight:700;color:'+txt+'">'+c.t+'</span></div><div style="font-size:10px;color:'+sub+';line-height:1.5">'+c.d+'</div></div>';
+    });
+    h+='</div>';
+
+  } else if(slide.key==='w2-deliverables'){
+    h+='<div style="text-align:center;padding:24px 0 20px">';
+    h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;color:#ef4444">DELIVERABLES</div>';
+    h+='<h2 style="font-size:clamp(24px,4vw,36px);font-weight:600;line-height:1.1;letter-spacing:-.5px;margin-bottom:12px;color:'+txt+'">四大交付物体系</h2>';
+    h+='<p style="font-size:14px;color:'+sub+'">从分析→决策→规划→执行的完整闭环</p>';
+    h+='</div>';
+    const deliverables=[{n:'1',t:'竞品分析报告',sub:'分析层',d:'分析目标5要素 + 4-5个竞品 + 市场/商业/用户三层分析',c:'#3b82f6'},{n:'2',t:'BRD 商业需求文档',sub:'决策层',d:'项目背景 · 市场机会 · 核心问题 · 建议方案 · 风险Top3',c:'#8b5cf6'},{n:'3',t:'MRD 市场需求文档',sub:'规划层',d:'Kano模型分级 + MVP功能清单 + 成功指标(DAU/留存)',c:'#06b6d4'},{n:'4',t:'立项报告',sub:'执行层',d:'一句话定位 + 30天行动计划 + 资源/风险/MVP清单',c:'#f59e0b'}];
+    h+='<div style="display:flex;flex-direction:column;gap:10px;max-width:540px;margin:0 auto">';
+    deliverables.forEach((d,i)=>{
+      h+='<div style="display:flex;align-items:center;gap:14px;padding:16px;border-radius:10px;background:'+card+';box-shadow:'+shadow+'">';
+      h+='<div style="width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;background:'+d.c+'15;color:'+d.c+';flex-shrink:0">'+d.n+'</div>';
+      h+='<div style="flex:1"><div style="display:flex;align-items:center;gap:8px;margin-bottom:2px"><span style="font-size:13px;font-weight:700;color:'+txt+'">'+d.t+'</span>';
+      h+='<span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;background:'+d.c+'15;color:'+d.c+'">'+d.sub+'</span></div>';
+      h+='<div style="font-size:11px;color:'+sub+'">'+d.d+'</div></div>';
+      if(i<3)h+='<div style="font-size:16px;color:'+sub+';margin-left:-4px">→</div>';
+      h+='</div>';
+    });
+    h+='</div>';
+
+  } else if(slide.key==='w2-kano'){
+    h+='<div style="text-align:center;padding:24px 0 20px">';
+    h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;color:#8b5cf6">KANO MODEL</div>';
+    h+='<h2 style="font-size:clamp(24px,4vw,36px);font-weight:600;line-height:1.1;letter-spacing:-.5px;margin-bottom:12px;color:'+txt+'">Kano 需求分级模型</h2>';
+    h+='<p style="font-size:14px;color:'+sub+'">用于MRD中的功能优先级排序</p>';
+    h+='</div>';
+    const kano=[{t:'基本型需求',sub:'Must-Be',d:'必须做，缺失则用户强烈不满。如：登录功能、数据安全',c:'#ef4444',icon:'🔴'},{t:'期望型需求',sub:'One-dimensional',d:'差异化竞争点，做得好提升满意度。如：搜索速度、UI美观',c:'#f59e0b',icon:'🟡'},{t:'兴奋型需求',sub:'Attractive',d:'亮点功能，超出预期带来惊喜。如：AI智能推荐、个性化定制',c:'#10b981',icon:'🟢'}];
+    h+='<div style="display:flex;flex-direction:column;gap:12px;max-width:520px;margin:0 auto 20px">';
+    kano.forEach(k=>{
+      h+='<div style="padding:16px;border-radius:10px;background:'+card+';box-shadow:'+shadow+';border-left:3px solid '+k.c+'">';
+      h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span>'+k.icon+'</span>';
+      h+='<span style="font-size:13px;font-weight:700;color:'+txt+'">'+k.t+'</span>';
+      h+='<span style="font-size:9px;font-weight:600;padding:2px 6px;border-radius:4px;background:'+k.c+'15;color:'+k.c+'">'+k.sub+'</span></div>';
+      h+='<div style="font-size:12px;color:'+sub+';line-height:1.5">'+k.d+'</div></div>';
+    });
+    h+='</div>';
+    h+='<div style="max-width:520px;margin:0 auto;padding:12px;border-radius:8px;background:'+secBg+';text-align:center">';
+    h+='<div style="font-size:11px;color:'+sub+'">MRD中按Kano分级列出v1.0功能 → MVP功能清单 → 成功指标(DAU/留存/转化率)</div>';
+    h+='</div>';
+
+  } else if(slide.key==='w2-knowledge'){
+    h+='<div style="text-align:center;padding:24px 0 20px">';
+    h+='<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;color:#06b6d4">KNOWLEDGE MANAGEMENT</div>';
+    h+='<h2 style="font-size:clamp(24px,4vw,36px);font-weight:600;line-height:1.1;letter-spacing:-.5px;margin-bottom:12px;color:'+txt+'">知识管理工具链</h2>';
+    h+='</div>';
+    const km=[{t:'飞书 CLI',d:'将飞书文档沉淀到Obsidian，建立关联形成知识图谱',icon:'📄',c:'#3b82f6'},{t:'Obsidian 原子笔记',d:'将文档拆解为细粒度结构化内容，通过双向链接构建知识网络',icon:'💎',c:'#8b5cf6'},{t:'NotebookLM',d:'YouTube to NotebookLM插件沉淀视频内容，50笔记本×300文档',icon:'📓',c:'#10b981'},{t:'Skill 封装',d:'将经验封装为可复用技能，AI设计目录 + MD文件说明资源调用',icon:'⚡',c:'#f59e0b'}];
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:540px;margin:0 auto 20px">';
+    km.forEach(k=>{
+      h+='<div style="padding:14px;border-radius:10px;background:'+card+';box-shadow:'+shadow+'">';
+      h+='<div style="display:flex;align-items:center;gap:6px;margin-bottom:6px"><span style="font-size:18px">'+k.icon+'</span>';
+      h+='<span style="font-size:12px;font-weight:700;color:'+k.c+'">'+k.t+'</span></div>';
+      h+='<div style="font-size:11px;color:'+sub+';line-height:1.5">'+k.d+'</div></div>';
+    });
+    h+='</div>';
+    h+='<div style="max-width:540px;margin:0 auto;padding:14px;border-radius:10px;border-left:3px solid #06b6d4;background:'+secBg+'">';
+    h+='<div style="font-size:11px;font-weight:700;color:#06b6d4;margin-bottom:4px">🔗 工具链路</div>';
+    h+='<div style="font-size:12px;color:'+txt+';text-align:center">飞书文档 → Obsidian原子笔记 → 知识图谱 → AI Skill封装 → 面试展示</div>';
+    h+='</div>';
+
   } else if(slide.key==='w2-summary'){
     h+='<div style="text-align:center;padding:32px 0 24px">';
     h+='<div style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;color:'+accent+'">WEEK 2 SUMMARY</div>';
@@ -4793,7 +4941,9 @@ function nhRenderCourseware(){
       {n:'07',t:'Dify 工作流',d:'工作流 vs 对话流，SOP→自动化',color:'#06b6d4'},
       {n:'08',t:'智能体全流程',d:'创建→人设→知识库→调试→发布',color:'#f59e0b'},
       {n:'09',t:'场景梳理',d:'行业→业务域→场景→AI落地方案',color:'#f59e0b'},
-      {n:'10',t:'面试实战',d:'RAG高频真题 + 场景化表达技巧',color:'#f59e0b'}
+      {n:'10',t:'竞品分析',d:'四步法 + 六层框架 + AI辅助分析',color:'#f59e0b'},
+      {n:'11',t:'四大交付物',d:'竞品报告→BRD→MRD→立项报告',color:'#ef4444'},
+      {n:'12',t:'知识管理',d:'Obsidian原子笔记 + NotebookLM + Skill封装',color:'#ef4444'}
     ];
     h+='<div style="max-width:560px;margin:0 auto 28px;columns:2;column-gap:20px">';
     w2pts.forEach(p=>{
@@ -4805,8 +4955,8 @@ function nhRenderCourseware(){
     h+='</div>';
     h+='<div style="text-align:center;padding:16px;border-radius:12px;background:'+secBg+'">';
     h+='<div style="font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px;color:'+sub+'">课程来源</div>';
-    h+='<div style="font-size:12px;color:'+txt+'">且曼 AI 产品经理前瞻学院 · 第二周 · 2天7节课</div>';
-    h+='<div style="font-size:11px;color:'+sub+';margin-top:4px">RAG全栈技术 → 智能体实战 → 场景梳理</div>';
+    h+='<div style="font-size:12px;color:'+txt+'">且曼 AI 产品经理前瞻学院 · 第二周 · 3天9节课</div>';
+    h+='<div style="font-size:11px;color:'+sub+';margin-top:4px">RAG全栈技术 → 智能体实战 → 竞品分析 → 项目立项</div>';
     h+='</div>';
 
   } else if(slide.key==='summary'){
