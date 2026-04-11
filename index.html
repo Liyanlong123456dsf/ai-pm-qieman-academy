@@ -3113,6 +3113,12 @@ const NH_GLOSSARY=[
 {term:'ICL',full:'In-Context Learning',zh:'上下文学习',cat:'AI基础',week:[1,2],desc:'将样本置于上下文窗口中，使模型在特定环境中学习并参考模板作答的技术。是涌现能力的子能力之一，也称Few-shot Learning。',refs:['Brown et al. "Language Models are Few-Shot Learners (GPT-3)." OpenAI, NeurIPS 2020']},
 {term:'乔哈里视窗',full:'Johari Window',zh:'',cat:'产品方法论',week:[1],desc:'人机协作四象限模型：①公开象限(我知AI知)→AI作助理 ②隐私象限(我知AI不知)→投喂上下文 ③盲点象限(AI知我不知)→AI作知识库 ④潜能象限(都不知)→共创探索。',refs:['Luft, J. & Ingham, H. (1955). "The Johari Window."']},
 {term:'上下文工程',full:'Context Engineering',zh:'',cat:'AI基础',week:[1],desc:'系统化管理和优化输入给模型的上下文信息的方法论，通过合理组织system prompt、ICL样本、chat history等提升输出质量。'},
+{term:'Prompt Engineering',full:'',zh:'提示词工程',cat:'AI基础',week:[1],desc:'系统化设计、优化和管理提示词的方法论。涵盖Prompt分类(User/System)、设计四大原则(简洁明了/正向提问/逐步引导/ICL样本)、效果公式(大模型能力×任务设计×Prompt质量)。与上下文工程共同构成人机协作的技术基础。',refs:['DAIR.AI "Prompt Engineering Guide." 2023']},
+{term:'System Prompt',full:'',zh:'系统提示词',cat:'AI基础',week:[1],desc:'为模型预设环境背景与角色定义的提示词。用于定义AI的"人设"、减少重复信息输入、提高对话一致性。例如"你是专业的营养师"。与User Prompt相对。'},
+{term:'User Prompt',full:'',zh:'用户提示词',cat:'AI基础',week:[1],desc:'用户对模型发出的具体指令或问题。随对话动态变化，表达具体需求与意图，每次交互可以不同。例如"帮我推荐附近的餐厅"。与System Prompt相对。'},
+{term:'指令跟随',full:'Instruction Following',zh:'',cat:'AI基础',week:[1],desc:'大模型涌现能力的三大子能力之一。模型理解多轮对话意图，根据用户指令执行多步骤复杂任务的能力。与ICL(上下文学习)和COT(思维链推理)并列。'},
+{term:'幻觉',full:'Hallucination',zh:'',cat:'AI基础',week:[1],desc:'大模型四大局限之一。模型生成看似合理但不准确甚至完全编造的内容。RAG技术通过检索外部知识库可有效缓解幻觉问题。其余三大局限：时效性、安全性、专业性与隐私。'},
+{term:'Few-shot Learning',full:'',zh:'少样本学习',cat:'AI基础',week:[1],desc:'在上下文中提供少量示例(2-5个)让模型学习模式并泛化输出的技术。是上下文工程的核心技巧之一。与Zero-shot(零样本)和One-shot(单样本)相对。与ICL同义。',refs:['Brown et al. "Language Models are Few-Shot Learners (GPT-3)." OpenAI, NeurIPS 2020']},
 {term:'Markdown',full:'',zh:'轻量级标记语言',cat:'工具平台',week:[1],desc:'通过简单文本格式规则实现标题、列表、代码块等排版的标记语言。用Markdown语法编写Prompt已被证明能显著提升模型理解和回应质量。'},
 // === RAG技术 ===
 {term:'RAG',full:'Retrieval-Augmented Generation',zh:'检索增强生成',cat:'RAG技术',week:[1,2],desc:'给大模型装"外挂知识库"的技术架构。通过检索外部知识库补充LLM回答，解决时效性、幻觉和数据安全问题。',refs:['Lewis et al. "RAG: Retrieval-Augmented Generation." Facebook AI Research, 2020']},
@@ -3137,6 +3143,9 @@ const NH_GLOSSARY=[
 {term:'Kano模型',full:'Kano Model',zh:'',cat:'产品方法论',week:[2],desc:'需求分级框架：基本型需求(必须做，缺失则不满)、期望型需求(差异化竞争点)、兴奋型需求(亮点功能，超出预期)。用于MRD中的功能优先级排序。',refs:['Kano, N. et al. "Attractive Quality and Must-Be Quality." 1984']},
 {term:'用户画像',full:'User Persona',zh:'',cat:'产品方法论',week:[2],desc:'基于数据构建的目标用户典型特征描述。获取途径：应用商店评论+爬虫分析+行为数据+用户访谈+问卷调研。企业中一般半年更新一次。'},
 {term:'用户旅程图',full:'User Journey Map',zh:'',cat:'产品方法论',week:[2],desc:'展示用户从接触到离开产品全流程的可视化工具。分析每阶段的行为/触点/关键功能/情绪变化，识别痛点指导产品优化。'},
+{term:'产品六层分析框架',full:'',zh:'',cat:'产品方法论',week:[2],desc:'竞品分析的系统化拆解框架，从宏观到微观逐层深入：市场层(TAM/SAM/SOM·规模/增长/格局)→商业层(定价/成本/护城河)→用户层(画像/痛点/旅程)→功能层(差异化功能)→技术层(架构方案)→模型层(AI能力)。'},
+{term:'四大交付物',full:'',zh:'',cat:'产品方法论',week:[2],desc:'从分析到执行的完整闭环文档体系：竞品分析报告(分析层)→BRD商业需求文档(决策层)→MRD市场需求文档(规划层)→立项报告(执行层)。每个阶段需正式汇报评审。'},
+{term:'立项报告',full:'Project Initiation Report',zh:'',cat:'产品方法论',week:[2],desc:'四大交付物的第四层(执行层)。核心要素：一句话定位+为什么做+凭什么是我们+能不能赚钱+风险Top3+资源需求+MVP功能清单+30天行动计划。是项目正式启动的决策依据。'},
 {term:'场景描述公式',full:'',zh:'',cat:'产品方法论',week:[1],desc:'用户[明确群体] + 场景[具体情境] + 痛点[详细说明]。场景=讲故事：主人公 + 情境 + 冲突 + 解决方案。'},
 {term:'场景梳理四层结构',full:'',zh:'',cat:'产品方法论',week:[1,2],desc:'行业→业务域→场景→AI落地方案。从宏观到微观逐层聚焦，最终落地为可执行的AI解决方案。'},
 {term:'SOP',full:'Standard Operating Procedure',zh:'标准操作流程',cat:'产品方法论',week:[2],desc:'工作流的前身。规范化→自动化的提效路径：先对齐成本建立SOP，再通过技术手段实现自动流转。',refs:['ISO 9001:2015 Quality Management Systems']},
@@ -4117,7 +4126,7 @@ function nhRenderCourseware(){
   const secBg=dk?'#000000':'#f5f5f7';
   const shadow=dk?'none':'rgba(0,0,0,.22) 3px 5px 30px 0px';
   const slide=CW_SLIDES[cwSlide];
-  const dayLabel=isW2?(slide.day===1?'Day 1 · 4月4日(周六)':slide.day===2?'Day 2 · 4月5日(周日·上午)':slide.day===3?'Day 3 · 4月5日(周日·下午)':''):(slide.day===1?'Day 1 · 3月28日':slide.day===2?'Day 2 · 3月29日':slide.day===3?'Day 3 · 4月2日':'');
+  const dayLabel=isW2?(slide.day===1?'Day 1 · 4月4日(周六)':slide.day===2?'Day 2 · 4月5日(周日·上午)':slide.day===3?'Day 3 · 4月5日(周日·下午)':slide.day===4?'Day 4 · 4月9日(周三)':''):(slide.day===1?'Day 1 · 3月28日':slide.day===2?'Day 2 · 3月29日':slide.day===3?'Day 3 · 4月2日':'');
   let h='<div class="nh-animate">';
 
   // ======== TOP NAV ========
