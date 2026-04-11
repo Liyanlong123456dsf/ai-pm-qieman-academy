@@ -1580,7 +1580,7 @@ function openObsidianVault(){
   AudioSys.play('obsidian');
   // Try Obsidian URI protocol first, fallback to showing info modal
   const vaultName='Obsidian Vault';
-  const notePath='第一周/00 Week01 学习地图';
+  const notePath='第一周笔记/00 第一周学习地图';
   const obsidianURI='obsidian://open?vault='+encodeURIComponent(vaultName)+'&file='+encodeURIComponent(notePath);
   
   // Show Obsidian integration overlay
@@ -1606,14 +1606,14 @@ function openObsidianVault(){
           <span class="text-lg mt-0.5">📘</span>
           <div>
             <div class="text-sm font-bold ${isDk?'text-white':'text-gray-900'}">学习地图 (MOC)</div>
-            <div class="text-xs ${isDk?'text-gray-400':'text-gray-500'}">00 Week01 学习地图.md — 课程总览与导航</div>
+            <div class="text-xs ${isDk?'text-gray-400':'text-gray-500'}">00 第一周学习地图.md / 00 第二周学习地图.md — 课程总览与导航</div>
           </div>
         </div>
         <div class="flex items-start gap-3 p-3 rounded-xl" style="background:${isDk?'rgba(255,255,255,.05)':'rgba(0,0,0,.03)'}">
           <span class="text-lg mt-0.5">📝</span>
           <div>
-            <div class="text-sm font-bold ${isDk?'text-white':'text-gray-900'}">9 篇课程笔记</div>
-            <div class="text-xs ${isDk?'text-gray-400':'text-gray-500'}">01-09 覆盖3天课程，含知识点/作业/关联链接</div>
+            <div class="text-sm font-bold ${isDk?'text-white':'text-gray-900'}">7 篇按天合并笔记</div>
+            <div class="text-xs ${isDk?'text-gray-400':'text-gray-500'}">Day1–Day4 覆盖7天课程，含全部知识点/作业/双向链接</div>
           </div>
         </div>
         <div class="flex items-start gap-3 p-3 rounded-xl" style="background:${isDk?'rgba(255,255,255,.05)':'rgba(0,0,0,.03)'}">
@@ -1627,7 +1627,7 @@ function openObsidianVault(){
           <span class="text-lg mt-0.5">📖</span>
           <div>
             <div class="text-sm font-bold ${isDk?'text-white':'text-gray-900'}">附录笔记</div>
-            <div class="text-xs ${isDk?'text-gray-400':'text-gray-500'}">工具清单 · 金句集 · 名词释义（40+术语）</div>
+            <div class="text-xs ${isDk?'text-gray-400':'text-gray-500'}">工具清单 · 金句集 · 名词释义（75+术语）</div>
           </div>
         </div>
         <div class="flex items-start gap-3 p-3 rounded-xl" style="background:${isDk?'rgba(255,255,255,.05)':'rgba(0,0,0,.03)'}">
@@ -1646,7 +1646,7 @@ function openObsidianVault(){
         <button onclick="this.closest('#obsidian-overlay').style.opacity='0';setTimeout(()=>document.getElementById('obsidian-overlay')?.remove(),300)" class="px-5 py-3 rounded-xl text-sm font-semibold ${isDk?'text-gray-400 hover:text-white':'text-gray-500 hover:text-gray-900'} transition-colors" style="background:${isDk?'rgba(255,255,255,.05)':'rgba(0,0,0,.05)'}">关闭</button>
       </div>
       <div class="mt-4 text-[10px] ${isDk?'text-gray-600':'text-gray-400'} text-center">
-        笔记路径：Obsidian Vault / 第一周 + 第二周 / · 含 RAG 专题精读 + 竞品分析
+        笔记路径：Obsidian Vault / 第一周笔记 + 第二周笔记 / · 按天合并 · 含 RAG 专题精读 + 竞品分析
       </div>
     </div>`;
     document.body.appendChild(overlay);
