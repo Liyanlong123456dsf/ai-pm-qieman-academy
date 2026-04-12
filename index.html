@@ -3395,6 +3395,7 @@ function nhRenderSidebar(){
     {key:'glossary',label:'释义',onclick:'nhShowGlossary()',ac:'dark:bg-cyan-500/15 bg-cyan-100 dark:text-cyan-400 text-cyan-600',svg:'<path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>'}
   ];
   _navItems.push({key:'courseware',label:'一周知识全览',onclick:'nhShowCourseware()',ac:'dark:bg-violet-500/15 bg-violet-100 dark:text-violet-400 text-violet-600',svg:'<path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>'});
+  _navItems.push({key:'weekly-output',label:'每周输出',onclick:'nhOpenWeeklyOutput()',ac:'dark:bg-pink-500/15 bg-pink-100 dark:text-pink-400 text-pink-600',svg:'<path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>'});
   h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:16px">';
   _navItems.forEach(n=>{
     const act=nhView===n.key;
@@ -5393,6 +5394,7 @@ function nhToggleDay(di){nhExpandedDay=nhExpandedDay===di?null:di;nhRenderSideba
 function nhShowDayOverview(di){nhView='day';nhExpandedDay=di;nhCourse=null;nhRenderSidebar();nhRenderMain()}
 function nhShowCourse(key){nhView='course';nhCourse=key;nhExpandedDay=parseInt(key.split('-')[0]);nhRenderSidebar();nhRenderMain()}
 function nhShowCourseware(){nhView='courseware';nhCourse=null;nhRenderSidebar();nhRenderMain()}
+function nhOpenWeeklyOutput(){const urls={0:'weekly-output/week1.html',1:'weekly-output/week2.html',2:'weekly-output/week3.html'};const u=urls[nhWeek];if(u)window.open(u,'_blank');else alert('该周每周输出课件正在制作中，敬请期待！')}
 // Cross-link: jump from Notes Hub → PM flow node
 function nhJumpToNode(nodeIdx){
   toggleNotesHub();

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第一周 · AI产品经理入门全景 — 每周输出课件</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;600;700;900&display=swap');
+:root{--black:#000;--near-black:#1d1d1f;--light-gray:#f5f5f7;--apple-blue:#0071e3;--bright-blue:#2997ff;--white:#fff;--surface:rgba(255,255,255,.06);--surface-border:rgba(255,255,255,.1);--dark-surface:#18181b;--expo:cubic-bezier(.16,1,.3,1);--green:#30d158;--purple:#bf5af2;--orange:#ff9f0a;--red:#ff453a;--teal:#64d2ff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter','Noto Sans SC',-apple-system,system-ui,sans-serif;background:#000;color:#fff;overflow:hidden;width:100vw;height:100vh;-webkit-font-smoothing:antialiased}
+::selection{background:rgba(41,151,255,.3)}
+#starfield{position:fixed;inset:0;z-index:0;pointer-events:none}
+.orb{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0;opacity:.2;animation:orbFloat 12s ease-in-out infinite}
+.orb-1{width:400px;height:400px;background:radial-gradient(circle,#2997ff,transparent);top:-10%;left:-5%}
+.orb-2{width:350px;height:350px;background:radial-gradient(circle,#bf5af2,transparent);bottom:-10%;right:-5%;animation-delay:-4s}
+.orb-3{width:250px;height:250px;background:radial-gradient(circle,#30d158,transparent);top:50%;left:60%;animation-delay:-7s}
+@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-20px,30px) scale(.95)}}
+.presentation{width:100vw;height:100vh;position:relative;z-index:1}
+.slide{width:100vw;height:100vh;display:none;flex-direction:column;justify-content:center;align-items:center;padding:60px 80px 100px;position:absolute;inset:0;opacity:0;transform:scale(.95) translateY(20px);transition:opacity .6s var(--expo),transform .6s var(--expo)}
+.slide.active{display:flex;opacity:1;transform:scale(1) translateY(0)}
+.slide.exit-left{display:flex;opacity:0;transform:scale(.93) translateX(-60px)}
+.slide.exit-right{display:flex;opacity:0;transform:scale(.93) translateX(60px)}
+.bg-black{background:transparent}.bg-light{background:rgba(245,245,247,.97);color:var(--near-black)}.bg-dark-surface{background:rgba(24,24,27,.92)}.bg-grad-blue{background:linear-gradient(135deg,rgba(0,40,80,.4),transparent)}.bg-grad-purple{background:linear-gradient(135deg,rgba(60,20,80,.3),transparent)}
+.slide-title{font-size:clamp(36px,5.5vw,64px);font-weight:800;line-height:1.05;letter-spacing:-1.5px;text-align:center;margin-bottom:20px;background:linear-gradient(135deg,#fff 0%,#2997ff 50%,#bf5af2 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.bg-light .slide-title{background:linear-gradient(135deg,#1d1d1f,#0071e3 60%,#bf5af2);-webkit-background-clip:text;background-clip:text}
+.slide-subtitle{font-size:clamp(16px,2.2vw,26px);font-weight:300;line-height:1.2;text-align:center;opacity:.6;margin-bottom:40px}
+.section-label{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--bright-blue);margin-bottom:14px;text-align:center}
+.bg-light .section-label{color:var(--apple-blue)}
+.ct{font-size:clamp(24px,3.2vw,40px);font-weight:700;line-height:1.1;letter-spacing:-.5px;text-align:center;margin-bottom:32px}
+.cb{font-size:clamp(14px,1.5vw,18px);font-weight:400;line-height:1.6;max-width:880px;text-align:center}
+.hl{color:var(--bright-blue);font-weight:600}.bg-light .hl{color:var(--apple-blue)}
+.hl-g{color:var(--green);font-weight:600}.hl-p{color:var(--purple);font-weight:600}.hl-o{color:var(--orange);font-weight:600}
+.card{background:var(--surface);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--surface-border);border-radius:16px;padding:24px 22px;text-align:left;transition:transform .5s var(--expo),box-shadow .5s var(--expo)}
+.card:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 0 30px rgba(41,151,255,.08),0 20px 40px rgba(0,0,0,.2)}
+.bg-light .card{background:rgba(255,255,255,.8);border:1px solid rgba(0,0,0,.06);box-shadow:0 4px 24px rgba(0,0,0,.04)}
+.bg-light .card:hover{box-shadow:0 8px 40px rgba(0,0,0,.08)}
+.ci{font-size:28px;margin-bottom:10px;display:block;transition:transform .4s var(--expo)}.card:hover .ci{transform:scale(1.12) rotate(-5deg)}
+.ctt{font-size:17px;font-weight:700;line-height:1.2;margin-bottom:6px}
+.cd{font-size:12.5px;font-weight:400;line-height:1.6;opacity:.7}
+.g{display:grid;gap:14px;max-width:1040px;width:100%}.c2{grid-template-columns:1fr 1fr}.c3{grid-template-columns:1fr 1fr 1fr}.c4{grid-template-columns:repeat(4,1fr)}.c5{grid-template-columns:repeat(5,1fr)}
+.tag{display:inline-block;background:rgba(41,151,255,.12);color:var(--bright-blue);font-size:11px;font-weight:700;padding:3px 12px;border-radius:980px;margin-bottom:6px;letter-spacing:.5px}
+.bg-light .tag{background:rgba(0,113,227,.08);color:var(--apple-blue)}
+.tg{background:rgba(48,209,88,.12);color:var(--green)}.tp{background:rgba(191,90,242,.12);color:var(--purple)}.to{background:rgba(255,159,10,.12);color:var(--orange)}
+.fd{display:flex;align-items:center;justify-content:center;gap:0;margin:24px 0;flex-wrap:wrap}
+.fn{background:var(--surface);backdrop-filter:blur(16px);border:1px solid var(--surface-border);border-radius:14px;padding:16px 22px;text-align:center;min-width:110px;transition:all .4s var(--expo)}
+.fn:hover{transform:translateY(-3px)}.bg-light .fn{background:rgba(255,255,255,.85);border:1px solid rgba(0,0,0,.06)}
+.fi{font-size:24px;margin-bottom:6px}.fl{font-size:13px;font-weight:600}.fs{font-size:10px;opacity:.5;margin-top:2px}
+.fa{font-size:20px;color:var(--bright-blue);margin:0 6px;opacity:.5}.bg-light .fa{color:var(--apple-blue)}
+.pl{text-align:left;max-width:900px;width:100%}
+.pi{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;font-size:clamp(13px,1.4vw,16px);line-height:1.55}
+.pb{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:rgba(41,151,255,.15);color:var(--bright-blue);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.bg-light .pb{background:rgba(0,113,227,.08);color:var(--apple-blue)}
+.fb{background:var(--surface);border:1px solid var(--surface-border);border-radius:16px;padding:28px 36px;text-align:center;margin:20px auto;max-width:700px}
+.bg-light .fb{background:rgba(255,255,255,.85);border:1px solid rgba(0,0,0,.06)}
+.ft{font-size:clamp(20px,2.8vw,36px);font-weight:800;letter-spacing:-.5px}
+.qb{background:var(--surface);border-left:3px solid var(--bright-blue);border-radius:0 12px 12px 0;padding:20px 28px;margin:16px auto;max-width:700px;font-size:clamp(16px,2vw,22px);font-weight:500;line-height:1.5;font-style:italic}
+.bg-light .qb{background:rgba(0,113,227,.04);border-left-color:var(--apple-blue)}
+.progress-bar{position:fixed;bottom:0;left:0;width:100%;height:3px;background:rgba(255,255,255,.06);z-index:100}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--apple-blue),var(--bright-blue));transition:width .4s var(--expo);border-radius:0 2px 2px 0}
+.nav-bar{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:100;display:flex;align-items:center;gap:16px;background:rgba(0,0,0,.6);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.08);border-radius:980px;padding:8px 20px}
+.nav-btn{width:36px;height:36px;border-radius:50%;border:none;background:rgba(255,255,255,.08);color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s var(--expo)}
+.nav-btn:hover{background:var(--apple-blue);transform:scale(1.1)}.nav-btn:disabled{opacity:.2;cursor:default;transform:none}.nav-btn:disabled:hover{background:rgba(255,255,255,.08)}
+.nav-info{font-size:12px;font-weight:600;color:rgba(255,255,255,.5);min-width:80px;text-align:center}
+.nav-home{font-size:13px;text-decoration:none;color:rgba(255,255,255,.5);transition:color .3s}.nav-home:hover{color:var(--bright-blue)}
+.sn{font-size:120px;font-weight:900;line-height:1;background:linear-gradient(135deg,var(--bright-blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px}
+.tl{max-width:800px;width:100%;position:relative;padding-left:40px}
+.tl::before{content:'';position:absolute;left:14px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--bright-blue),var(--purple),var(--green))}
+.tli{position:relative;margin-bottom:20px;padding-left:24px}
+.tld{position:absolute;left:-32px;top:4px;width:12px;height:12px;border-radius:50%;border:2px solid var(--bright-blue);background:#000}
+.tlt{font-size:15px;font-weight:700;margin-bottom:3px}.tlc{font-size:12.5px;opacity:.6;line-height:1.5}
+.card,.pi,.fn,.tli{opacity:0;transform:translateY(16px);transition:opacity .5s var(--expo),transform .5s var(--expo)}
+.slide.active .card,.slide.active .pi,.slide.active .fn,.slide.active .tli{opacity:1;transform:translateY(0)}
+.slide.active *:nth-child(1){transition-delay:.05s}.slide.active *:nth-child(2){transition-delay:.1s}.slide.active *:nth-child(3){transition-delay:.15s}.slide.active *:nth-child(4){transition-delay:.2s}.slide.active *:nth-child(5){transition-delay:.25s}.slide.active *:nth-child(6){transition-delay:.3s}
+@media(max-width:768px){.slide{padding:40px 24px 90px}.c3,.c4,.c5{grid-template-columns:1fr 1fr}.c2{grid-template-columns:1fr}.nav-bar{bottom:8px;padding:6px 14px;gap:10px}}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+<div class="presentation" id="deck">
+
+<!-- S0 封面 -->
+<div class="slide bg-black">
+  <div class="section-label">且曼AI产品经理学院 · 每周输出</div>
+  <div class="slide-title">第一周<br>AI产品经理入门全景</div>
+  <div class="slide-subtitle">3天 · 9课 · 从工具到思维的完整跃迁</div>
+  <div style="display:flex;gap:24px;margin-top:16px">
+    <div class="card" style="text-align:center;padding:16px 24px"><div style="font-size:28px;font-weight:800;color:var(--bright-blue)">3</div><div style="font-size:11px;opacity:.5">教学日</div></div>
+    <div class="card" style="text-align:center;padding:16px 24px"><div style="font-size:28px;font-weight:800;color:var(--purple)">9</div><div style="font-size:11px;opacity:.5">课程数</div></div>
+    <div class="card" style="text-align:center;padding:16px 24px"><div style="font-size:28px;font-weight:800;color:var(--green)">9</div><div style="font-size:11px;opacity:.5">核心工具</div></div>
+    <div class="card" style="text-align:center;padding:16px 24px"><div style="font-size:28px;font-weight:800;color:var(--orange)">2h</div><div style="font-size:11px;opacity:.5">精讲时长</div></div>
+  </div>
+</div>
+
+<!-- S1 学习地图 -->
+<div class="slide bg-dark-surface">
+  <div class="section-label">学习路线图</div>
+  <div class="ct">三天 · 九课 · 知识全景导航</div>
+  <div class="tl">
+    <div class="tli"><div class="tld"></div><div class="tlt" style="color:var(--bright-blue)">Day 1 · 3月28日 — AI工具入门与场景思维</div><div class="tlc">课程 001-003：IDE安装实战 → 场景描述公式 → 国产模型选型</div></div>
+    <div class="tli"><div class="tld" style="border-color:var(--purple)"></div><div class="tlt" style="color:var(--purple)">Day 2 · 3月29日 — 大模型产品化思维</div><div class="tlc">课程 004-006-2：POC/MVP方法论 → LLM技术原理 → 模型服务化 → API多平台接入</div></div>
+    <div class="tli"><div class="tld" style="border-color:var(--green)"></div><div class="tlt" style="color:var(--green)">Day 3 · 4月2日 — 大模型深化与Prompt工程</div><div class="tlc">课程 007/007-2：训练流程与核心能力 → Prompt工程与乔哈里视窗人机协作模型</div></div>
+  </div>
+</div>
+
+<!-- S2 第一节课分隔 -->
+<div class="slide bg-black" style="justify-content:center;align-items:center">
+  <div class="sn">01</div>
+  <div style="font-size:clamp(28px,4vw,48px);font-weight:700;letter-spacing:-1px;margin-bottom:12px">AI工具与技术原理</div>
+  <div style="font-size:16px;opacity:.4">第一节课 · 约60分钟 · Day1 + Day2</div>
+</div>
+
+<!-- S3 001 IDE工具 -->
+<div class="slide bg-light">
+  <div class="section-label">课程 001 · Day 1</div>
+  <div class="ct">AI编程工具选型与实战</div>
+  <div class="g c3">
+    <div class="card"><div class="ci">⚡</div><div class="tag">工具选型</div><div class="ctt">Cursor vs Trae</div><div class="cd"><b>Cursor</b>：海外版AI IDE，内置Claude模型，代码补全强<br><b>Trae</b>：字节跳动国内版，免翻墙，适合国内环境<br>二选一安装，推荐 Claude 4.7（不带Beta）</div></div>
+    <div class="card"><div class="ci">🐍</div><div class="tag tg">实战项目</div><div class="ctt">AI生成贪吃蛇游戏</div><div class="cd">用自然语言指令让AI生成完整游戏代码<br>右键HTML → 浏览器打开即可测试<br><b>核心体验</b>：感受AI从"描述"到"代码"的转化</div></div>
+    <div class="card"><div class="ci">🐛</div><div class="tag tp">核心思维</div><div class="ctt">Bug反馈思维</div><div class="cd"><b>正确</b>："点击开始按钮后画面无响应"<br><b>错误</b>："它坏了"、"不能用了"<br>明确描述<b>现象</b>，不做模糊反馈</div></div>
+  </div>
+</div>
+
+<!-- S4 002 场景思维 -->
+<div class="slide bg-black">
+  <div class="section-label">课程 002 · Day 1</div>
+  <div class="ct">场景思维 — 产品经理的第一课</div>
+  <div class="fb"><div class="tag" style="margin-bottom:12px">场景描述公式</div><div class="ft"><span class="hl">用户</span>（谁）+ <span class="hl-p">场景</span>（在哪）+ <span class="hl-o">痛点</span>（怎么痛）</div><div style="font-size:13px;opacity:.5;margin-top:10px">场景 = 讲故事：主人公 + 情境 + 冲突 + 解决方案</div></div>
+  <div class="qb">"从现在开始，张口就要提场景，用语言表达出来"</div>
+  <div class="pl" style="margin-top:20px">
+    <div class="pi"><div class="pb">1</div><div><b>BRD文档</b>（Business Requirement Document）：分清做什么与<b>不做什么</b>，明确技术路线</div></div>
+    <div class="pi"><div class="pb">2</div><div><b>产品分析画布</b>：结构化拆解产品的分析工具，适用竞品研究和自身产品规划</div></div>
+    <div class="pi"><div class="pb">3</div><div><b>技术评审</b>：评估技术可行性是产品方案落地的关键环节，PM需具备基础技术语感</div></div>
+  </div>
+</div>
+
+<!-- S5 场景举例 GitHub -->
+<div class="slide bg-dark-surface">
+  <div class="section-label">实战举例</div>
+  <div class="ct">场景思维应用 — 以 GitHub 热门项目为例</div>
+  <div class="g c2" style="max-width:860px">
+    <div class="card"><div class="ci">🔥</div><div class="ctt">Dify — GitHub 136k ⭐</div><div class="cd">开源LLM应用开发平台，低代码构建AI工作流</div><div style="margin-top:12px;padding:12px;background:rgba(41,151,255,.06);border-radius:8px;font-size:12px;line-height:1.6"><b>场景公式分析：</b><br><span class="hl">用户</span>：中小企业开发者、AI产品经理<br><span class="hl-p">场景</span>：需要快速搭建AI应用但缺少开发资源<br><span class="hl-o">痛点</span>：从零编码搭建LLM应用门槛高、周期长</div></div>
+    <div class="card"><div class="ci">🤖</div><div class="ctt">AutoGPT — GitHub 173k ⭐</div><div class="cd">自主AI Agent先驱，能自主规划、执行、迭代任务</div><div style="margin-top:12px;padding:12px;background:rgba(191,90,242,.06);border-radius:8px;font-size:12px;line-height:1.6"><b>场景公式分析：</b><br><span class="hl">用户</span>：技术爱好者、创业者<br><span class="hl-p">场景</span>：需要AI自主完成复杂多步骤任务<br><span class="hl-o">痛点</span>：人工逐步给指令效率低、容易遗漏</div></div>
+  </div>
+</div>
+
+<!-- S6 003 模型选型 -->
+<div class="slide bg-light">
+  <div class="section-label">课程 003 · Day 1</div>
+  <div class="ct">模型选型与国产替代方案</div>
+  <div class="g c2" style="max-width:860px">
+    <div class="card"><div class="ci">🌐</div><div class="tag">海外模型</div><div class="ctt">Claude / GPT 系列</div><div class="cd"><b>Claude 4.7</b>（Anthropic）— 长文本理解、代码生成突出<br><b>GPT-4o</b>（OpenAI）— 多模态能力强<br>⚠️ 需科学上网，有使用成本</div></div>
+    <div class="card"><div class="ci">🇨🇳</div><div class="tag tg">国产模型</div><div class="ctt">GLM / MiniMax / Kimi</div><div class="cd"><b>GLM-4</b>（智谱）— 中文理解优秀<br><b>MiniMax 2.5/2.7</b> — 长上下文窗口<br><b>Kimi</b>（月之暗面）— Agent能力突出<br>✅ 无需翻墙，免费额度充足</div></div>
+  </div>
+  <div style="margin-top:24px;font-size:14px;opacity:.6;text-align:center;max-width:600px"><b>选型原则</b>：官网优先体验 → 根据项目需求选 → 免费工具先摸清能力边界 → 遇到问题找替代而非等待</div>
+</div>
+
+<!-- S7 004 POC/MVP -->
+<div class="slide bg-grad-blue">
+  <div class="section-label">课程 004 · Day 2</div>
+  <div class="ct">POC验证与MVP方法论</div>
+  <div class="g c2" style="max-width:860px;margin-bottom:20px">
+    <div class="card" style="border-left:3px solid var(--bright-blue)"><div class="ci">🧪</div><div class="ctt">POC — 概念验证</div><div class="cd" style="font-size:14px;line-height:1.7"><b>回答</b>："做不做得出来？"<br><b>流程</b>：想清楚验证什么 → 定义成功标准 → 快速试验 → 结果决策<br><b>可跳过</b>：技术方案已成熟时<br><b>举例</b>：用Dify验证RAG能否满足客服场景准确率</div></div>
+    <div class="card" style="border-left:3px solid var(--green)"><div class="ci">🚀</div><div class="ctt">MVP — 最小可行产品</div><div class="cd" style="font-size:14px;line-height:1.7"><b>回答</b>："做出来有没有人用？"<br><b>目标</b>：用最低成本验证市场需求<br><b>可跳过</b>：市场需求已验证时<br><b>举例</b>：上线简化版智能客服，观察使用率和满意度</div></div>
+  </div>
+  <div class="qb">"POC回答'做不做得出来'，MVP回答'做出来有没有人用'—— 两者缺一不可"</div>
+</div>
+
+<!-- S8 005 LLM推理流程 -->
+<div class="slide bg-light">
+  <div class="section-label">课程 005 · Day 2</div>
+  <div class="ct">LLM推理流程 — 一句话如何被理解</div>
+  <div class="fd" style="margin-bottom:28px">
+    <div class="fn"><div class="fi">❓</div><div class="fl">Query</div><div class="fs">用户提问</div></div><div class="fa">→</div>
+    <div class="fn"><div class="fi">✂️</div><div class="fl">Tokenization</div><div class="fs">分词拆解</div></div><div class="fa">→</div>
+    <div class="fn"><div class="fi">🔤</div><div class="fl">Token</div><div class="fs">最小语义单元</div></div><div class="fa">→</div>
+    <div class="fn"><div class="fi">📐</div><div class="fl">Embedding</div><div class="fs">向量化表示</div></div><div class="fa">→</div>
+    <div class="fn" style="border-color:rgba(0,113,227,.3)"><div class="fi">💡</div><div class="fl">Semantics</div><div class="fs">语义理解</div></div>
+  </div>
+  <div class="card" style="max-width:700px;text-align:center"><div style="font-size:14px;line-height:1.7"><b>通俗理解</b>：你说了一句话 → 拆成小碎片（Token）→ 变成数学向量（Embedding）→ 计算距离找语义关系 → 生成最可能的下一个词<br><br><b>关键认知</b>：LLM本质是<span class="hl">概率预测</span>——预测下一个最可能出现的词，而非"理解"<br><br><b>Transformer对比</b>：CNN逐步扫描局部（像看拼图碎片），RNN按顺序但记忆有限，Transformer全局并行理解（像总指挥俯瞰全局）</div></div>
+</div>
+
+<!-- S9 006 模型服务化 -->
+<div class="slide bg-dark-surface">
+  <div class="section-label">课程 006 · Day 2</div>
+  <div class="ct">模型服务化 — 四种商业模式</div>
+  <div class="g c4" style="max-width:960px">
+    <div class="card" style="border-top:3px solid var(--bright-blue)"><div class="ci">🏗️</div><div class="ctt">自研+自营</div><div class="cd">自己训练，自己运营<br><b>代表</b>：OpenAI、百度文心<br><b>门槛</b>：极高（千万美元起）</div></div>
+    <div class="card" style="border-top:3px solid var(--purple)"><div class="ci">🏪</div><div class="ctt">自营+分销</div><div class="cd">自有平台接入三方模型<br><b>代表</b>：阿里云、火山引擎<br><b>优势</b>：多模型、按需付费</div></div>
+    <div class="card" style="border-top:3px solid var(--green)"><div class="ci">🔄</div><div class="ctt">外采+转售</div><div class="cd">采购API包装后转售<br><b>代表</b>：各AI应用服务商<br><b>关键</b>：服务包装与场景适配</div></div>
+    <div class="card" style="border-top:3px solid var(--orange)"><div class="ci">🌍</div><div class="ctt">开源+托管</div><div class="cd">开源模型自建或云托管<br><b>代表</b>：Llama、Qwen、GLM<br><b>优势</b>：数据可控、成本可控</div></div>
+  </div>
+  <div style="margin-top:20px;font-size:13px;opacity:.5;text-align:center">训练大模型：大量显卡（千万级）+ 数月周期 — 服务商解决算力、迭代成本、效果稳定性、合规性</div>
+</div>
+
+<!-- S10 006-2 API实战 -->
+<div class="slide bg-light">
+  <div class="section-label">课程 006-2 · Day 2</div>
+  <div class="ct">API密钥管理与多平台接入</div>
+  <div class="g c2" style="max-width:860px;margin-bottom:16px">
+    <div class="card"><div class="ci">🍒</div><div class="ctt">Cherry Studio · GitHub 41k+ ⭐</div><div class="cd" style="font-size:13px;line-height:1.7">开源多模型测试工具<br>• 多模型同时对话，横向对比<br>• 知识库接入，构建本地RAG<br>• 支持所有主流模型API</div></div>
+    <div class="card"><div class="ci">🔀</div><div class="ctt">CC Switch（Cloud Code）</div><div class="cd" style="font-size:13px;line-height:1.7">API多平台管理与模型切换<br>• 替换IDE内置模型，降成本<br>• 终端启动，按需切换模型<br>• <span class="hl">底层API优化 > 官网表现</span></div></div>
+  </div>
+  <div class="fd">
+    <div class="fn"><div class="fi">🔑</div><div class="fl">创建密钥</div><div class="fs">登录→密钥管理</div></div><div class="fa">→</div>
+    <div class="fn"><div class="fi">📋</div><div class="fl">复制Key</div><div class="fs">命名→选模式</div></div><div class="fa">→</div>
+    <div class="fn"><div class="fi">🔗</div><div class="fl">接入平台</div><div class="fs">粘贴到目标工具</div></div><div class="fa">→</div>
+    <div class="fn"><div class="fi">✅</div><div class="fl">连接测试</div><div class="fs">发送对话验证</div></div>
+  </div>
+</div>
+
+<!-- S11 工具全景 -->
+<div class="slide bg-black">
+  <div class="section-label">第一周工具矩阵</div>
+  <div class="ct">9大工具一览</div>
+  <div class="g c3" style="max-width:960px">
+    <div class="card" style="padding:16px"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:22px">💻</span><div><div class="ctt" style="font-size:14px;margin:0">Cursor / Trae</div><div class="cd" style="margin:0">AI辅助编程IDE</div></div></div></div>
+    <div class="card" style="padding:16px"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:22px">🤖</span><div><div class="ctt" style="font-size:14px;margin:0">扣子（Coze）</div><div class="cd" style="margin:0">智能体开发平台</div></div></div></div>
+    <div class="card" style="padding:16px"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:22px">🍒</span><div><div class="ctt" style="font-size:14px;margin:0">Cherry Studio</div><div class="cd" style="margin:0">多模型测试工具</div></div></div></div>
+    <div class="card" style="padding:16px"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:22px">📝</span><div><div class="ctt" style="font-size:14px;margin:0">飞书</div><div class="cd" style="margin:0">团队协作与文档</div></div></div></div>
+    <div class="card" style="padding:16px"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:22px">🇨🇳</span><div><div class="ctt" style="font-size:14px;margin:0">GLM / MiniMax</div><div class="cd" style="margin:0">国产大模型</div></div></div></div>
+    <div class="card" style="padding:16px"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:22px">🌐</span><div><div class="ctt" style="font-size:14px;margin:0">Claude / GPT</div><div class="cd" style="margin:0">海外大模型</div></div></div></div>
+    <div class="card" style="padding:16px"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:22px">🔀</span><div><div class="ctt" style="font-size:14px;margin:0">CC Switch</div><div class="cd" style="margin:0">API多平台管理</div></div></div></div>
+    <div class="card" style="padding:16px"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:22px">🐙</span><div><div class="ctt" style="font-size:14px;margin:0">GitHub</div><div class="cd" style="margin:0">代码托管平台</div></div></div></div>
+    <div class="card" style="padding:16px"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:22px">📑</span><div><div class="ctt" style="font-size:14px;margin:0">Markdown</div><div class="cd" style="margin:0">标记语言·提升Prompt</div></div></div></div>
+  </div>
+</div>
+
+<!-- S12 GitHub热门 -->
+<div class="slide bg-grad-purple">
+  <div class="section-label">行业视野 · 2026年4月</div>
+  <div class="ct">GitHub最火AI项目 — PM必知</div>
+  <div class="g c3" style="max-width:960px">
+    <div class="card"><div class="ci">🔥</div><div class="ctt">Dify · 136k ⭐</div><div class="cd">开源LLM应用开发平台，可视化拖拽构建AI工作流。第二周将重点学习。</div></div>
+    <div class="card"><div class="ci">🌊</div><div class="ctt">Langflow · 146k ⭐</div><div class="cd">基于LangChain的低代码AI流程编排器，拖拽连接LLM组件。</div></div>
+    <div class="card"><div class="ci">🤖</div><div class="ctt">AutoGPT · 173k ⭐</div><div class="cd">自主AI Agent先驱，能自主设定目标、规划步骤、执行任务。</div></div>
+    <div class="card"><div class="ci">🍒</div><div class="ctt">Cherry Studio · 41k ⭐</div><div class="cd">课程工具之一，一站式测试多个LLM，支持知识库和RAG。</div></div>
+    <div class="card"><div class="ci">🧠</div><div class="ctt">MetaGPT · 49k ⭐</div><div class="cd">多Agent软件公司模拟，AI分饰PM、架构师、工程师协作开发。</div></div>
+    <div class="card"><div class="ci">🌐</div><div class="ctt">Browser-use · 55k ⭐</div><div class="cd">AI浏览器自动化，让Agent操控浏览器完成搜索、填表等任务。</div></div>
+  </div>
+</div>
+
+<!-- S13 第一节小结 -->
+<div class="slide bg-light">
+  <div class="section-label">第一节课小结</div>
+  <div class="ct">关键收获回顾</div>
+  <div class="pl" style="max-width:800px">
+    <div class="pi"><div class="pb" style="background:rgba(0,113,227,.1)">✓</div><div><b>工具选型</b>：Cursor/Trae + Cherry Studio + CC Switch 构建AI工具链</div></div>
+    <div class="pi"><div class="pb" style="background:rgba(0,113,227,.1)">✓</div><div><b>场景思维</b>：用户 + 场景 + 痛点 = 产品经理的核心语言</div></div>
+    <div class="pi"><div class="pb" style="background:rgba(0,113,227,.1)">✓</div><div><b>POC/MVP</b>：POC验证"能不能做"，MVP验证"有没有人用"</div></div>
+    <div class="pi"><div class="pb" style="background:rgba(0,113,227,.1)">✓</div><div><b>LLM原理</b>：AI→ML→DL→Transformer→LLM，推理=概率预测Token</div></div>
+    <div class="pi"><div class="pb" style="background:rgba(0,113,227,.1)">✓</div><div><b>服务化</b>：自研自营 / 自营分销 / 外采转售 / 开源托管 四种模式</div></div>
+    <div class="pi"><div class="pb" style="background:rgba(0,113,227,.1)">✓</div><div><b>API实战</b>：密钥创建→接入平台→底层API释放模型潜能</div></div>
+  </div>
+</div>
+
+<!-- S14 第二节课分隔 -->
+<div class="slide bg-black" style="justify-content:center;align-items:center">
+  <div class="sn">02</div>
+  <div style="font-size:clamp(28px,4vw,48px);font-weight:700;letter-spacing:-1px;margin-bottom:12px">大模型深化与Prompt工程</div>
+  <div style="font-size:16px;opacity:.4">第二节课 · 约60分钟 · Day3</div>
+</div>
+
+<!-- S15 007 训练两阶段 -->
+<div class="slide bg-light">
+  <div class="section-label">课程 007 · Day 3</div>
+  <div class="ct">大模型训练 — 两阶段流程</div>
+  <div class="g c2" style="max-width:860px;margin-bottom:16px">
+    <div class="card" style="border-top:3px solid var(--apple-blue)"><div class="tag">第一阶段</div><div class="ctt">预训练 Pre-training</div><div class="cd" style="font-size:13px;line-height:1.7"><b>方式</b>：无监督学习 — 从数据中自己找规律<br><b>数据</b>：维基百科、论文、图书、网页<br><b>三要素</b>：数据采集 + 注意力机制 + Transformer<br><b>类比</b>：小孩通过大量阅读获得基础语感</div></div>
+    <div class="card" style="border-top:3px solid var(--green)"><div class="tag tg">第二阶段</div><div class="ctt">微调 SFT</div><div class="cd" style="font-size:13px;line-height:1.7"><b>全称</b>：Supervised Fine-Tuning<br><b>方式</b>：有监督 — 人工标注什么是好回答<br><b>目标</b>：针对对话、代码、医疗等垂直领域优化<br><b>类比</b>：从"什么都懂一点"变成"某领域精通"</div></div>
+  </div>
+  <div class="fb"><div class="ft" style="font-size:clamp(16px,2vw,24px)">预训练（通用能力）→ 微调（专项能力）→ 部署上线</div></div>
+</div>
+
+<!-- S16 核心能力 -->
+<div class="slide bg-black">
+  <div class="section-label">课程 007 · 深化</div>
+  <div class="ct">泛化能力与涌现能力</div>
+  <div class="g c3" style="max-width:920px;margin-bottom:16px">
+    <div class="card" style="border-left:3px solid var(--red)"><div class="ci">📉</div><div class="ctt">欠拟合</div><div class="cd">学习不足，做不到举一反三<br><b>类比</b>：只看了目录就考试</div></div>
+    <div class="card" style="border-left:3px solid var(--orange)"><div class="ci">📈</div><div class="ctt">过拟合</div><div class="cd">过度学习，只会背答案<br><b>类比</b>：背了全部习题不懂原理</div></div>
+    <div class="card" style="border-left:3px solid var(--green)"><div class="ci">✨</div><div class="ctt">泛化</div><div class="cd">学到抽象知识，迁移到新任务<br><b>类比</b>：真正理解，什么题都能做</div></div>
+  </div>
+  <div class="card" style="max-width:920px;width:100%;text-align:center"><div class="tag tp" style="margin-bottom:10px">涌现能力 Emergence</div><div style="font-size:14px;line-height:1.7">模型规模达到阈值后<b>突然涌现</b>新能力<br><b>三大子能力</b>：<span class="hl">小样本学习 Few-shot ICL</span> + <span class="hl-p">指令跟随</span> + <span class="hl-g">思维链推理 COT</span></div></div>
+</div>
+
+<!-- S17 大模型局限性 -->
+<div class="slide bg-dark-surface">
+  <div class="section-label">课程 007 · 补充</div>
+  <div class="ct">大模型四大局限性 — PM必须知道</div>
+  <div class="g c2" style="max-width:860px">
+    <div class="card"><div class="ci">⏰</div><div class="ctt">时效性局限</div><div class="cd">训练数据有截止日期，不知道最新事件<br><b>解决</b>：RAG检索增强 + 联网搜索</div></div>
+    <div class="card"><div class="ci">👻</div><div class="ctt">模型幻觉</div><div class="cd">基于概率预测，可能"一本正经地胡说八道"<br><b>解决</b>：人工审核 + 事实核查 + RAG</div></div>
+    <div class="card"><div class="ci">🔬</div><div class="ctt">专业性不足</div><div class="cd">公开数据训练，垂直领域知识薄弱<br><b>解决</b>：专业数据微调 + 领域知识库</div></div>
+    <div class="card"><div class="ci">🔒</div><div class="ctt">安全性风险</div><div class="cd">可能生成有害/偏见/隐私泄露内容<br><b>解决</b>：RLHF对齐 + 过滤 + 私有化部署</div></div>
+  </div>
+</div>
+
+<!-- S18 Prompt工程 -->
+<div class="slide bg-light">
+  <div class="section-label">课程 007-2 · Day 3</div>
+  <div class="ct">Prompt工程 — 人机沟通的桥梁</div>
+  <div class="fb"><div class="tag" style="margin-bottom:10px">核心公式</div><div class="ft"><span class="hl">效果</span> = 模型能力 × 任务设计 × <span class="hl">Prompt质量</span></div></div>
+  <div class="pl" style="margin-top:20px;max-width:800px">
+    <div class="pi"><div class="pb">1</div><div><b>Prompt本质</b>：人与AI对话的桥梁，承担"编码"和"解码"角色</div></div>
+    <div class="pi"><div class="pb">2</div><div><b>User Prompt</b>：用户直接输入的指令 — "你说的话"</div></div>
+    <div class="pi"><div class="pb">3</div><div><b>System Prompt</b>：设定对话背景和AI行为 — "你给AI的角色和规则"</div></div>
+    <div class="pi"><div class="pb">4</div><div><b>同一句话不同System Prompt</b>：<br>"我饿了" → 宿舍：室友推荐外卖 / 春节：妈妈做饭 / 情侣：一起出去吃</div></div>
+  </div>
+</div>
+
+<!-- S19 Prompt设计原则 -->
+<div class="slide bg-black">
+  <div class="section-label">Prompt 设计方法论</div>
+  <div class="ct">六大设计原则</div>
+  <div class="g c3" style="max-width:960px">
+    <div class="card" style="text-align:center"><div class="ci">✨</div><div class="ctt">简洁明了</div><div class="cd">避免冗余，一个Prompt只解决一个问题</div></div>
+    <div class="card" style="text-align:center"><div class="ci">👍</div><div class="ctt">正向描述</div><div class="cd">告诉AI"做什么"而非"不做什么"</div></div>
+    <div class="card" style="text-align:center"><div class="ci">🪜</div><div class="ctt">逐步引导</div><div class="cd">Chain-of-Thought，复杂问题分解</div></div>
+    <div class="card" style="text-align:center"><div class="ci">📝</div><div class="ctt">提供样本</div><div class="cd">ICL上下文学习：给1-3个示例</div></div>
+    <div class="card" style="text-align:center"><div class="ci">📑</div><div class="ctt">Markdown格式</div><div class="cd">结构化格式显著提升模型理解</div></div>
+    <div class="card" style="text-align:center"><div class="ci">🎭</div><div class="ctt">角色设定</div><div class="cd">通用结构 / 任务执行 / 角色扮演</div></div>
+  </div>
+</div>
+
+<!-- S20 乔哈里视窗 -->
+<div class="slide bg-grad-blue">
+  <div class="section-label">课程 007-2 · 核心模型</div>
+  <div class="ct">乔哈里视窗 — 人机协作四象限</div>
+  <div class="g c2" style="max-width:860px">
+    <div class="card" style="border-top:3px solid var(--bright-blue)"><div class="ci">🔓</div><div class="tag">公开象限：我知·AI知</div><div class="ctt">AI作助理</div><div class="cd">精准指令让AI执行<br><b>场景</b>：让AI写你熟悉领域的报告</div></div>
+    <div class="card" style="border-top:3px solid var(--purple)"><div class="ci">🔒</div><div class="tag tp">隐私象限：我知·AI不知</div><div class="ctt">投喂上下文</div><div class="cd">提供独有知识让AI理解<br><b>场景</b>：提供内部文档后再提问</div></div>
+    <div class="card" style="border-top:3px solid var(--green)"><div class="ci">🔍</div><div class="tag tg">盲点象限：AI知·我不知</div><div class="ctt">AI作老师</div><div class="cd">向AI提问学习新知识<br><b>场景</b>：请AI解释注意力机制</div></div>
+    <div class="card" style="border-top:3px solid var(--orange)"><div class="ci">🌌</div><div class="tag to">潜能象限：双方都不知</div><div class="ctt">共创探索</div><div class="cd">先发散再收拢探索未知<br><b>场景</b>：与AI头脑风暴新产品方向</div></div>
+  </div>
+</div>
+
+<!-- S21 双钻+上下文工程 -->
+<div class="slide bg-light">
+  <div class="section-label">课程 007-2 · 进阶</div>
+  <div class="ct">双钻模型与上下文工程</div>
+  <div class="g c2" style="max-width:860px;margin-bottom:16px">
+    <div class="card"><div class="ci">💎</div><div class="ctt">双钻模型</div><div class="cd" style="font-size:13px;line-height:1.7"><b>第一颗钻石：发散</b> — AI负责生成大量可能性<br><b>第二颗钻石：收拢</b> — 人负责筛选和决策<br><b>核心</b>：AI不替代判断力，而是放大视野</div></div>
+    <div class="card"><div class="ci">🧩</div><div class="ctt">上下文工程</div><div class="cd" style="font-size:13px;line-height:1.7"><b>定义</b>：系统化管理输入给模型的上下文<br><b>ICL</b>：将示例放入上下文让模型学习<br><b>Markdown格式化</b> → 模型理解显著提升<br><b>这是AI PM的核心技能之一</b></div></div>
+  </div>
+  <div class="qb">"大模型效果 = 模型能力 × 任务设计 × Prompt质量"</div>
+</div>
+
+<!-- S22 感官学习法 -->
+<div class="slide bg-dark-surface">
+  <div class="section-label">学习方法论</div>
+  <div class="ct">感官学习法 — 五感协同内化知识</div>
+  <div class="fd" style="margin-bottom:24px">
+    <div class="fn"><div class="fi">👀</div><div class="fl">眼看</div><div class="fs">观看内容</div></div><div class="fa">→</div>
+    <div class="fn"><div class="fi">✍️</div><div class="fl">手写</div><div class="fs">整理笔记</div></div><div class="fa">→</div>
+    <div class="fn"><div class="fi">🧠</div><div class="fl">脑思考</div><div class="fs">理解逻辑</div></div><div class="fa">→</div>
+    <div class="fn"><div class="fi">🗣️</div><div class="fl">嘴说</div><div class="fs">讲给别人</div></div><div class="fa">→</div>
+    <div class="fn"><div class="fi">👂</div><div class="fl">耳听</div><div class="fs">听反馈优化</div></div>
+  </div>
+  <div class="card" style="max-width:700px;text-align:center"><div style="font-size:14px;line-height:1.7"><b>费曼学习法</b>：如果你不能用简单语言向别人解释清楚，说明你还没真正理解<br><br><b>录制作品讲解视频</b>：面试前自查不足，获得全局意识与"上帝视角"</div></div>
+</div>
+
+<!-- S23 第二节小结 -->
+<div class="slide bg-black">
+  <div class="section-label">第二节课小结</div>
+  <div class="ct">关键收获回顾</div>
+  <div class="pl" style="max-width:800px">
+    <div class="pi"><div class="pb">✓</div><div><b>训练两阶段</b>：预训练（无监督通用）→ SFT微调（有监督专项）</div></div>
+    <div class="pi"><div class="pb">✓</div><div><b>三大能力</b>：泛化（举一反三）、涌现（突破阈值）、COT（思维链推理）</div></div>
+    <div class="pi"><div class="pb">✓</div><div><b>四大局限</b>：时效性、幻觉、专业性、安全性——知道模型"不能做什么"</div></div>
+    <div class="pi"><div class="pb">✓</div><div><b>Prompt工程</b>：效果=模型能力×任务设计×Prompt质量，六大原则</div></div>
+    <div class="pi"><div class="pb">✓</div><div><b>乔哈里视窗</b>：公开/隐私/盲点/潜能四象限人机协作</div></div>
+    <div class="pi"><div class="pb">✓</div><div><b>上下文工程</b>：双钻模型 + Context Engineering = PM核心技能</div></div>
+  </div>
+</div>
+
+<!-- S24 金句墙 -->
+<div class="slide bg-grad-purple">
+  <div class="section-label">第一周精华</div>
+  <div class="ct">金句墙</div>
+  <div class="g c2" style="max-width:860px">
+    <div class="qb" style="margin:0;font-size:14px">"在AI时代，没有任何大腿可以抱，只能抱自己"</div>
+    <div class="qb" style="margin:0;font-size:14px">"痛点不够痛，就不是痛点"</div>
+    <div class="qb" style="margin:0;font-size:14px">"POC回答做不做得出来，MVP回答有没有人用"</div>
+    <div class="qb" style="margin:0;font-size:14px">"你是一个创建者(Builder)，千万不要混淆角色"</div>
+    <div class="qb" style="margin:0;font-size:14px">"数据质量决定AI系统的天花板"</div>
+    <div class="qb" style="margin:0;font-size:14px">"丢掉羞耻心，在学习中大胆丢脸才能成长"</div>
+    <div class="qb" style="margin:0;font-size:14px">"场景思维很重要，场景其实就是讲故事"</div>
+    <div class="qb" style="margin:0;font-size:14px">"AI不具备自我意识，它在学习和模仿人类方案"</div>
+  </div>
+</div>
+
+<!-- S25 第二周预习 -->
+<div class="slide bg-dark-surface">
+  <div class="section-label">预习 · 第二周 10%</div>
+  <div class="ct">RAG是什么？— 检索增强生成初探</div>
+  <div class="g c2" style="max-width:860px;margin-bottom:16px">
+    <div class="card" style="border-left:3px solid var(--purple)"><div class="ci">🔍</div><div class="ctt">RAG = 给大模型装外挂知识库</div><div class="cd" style="font-size:13px;line-height:1.7">解决大模型三大局限：<br>• <b>时效性</b>：实时检索最新数据<br>• <b>幻觉</b>：基于真实文档回答<br>• <b>专业性</b>：注入领域知识<br><br>第二周将深入学习完整RAG Pipeline</div></div>
+    <div class="card" style="border-left:3px solid var(--green)"><div class="ci">⚙️</div><div class="ctt">Dify 工作流预览</div><div class="cd" style="font-size:13px;line-height:1.7">第二周核心工具 — Dify 平台：<br>• <b>工作流模式</b>：有始有终流程化<br>• <b>对话流模式</b>：围绕话题持续交流<br>• 可视化拖拽构建RAG应用<br><br>提前注册 <b>dify.ai</b> 准备好账号</div></div>
+  </div>
+  <div style="text-align:center;font-size:13px;opacity:.5">第二周关键词：RAG全流程 · 智能体开发 · 竞品分析 · 项目立项 · 四大交付物</div>
+</div>
+
+<!-- S26 作业 -->
+<div class="slide bg-light">
+  <div class="section-label">课后行动</div>
+  <div class="ct">作业与实操任务</div>
+  <div class="pl" style="max-width:800px">
+    <div class="pi"><div class="pb">1</div><div><b>收集30个目标岗位职责详情</b> — 了解市场对AI产品经理的真实需求</div></div>
+    <div class="pi"><div class="pb">2</div><div><b>完成IDE安装并配置</b> — Cursor 或 Trae 二选一，跑通第一个AI生成项目</div></div>
+    <div class="pi"><div class="pb">3</div><div><b>安装Cherry Studio并测试2个模型</b> — 横向对比不同模型的回答质量</div></div>
+    <div class="pi"><div class="pb">4</div><div><b>模型横向对比与选型评估</b> — 列表对比3-5个模型的能力、价格、适用场景</div></div>
+    <div class="pi"><div class="pb">5</div><div><b>AI产品协作全流程笔记</b> — 用创新PRD格式整理课程内容</div></div>
+    <div class="pi"><div class="pb">6</div><div><b>上下文工程作业</b> — 制作课程讲义（大纲+内容+可视化方案）</div></div>
+  </div>
+</div>
+
+<!-- S27 尾页 -->
+<div class="slide bg-black">
+  <div class="slide-title">第一周完成 🎉</div>
+  <div class="slide-subtitle">下一站：RAG技术深潜 → 智能体开发 → 竞品分析</div>
+  <div style="margin-top:20px;font-size:13px;opacity:.4">且曼AI产品经理学院 · 第一周每周输出课件</div>
+</div>
+
+</div><!-- /presentation -->
+
+<!-- 进度条 -->
+<div class="progress-bar"><div class="progress-fill" id="pf"></div></div>
+
+<!-- 导航栏 -->
+<div class="nav-bar">
+  <a class="nav-home" href="../index.html" title="返回主站">🏠</a>
+  <button class="nav-btn" id="prev-btn" onclick="go(-1)">←</button>
+  <div class="nav-info" id="nav-info">1 / 28</div>
+  <button class="nav-btn" id="next-btn" onclick="go(1)">→</button>
+</div>
+
+<script>
+// 星空背景
+const canvas=document.getElementById('starfield'),ctx=canvas.getContext('2d');
+let stars=[];
+function initStars(){canvas.width=innerWidth;canvas.height=innerHeight;stars=[];for(let i=0;i<120;i++)stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.2+.3,a:Math.random()*.5+.2,s:Math.random()*.3+.1})}
+function drawStars(){ctx.clearRect(0,0,canvas.width,canvas.height);stars.forEach(s=>{s.a+=Math.sin(Date.now()*s.s*.001)*.003;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${Math.max(.05,Math.min(.6,s.a))})`;ctx.fill()});requestAnimationFrame(drawStars)}
+initStars();drawStars();addEventListener('resize',initStars);
+
+// 幻灯片引擎
+const slides=document.querySelectorAll('.slide');
+let cur=0;
+function updateSlide(n){
+  const old=cur;cur=Math.max(0,Math.min(slides.length-1,n));
+  if(old!==cur){slides[old].classList.remove('active');slides[old].classList.add(n>old?'exit-left':'exit-right');setTimeout(()=>slides[old].classList.remove('exit-left','exit-right'),600)}
+  slides[cur].classList.add('active');
+  document.getElementById('pf').style.width=((cur+1)/slides.length*100)+'%';
+  document.getElementById('nav-info').textContent=(cur+1)+' / '+slides.length;
+  document.getElementById('prev-btn').disabled=cur===0;
+  document.getElementById('next-btn').disabled=cur===slides.length-1;
+}
+function go(d){updateSlide(cur+d)}
+updateSlide(0);
+
+// 键盘翻页
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' ')go(1);
+  if(e.key==='ArrowLeft')go(-1);
+  if(e.key==='Home')updateSlide(0);
+  if(e.key==='End')updateSlide(slides.length-1);
+});
+
+// 触摸翻页
+let tx=0;
+document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX});
+document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50){dx<0?go(1):go(-1)}});
+
+// 3D卡片倾斜
+document.addEventListener('mousemove',e=>{
+  const cx=e.clientX/innerWidth-.5,cy=e.clientY/innerHeight-.5;
+  document.querySelectorAll('.slide.active .card').forEach(c=>{
+    const r=c.getBoundingClientRect(),dx=(cx-(r.left+r.width/2)/innerWidth+.5)*6,dy=(cy-(r.top+r.height/2)/innerHeight+.5)*6;
+    c.style.transform=`perspective(800px) rotateY(${dx}deg) rotateX(${-dy}deg) translateY(-2px)`;
+  });
+  document.querySelectorAll('.orb').forEach((o,i)=>{o.style.transform=`translate(${cx*(i+1)*15}px,${cy*(i+1)*15}px)`});
+});
+document.addEventListener('mouseleave',()=>{document.querySelectorAll('.card').forEach(c=>c.style.transform='')});
+</script>
+</body>
+</html>
