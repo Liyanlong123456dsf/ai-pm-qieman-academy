@@ -217,16 +217,20 @@ tailwind.config = {
       </div>
     </div>
     <div class="hero-el opacity-0" style="animation-delay:1.1s">
-      <button onclick="enterApp()" class="pointer-events-auto group relative inline-flex items-center gap-3 px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold text-lg rounded-2xl transition-all duration-300 ease-expo animate-cta-pulse hover:scale-[1.02]">
-        <span>开始探索流程</span>
-        <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
-      </button>
-      <button onclick="toggleNotesHub()" class="pointer-events-auto inline-flex items-center gap-2 px-6 py-3 ml-3 glass-card dark:text-gray-300 text-gray-600 hover:dark:text-white hover:text-gray-900 text-sm font-semibold rounded-2xl transition-all duration-300 ease-expo hover:scale-[1.02]"><span>📚</span><span>课程笔记</span></button>
-      <button onclick="openObsidianVault()" class="pointer-events-auto inline-flex items-center gap-2 px-6 py-3 ml-3 glass-card dark:text-gray-300 text-gray-600 hover:dark:text-white hover:text-gray-900 text-sm font-semibold rounded-2xl transition-all duration-300 ease-expo hover:scale-[1.02] group" style="border-color:rgba(139,92,246,.3)"><span class="text-purple-400 group-hover:text-purple-300 transition-colors">💎</span><span>Obsidian 笔记库</span></button>
-      <a href="rag-knowledge/index.html" class="pointer-events-auto inline-flex items-center gap-2 px-6 py-3 ml-3 glass-card dark:text-gray-300 text-gray-600 hover:dark:text-white hover:text-gray-900 text-sm font-semibold rounded-2xl transition-all duration-300 ease-expo hover:scale-[1.02] group no-underline" style="border-color:rgba(0,113,227,.3);text-decoration:none"><span class="text-blue-400 group-hover:text-blue-300 transition-colors">🧠</span><span>RAG 技术专题</span></a>
-      <a href="https://ai-pm-job-dashboard.netlify.app" target="_blank" class="pointer-events-auto inline-flex items-center gap-2 px-6 py-3 ml-3 glass-card dark:text-gray-300 text-gray-600 hover:dark:text-white hover:text-gray-900 text-sm font-semibold rounded-2xl transition-all duration-300 ease-expo hover:scale-[1.02] group no-underline" style="border-color:rgba(34,197,94,.3);text-decoration:none"><span class="text-green-400 group-hover:text-green-300 transition-colors">📊</span><span>岗位全景洞察</span></a>
-      <button onclick="AudioSys.toggleMute()" class="pointer-events-auto inline-flex items-center gap-2 px-5 py-3 ml-3 glass-card dark:text-gray-300 text-gray-600 hover:dark:text-white hover:text-gray-900 text-sm font-semibold rounded-2xl transition-all duration-300 ease-expo hover:scale-[1.02]" title="背景音乐 (M)"><svg class="w-4 h-4 audio-toggle-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/><path stroke-linecap="round" stroke-linejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/></svg></button>
-      <p class="mt-4 text-xs dark:text-gray-500 text-gray-400">按 <kbd class="px-1.5 py-0.5 rounded glass-card text-[10px] font-mono">Enter</kbd> 快速进入 · <kbd class="px-1.5 py-0.5 rounded glass-card text-[10px] font-mono">W</kbd> 查看笔记 · <kbd class="px-1.5 py-0.5 rounded glass-card text-[10px] font-mono">M</kbd> 音乐</p>
+      <div class="flex flex-col items-center gap-6 pointer-events-auto">
+        <button onclick="enterApp()" class="group relative inline-flex items-center gap-3 px-10 py-4 text-white font-semibold text-lg transition-all duration-300 ease-expo hover:scale-[1.02]" style="background:#0071e3;border-radius:980px;letter-spacing:-0.28px">
+          <span>开始探索流程</span>
+          <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+        </button>
+        <div class="flex flex-wrap items-center justify-center gap-3">
+          <button onclick="toggleNotesHub()" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium dark:text-gray-300 text-gray-600 hover:dark:text-white hover:text-gray-900 transition-all duration-300" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(12px)"><span>📚</span><span>课程笔记</span></button>
+          <button onclick="openObsidianVault()" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium dark:text-gray-300 text-gray-600 hover:dark:text-white hover:text-gray-900 transition-all duration-300" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(12px)"><span class="text-purple-400">💎</span><span>Obsidian 笔记库</span></button>
+          <a href="rag-knowledge/index.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium dark:text-gray-300 text-gray-600 hover:dark:text-white hover:text-gray-900 transition-all duration-300 no-underline" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(12px);text-decoration:none"><span class="text-blue-400">🧠</span><span>RAG 技术专题</span></a>
+          <a href="https://ai-pm-job-dashboard.netlify.app" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium dark:text-gray-300 text-gray-600 hover:dark:text-white hover:text-gray-900 transition-all duration-300 no-underline" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(12px);text-decoration:none"><span class="text-green-400">📊</span><span>岗位全景洞察</span></a>
+          <button onclick="AudioSys.toggleMute()" class="inline-flex items-center justify-center w-10 h-10 rounded-full dark:text-gray-400 text-gray-500 hover:dark:text-white hover:text-gray-900 transition-all duration-300" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(12px)" title="背景音乐 (M)"><svg class="w-4 h-4 audio-toggle-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/><path stroke-linecap="round" stroke-linejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/></svg></button>
+        </div>
+        <p class="text-xs dark:text-gray-500 text-gray-400" style="letter-spacing:-0.12px">按 <kbd class="px-1.5 py-0.5 rounded text-[10px] font-mono" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)">Enter</kbd> 快速进入 · <kbd class="px-1.5 py-0.5 rounded text-[10px] font-mono" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)">W</kbd> 查看笔记 · <kbd class="px-1.5 py-0.5 rounded text-[10px] font-mono" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)">M</kbd> 音乐</p>
+      </div>
     </div>
   </div>
 </section>
@@ -645,7 +649,8 @@ outputs:[
 {title:"用户画像（Persona）",detail:[
 "核心要素：姓名照片（虚构但具体）、人口统计、行为特征、核心目标、痛点、决策因素",
 "数量控制：主要画像2-3个，避免过多失焦；每个画像对应一个核心场景",
-"验证方法：画像需基于真实数据（访谈+数据分析），非团队臆想；定期回访更新"]},
+"验证方法：画像需基于真实数据（访谈+数据分析），非团队臆想；定期回访更新",
+"画像构建方法(W3-013)：基础角色+核心价值+行为场景，推荐蜜桃AI等工具辅助生成；信息获取渠道：Meta/Google/专业产品论坛/人人都是产品经理，多渠道交叉验证"]},
 {title:"竞品分析报告",detail:[
 "分析目标5要素：决策类型+方向+用户假设+场景假设+成功标准",
 "报告结构：市场概况(TAM/SAM/SOM)→竞品概览→功能对比→体验拆解→SWOT总结→产品建议",
@@ -845,7 +850,8 @@ work:[
 "任务类型：开发任务（前端/后端/移动端）、联调任务、测试任务、部署任务、文档任务",
 "依赖关系：标注任务间前置依赖（FS/FF/SS/SF），识别关键路径上的Blocker",
 "验收定义：每个任务都有明确的完成标准DoD（Definition of Done）",
-"Agent Planning视角(W3)：子目标拆解(Subgoal Decomposition)思维可迁移到WBS——将复杂Agent项目按模型层/工程层/应用层三层分解"]},
+"Agent Planning视角(W3)：子目标拆解(Subgoal Decomposition)思维可迁移到WBS——将复杂Agent项目按模型层/工程层/应用层三层分解",
+"项目价值量化(W3-013)：增收/降本/提效三维度论证立项价值——业务价值确认流程：价值梳理→文档编写→业务方认可→高层汇报"]},
 {title:"工时评估",desc:"三点估算：乐观/最可能/悲观",detail:[
 "三点估算公式：E=(O+4M+P)/6，O=乐观、M=最可能、P=悲观",
 "标准差σ=(P-O)/6，用于评估不确定性，σ越大说明估算越不靠谱",
@@ -908,7 +914,9 @@ work:[
 "答疑记录：所有clarification记录到PRD的FAQ区域，避免重复回答相同问题",
 "边界处理：遇到PRD未覆盖的场景，PM当场给出结论并补充到文档中",
 "避免过度设计：如果clarification导致大幅改动，需评估是否走变更流程",
-"Agent技术栈对齐(W3)：模型层→工程层(数据+工具链+A2A)→应用层三层架构，为开发协作提供技术语境框架"]},
+"Agent技术栈对齐(W3)：模型层→工程层(数据+工具链+A2A)→应用层三层架构，为开发协作提供技术语境框架",
+"工作流开发实操(W3-014)：开始节点(输入变量)→大模型节点(处理逻辑)→输出节点(结果返回)，单节点测试vs整体测试——单节点验证局部逻辑后再端到端验证",
+"Temperature调参(W3-014)：温度参数影响模型输出多样性——低温保守确定/高温创造多样，需根据业务场景选择合适温度值"]},
 {title:"变更控制",desc:"CR流程：Change Request",detail:[
 "变更分级：小变更（文案/颜色调整）→即时处理；中变更（逻辑调整）→评估影响后决策；大变更（新增功能）→走正式CR流程",
 "CR表单：变更描述/影响范围/工期影响/风险评估/审批人，必须Tech Lead确认",
@@ -967,7 +975,9 @@ work:[
 "P0阻塞级：核心功能不可用/数据丢失/安全漏洞→立即修复，所有人停下配合",
 "P1严重级：影响主流程但有workaround→当天修复",
 "P2一般级：UI错位/性能卡顿/体验不佳→排期修复（可上线后处理）",
-"P3建议级：优化建议/非必须→记录到下版本需求池"]},
+"P3建议级：优化建议/非必须→记录到下版本需求池",
+"Bad Case优化(W3-014)：智能体质量提升核心——明确错误case→补充具体信息(模型/入参/变量)→根据业务规则调整提示词→验证修复效果。业务规则变动时必须通知AI系统更新",
+"线上保护原则(W3-014)：不要大刀阔斧改动，保证原有数据稳定正确，新问题明确标准后小幅优化"]},
 {title:"回归测试确认",desc:"",detail:[
 "回归范围：Bug修复后不仅验证该Bug，还要验证关联功能未被影响",
 "自动化覆盖：核心流程的回归测试应有自动化用例支撑，减少人工重复劳动",
@@ -1838,6 +1848,49 @@ function buildGraphData(){
       });
     });
   });
+
+  // === RAG技术专题特殊节点 ===
+  const ragAngle=Math.PI*0.25;
+  const ragR=mainR*1.65;
+  const ragX=cx+Math.cos(ragAngle)*ragR, ragY=cy+Math.sin(ragAngle)*ragR;
+  graphNodes.push({id:'rag-special',x:ragX,y:ragY,vx:0,vy:0,r:22,label:'RAG 技术专题',type:'special',color:'#06b6d4',fixed:false,data:{title:'RAG 技术专题',icon:'🧠'}});
+  // RAG专题 ↔ W2 RAG相关课程
+  const ragCourseIds=['008','008-2','009','009-2','009-3','009-4'];
+  graphNodes.filter(n=>n.type==='nh'&&n.data&&ragCourseIds.includes(n.data.id)).forEach(n=>{
+    graphEdges.push({from:'rag-special',to:n.id,type:'bridge',label:'RAG技术关联',color:'#06b6d4'});
+  });
+
+  // === 同周课程之间的顺序连线 ===
+  NH_WEEKS.forEach((w,wi)=>{
+    let prevNhId=null;
+    w.days.forEach((day,di)=>{
+      day.courses.forEach((c,ci)=>{
+        const nhId='nh-'+wi+'-'+di+'-'+ci;
+        if(prevNhId){
+          graphEdges.push({from:prevNhId,to:nhId,type:'sequence',color:day.color||'#64748b'});
+        }
+        prevNhId=nhId;
+      });
+    });
+  });
+
+  // === 跨周知识关联边 ===
+  const knowledgeLinks=[
+    {fromCourse:'007-2',toCourse:'008',label:'Prompt→RAG输入',color:'#8b5cf6'},
+    {fromCourse:'009-2',toCourse:'014',label:'Dify工作流延续',color:'#06b6d4'},
+    {fromCourse:'005',toCourse:'011',label:'LLM→Agent基座',color:'#3b82f6'},
+    {fromCourse:'008',toCourse:'011',label:'RAG→Agent记忆',color:'#10b981'}
+  ];
+  knowledgeLinks.forEach(kl=>{
+    let fromId=null,toId=null;
+    graphNodes.forEach(n=>{
+      if(n.type==='nh'&&n.data&&n.data.id===kl.fromCourse)fromId=n.id;
+      if(n.type==='nh'&&n.data&&n.data.id===kl.toCourse)toId=n.id;
+    });
+    if(fromId&&toId){
+      graphEdges.push({from:fromId,to:toId,type:'knowledge',label:kl.label,color:kl.color});
+    }
+  });
 }
 
 function getGraphNode(id){return graphNodes.find(n=>n.id===id)}
@@ -1864,6 +1917,8 @@ function simulateGraph(){
       const a=getGraphNode(e.from),b=getGraphNode(e.to);if(!a||!b)return;
       if(e.type==='cross'){if(!showCrossEdges)return;const dx=b.x-a.x,dy=b.y-a.y,dist=Math.sqrt(dx*dx+dy*dy)||1;if(dist>300){const f=(dist-300)*0.0004;const fx=dx/dist*f,fy=dy/dist*f;if(!a.fixed){a.vx+=fx;a.vy+=fy}if(!b.fixed){b.vx-=fx;b.vy-=fy}}return}
       if(e.type==='bridge'){const dx=b.x-a.x,dy=b.y-a.y,dist=Math.sqrt(dx*dx+dy*dy)||1;const target=250;if(Math.abs(dist-target)>20){const f=(dist-target)*0.001;const fx=dx/dist*f,fy=dy/dist*f;if(!a.fixed){a.vx+=fx;a.vy+=fy}if(!b.fixed){b.vx-=fx;b.vy-=fy}}return}
+      if(e.type==='sequence'){const dx=b.x-a.x,dy=b.y-a.y,dist=Math.sqrt(dx*dx+dy*dy)||1;const target=60;if(Math.abs(dist-target)>10){const f=(dist-target)*0.002;const fx=dx/dist*f,fy=dy/dist*f;if(!a.fixed){a.vx+=fx;a.vy+=fy}if(!b.fixed){b.vx-=fx;b.vy-=fy}}return}
+      if(e.type==='knowledge'){const dx=b.x-a.x,dy=b.y-a.y,dist=Math.sqrt(dx*dx+dy*dy)||1;if(dist>400){const f=(dist-400)*0.0003;const fx=dx/dist*f,fy=dy/dist*f;if(!a.fixed){a.vx+=fx;a.vy+=fy}if(!b.fixed){b.vx-=fx;b.vy-=fy}}return}
       const dx=b.x-a.x,dy=b.y-a.y,dist=Math.sqrt(dx*dx+dy*dy)||1;
       const targetDist=e.type==='flow'?200:75;
       const k=e.type==='flow'?0.003:0.02;
@@ -1885,6 +1940,13 @@ function simulateGraph(){
         n.vx-=(dx/dist)*f;n.vy-=(dy/dist)*f;
         // Slight center gravity to prevent drifting
         n.vx+=(cx-n.x)*0.0001;n.vy+=(cy-n.y)*0.0001;
+      }
+      if(n.type==='special'&&!n.fixed){
+        const spTargetR=nhTargetR*1.22;
+        const dx=n.x-cx,dy=n.y-cy,dist=Math.sqrt(dx*dx+dy*dy)||1;
+        const f=(dist-spTargetR)*0.002;
+        n.vx-=(dx/dist)*f;n.vy-=(dy/dist)*f;
+        n.vx+=(cx-n.x)*0.00008;n.vy+=(cy-n.y)*0.00008;
       }
     });
     // Integration
@@ -1920,6 +1982,9 @@ function drawGraph(){
       });
     }
     graphEdges.filter(e=>e.type==='bridge').forEach(e=>{
+      if(e.from===hovId||e.to===hovId){bridgeHighlight.add(e.from);bridgeHighlight.add(e.to);bridgeHighlightEdges.push(e)}
+    });
+    graphEdges.filter(e=>e.type==='sequence'||e.type==='knowledge').forEach(e=>{
       if(e.from===hovId||e.to===hovId){bridgeHighlight.add(e.from);bridgeHighlight.add(e.to);bridgeHighlightEdges.push(e)}
     });
   }
@@ -2031,6 +2096,52 @@ function drawGraph(){
     });
   }
 
+  // Draw sequence edges (同周课程顺序)
+  graphEdges.filter(e=>e.type==='sequence').forEach(e=>{
+    const a=getGraphNode(e.from),b=getGraphNode(e.to);if(!a||!b)return;
+    const isHL=hovId&&(e.from===hovId||e.to===hovId);
+    ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
+    ctx.strokeStyle=(e.color||'#64748b')+(isHL?'90':'30');
+    ctx.lineWidth=isHL?2:1;
+    ctx.setLineDash([3,3]);ctx.stroke();ctx.setLineDash([]);
+    // Arrow at midpoint
+    const mx=(a.x+b.x)/2,my=(a.y+b.y)/2;
+    const ang=Math.atan2(b.y-a.y,b.x-a.x);const as=4;
+    ctx.beginPath();ctx.moveTo(mx+Math.cos(ang)*as,my+Math.sin(ang)*as);
+    ctx.lineTo(mx+Math.cos(ang+2.5)*as,my+Math.sin(ang+2.5)*as);
+    ctx.lineTo(mx+Math.cos(ang-2.5)*as,my+Math.sin(ang-2.5)*as);
+    ctx.closePath();ctx.fillStyle=(e.color||'#64748b')+(isHL?'b0':'50');ctx.fill();
+  });
+
+  // Draw knowledge edges (跨周知识关联)
+  graphEdges.filter(e=>e.type==='knowledge').forEach(e=>{
+    const a=getGraphNode(e.from),b=getGraphNode(e.to);if(!a||!b)return;
+    const isHL=hovId&&(e.from===hovId||e.to===hovId);
+    const cp=crossCtrl(a,b);
+    ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.quadraticCurveTo(cp.x,cp.y,b.x,b.y);
+    ctx.strokeStyle=(e.color||'#a78bfa')+(isHL?'b0':'35');
+    ctx.lineWidth=isHL?2.5:1.5;
+    ctx.setLineDash([6,3,2,3]);ctx.stroke();ctx.setLineDash([]);
+    // Animated particle
+    if(isHL||!hovId){
+      const now=performance.now()*0.001;
+      const t=((now*0.2+graphEdges.indexOf(e)*0.19)%1);
+      const px=(1-t)*(1-t)*a.x+2*(1-t)*t*cp.x+t*t*b.x;
+      const py=(1-t)*(1-t)*a.y+2*(1-t)*t*cp.y+t*t*b.y;
+      ctx.beginPath();ctx.arc(px,py,isHL?3:2,0,Math.PI*2);
+      ctx.fillStyle=e.color||'#a78bfa';ctx.fill();
+    }
+    // Label on hover
+    if(isHL&&e.label){
+      const lx=cp.x,ly=cp.y-8;
+      ctx.font='bold 9px "Noto Sans SC",sans-serif';ctx.textAlign='center';ctx.textBaseline='bottom';
+      const tw=ctx.measureText(e.label).width;
+      ctx.fillStyle=isDark?'rgba(0,0,0,.7)':'rgba(255,255,255,.85)';
+      ctx.beginPath();ctx.roundRect(lx-tw/2-4,ly-12,tw+8,15,4);ctx.fill();
+      ctx.fillStyle=e.color||'#a78bfa';ctx.fillText(e.label,lx,ly);
+    }
+  });
+
   // Draw NH course nodes (outer ring, rounded-rect style)
   graphNodes.filter(n=>n.type==='nh').forEach(n=>{
     const isHovered=graphHoveredNode&&graphHoveredNode.id===n.id;
@@ -2069,8 +2180,36 @@ function drawGraph(){
     }
   });
 
+  // Draw special nodes (RAG技术专题等)
+  graphNodes.filter(n=>n.type==='special').forEach(n=>{
+    const isHovered=graphHoveredNode&&graphHoveredNode.id===n.id;
+    const isBridgeHL=bridgeHighlight.has(n.id);
+    const r=isHovered?n.r*1.3:(isBridgeHL?n.r*1.15:n.r);
+    // Glow
+    if(isHovered||isBridgeHL){
+      ctx.beginPath();ctx.arc(n.x,n.y,r+12,0,Math.PI*2);
+      const g=ctx.createRadialGradient(n.x,n.y,r,n.x,n.y,r+12);
+      g.addColorStop(0,n.color+'60');g.addColorStop(1,n.color+'00');ctx.fillStyle=g;ctx.fill();
+    }
+    // Hexagon shape
+    ctx.beginPath();
+    for(let i=0;i<6;i++){const a=Math.PI/3*i-Math.PI/6;ctx.lineTo(n.x+Math.cos(a)*r,n.y+Math.sin(a)*r)}
+    ctx.closePath();
+    const grad=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,r);
+    grad.addColorStop(0,n.color);grad.addColorStop(1,n.color+'aa');
+    ctx.fillStyle=grad;ctx.fill();
+    if(isHovered){ctx.strokeStyle='#fff';ctx.lineWidth=2.5;ctx.stroke()}
+    else{ctx.strokeStyle=n.color;ctx.lineWidth=1.5;ctx.stroke()}
+    // Icon
+    ctx.font='16px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillStyle='#fff';ctx.fillText(n.data.icon||'🧠',n.x,n.y-2);
+    // Label
+    ctx.font='bold 11px "Noto Sans SC",sans-serif';ctx.textBaseline='top';
+    ctx.fillStyle=isDark?'#fff':'#111';ctx.fillText(n.label,n.x,n.y+r+6);
+  });
+
   // Draw child nodes (behind main)
-  graphNodes.filter(n=>n.type!=='main'&&n.type!=='nh').forEach(n=>{
+  graphNodes.filter(n=>n.type!=='main'&&n.type!=='nh'&&n.type!=='special').forEach(n=>{
     const isHovered=graphHoveredNode&&graphHoveredNode.id===n.id;
     const isCrossHL=crossHighlight.has(n.id);
     const r=isHovered?n.r*1.4:(isCrossHL?n.r*1.2:n.r);
@@ -2196,6 +2335,8 @@ function setupGraphInteractions(){
     } else if(node&&node.type==='nh'){
       toggleGraph();
       setTimeout(()=>{nhJumpToCourse(node.weekIdx,node.courseKey)},450);
+    } else if(node&&node.type==='special'){
+      window.open('rag-knowledge/index.html','_blank');
     }
   });
 }
@@ -2257,6 +2398,17 @@ function showGraphTooltip(node,sx,sy){
     (d.points.length>3?'<div class="text-[10px] dark:text-gray-500 text-gray-400 mt-1">还有 '+(d.points.length-3)+' 个知识点…</div>':'')+
     '<div class="text-xs dark:text-gray-400 text-gray-500 mt-2">点击跳转到课程笔记</div>'+
     bHtml+
+    '</div>';
+  } else if(node.type==='special'){
+    let spBridge=[];
+    graphEdges.filter(e=>e.type==='bridge').forEach(e=>{
+      if(e.from===node.id){const tgt=getGraphNode(e.to);if(tgt)spBridge.push(tgt.label)}
+      if(e.to===node.id){const src=getGraphNode(e.from);if(src)spBridge.push(src.label)}
+    });
+    html='<div class="glass-card rounded-xl p-4 dark:text-white text-gray-900" style="border:2px solid '+node.color+'40">'+
+    '<div class="flex items-center gap-2 mb-2"><span class="text-lg">🧠</span><span class="font-bold text-base">'+node.label+'</span></div>'+
+    '<div class="text-xs dark:text-gray-300 text-gray-600 mb-2">独立知识专题页面，点击打开</div>'+
+    (spBridge.length?'<div class="text-[10px] dark:text-gray-400 text-gray-500 mt-1">🔗 关联 '+spBridge.length+' 个课程笔记</div>':'')+
     '</div>';
   } else {
     const d=node.data;
@@ -2978,15 +3130,15 @@ const NH_WEEKS=[
      courses:[
       {id:'001',title:'IDE工具安装与AI编程初体验',tags:['工具','实战'],
        relatedNodes:[{id:6,title:'开发跟进与迭代',why:'开发工具与效率提升'}],
-       points:['IDE工具选型：Cursor（海外版）与 Trae（国内版）二选一安装配置','AI辅助编程实践：通过自然语言指令让AI生成贪吃蛇小游戏代码','模型选择建议：推荐 Claude 4.7（不带 Beta 后缀），根据需求选型','项目管理基础：每个项目创建独立文件夹，指定工作路径避免混乱','Bug反馈思维：明确描述问题现象（如"点击开始没反应"），不做模糊反馈','测试方法：在AI生成的HTML文件上右键→用浏览器打开即可测试'],
+       points:['IDE工具选型：Cursor（海外版）与 Trae（国内版）二选一安装配置','AI辅助编程实践：通过自然语言指令让AI生成贪吃蛇小游戏代码','模型选择建议：推荐 Claude 4.7（不带 Beta 后缀），根据需求选型','项目管理基础：每个项目创建独立文件夹，指定工作路径避免混乱','Bug反馈思维：明确描述问题现象（如"点击开始没反应"），不做模糊反馈','测试方法：在AI生成的HTML文件上右键→用浏览器打开即可测试','Cloud Code工具体验：AI编程IDE市场前景广阔，探索编程工具与AI在数据库管理中的应用','AI训练师新岗位：垂类模型优化方向，薪资与行业认知存在挑战，需理解数据标注与模型微调','AI产品经理真实身份：本质是模型沟通能力+产品化能力，不是纯技术也不是纯业务','互联网留痕与垂类专家：构建个人品牌，在细分领域建立专业影响力'],
        keyPoint:'Bug反馈思维：明确描述问题现象，不做模糊反馈',homework:'小组比赛：用AI生成创意小游戏，组内评选前三名参加决赛'},
       {id:'002',title:'场景思维与产品分析框架',tags:['方法论','核心'],
        relatedNodes:[{id:1,title:'需求收集与分析',why:'场景描述公式=需求收集方法'},{id:2,title:'需求定义与PRD撰写',why:'BRD/PRD文档撰写'}],
-       points:['场景描述公式：用户[明确群体] + 场景[具体情境] + 痛点[详细说明]','BRD文档要义：分清楚做什么与不做什么，明确技术路线','产品分析画布：结构化拆解产品的分析工具','传统产品经理核心输出物：原型图 + 产品需求文档（PRD）','技术评审：评估技术可行性是产品落地的关键环节','场景=讲故事：主人公 + 情境 + 冲突 + 解决方案'],
+       points:['场景描述公式：用户[明确群体] + 场景[具体情境] + 痛点[详细说明]','BRD文档要义：分清楚做什么与不做什么，明确技术路线','产品分析画布：结构化拆解产品的分析工具','传统产品经理核心输出物：原型图 + 产品需求文档（PRD）','技术评审：评估技术可行性是产品落地的关键环节','场景=讲故事：主人公 + 情境 + 冲突 + 解决方案','信息化→数字化→智能化进程：产品经理角色从IT产品→互联网产品→AI产品演变','自媒体创业与市场验证：通过自媒体验证市场需求，积累行业经验与用户反馈','AI产品经理岗位需求激增：市场人才流入加速，跨行业转型案例增多，勇气与游戏心态很重要'],
        keyPoint:'场景描述公式：用户 + 场景 + 痛点',homework:'收集30个目标岗位职责详情'},
       {id:'003',title:'模型选型与国产替代方案',tags:['工具','模型'],
        relatedNodes:[{id:5,title:'开发排期与立项',why:'模型选型影响资源规划'}],
-       points:['国产模型推荐：GLM、KB12.5、MiniMax 2.5/2.7 等可作为替代','模型选择策略：根据项目需求和场景选择合适的模型版本','免费与付费工具的能力边界：了解各工具的适用范围','官网优先原则：利用模型官方平台完成作业和实践练习','问题解决导向：遇到工具问题时积极寻找替代方案而非等待'],
+       points:['国产模型推荐：GLM、KB12.5、MiniMax 2.5/2.7 等可作为替代','模型选择策略：根据项目需求和场景选择合适的模型版本','免费与付费工具的能力边界：了解各工具的适用范围','官网优先原则：利用模型官方平台完成作业和实践练习','问题解决导向：遇到工具问题时积极寻找替代方案而非等待','Windows用户指南：系统界面英文但支持中文输入与理解，淘宝/闲鱼购买账号注意登录安全','团队协作与竞赛机制：小组赛→总决赛评选，通过竞赛驱动学习积极性与创意'],
        keyPoint:'根据项目需求和场景选择合适的模型版本',homework:'完成IDE工具安装并完成基础配置'}
     ]},
     {date:'3月29日（周六）',title:'大模型技术原理与产品化思维',icon:'🧠',color:'#8b5cf6',
@@ -2994,11 +3146,11 @@ const NH_WEEKS=[
      courses:[
       {id:'004',title:'POC验证与MVP方法论',tags:['方法论','核心'],
        relatedNodes:[{id:1,title:'需求收集与分析',why:'需求挖掘多维度收集'},{id:9,title:'灰度发布/全量上线',why:'MVP灰度验证方法'}],
-       points:['POC回答"做不做得出来"，MVP回答"做出来有没有人用"——两者缺一不可','POC可跳过：技术方案已成熟｜MVP可跳过：市场需求已验证','全新领域探索：POC和MVP都不能跳过，必须双重验证','POC标准流程：想清楚验证什么→定义成功标准→快速试验→结果决策','提示词工程：理解提示词限制词，认知模型能力边界','需求挖掘渠道：问卷、社群、对话、业务方反馈等多维度收集'],
+       points:['POC回答"做不做得出来"，MVP回答"做出来有没有人用"——两者缺一不可','POC可跳过：技术方案已成熟｜MVP可跳过：市场需求已验证','全新领域探索：POC和MVP都不能跳过，必须双重验证','POC标准流程：想清楚验证什么→定义成功标准→快速试验→结果决策','提示词工程：理解提示词限制词，认知模型能力边界','需求挖掘渠道：问卷、社群、对话、业务方反馈等多维度收集','产品研发全流程：需求调研→方案设计→技术实现→项目落地→测试验收，全链路理解','乙方vs甲方选择：乙方接触大项目成长快但不稳定，甲方稳定但成长空间可能受限','资源调配与跨部门协作：技术/UI/测试资源的有效利用，外包策略与实习生管理','ASR/OCR/TTS技术认知：自动语音识别/光学字符识别/语音合成，AI产品常见技术组件'],
        keyPoint:'POC回答"做不做得出来"，MVP回答"做出来有没有人用"',homework:'AI产品协作全流程笔记（创新PRD格式）+ 小游戏迭代'},
       {id:'005',title:'LLM核心技术概念解析',tags:['技术','核心'],
        relatedNodes:[{id:4,title:'需求评审与确认',why:'技术可行性评估基础'}],
-       points:['OpenAI = 第一个把AI产品化的公司，开创性地将技术转化为产品','LLM = Large Language Model（大型语言模型），VLM = 视觉语言模型','NLP = 自然语言处理：让机器"听懂人话、说出人话"的技术','端到端学习：输入端直达输出端，中间全部自动学习，一步到位','技术演进路线：CNN（卷积神经网络）→ RNN → Transformer 架构','LLM推理流程：Query→Tokenization(拆解)→Token(词语)→Embedding→Semantics(语义)'],
+       points:['OpenAI = 第一个把AI产品化的公司，开创性地将技术转化为产品','LLM = Large Language Model（大型语言模型），VLM = 视觉语言模型','NLP = 自然语言处理：让机器"听懂人话、说出人话"的技术','端到端学习：输入端直达输出端，中间全部自动学习，一步到位','技术演进路线：CNN（卷积神经网络）→ RNN → Transformer 架构','LLM推理流程：Query→Tokenization(拆解)→Token(词语)→Embedding→Semantics(语义)','数字员工平台开发：团队协作经验，AI助手在企业内部的产品化实践','注意力机制(Attention)：深度学习的核心突破，理解CNN与Transformer处理数据集的本质区别','AI搜索技巧与平台比较：善用不同AI平台的搜索能力，获取高质量信息','Token消耗与成本：模型分词逻辑影响资源消耗，理解Token计费对产品成本的影响'],
        keyPoint:'LLM推理流程：Query→Tokenization→Token→Embedding→Semantics',homework:'理解并整理LLM技术原理笔记'},
       {id:'006',title:'模型服务化与商业模式',tags:['商业','模型'],
        relatedNodes:[{id:5,title:'开发排期与立项',why:'模型成本与资源规划'},{id:8,title:'上线前准备',why:'服务化部署与上线'}],
@@ -3006,7 +3158,7 @@ const NH_WEEKS=[
        keyPoint:'模型服务化四种模式：自研+自营、自营+分销、外采+转售、开源+托管',homework:'完成模型横向对比与选型评估'},
       {id:'006-2',title:'API密钥管理与多平台接入',tags:['工具','实战'],
        relatedNodes:[{id:6,title:'开发跟进与迭代',why:'API接入与开发协作'}],
-       points:['API密钥创建流程：登录平台→点击密钥创建→命名→选择模式→提交保存','多平台接入方法：通过 API Key 接入不同服务商的模型资源','Cherry Studio实操：客户端简化安装、知识库接入、模型效果对比','CC Switch配置：接入 KPIK 密钥，按需选择合适的调用模型','底层API优化：通过API转换释放模型潜能，表现优于官网环境'],
+       points:['API密钥创建流程：登录平台→点击密钥创建→命名→选择模式→提交保存','多平台接入方法：通过 API Key 接入不同服务商的模型资源','Cherry Studio实操：客户端简化安装、知识库接入、模型效果对比','CC Switch配置：接入 KPIK 密钥，按需选择合适的调用模型','底层API优化：通过API转换释放模型潜能，表现优于官网环境','GitHub资源利用：探索开源项目资源，学习模型优化与缓存机制','Cloud Code与模型切换：掌握多模型切换技术，根据任务需求灵活调用不同模型','竞品分析与团队作业策略：通过竞品分析培养产品思维，团队协作完成综合作业'],
        keyPoint:'通过API转换释放模型潜能，表现优于官网环境',homework:'安装Cherry Studio并测试至少2个不同模型'}
     ]},
     {date:'4月2日（周三）',title:'大模型技术深化与Prompt工程',icon:'✍️',color:'#06b6d4',
@@ -3049,7 +3201,7 @@ const NH_WEEKS=[
        webUrl:'rag-pipeline/index.html',webLabel:'RAG 全流程知识图谱',
        extraLinks:[{url:'rag-knowledge/index.html#topic1',label:'RAG 技术专题 · 文档解析',icon:'🧠'}],
        relatedNodes:[{id:1,title:'需求收集与分析',why:'数据采集方法论复用'},{id:7,title:'测试验收与BUG修复',why:'质量标准制定方法'}],
-       points:['RAG = 检索增强生成，给大模型装外挂知识库，解决时效性/幻觉/安全性问题','离线Pipeline全景：数据采集(A)→文档解析(B)→数据清洗(C)→文本分割(D)→向量化(E)→索引构建(F)','Pipeline A 数据采集：企业内部/外网公开/付费外采/多轮对话QA/网盘API，只采集业务场景强相关数据','Pipeline B 文档解析：OCR(图像)→ASR(语音)→Pandas(结构化)→pdfplumber(半结构化)→markdown(纯文本) <a href="rag-knowledge/index.html#topic1" class="xlink-inline" target="_blank">🧠 RAG专题·文档解析</a>','Pipeline C 数据清洗：元数据绑定(来源/时间) + 复杂排版阅读顺序处理，Chunk是清洗后基本单位 <a href="rag-knowledge/index.html#topic1" class="xlink-inline" target="_blank">🧠 RAG专题·阅读顺序</a>','腾讯DREAM模型：三步走处理复杂排版——图像特征提取→元素特征聚合→元素并行生成 <a href="rag-knowledge/index.html#topic1" class="xlink-inline" target="_blank">🧠 RAG专题·DREAM模型</a>','PM职责：定义知识边界与优先级、输出《文档解析质量标准》、制定清洗规则与验收标准'],
+       points:['RAG = 检索增强生成，给大模型装外挂知识库，解决时效性/幻觉/安全性问题','离线Pipeline全景：数据采集(A)→文档解析(B)→数据清洗(C)→文本分割(D)→向量化(E)→索引构建(F)','Pipeline A 数据采集：企业内部/外网公开/付费外采/多轮对话QA/网盘API，只采集业务场景强相关数据','Pipeline B 文档解析：OCR(图像)→ASR(语音)→Pandas(结构化)→pdfplumber(半结构化)→markdown(纯文本) <a href="rag-knowledge/index.html#topic1" class="xlink-inline" target="_blank">🧠 RAG专题·文档解析</a>','Pipeline C 数据清洗：元数据绑定(来源/时间) + 复杂排版阅读顺序处理，Chunk是清洗后基本单位 <a href="rag-knowledge/index.html#topic1" class="xlink-inline" target="_blank">🧠 RAG专题·阅读顺序</a>','腾讯DREAM模型：三步走处理复杂排版——图像特征提取→元素特征聚合→元素并行生成 <a href="rag-knowledge/index.html#topic1" class="xlink-inline" target="_blank">🧠 RAG专题·DREAM模型</a>','PM职责：定义知识边界与优先级、输出《文档解析质量标准》、制定清洗规则与验收标准','OCR在论文解析中的应用：处理复杂文档(图表/公式/表格)需按顺序提取，版面分析是关键挑战','宠物医疗AI案例：高质量数据来源独特(国际合作购买专业书籍)，专业实习生整理，数据壁垒构建竞争优势','数据清洗实操：去除空格/敏感信息过滤/格式标准化，可编写脚本自动完成，自动化+人工抽样结合提升效率','文本分割三原则：语义完整性(避免断章取义)+长度适配(300-500字)+重叠窗口机制(10%-20%重叠保持上下文)','向量化本质：将文本转换为数值向量，通过余弦相似度和欧式距离判断语义相似性','向量数据库vs关系型数据库：MySQL精准匹配 vs 向量DB语义模糊匹配，PM需关注算法开发定义关键词匹配'],
        keyPoint:'RAG = 给大模型装外挂知识库，离线Pipeline六环节构建高质量知识库',homework:'产品全流程笔记（含RAG技术流程）提交飞书'},
       {id:'008-2',title:'离线Pipeline D-F与大模型演进',tags:['技术','方法论'],
        relatedNodes:[{id:5,title:'开发排期与立项',why:'向量索引构建需排期管理'},{id:6,title:'开发跟进与迭代',why:'跨部门协调模型选型'}],
@@ -3073,11 +3225,11 @@ const NH_WEEKS=[
     {date:'4月5日（周日）',title:'智能体开发与项目实战落地',icon:'🚀',color:'#06b6d4',
      summary:'聚焦实战落地，在扣子平台完成智能体全流程开发，掌握RAG知识库构建方法与场景梳理。',
      courses:[
-      {id:'007',title:'扣子(Coze)平台与RAG知识库构建',tags:['实战','核心'],
+      {id:'009-3',title:'扣子(Coze)平台与RAG知识库构建',tags:['实战','核心'],
        relatedNodes:[{id:3,title:'原型设计与交互设计',why:'智能体人设=交互设计'},{id:7,title:'测试验收与BUG修复',why:'预览调试=测试验收'}],
        points:['三种角色：创建者(Builder) vs 用户(User) vs 协作开发者——看场景区分','智能体全流程：创建→配置人设与回复逻辑→预览调试→发布上线','人设配置要素：人物背景 + 对话风格 + 场景化回复策略','RAG知识库Pipeline：数据采集→FAQ整理→文档解析→分段策略→向量化→索引存储','分段策略要点：按层级自定义标识符，物理长度100左右可覆盖大部分场景','面试技巧：聚焦产品定位和解决的痛点，避免叙述操作步骤细节','项目命名原则：名称应直观反映服务对象、业务领域和目标'],
        keyPoint:'RAG知识库Pipeline：数据采集→FAQ整理→文档解析→分段策略→向量化→索引存储',homework:'创建并发布一个可用的智能问答助手（覆盖≥3个场景）'},
-      {id:'008',title:'场景梳理与团队协作实战',tags:['实战','协作'],
+      {id:'009-4',title:'场景梳理与团队协作实战',tags:['实战','协作'],
        relatedNodes:[{id:1,title:'需求收集与分析',why:'场景梳理四层结构'},{id:10,title:'数据监控与用户反馈',why:'数据收集与质量管理'}],
        points:['场景梳理四层结构：行业→业务域→场景→AI落地方案','场景描述格式：场景概括应体现产品定位和解决的具体问题','数据收集实战：覆盖12个城市（北京/上海/广州/深圳/杭州/厦门等）岗位数据','飞书协作规范：统一表格录入、正确设置权限、创建个人视图保护隐私','数据质量红线：统一字段顺序、城市名称规范化、公司名称全称/简称统一','手动采集保质量：避免直接爬虫，用小号防封，确保数据真实准确','求职助手APP：至少3个不雷同场景，小组合作完成'],
        keyPoint:'场景梳理四层结构：行业→业务域→场景→AI落地方案',homework:'场景梳理文档 + 岗位详情表（12城市）+ 求职助手APP'}
@@ -3087,7 +3239,7 @@ const NH_WEEKS=[
      courses:[
       {id:'010',title:'竞品分析方法论与AI辅助实践',tags:['方法论','核心'],
        relatedNodes:[{id:1,title:'需求收集与分析',why:'竞品分析是需求分析的核心环节'},{id:2,title:'需求定义与PRD撰写',why:'竞品分析支撑PRD决策'}],
-       points:['竞品分析四步法：①明确分析目的(产品阶段+核心问题)→②确定竞品范围→③收集分析数据(AI辅助)→④决策判断(PM主导)','竞品分类四象限：直接竞品(业务+用户相同)、间接竞品(需求同方案异)、潜在竞品(跨行业入侵)、替代品(争夺用户时间)','产品六层分析框架：市场层(规模/增长/格局)→商业层(定价/成本/护城河)→用户层(画像/痛点/旅程)→功能层(差异化)→技术层(架构)→模型层(能力)','市场规模三层次：TAM(总市场)→SAM(可服务市场)→SOM(可获取市场)','竞品数量选择：单点功能分析1个、常规迭代2-4个、全行业调研4个以上','调研渠道矩阵：APP Store/Google Play/Product Hunt/AI工具集 + 清迈数据/艾瑞咨询/极光大数据 + IT橘子/天眼查/企查查','AI辅助竞品分析：设定目标与竞品范围→指导AI查找可靠数据源→审核关键信息→PM做最终决策','用户画像构建：应用商店评论+爬虫分析+行为数据+用户访谈+问卷调研，比凭空想象更落地','用户旅程图：梳理用户从接触到离开的全流程，分析每阶段行为/触点/情绪，识别关键痛点','PM核心价值：AI可收集数据和撰写报告，但目标设定/数据可信度判断/用户需求洞察/最终决策仍需PM完成'],
+       points:['竞品分析四步法：①明确分析目的(产品阶段+核心问题)→②确定竞品范围→③收集分析数据(AI辅助)→④决策判断(PM主导)','竞品分类四象限：直接竞品(业务+用户相同)、间接竞品(需求同方案异)、潜在竞品(跨行业入侵)、替代品(争夺用户时间)','产品六层分析框架：市场层(规模/增长/格局)→商业层(定价/成本/护城河)→用户层(画像/痛点/旅程)→功能层(差异化)→技术层(架构)→模型层(能力)','市场规模三层次：TAM(总市场)→SAM(可服务市场)→SOM(可获取市场)','竞品数量选择：单点功能分析1个、常规迭代2-4个、全行业调研4个以上','调研渠道矩阵：APP Store/Google Play/Product Hunt/AI工具集 + 清迈数据/艾瑞咨询/极光大数据 + IT橘子/天眼查/企查查','AI辅助竞品分析：设定目标与竞品范围→指导AI查找可靠数据源→审核关键信息→PM做最终决策','用户画像构建：应用商店评论+爬虫分析+行为数据+用户访谈+问卷调研，比凭空想象更落地','用户旅程图：梳理用户从接触到离开的全流程，分析每阶段行为/触点/情绪，识别关键痛点','PM核心价值：AI可收集数据和撰写报告，但目标设定/数据可信度判断/用户需求洞察/最终决策仍需PM完成','竞品分析报告正确方式：聚焦解决具体问题而非信息堆砌，注重差异化与目标市场分析，避免盲目跟风','AI与PM角色融合：AI加速产品迭代和数据分析，但核心决策/目标设定/深度理解仍需人类参与','面试准备策略：带着完整竞品分析报告参加面试，展示清晰思路和个人能力对职业发展的积极影响','产品开发成本效益分析：收费模式设计/用户获取成本/优化策略，PM需掌控项目底层技术'],
        keyPoint:'竞品分析四步法：明确目的→选择竞品→收集分析→决策判断；PM负责决策，AI辅助执行',homework:'完成竞品分析报告（含市场层/商业层/用户层分析）'},
       {id:'010-2',title:'四大交付物体系与项目立项',tags:['方法论','实战'],
        relatedNodes:[{id:2,title:'需求定义与PRD撰写',why:'BRD/MRD/立项报告=需求文档体系'},{id:4,title:'需求评审与确认',why:'四大交付物每阶段需正式评审'},{id:5,title:'开发排期与立项',why:'立项报告含资源与排期规划'}],
@@ -3097,8 +3249,8 @@ const NH_WEEKS=[
   ]
 },
 {
-  week:3, title:'第三周', subtitle:'AI Agent认知架构 → 项目实战 → 团队协作',
-  dateRange:'4.11 –', color:'#10b981', icon:'🤖',
+  week:3, title:'第三周', subtitle:'AI Agent认知架构 → 项目实战 → 价值量化 → 工作流实操',
+  dateRange:'4.11 – 4.12', color:'#10b981', icon:'🤖',
   highlights:[
     {icon:'🧠',title:'Agent认知架构',desc:'Memory/Planning/Tools/Action/Observation/Reflection 六大模块'},
     {icon:'🔄',title:'ReAct循环',desc:'Reasoning + Acting 交替执行，感知→规划→执行→观察→反思闭环'},
@@ -3107,10 +3259,14 @@ const NH_WEEKS=[
     {icon:'🔧',title:'Tool Use模式',desc:'Function Calling / ReAct格式 / Code Generation 三种工具调用模式'},
     {icon:'🪞',title:'Reflexion三元组',desc:'Actor(执行) + Evaluator(评估) + Self-Reflection(自反思) 持续学习'},
     {icon:'🏗️',title:'Agent技术三层',desc:'模型层→工程层(数据/工具链/A2A)→应用层，完整技术栈'},
-    {icon:'🚀',title:'项目实战孵化',desc:'产品微度测试、多版本管理、并发测试、团队协作'}
+    {icon:'🚀',title:'项目实战孵化',desc:'产品微度测试、多版本管理、并发测试、团队协作'},
+    {icon:'💎',title:'价值三维度',desc:'增收(Revenue Up) + 降本(Cost Down) + 提效(Efficiency Up)'},
+    {icon:'📊',title:'能力成熟度模型',desc:'L1 Chatbot → L2 Workflow → L3 Agent 三级进化路径'},
+    {icon:'🔧',title:'工作流实操',desc:'打标助手全流程：模型选型→变量配置→提示词→测试→优化'},
+    {icon:'🐛',title:'Bad Case优化',desc:'明确错误→补充信息→调整规则→验证效果，质量提升核心手段'}
   ],
-  quotes:['AI等级从推理转向智能体，这是行业共识','你会觉得越学越多越焦虑，但市场要求其实没那么高','似懂非懂的领导最难搞，完全不懂反而好沟通','商业的本质是创新','从现在就可以开始孵化自己的项目','芯片晶体管16-24个月翻倍，AI能处理的任务长度7个月翻一倍','用户跟AI对话的内容，是主动变成记忆还是被动添加记忆？这是值得思考的策略问题','每个人都是资源，都是信息源'],
-  tools:[{n:'豆包/Cloud Code',d:'AI会议转写与架构生成'},{n:'飞书COI',d:'在线画板架构图工具'},{n:'Kimi',d:'AI辅助知识整理与搜索'},{n:'扣子(Coze)',d:'智能体开发与发布平台'},{n:'MCP',d:'Model Context Protocol 模型上下文协议'},{n:'Windsurf',d:'AI编程IDE(Plan/Code模式)'},{n:'NotebookLM',d:'知识沉淀与结构化工具'},{n:'飞书',d:'团队协作与文档'}],
+  quotes:['AI等级从推理转向智能体，这是行业共识','你会觉得越学越多越焦虑，但市场要求其实没那么高','似懂非懂的领导最难搞，完全不懂反而好沟通','商业的本质是创新','从现在就可以开始孵化自己的项目','芯片晶体管16-24个月翻倍，AI能处理的任务长度7个月翻一倍','用户跟AI对话的内容，是主动变成记忆还是被动添加记忆？这是值得思考的策略问题','每个人都是资源，都是信息源','项目价值远比复杂度更打动面试官，简单项目也能带来巨大影响','业务价值必须先获得业务方认可，不能直接向高层汇报','线上不要大刀阔斧改动，保证原有数据稳定正确','Bad Case是智能体质量提升的核心手段','不投递的失败概率是100%，投了至少有机会'],
+  tools:[{n:'豆包/Cloud Code',d:'AI会议转写与架构生成'},{n:'飞书COI',d:'在线画板架构图工具'},{n:'Kimi',d:'AI辅助知识整理与搜索'},{n:'扣子(Coze)',d:'智能体开发与发布平台'},{n:'MCP',d:'Model Context Protocol 模型上下文协议'},{n:'Windsurf',d:'AI编程IDE(Plan/Code模式)'},{n:'NotebookLM',d:'知识沉淀与结构化工具'},{n:'飞书',d:'团队协作与文档'},{n:'蜜桃AI',d:'用户画像辅助生成工具'},{n:'飞书多维表格',d:'字段与变量映射管理'},{n:'Dify工作流',d:'打标助手开发平台'}],
   days:[
     {date:'4月11日（周五）',title:'AI Agent认知架构与项目实战',icon:'🤖',color:'#10b981',
      summary:'系统学习AI Agent认知架构六大模块（Memory/Planning/Tools/Action/Observation/Reflection），理解ReAct循环与Reflexion框架；并通过项目实战体验产品微度测试与团队协作。',
@@ -3123,6 +3279,18 @@ const NH_WEEKS=[
        relatedNodes:[{id:7,title:'测试验收与BUG修复',why:'微度测试=产品验收流程'},{id:10,title:'数据监控与用户反馈',why:'产品测试反馈收集'},{id:9,title:'灰度发布/全量上线',why:'产品发布与版本管理'},{id:5,title:'开发排期与立项',why:'团队分组与立项规划'},{id:8,title:'上线前准备',why:'域名部署与上线流程'},{id:11,title:'复盘总结与迭代优化',why:'项目孵化与面试复盘'}],
        points:['产品微度测试：注册体验→BUG反馈→优化迭代，模拟真实产品验收流程','多版本管理：支持产品迭代操作，点赞/鲜花/评分评价机制，周期性数据清理','并发测试实践：个人邮箱并发限制、服务器压力测试、域名申请与部署流程','智能体项目分享：如何处理客户投诉、技术选型、工作流制定、保密性与隐私保护','产运岗位趋势：AI产品常态化后运营需求量大，产运需具备产品背景+运营能力','团队分组与协作：5人一组+组长负责制，模拟真实团队运作，定期汇报','AI孵化项目思路：从小游戏到产品平台，鼓励在学习中沉淀具体项目带走','面试市场洞察：市场要求比想象中低，关键是能讲清楚基础原理和落地流程'],
        keyPoint:'通过微度测试体验产品验收全流程，团队协作模拟真实项目管理',homework:'注册体验产品平台并提交BUG反馈 + 确认小组分组与角色分工'}
+    ]},
+    {date:'4月12日（周六）',title:'项目价值量化与智能体工作流实操',icon:'💎',color:'#f59e0b',
+     summary:'系统学习项目价值量化三维度（增收/降本/提效），掌握用户画像构建与能力成熟度模型；实操工作流vs对话流开发，完成打标助手全流程并深入Bad Case优化方法论。',
+     courses:[
+      {id:'013',title:'项目价值量化与产品方法论',tags:['方法论','核心'],
+       relatedNodes:[{id:1,title:'需求收集与分析',why:'用户画像构建与需求挖掘'},{id:2,title:'需求定义与PRD撰写',why:'业务流程图与服务蓝图'},{id:5,title:'开发排期与立项',why:'项目价值量化论证立项'}],
+       points:['项目价值三维度：增收(Revenue Up) + 降本(Cost Down) + 提效(Efficiency Up)，面试中用数据量化贡献','价值汇报流程：价值梳理→文档编写→业务方认可→高层汇报，必须先获得业务方认可','用户画像构建：基础角色+核心价值+行为场景，蜜桃AI辅助生成，信息源：Meta/Google/专业论坛/人人都是产品经理','业务流程图绘制：梳理完整业务链路，标注AI可介入的节点与预期效果','思维导图笔记法：结构化梳理课程内容，培养系统性思维习惯','战略地图与服务蓝图：以客服系统为例，从用户咨询到智能质检的全流程，包含业务节点/方向连线/角色标识','能力成熟度模型：L1 Chatbot(简单问答) → L2 Workflow(流程自动化) → L3 Agent(自主规划执行)','AI自主运营愿景：从人工干预到AI自主决策的进化路径，运营效率指数级提升','项目价值远比复杂度更打动面试官：简单项目也能带来巨大影响，关键是能量化说明','面试与求职心态：不投递的失败概率是100%，投了至少有机会；勇气比完美准备更重要'],
+       keyPoint:'项目价值三维度：增收/降本/提效，用数据量化贡献比展示技术复杂度更有说服力',homework:'完成项目价值量化文档 + 用户画像构建 + 业务流程图'},
+      {id:'014',title:'工作流开发实操与Bad Case优化',tags:['实战','工具'],
+       relatedNodes:[{id:3,title:'原型设计与交互设计',why:'工作流=交互流程设计'},{id:6,title:'开发跟进与迭代',why:'工作流开发与调参实操'},{id:7,title:'测试验收与BUG修复',why:'Bad Case优化=质量验收'}],
+       points:['工作流vs对话流选择：工作流有始有终适合自动化任务，对话流多轮记忆适合咨询问答','字段与变量概念：飞书多维表格字段映射，变量在工作流中承载数据传递','打标助手开发全流程：模型选择→入参配置(sys/user prompt)→变量引用→输出节点→测试验证','温度参数(Temperature)调优：低温保守确定/高温创造多样，半径比喻——低温小半径精确/高温大半径探索','单节点测试vs整体测试：先验证局部逻辑正确性，再端到端验证完整流程','Bad Case优化方法论：明确错误→补充具体信息(模型/入参/变量)→根据业务规则调整提示词→验证修复效果','业务规则变动管理：业务方规则变更时必须同步通知AI系统更新，否则产生系统性错误','线上保护原则：不要大刀阔斧改动，保证原有数据稳定正确，新问题明确标准后小幅优化','AI自动化提效ROI计算：量化AI替代人工的效率提升，投入产出比论证项目持续投入价值','工作流调试技巧：善用日志输出和中间变量查看，定位问题节点快速修复'],
+       keyPoint:'Bad Case是智能体质量提升的核心手段：明确错误→补充信息→调整规则→验证效果',homework:'完成打标助手工作流开发 + 至少3个Bad Case优化记录'}
     ]}
   ]
 }
@@ -3224,7 +3392,16 @@ const NH_GLOSSARY=[
 {term:'Human-in-the-Loop',full:'',zh:'人在回路',cat:'Agent架构',week:[3],desc:'在Agent执行流程中引入人类判断和反馈的机制。用户反馈经意图识别与情感分析后存入长期记忆，用于优化Agent未来行为。'},
 {term:'元认知',full:'Metacognition',zh:'',cat:'Agent架构',week:[3],desc:'Agent对自身认知过程的认知与监控能力。Reflection模块通过元认知实现对历史决策的复盘、经验提取和策略优化。'},
 {term:'ETL Pipeline(Agent)',full:'Extract-Transform-Load',zh:'数据处理管道',cat:'Agent架构',week:[3],desc:'Agent记忆系统的数据入库流程：采集(Extract)→解析+清洗(Transform)→分块+向量化+索引(Load)。与RAG离线Pipeline一脉相承。'},
-{term:'微度测试',full:'',zh:'',cat:'产品方法论',week:[3],desc:'小范围用户体验测试方法。流程：注册体验→BUG反馈→优化迭代，模拟真实产品验收。关注并发性能、用户体验和功能完整性。'}
+{term:'微度测试',full:'',zh:'',cat:'产品方法论',week:[3],desc:'小范围用户体验测试方法。流程：注册体验→BUG反馈→优化迭代，模拟真实产品验收。关注并发性能、用户体验和功能完整性。'},
+// === 项目价值与工作流实操 (第三周 013/014) ===
+{term:'增收/降本/提效',full:'Revenue Up / Cost Down / Efficiency Up',zh:'项目价值三维度',cat:'产品方法论',week:[3],desc:'量化项目价值的三个核心维度。面试中用数据说明项目对公司的具体贡献，比展示技术复杂度更有说服力。'},
+{term:'能力成熟度模型',full:'Capability Maturity Model',zh:'',cat:'Agent架构',week:[3],desc:'AI能力的三级进化路径：L1 Chatbot(简单问答) → L2 Workflow(流程自动化) → L3 Agent(自主规划执行)。用于评估业务场景中AI应用的成熟度。'},
+{term:'服务蓝图',full:'Service Blueprint',zh:'',cat:'产品方法论',week:[3],desc:'标准化战略地图，以客服系统为例展示从用户咨询到智能质检的各阶段流程。包含业务节点、方向连线和角色标识三大要素。'},
+{term:'用户画像',full:'User Persona',zh:'',cat:'产品方法论',week:[3],desc:'目标用户的结构化描述，包含基础角色+核心价值+行为场景。可借助蜜桃AI等工具辅助生成，信息来源包括Meta/Google/专业论坛/人人都是产品经理。'},
+{term:'Bad Case',full:'',zh:'错误案例',cat:'工作流',week:[3],desc:'智能体输出结果不正确的测试案例。优化流程：明确错误→补充具体信息(模型/入参/变量)→根据业务规则调整提示词→验证修复效果。是质量提升的核心手段。'},
+{term:'Temperature',full:'',zh:'温度参数',cat:'模型服务',week:[3],desc:'控制模型输出随机性的参数。温度低→推荐保守/确定性高；温度高→推荐多样/创造性强。可用半径比喻理解：低温=小半径精确范围，高温=大半径探索范围。'},
+{term:'打标助手',full:'Labeling Assistant',zh:'',cat:'工作流',week:[3],desc:'基于工作流开发的智能体应用。全流程：模型选择→入参配置→系统提示词→用户提示词→变量引用→输出节点配置。用于自动化数据标注与分类。'},
+{term:'蜜桃AI',full:'',zh:'用户画像生成工具',cat:'工具平台',week:[3],desc:'AI辅助生成用户画像的工具，帮助构建基础角色、核心价值和行为场景描述。'}
 ];
 
 // ---- 参考文献与标准 (shown at bottom of glossary) ----
@@ -4174,6 +4351,11 @@ const CW_SLIDES_W3=[
   {key:'w3-react',title:'ReAct 循环',icon:'🔄',day:1},
   {key:'w3-tech-stack',title:'Agent 技术三层',icon:'🏗️',day:1},
   {key:'w3-project',title:'项目实战与测试',icon:'🚀',day:1},
+  {key:'w3-value',title:'项目价值量化',icon:'💎',day:2},
+  {key:'w3-persona',title:'用户画像与蓝图',icon:'👤',day:2},
+  {key:'w3-maturity',title:'能力成熟度模型',icon:'📊',day:2},
+  {key:'w3-workflow-dev',title:'工作流开发实操',icon:'⚙️',day:2},
+  {key:'w3-badcase',title:'Bad Case 优化',icon:'🐛',day:2},
   {key:'w3-summary',title:'总结与行动',icon:'🎯',day:0}
 ];
 function nhRenderCourseware(){
@@ -4192,7 +4374,7 @@ function nhRenderCourseware(){
   const secBg=dk?'#000000':'#f5f5f7';
   const shadow=dk?'none':'rgba(0,0,0,.22) 3px 5px 30px 0px';
   const slide=CW_SLIDES[cwSlide];
-  const dayLabel=isW3?(slide.day===1?'Day 1 · 4月11日(周五)':''):isW2?(slide.day===1?'Day 1 · 4月4日(周六)':slide.day===2?'Day 2 · 4月5日(周日·上午)':slide.day===3?'Day 3 · 4月5日(周日·下午)':slide.day===4?'Day 4 · 4月9日(周三)':''):(slide.day===1?'Day 1 · 3月28日':slide.day===2?'Day 2 · 3月29日':slide.day===3?'Day 3 · 4月2日':'');
+  const dayLabel=isW3?(slide.day===1?'Day 1 · 4月11日(周五)':slide.day===2?'Day 2 · 4月12日(周六)':''):isW2?(slide.day===1?'Day 1 · 4月4日(周六)':slide.day===2?'Day 2 · 4月5日(周日·上午)':slide.day===3?'Day 3 · 4月5日(周日·下午)':slide.day===4?'Day 4 · 4月9日(周三)':''):(slide.day===1?'Day 1 · 3月28日':slide.day===2?'Day 2 · 3月29日':slide.day===3?'Day 3 · 4月2日':'');
   let h='<div class="nh-animate">';
 
   // ======== TOP NAV ========
@@ -5074,10 +5256,11 @@ function nhRenderCourseware(){
     h+='<div style="text-align:center;padding:40px 0 32px">';
     h+='<div style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;color:'+accent+'">WEEK 3 COURSEWARE</div>';
     h+='<h1 style="font-size:clamp(32px,6vw,48px);font-weight:600;line-height:1.07;letter-spacing:-.5px;margin-bottom:16px;color:'+txt+'">第三周知识全景</h1>';
-    h+='<p style="font-size:17px;line-height:1.47;letter-spacing:-.37px;max-width:560px;margin:0 auto 40px;color:'+sub+'">4.11 – · AI Agent 认知架构 × 项目实战<br>从智能体架构原理到产品测试协作的完整链路</p>';
+    h+='<p style="font-size:17px;line-height:1.47;letter-spacing:-.37px;max-width:560px;margin:0 auto 40px;color:'+sub+'">4.11 – 4.12 · AI Agent认知架构 → 项目实战 → 价值量化 → 工作流实操<br>从智能体架构原理到工作流开发的完整链路</p>';
     h+='</div>';
     const w3days=[
-      {n:'Day 1',d:'4月11日(周五)',t:'AI Agent认知架构与项目实战',courses:2,icon:'🤖'}
+      {n:'Day 1',d:'4月11日(周五)',t:'AI Agent认知架构与项目实战',courses:2,icon:'🤖'},
+      {n:'Day 2',d:'4月12日(周六)',t:'项目价值量化与工作流实操',courses:2,icon:'💎'}
     ];
     h+='<div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:32px">';
     w3days.forEach(d=>{
@@ -5090,7 +5273,7 @@ function nhRenderCourseware(){
     });
     h+='</div>';
     h+='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;max-width:480px;margin:0 auto">';
-    [{n:'2',l:'节课'},{n:'1',l:'天'},{n:'21',l:'个要点'},{n:'6',l:'大模块'}].forEach(s=>{
+    [{n:'4',l:'节课'},{n:'2',l:'天'},{n:'41',l:'个要点'},{n:'6',l:'大模块'}].forEach(s=>{
       h+='<div style="padding:12px;border-radius:10px;background:'+secBg+';text-align:center">';
       h+='<div style="font-size:20px;font-weight:800;color:'+accent+'">'+s.n+'</div>';
       h+='<div style="font-size:10px;color:'+sub+'">'+s.l+'</div></div>';
@@ -5337,6 +5520,97 @@ function nhRenderCourseware(){
     h+='<div style="font-size:11px;color:'+txt+';margin-top:4px">市场要求比想象中低，关键是能讲清楚基础原理和落地流程</div>';
     h+='</div>';
 
+  } else if(slide.key==='w3-value'){
+    h+='<div style="text-align:center;margin-bottom:24px">';
+    h+='<h2 style="font-size:clamp(22px,4vw,32px);font-weight:600;line-height:1.1;letter-spacing:-.4px;color:'+txt+'">项目价值量化</h2>';
+    h+='<p style="font-size:14px;color:'+sub+';margin-top:6px">用数据说话，比展示技术复杂度更打动面试官</p></div>';
+    h+='<div style="display:flex;gap:16px;justify-content:center;margin-bottom:24px;flex-wrap:wrap">';
+    [{icon:'💰',t:'增收',d:'Revenue Up',c:'#10b981'},{icon:'📉',t:'降本',d:'Cost Down',c:'#3b82f6'},{icon:'⚡',t:'提效',d:'Efficiency Up',c:'#f59e0b'}].forEach(v=>{
+      h+='<div style="flex:1;min-width:120px;max-width:160px;padding:20px 16px;border-radius:14px;background:'+card+';border:1px solid '+cardBd+';box-shadow:'+shadow+';text-align:center">';
+      h+='<div style="font-size:28px;margin-bottom:8px">'+v.icon+'</div>';
+      h+='<div style="font-size:16px;font-weight:700;color:'+v.c+'">'+v.t+'</div>';
+      h+='<div style="font-size:10px;color:'+sub+';margin-top:2px">'+v.d+'</div></div>';
+    });
+    h+='</div>';
+    h+='<div style="padding:14px;border-radius:12px;background:'+secBg+'">';
+    h+='<div style="font-size:12px;font-weight:600;color:'+accent+';margin-bottom:8px">📋 价值汇报流程</div>';
+    h+='<div style="display:flex;align-items:center;gap:8px;justify-content:center;flex-wrap:wrap">';
+    ['价值梳理','文档编写','业务方认可','高层汇报'].forEach((s,i)=>{
+      h+='<span style="font-size:11px;font-weight:600;color:'+txt+';padding:4px 10px;border-radius:8px;background:'+card+';border:1px solid '+cardBd+'">'+s+'</span>';
+      if(i<3)h+='<span style="color:'+accent+'">→</span>';
+    });
+    h+='</div></div>';
+
+  } else if(slide.key==='w3-persona'){
+    h+='<div style="text-align:center;margin-bottom:24px">';
+    h+='<h2 style="font-size:clamp(22px,4vw,32px);font-weight:600;line-height:1.1;letter-spacing:-.4px;color:'+txt+'">用户画像与服务蓝图</h2>';
+    h+='<p style="font-size:14px;color:'+sub+';margin-top:6px">从用户洞察到战略地图的方法论</p></div>';
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:520px;margin:0 auto 24px">';
+    h+='<div style="padding:16px;border-radius:14px;background:'+card+';border:1px solid '+cardBd+';box-shadow:'+shadow+'">';
+    h+='<div style="font-size:14px;font-weight:700;color:'+accent+';margin-bottom:10px">👤 用户画像三要素</div>';
+    ['基础角色','核心价值','行为场景'].forEach(s=>{
+      h+='<div style="font-size:11px;color:'+txt+';padding:4px 0;border-bottom:1px solid '+cardBd+'">'+s+'</div>';
+    });
+    h+='<div style="font-size:10px;color:'+sub+';margin-top:8px">工具：蜜桃AI · Meta · 人人都是PM</div></div>';
+    h+='<div style="padding:16px;border-radius:14px;background:'+card+';border:1px solid '+cardBd+';box-shadow:'+shadow+'">';
+    h+='<div style="font-size:14px;font-weight:700;color:'+accent2+';margin-bottom:10px">🗺️ 服务蓝图三要素</div>';
+    ['业务节点','方向连线','角色标识'].forEach(s=>{
+      h+='<div style="font-size:11px;color:'+txt+';padding:4px 0;border-bottom:1px solid '+cardBd+'">'+s+'</div>';
+    });
+    h+='<div style="font-size:10px;color:'+sub+';margin-top:8px">案例：客服系统全流程</div></div>';
+    h+='</div>';
+
+  } else if(slide.key==='w3-maturity'){
+    h+='<div style="text-align:center;margin-bottom:24px">';
+    h+='<h2 style="font-size:clamp(22px,4vw,32px);font-weight:600;line-height:1.1;letter-spacing:-.4px;color:'+txt+'">能力成熟度模型</h2>';
+    h+='<p style="font-size:14px;color:'+sub+';margin-top:6px">AI 能力三级进化路径</p></div>';
+    h+='<div style="display:flex;flex-direction:column;gap:12px;max-width:480px;margin:0 auto 24px">';
+    [{l:'L3',t:'Agent',d:'自主规划执行，端到端完成复杂任务',c:'#10b981',w:'100%'},{l:'L2',t:'Workflow',d:'流程自动化，有始有终的任务执行',c:'#3b82f6',w:'70%'},{l:'L1',t:'Chatbot',d:'简单问答，基础对话交互',c:'#8b5cf6',w:'40%'}].forEach(m=>{
+      h+='<div style="display:flex;align-items:center;gap:12px">';
+      h+='<div style="width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;background:'+m.c+'20;color:'+m.c+';flex-shrink:0">'+m.l+'</div>';
+      h+='<div style="flex:1"><div style="font-size:13px;font-weight:700;color:'+txt+'">'+m.t+'</div>';
+      h+='<div style="font-size:10px;color:'+sub+'">'+m.d+'</div>';
+      h+='<div style="height:4px;border-radius:2px;background:'+cardBd+';margin-top:4px"><div style="height:100%;width:'+m.w+';border-radius:2px;background:'+m.c+'"></div></div>';
+      h+='</div></div>';
+    });
+    h+='</div>';
+    h+='<div style="padding:12px;border-radius:12px;background:'+secBg+';text-align:center">';
+    h+='<div style="font-size:11px;color:'+sub+'">从 <span style="font-weight:700;color:'+txt+'">人工干预</span> 到 <span style="font-weight:700;color:'+accent+'">AI 自主决策</span> 的进化路径</div></div>';
+
+  } else if(slide.key==='w3-workflow-dev'){
+    h+='<div style="text-align:center;margin-bottom:24px">';
+    h+='<h2 style="font-size:clamp(22px,4vw,32px);font-weight:600;line-height:1.1;letter-spacing:-.4px;color:'+txt+'">工作流开发实操</h2>';
+    h+='<p style="font-size:14px;color:'+sub+';margin-top:6px">打标助手：从模型选择到输出验证的全流程</p></div>';
+    h+='<div style="display:flex;align-items:center;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:20px">';
+    ['模型选择','入参配置','系统提示词','用户提示词','变量引用','输出节点'].forEach((s,i)=>{
+      h+='<div style="padding:6px 12px;border-radius:10px;background:'+card+';border:1px solid '+cardBd+';font-size:11px;font-weight:600;color:'+txt+'">'+s+'</div>';
+      if(i<5)h+='<span style="color:'+accent+';font-size:12px">→</span>';
+    });
+    h+='</div>';
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:480px;margin:0 auto 20px">';
+    h+='<div style="padding:14px;border-radius:12px;background:'+card+';border:1px solid '+cardBd+'">';
+    h+='<div style="font-size:12px;font-weight:700;color:'+accent+'">🌡️ Temperature</div>';
+    h+='<div style="font-size:10px;color:'+sub+';margin-top:4px">低温 = 小半径精确<br>高温 = 大半径探索</div></div>';
+    h+='<div style="padding:14px;border-radius:12px;background:'+card+';border:1px solid '+cardBd+'">';
+    h+='<div style="font-size:12px;font-weight:700;color:'+accent2+'">🧪 测试策略</div>';
+    h+='<div style="font-size:10px;color:'+sub+';margin-top:4px">单节点测试验证局部<br>整体测试端到端验证</div></div>';
+    h+='</div>';
+
+  } else if(slide.key==='w3-badcase'){
+    h+='<div style="text-align:center;margin-bottom:24px">';
+    h+='<h2 style="font-size:clamp(22px,4vw,32px);font-weight:600;line-height:1.1;letter-spacing:-.4px;color:'+txt+'">Bad Case 优化</h2>';
+    h+='<p style="font-size:14px;color:'+sub+';margin-top:6px">智能体质量提升的核心手段</p></div>';
+    h+='<div style="display:flex;flex-direction:column;gap:10px;max-width:440px;margin:0 auto 24px">';
+    [{n:'1',t:'明确错误',d:'准确描述 Bad Case 的错误现象',c:'#ef4444'},{n:'2',t:'补充信息',d:'补充模型/入参/变量等具体信息',c:'#f59e0b'},{n:'3',t:'调整规则',d:'根据业务规则调整提示词',c:'#3b82f6'},{n:'4',t:'验证效果',d:'确认修复后不影响已有正确输出',c:'#10b981'}].forEach(s=>{
+      h+='<div style="display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;background:'+card+';border:1px solid '+cardBd+';box-shadow:'+shadow+'">';
+      h+='<div style="width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;background:'+s.c+'20;color:'+s.c+';flex-shrink:0">'+s.n+'</div>';
+      h+='<div><div style="font-size:12px;font-weight:700;color:'+txt+'">'+s.t+'</div>';
+      h+='<div style="font-size:10px;color:'+sub+'">'+s.d+'</div></div></div>';
+    });
+    h+='</div>';
+    h+='<div style="padding:12px;border-radius:12px;background:'+secBg+';text-align:center">';
+    h+='<div style="font-size:11px;color:'+sub+'">⚠️ 线上保护原则：<span style="font-weight:600;color:'+txt+'">不要大刀阔斧改动</span>，保证原有数据稳定正确</div></div>';
+
   } else if(slide.key==='w3-summary'){
     h+='<div style="text-align:center;padding:32px 0 24px">';
     h+='<div style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;color:'+accent+'">WEEK 3 SUMMARY</div>';
@@ -5352,7 +5626,11 @@ function nhRenderCourseware(){
       {n:'07',t:'ReAct 循环',d:'感知→记忆→规划→执行→观察→反思闭环',color:'#8b5cf6'},
       {n:'08',t:'技术三层架构',d:'模型层 → 工程层 → 应用层',color:'#f59e0b'},
       {n:'09',t:'项目实战',d:'微度测试 + 多版本管理 + 并发测试',color:'#f59e0b'},
-      {n:'10',t:'团队协作',d:'5人一组 + 组长负责制 + 项目孵化',color:'#ef4444'}
+      {n:'10',t:'团队协作',d:'5人一组 + 组长负责制 + 项目孵化',color:'#f59e0b'},
+      {n:'11',t:'价值三维度',d:'增收 + 降本 + 提效，数据量化项目贡献',color:'#ef4444'},
+      {n:'12',t:'能力成熟度',d:'L1 Chatbot → L2 Workflow → L3 Agent',color:'#ef4444'},
+      {n:'13',t:'工作流实操',d:'打标助手全流程 + Temperature 调参',color:'#ec4899'},
+      {n:'14',t:'Bad Case 优化',d:'明确错误→补充信息→调整规则→验证效果',color:'#ec4899'}
     ];
     h+='<div style="max-width:560px;margin:0 auto 28px;columns:2;column-gap:20px">';
     w3pts.forEach(p=>{
