@@ -72,10 +72,16 @@ body{font-family:'Inter','Noto Sans SC',-apple-system,system-ui,sans-serif;backg
 .card,.pi,.fn,.tli{opacity:0;transform:translateY(16px);transition:opacity .5s var(--expo),transform .5s var(--expo)}
 .slide.active .card,.slide.active .pi,.slide.active .fn,.slide.active .tli{opacity:1;transform:translateY(0)}
 .slide.active *:nth-child(1){transition-delay:.05s}.slide.active *:nth-child(2){transition-delay:.1s}.slide.active *:nth-child(3){transition-delay:.15s}.slide.active *:nth-child(4){transition-delay:.2s}.slide.active *:nth-child(5){transition-delay:.25s}.slide.active *:nth-child(6){transition-delay:.3s}
-@media(max-width:768px){.slide{padding:40px 24px 90px}.c3,.c4,.c5{grid-template-columns:1fr 1fr}.c2{grid-template-columns:1fr}.nav-bar{bottom:8px;padding:6px 14px;gap:10px}}
+@media(max-width:768px){.slide{padding:40px 24px 90px}.c3,.c4,.c5{grid-template-columns:1fr 1fr}.c2{grid-template-columns:1fr}.nav-bar{bottom:8px;padding:6px 14px;gap:10px}.home-float{top:14px;left:14px;padding:8px 14px;font-size:12px}}
+/* 浮动返回主页按钮 */
+.home-float{position:fixed;top:22px;left:22px;z-index:200;display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:980px;background:rgba(0,0,0,.5);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.88);font-size:13px;font-weight:500;text-decoration:none;letter-spacing:.2px;transition:all .4s var(--expo)}
+.home-float:hover{background:rgba(41,151,255,.18);border-color:rgba(41,151,255,.5);color:#fff;transform:translateX(-2px);box-shadow:0 0 20px rgba(41,151,255,.2)}
+.home-float .home-arrow{font-size:15px;line-height:1;transition:transform .3s var(--expo)}
+.home-float:hover .home-arrow{transform:translateX(-3px)}
 </style>
 </head>
 <body>
+<a href="../index.html" class="home-float" title="返回主页"><span class="home-arrow">←</span><span>🏠</span><span>返回主页</span></a>
 <canvas id="starfield"></canvas>
 <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
 <div class="presentation" id="deck">
