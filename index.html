@@ -1664,7 +1664,7 @@ function openObsidianVault(){
         <button onclick="this.closest('#obsidian-overlay').style.opacity='0';setTimeout(()=>document.getElementById('obsidian-overlay')?.remove(),300)" class="px-5 py-3 rounded-xl text-sm font-semibold ${isDk?'text-gray-400 hover:text-white':'text-gray-500 hover:text-gray-900'} transition-colors" style="background:${isDk?'rgba(255,255,255,.05)':'rgba(0,0,0,.05)'}">关闭</button>
       </div>
       <div class="mt-4 text-[10px] ${isDk?'text-gray-600':'text-gray-400'} text-center">
-        笔记路径：Obsidian Vault / 第一周笔记 + 第二周笔记 + 第三周笔记 / · 按天合并 · 含 RAG 专题 + 竞品分析 + Agent架构
+        笔记路径：Obsidian Vault / 第一周笔记 + 第二周笔记 + 第三周笔记 / · 按天合并 · 含 RAG 专题 + 竞品分析 + Agent架构 + 知识库构建 + 项目评审 + 产品六层架构
       </div>
     </div>`;
     document.body.appendChild(overlay);
@@ -3468,8 +3468,8 @@ const NH_WEEKS=[
   ]
 },
 {
-  week:3, title:'第三周', subtitle:'AI Agent认知架构 → 项目实战 → 价值量化 → 工作流实操',
-  dateRange:'4.11 – 4.12', color:'#10b981', icon:'🤖',
+  week:3, title:'第三周', subtitle:'AI Agent认知架构 → 项目实战 → 价值量化 → 工作流实操 → 知识库构建 → 项目评审 → 产品六层架构',
+  dateRange:'4.11 – 4.16', color:'#10b981', icon:'🤖',
   highlights:[
     {icon:'🧠',title:'Agent认知架构',desc:'Memory/Planning/Tools/Action/Observation/Reflection 六大模块'},
     {icon:'🔄',title:'ReAct循环',desc:'Reasoning + Acting 交替执行，感知→规划→执行→观察→反思闭环'},
@@ -3482,10 +3482,13 @@ const NH_WEEKS=[
     {icon:'💎',title:'价值三维度',desc:'增收(Revenue Up) + 降本(Cost Down) + 提效(Efficiency Up)'},
     {icon:'📊',title:'能力成熟度模型',desc:'L1 Chatbot → L2 Workflow → L3 Agent 三级进化路径'},
     {icon:'🔧',title:'工作流实操',desc:'打标助手全流程：模型选型→变量配置→提示词→测试→优化'},
-    {icon:'🐛',title:'Bad Case优化',desc:'明确错误→补充信息→调整规则→验证效果，质量提升核心手段'}
+    {icon:'🐛',title:'Bad Case优化',desc:'明确错误→补充信息→调整规则→验证效果，质量提升核心手段'},
+    {icon:'📚',title:'知识库四件套',desc:'NotebookLM + Claude/Cloud Code + Obsidian + Skills 搭建第二大脑'},
+    {icon:'🎭',title:'五组项目评审',desc:'玄学社交/汉服妆造/黑胶识别/同人文/宠物殡葬 · MVP三段式验证'},
+    {icon:'🏛️',title:'产品六层架构',desc:'市场→商业→用户→技术→模型→基础 · OLO/昆仑sky real 案例拆解'}
   ],
-  quotes:['AI等级从推理转向智能体，这是行业共识','你会觉得越学越多越焦虑，但市场要求其实没那么高','似懂非懂的领导最难搞，完全不懂反而好沟通','商业的本质是创新','从现在就可以开始孵化自己的项目','芯片晶体管16-24个月翻倍，AI能处理的任务长度7个月翻一倍','用户跟AI对话的内容，是主动变成记忆还是被动添加记忆？这是值得思考的策略问题','每个人都是资源，都是信息源','项目价值远比复杂度更打动面试官，简单项目也能带来巨大影响','业务价值必须先获得业务方认可，不能直接向高层汇报','线上不要大刀阔斧改动，保证原有数据稳定正确','Bad Case是智能体质量提升的核心手段','不投递的失败概率是100%，投了至少有机会'],
-  tools:[{n:'豆包/Cloud Code',d:'AI会议转写与架构生成'},{n:'飞书COI',d:'在线画板架构图工具'},{n:'Kimi',d:'AI辅助知识整理与搜索'},{n:'扣子(Coze)',d:'智能体开发与发布平台'},{n:'MCP',d:'Model Context Protocol 模型上下文协议'},{n:'Windsurf',d:'AI编程IDE(Plan/Code模式)'},{n:'NotebookLM',d:'知识沉淀与结构化工具'},{n:'飞书',d:'团队协作与文档'},{n:'蜜桃AI',d:'用户画像辅助生成工具'},{n:'飞书多维表格',d:'字段与变量映射管理'},{n:'Dify工作流',d:'打标助手开发平台'}],
+  quotes:['AI等级从推理转向智能体，这是行业共识','你会觉得越学越多越焦虑，但市场要求其实没那么高','似懂非懂的领导最难搞，完全不懂反而好沟通','商业的本质是创新','从现在就可以开始孵化自己的项目','芯片晶体管16-24个月翻倍，AI能处理的任务长度7个月翻一倍','用户跟AI对话的内容，是主动变成记忆还是被动添加记忆？这是值得思考的策略问题','每个人都是资源，都是信息源','项目价值远比复杂度更打动面试官，简单项目也能带来巨大影响','业务价值必须先获得业务方认可，不能直接向高层汇报','线上不要大刀阔斧改动，保证原有数据稳定正确','Bad Case是智能体质量提升的核心手段','不投递的失败概率是100%，投了至少有机会','NotebookLM + Claude + Skills = AI 产品经理的"第二大脑"','评审五问：用户清晰度 / 竞品扎实度 / 商业闭环 / 风险识别 / MVP可验证','产品六层架构是 PM 的 CT 扫描仪，任何 AI 产品都可按此全栈拆解','似懂非懂的客户需要技术可视化解释'],
+  tools:[{n:'豆包/Cloud Code',d:'AI会议转写与架构生成'},{n:'飞书COI',d:'在线画板架构图工具'},{n:'Kimi',d:'AI辅助知识整理与搜索'},{n:'扣子(Coze)',d:'智能体开发与发布平台'},{n:'MCP',d:'Model Context Protocol 模型上下文协议'},{n:'Windsurf',d:'AI编程IDE(Plan/Code模式)'},{n:'NotebookLM',d:'知识沉淀与结构化工具'},{n:'飞书',d:'团队协作与文档'},{n:'蜜桃AI',d:'用户画像辅助生成工具'},{n:'飞书多维表格',d:'字段与变量映射管理'},{n:'Dify工作流',d:'打标助手开发平台'},{n:'Obsidian',d:'本地双向链接知识图谱'},{n:'Claude Skills',d:'Claude Code 可扩展技能包'},{n:'OLO/昆仑sky real',d:'AI视频创作产品拆解案例'}],
   days:[
     {date:'4月11日（周五）',title:'AI Agent认知架构与项目实战',icon:'🤖',color:'#10b981',
      summary:'系统学习AI Agent认知架构六大模块（Memory/Planning/Tools/Action/Observation/Reflection），理解ReAct循环与Reflexion框架；并通过项目实战体验产品微度测试与团队协作。',
@@ -3510,6 +3513,30 @@ const NH_WEEKS=[
        relatedNodes:[{id:3,title:'原型设计与交互设计',why:'工作流=交互流程设计'},{id:6,title:'开发跟进与迭代',why:'工作流开发与调参实操'},{id:7,title:'测试验收与BUG修复',why:'Bad Case优化=质量验收'}],
        points:['工作流vs对话流选择：工作流有始有终适合自动化任务，对话流多轮记忆适合咨询问答','字段与变量概念：飞书多维表格字段映射，变量在工作流中承载数据传递','打标助手开发全流程：模型选择→入参配置(sys/user prompt)→变量引用→输出节点→测试验证','温度参数(Temperature)调优：低温保守确定/高温创造多样，半径比喻——低温小半径精确/高温大半径探索','单节点测试vs整体测试：先验证局部逻辑正确性，再端到端验证完整流程','Bad Case优化方法论：明确错误→补充具体信息(模型/入参/变量)→根据业务规则调整提示词→验证修复效果','业务规则变动管理：业务方规则变更时必须同步通知AI系统更新，否则产生系统性错误','线上保护原则：不要大刀阔斧改动，保证原有数据稳定正确，新问题明确标准后小幅优化','AI自动化提效ROI计算：量化AI替代人工的效率提升，投入产出比论证项目持续投入价值','工作流调试技巧：善用日志输出和中间变量查看，定位问题节点快速修复'],
        keyPoint:'Bad Case是智能体质量提升的核心手段：明确错误→补充信息→调整规则→验证效果',homework:'完成打标助手工作流开发 + 至少3个Bad Case优化记录'}
+    ]},
+    {date:'4月13日（周一·思敏）',title:'知识库构建与 AI 工具矩阵',icon:'📚',color:'#06b6d4',
+     summary:'以 NotebookLM + Claude/Cloud Code + Obsidian + Skills 四件套为核心，系统讲解知识库的安装配置、导入整理、结构设计与双向链接建立，并演示 Skills 技能服务于写作、选题与项目管理。',
+     courses:[
+      {id:'015',title:'知识库构建 · AI 工具应用 · Skills 技能',tags:['工具','实战'],
+       relatedNodes:[{id:1,title:'需求收集与分析',why:'知识库=需求素材沉淀池'},{id:3,title:'原型设计与交互设计',why:'双向链接=知识图谱结构设计'},{id:11,title:'复盘总结与迭代优化',why:'持续沉淀优化知识库'}],
+       points:['四件套安装：NotebookLM(Google 官方知识沉淀) + Claude/Cloud Code(AI 编辑器) + Obsidian/OFCD(本地知识库) + 浏览器/桌面插件','NotebookLM 导入：Google 账号登录→新建 Notebook→批量上传资料(PDF/网页/YouTube 视频)','原子笔记提炼：用 Claude 读取 Notebook 内容→生成结构化原子笔记→沉淀到 Obsidian 知识库','知识库文件夹结构设计：按"课程/主题/原子笔记/索引"四级分层，Index MOC 作为知识地图入口','双向链接(Bi-directional Link)：用 [[note-name]] 语法建立笔记互引，沉淀知识图谱','标签管理：按 type(MOC/note/pm) × tag(主题) × date 多维打标，支持多维检索','Skills(技能)概念：Claude Code 中可安装和自定义的技能包，覆盖写作、选题、项目管理等高频场景','Skills 安装流程：Claude Code 市场挑选→一键安装→在对话中调用；支持自定义新 Skills','写作与选题应用：用 Claude 读取知识库→挖掘候选选题→生成文章初稿→人工润色','长期记忆与对话管理：Claude 可调用历史对话 + 知识库形成"长记忆"工作流','常见问题排查：软件安装失败/知识库连接失败/技能调用失败，通常为权限/路径/插件未装','持续优化闭环：定期整理→归档过时资料→扩展新资料→反思并更新 Index MOC'],
+       keyPoint:'NotebookLM + Claude + Obsidian + Skills = AI 产品经理的"第二大脑"',homework:'搭建个人知识库 Vault + 沉淀至少 5 条原子笔记 + 体验 1 个 Skill'}
+    ]},
+    {date:'4月15日（周三·项目评审）',title:'五组项目方案评审（MVP → 商业模式 → 风险）',icon:'🎭',color:'#a855f7',
+     summary:'围绕 5 个小组项目进行集中评审：AI玄学社交 / AI汉服妆造 / 黑胶唱片 AI 识别 / AI同人文生成 / AI宠物殡葬。每组按"目标用户→市场调研→商业模式→风险评估→实施计划"五段式汇报，老师逐项点评并给出 MVP 验证路径。',
+     courses:[
+      {id:'P-REVIEW',title:'五组项目评审：玄学/汉服/黑胶/同人文/宠物殡葬',tags:['实战','评审'],
+       relatedNodes:[{id:1,title:'需求收集与分析',why:'用户访谈与市场调研汇报'},{id:2,title:'需求定义与PRD撰写',why:'产品定位与商业模式设计'},{id:4,title:'需求评审与确认',why:'项目评审即需求评审'},{id:5,title:'开发排期与立项',why:'MVP 验证路径与立项决策'}],
+       points:['AI 玄学社交：目标用户=重度社交+重度玄学爱好者；订阅 28-38 元；引入 Hermes Agent 技术壁垒；核心风险=监管+大厂跟进+核心体验不成立','AI 汉服妆造+线下租赁：市场规模 191 亿；线上妆造+线下租赁双轮；风险=审美与选品；4 周 MVP 验证','黑胶唱片 AI 识别：中国市场空白；订阅服务毛利率 50%-93%；护城河=华语唱片数据化与本地化；建议改为小程序而非 APP','AI 同人文生成：泛二次元 5.03 亿；单篇付费+月卡；毛利率 97%；护城河=冷门角色库+场景标签+用户习惯；走差异化路线回避真名','AI 宠物殡葬：Z 时代+超一线中产；核心模块=AI 数字生命+宠物论坛+宠物周边；风险=伦理+数据隐私；3 年财务预测，第 2 年回笼资金','MVP 验证三段式：1 周验证需求→1 周付费验证→1 周优化，30 天快速跑通','评审通用五问：目标用户是否清晰/竞品分析是否扎实/商业模式是否闭环/核心风险是否识别/MVP 路径是否可验证','助教小助理制度：每组配一位助教小助理，提供技术/产品/数据支持，加速 MVP','评审反馈机制：当场点评→小组会后复盘→下次汇报迭代，形成持续优化闭环','面对不同客户沟通技巧：完全不懂的客户反而好沟通，似懂非懂的客户需要技术可视化解释','避免三类陷阱：盲目跟进大厂/核心体验不成立/数据隐私监管红线'],
+       keyPoint:'评审五问：用户清晰度/竞品扎实度/商业闭环/风险识别/MVP 可验证',homework:'为自己小组完善一份评审反馈落地方案 + 识别 Top-3 核心风险与应对'}
+    ]},
+    {date:'4月16日（周四·思敏）',title:'产品六层架构拆解 · OLO 与昆仑 sky real 案例',icon:'🏛️',color:'#ec4899',
+     summary:'引入"市场→商业→用户→技术→模型→基础"六层拆解框架；以视频创作平台 OLO 为主案例详解每层产出；拓展到昆仑 sky real 电商视频场景；系统讲解提示词工程与上下文管理。',
+     courses:[
+      {id:'016',title:'产品六层架构 · 上下文工程 · 案例实战',tags:['方法论','实战'],
+       relatedNodes:[{id:1,title:'需求收集与分析',why:'市场+用户两层对应需求输入'},{id:2,title:'需求定义与PRD撰写',why:'六层拆解=PRD 体系化产出'},{id:3,title:'原型设计与交互设计',why:'技术层的 Agent 设计与交互'},{id:5,title:'开发排期与立项',why:'模型层调用规则+基础层数据飞轮'}],
+       points:['产品架构六层拆解：市场层→商业层→用户层→技术层→模型层→基础层','市场层：市场是否值得进入→年报分析+竞品分析报告','商业层：商业模式与用户定位→产品定位+商业模式设计','用户层：用户需求与任务完成→用户旅程图+功能设计','技术层：核心节点与技术结构→工作流设计+Agent+工具调用','模型层：模型能力与成本控制→模型列表+调用规则+模型路由','基础层：数据与算力支持→数据来源+数据飞轮设计','OLO 平台案例(用户层)：项目创作+角色库管理，服务半专业+小白用户','OLO 技术层：需求分析→剧本设计→角色设计→分镜生成→视频合成五大核心节点','OLO Agent 设计：艺术总监+编剧+角色设计师+分镜师+音乐总监五类 Agent 分工协同','模型路由(Model Routing)：根据场景与任务选择不同模型，平衡效果与成本','提示词工程：角色+技能+任务流程三段式；明确工具调用触发条件；定义交互准则','上下文工程(Context Engineering)：全局上下文(项目 ID/角色 ID/分镜 ID)+增删改查+版本管理','评测方法：定义打分规则(端到端能力/技术层表现)→测试输入→生成质量评分','迭代优化：提示词→模型路由→数据迭代三条线并行','昆仑 sky real 案例：电商场景商品视频生成+推广投流人货交互视频','产品设计模式：画板(需求理解+素材整合)+编辑器(视频编辑)双核','角色一致性：三视图设计(正/侧/背)保证跨镜头角色不变形','音频同步：分镜与口型对齐，工程上需单独的音视频对齐节点'],
+       keyPoint:'产品六层架构=从市场到基础的完整拆解视角，PM 的"CT 扫描仪"',homework:'任选一个 AI 产品，用六层架构完整拆解一遍 + 为其中一层写一份详细规范'}
     ]}
   ]
 }
@@ -3537,7 +3564,7 @@ const NH_GLOSSARY=[
 {term:'涌现能力',full:'Emergence',zh:'',cat:'AI基础',week:[1],desc:'模型在训练过程中突然涌现出解决之前无法解决的新任务的能力。包含三个子能力：小样本ICL、指令跟随、思维链推理(COT)。'},
 {term:'ICL',full:'In-Context Learning',zh:'上下文学习',cat:'AI基础',week:[1,2],desc:'将样本置于上下文窗口中，使模型在特定环境中学习并参考模板作答的技术。是涌现能力的子能力之一，也称Few-shot Learning。',refs:['Brown et al. "Language Models are Few-Shot Learners (GPT-3)." OpenAI, NeurIPS 2020']},
 {term:'乔哈里视窗',full:'Johari Window',zh:'',cat:'产品方法论',week:[1],desc:'人机协作四象限模型：①公开象限(我知AI知)→AI作助理 ②隐私象限(我知AI不知)→投喂上下文 ③盲点象限(AI知我不知)→AI作知识库 ④潜能象限(都不知)→共创探索。',refs:['Luft, J. & Ingham, H. (1955). "The Johari Window."']},
-{term:'上下文工程',full:'Context Engineering',zh:'',cat:'AI基础',week:[1],desc:'系统化管理和优化输入给模型的上下文信息的方法论，通过合理组织system prompt、ICL样本、chat history等提升输出质量。'},
+{term:'上下文工程',full:'Context Engineering',zh:'',cat:'AI基础',week:[1,3],desc:'系统化管理和优化输入给模型的上下文信息的方法论，通过合理组织system prompt、ICL样本、chat history等提升输出质量。'},
 {term:'Prompt Engineering',full:'',zh:'提示词工程',cat:'AI基础',week:[1],desc:'系统化设计、优化和管理提示词的方法论。涵盖Prompt分类(User/System)、设计四大原则(简洁明了/正向提问/逐步引导/ICL样本)、效果公式(大模型能力×任务设计×Prompt质量)。与上下文工程共同构成人机协作的技术基础。',refs:['DAIR.AI "Prompt Engineering Guide." 2023']},
 {term:'System Prompt',full:'',zh:'系统提示词',cat:'AI基础',week:[1],desc:'为模型预设环境背景与角色定义的提示词。用于定义AI的"人设"、减少重复信息输入、提高对话一致性。例如"你是专业的营养师"。与User Prompt相对。'},
 {term:'User Prompt',full:'',zh:'用户提示词',cat:'AI基础',week:[1],desc:'用户对模型发出的具体指令或问题。随对话动态变化，表达具体需求与意图，每次交互可以不同。例如"帮我推荐附近的餐厅"。与System Prompt相对。'},
@@ -3549,7 +3576,7 @@ const NH_GLOSSARY=[
 {term:'RAG',full:'Retrieval-Augmented Generation',zh:'检索增强生成',cat:'RAG技术',week:[1,2],desc:'给大模型装"外挂知识库"的技术架构。通过检索外部知识库补充LLM回答，解决时效性、幻觉和数据安全问题。',refs:['Lewis et al. "RAG: Retrieval-Augmented Generation." Facebook AI Research, 2020']},
 {term:'Pipeline',full:'',zh:'管道/流水线',cat:'RAG技术',week:[2],desc:'数据处理的流水线架构。RAG离线Pipeline含6环节：数据采集(A)→文档解析(B)→数据清洗(C)→文本分割(D)→向量化(E)→索引构建(F)。'},
 {term:'Chunk',full:'',zh:'文本块/切片',cat:'RAG技术',week:[2],desc:'数据清洗后的基本存储和检索单位。文本分割策略决定Chunk质量，影响检索精度。'},
-{term:'向量数据库',full:'Vector Database',zh:'',cat:'RAG技术',week:[2],desc:'专门存储和检索高维向量的数据库，支持语义相似度搜索。vs RDBMS/NoSQL的精准匹配。核心指标：Recall@K、P95延迟、存储压缩率。'},
+{term:'向量数据库',full:'Vector Database',zh:'',cat:'RAG技术',week:[2,3],desc:'专门存储和检索高维向量的数据库，支持语义相似度搜索。vs RDBMS/NoSQL的精准匹配。核心指标：Recall@K、P95延迟、存储压缩率。'},
 {term:'Query改写',full:'Query Rewriting',zh:'',cat:'RAG技术',week:[2],desc:'优化用户查询以提升检索质量的六种方法：语义强化、歧义消除、上下文补全、意图拆解、领域术语适配、约束条件强化。'},
 {term:'多路检索',full:'Multi-path Retrieval',zh:'',cat:'RAG技术',week:[2],desc:'同时使用关键词搜索+向量搜索的混合检索策略，通过Score评分+TopK筛选合并去重，提升召回率。'},
 {term:'Graph RAG',full:'',zh:'图增强检索',cat:'RAG技术',week:[2],desc:'知识图谱增强的RAG技术，适用于需要关系推理的复杂场景：政策穿透、合规分析、科研追踪、故障因分析。',refs:['Microsoft Research. "Graph RAG." 2024']},
@@ -3559,7 +3586,7 @@ const NH_GLOSSARY=[
 {term:'召回率',full:'Recall',zh:'',cat:'RAG技术',week:[2],desc:'检索结果中包含相关文档的比例。PM制定的质量标准通常要求召回率≥90%、准确率≥85%。'},
 // === 产品方法论 ===
 {term:'POC',full:'Proof of Concept',zh:'概念验证',cat:'产品方法论',week:[1],desc:'回答"做不做得出来"的快速验证。标准流程：想清楚验证什么→定义成功标准→快速试验→结果决策。技术成熟时可跳过。',refs:['CRISP-DM 1.0 — Chapman, P. et al. (2000). SPSS Inc.']},
-{term:'MVP',full:'Minimum Viable Product',zh:'最小可行产品',cat:'产品方法论',week:[1],desc:'回答"做出来有没有人用"的最小产品。市场需求已验证时可跳过。全新领域POC和MVP都不能跳过。'},
+{term:'MVP',full:'Minimum Viable Product',zh:'最小可行产品',cat:'产品方法论',week:[1,3],desc:'回答"做出来有没有人用"的最小产品。市场需求已验证时可跳过。全新领域POC和MVP都不能跳过。项目评审中常用三段式验证：1 周验证需求→1 周付费验证→1 周优化，30 天快速跑通。'},
 {term:'PRD',full:'Product Requirements Document',zh:'产品需求文档',cat:'产品方法论',week:[1],desc:'传统产品经理的核心输出物，详细描述产品功能需求、交互逻辑、技术要求等。与原型图配合使用。'},
 {term:'BRD',full:'Business Requirements Document',zh:'商业需求文档',cat:'产品方法论',week:[1,2],desc:'论证"为什么做"+"值不值得做"的商业决策文档。含项目背景、市场机会、核心问题、建议方案、竞争分析摘要、风险Top3、结论与建议。是四大交付物的第二层(决策层)。'},
 {term:'MRD',full:'Market Requirements Document',zh:'市场需求文档',cat:'产品方法论',week:[2],desc:'细化市场需求的规划文档。含市场概述、用户细分(按场景/付费意愿/频率)、Kano模型需求分级(基本型/期望型/兴奋型)、竞品功能差距、产品定位、MVP功能清单、成功指标(DAU/留存/转化率)。'},
@@ -3581,13 +3608,13 @@ const NH_GLOSSARY=[
 {term:'Cherry Studio',full:'',zh:'多模型测试工具',cat:'工具平台',week:[1],desc:'支持客户端安装、知识库接入、多模型测试与效果对比的桌面工具。'},
 {term:'Cursor / Trae',full:'',zh:'AI辅助编程IDE',cat:'工具平台',week:[1],desc:'AI辅助编程工具。Cursor为海外版，Trae为国内版。通过自然语言指令生成代码。'},
 {term:'CC Switch',full:'',zh:'API多平台管理工具',cat:'工具平台',week:[1],desc:'API密钥管理工具，支持接入多服务商模型资源，通过底层API优化释放模型潜能。'},
-{term:'NotebookLM',full:'',zh:'Google知识沉淀工具',cat:'工具平台',week:[2],desc:'Google推出的AI笔记工具，支持文档上传与智能问答。可通过YouTube to NotebookLM插件沉淀视频内容，付费版支持50个笔记本×300篇文档。'},
-{term:'Obsidian',full:'',zh:'本地知识图谱笔记',cat:'工具平台',week:[2],desc:'本地化Markdown笔记工具，核心理念为原子笔记——将文档拆解为细粒度结构化内容，通过双向链接建立知识图谱。支持飞书CLI迁移文档并构建关联。'},
+{term:'NotebookLM',full:'',zh:'Google知识沉淀工具',cat:'工具平台',week:[2,3],desc:'Google推出的AI笔记工具，支持文档上传与智能问答。可通过YouTube to NotebookLM插件沉淀视频内容，付费版支持50个笔记本×300篇文档。作为“知识库四件套”之一与 Claude / Obsidian / Skills 配套使用。'},
+{term:'Obsidian',full:'',zh:'本地知识图谱笔记',cat:'工具平台',week:[2,3],desc:'本地化Markdown笔记工具，核心理念为原子笔记——将文档拆解为细粒度结构化内容，通过双向链接建立知识图谱。支持飞书CLI迁移文档并构建关联。'},
 {term:'Product Hunt',full:'',zh:'海外产品发现平台',cat:'工具平台',week:[2],desc:'海外新产品发布和发现平台，是竞品调研和市场分析的重要渠道。可用于了解AIGC等领域的最新产品动态。'},
 {term:'IT橘子/天眼查',full:'',zh:'企业信息查询平台',cat:'工具平台',week:[2],desc:'用于查询竞品融资阶段、企业资质、招投标项目等信息。天眼查/企查查可查看企业资质和违法信息，IT橘子专注互联网创投数据。'},
 // === 工作流与自动化 ===
-{term:'工作流',full:'Workflow',zh:'',cat:'工作流',week:[2],desc:'有明确开始和结束的流程化任务执行方式。构建要素：触发器→开始节点(输入变量)→处理节点(业务逻辑)→结束节点(输出结果)。适合自动化任务。'},
-{term:'对话流',full:'Chatflow',zh:'',cat:'工作流',week:[2],desc:'围绕话题持续交流的多轮对话模式，支持记忆和上下文管理。适合群组交互和咨询问答场景。'},
+{term:'工作流',full:'Workflow',zh:'',cat:'工作流',week:[2,3],desc:'有明确开始和结束的流程化任务执行方式。构建要素：触发器→开始节点(输入变量)→处理节点(业务逻辑)→结束节点(输出结果)。适合自动化任务。'},
+{term:'对话流',full:'Chatflow',zh:'',cat:'工作流',week:[2,3],desc:'围绕话题持续交流的多轮对话模式，支持记忆和上下文管理。适合群组交互和咨询问答场景。'},
 {term:'RPA',full:'Robotic Process Automation',zh:'机器人流程自动化',cat:'工作流',week:[2],desc:'通过软件机器人模拟人类操作，自动执行重复性业务流程。是自动化工具矩阵中的流程自动化分支。',refs:['Gartner. "Market Guide for Robotic Process Automation." 2023']},
 {term:'触发器',full:'Trigger',zh:'',cat:'工作流',week:[2],desc:'启动工作流的条件机制。类型包括：用户输入触发、定时触发、事件触发。'},
 // === 模型与服务 ===
@@ -3620,7 +3647,25 @@ const NH_GLOSSARY=[
 {term:'Bad Case',full:'',zh:'错误案例',cat:'工作流',week:[3],desc:'智能体输出结果不正确的测试案例。优化流程：明确错误→补充具体信息(模型/入参/变量)→根据业务规则调整提示词→验证修复效果。是质量提升的核心手段。'},
 {term:'Temperature',full:'',zh:'温度参数',cat:'模型服务',week:[3],desc:'控制模型输出随机性的参数。温度低→推荐保守/确定性高；温度高→推荐多样/创造性强。可用半径比喻理解：低温=小半径精确范围，高温=大半径探索范围。'},
 {term:'打标助手',full:'Labeling Assistant',zh:'',cat:'工作流',week:[3],desc:'基于工作流开发的智能体应用。全流程：模型选择→入参配置→系统提示词→用户提示词→变量引用→输出节点配置。用于自动化数据标注与分类。'},
-{term:'蜜桃AI',full:'',zh:'用户画像生成工具',cat:'工具平台',week:[3],desc:'AI辅助生成用户画像的工具，帮助构建基础角色、核心价值和行为场景描述。'}
+{term:'蜜桃AI',full:'',zh:'用户画像生成工具',cat:'工具平台',week:[3],desc:'AI辅助生成用户画像的工具，帮助构建基础角色、核心价值和行为场景描述。'},
+// === 第三周 · Agent 六模块独立条目 ===
+{term:'Memory',full:'',zh:'记忆系统',cat:'Agent架构',week:[3],desc:'Agent 的上下文管理层。短期记忆 = Context Window / 会话缓存；长期记忆 = Vector DB + 关系数据库。解决 LLM 上下文窗口限制的关键设计。'},
+{term:'Tools',full:'',zh:'工具系统',cat:'Agent架构',week:[3],desc:'Agent 的能力扩展层。内置：Calendar / Calculator / Code Interpreter / Search；外接：API / UI 操作 / 自定义函数。工具数量 × 质量决定 Agent 能力边界。'},
+{term:'Action',full:'',zh:'执行系统',cat:'Agent架构',week:[3],desc:'将 Planning 决策转化为环境交互的模块。执行状态回传 Memory，触发 Reflection 形成闭环。'},
+{term:'Reflection',full:'',zh:'反思系统',cat:'Agent架构',week:[3],desc:'Agent 的自我评估与策略调整模块。实现持续学习能力，让 Agent 越用越聪明。对应 Self-critics 目标验证机制。'},
+{term:'Subgoal Decomposition',full:'',zh:'子目标拆解',cat:'Agent架构',week:[3],desc:'Planning 的核心能力：把大任务拆成可执行的子任务序列。是 Agent 处理复杂问题的前置步骤，常与 CoT 结合。'},
+// === 第三周 · 知识管理 (015) ===
+{term:'Skills',full:'',zh:'Claude Code 技能包',cat:'工具平台',week:[3],desc:'Claude Code 中可安装和自定义的技能模块，覆盖写作、选题、项目管理等高频场景。支持市场一键安装 + 自定义扩展。'},
+{term:'双向链接',full:'Bi-directional Link',zh:'',cat:'工具平台',week:[3],desc:'Obsidian / Logseq 等笔记工具的核心语法 [[note-name]]。让笔记互相引用，沉淀知识图谱，是从“笔记”到“知识”的分水岭。'},
+{term:'知识库四件套',full:'',zh:'',cat:'工具平台',week:[3],desc:'AI 产品经理的“第二大脑”组合：NotebookLM(沉淀) + Claude/Cloud Code(AI 编辑器) + Obsidian(本地知识库) + Skills(技能包)。四件协同完成从采集到应用的闭环。'},
+// === 第三周 · 产品拆解 (评审 + 016) ===
+{term:'产品六层架构',full:'',zh:'',cat:'产品方法论',week:[3],desc:'AI 产品拆解的完整视角：市场层→商业层→用户层→技术层→模型层→基础层。PM 的“CT 扫描仪”，任何产品都可按此六层展开。以 OLO / 昆仑 sky real 为典型案例。'},
+{term:'评审五问',full:'',zh:'',cat:'产品方法论',week:[3],desc:'项目评审的通用检查清单：用户清晰度 / 竞品扎实度 / 商业闭环 / 风险识别 / MVP 可验证。任何项目立项前必过这五问。'},
+// === 第三周 · 工作流 + 方法论补充 ===
+{term:'模型路由',full:'Model Routing',zh:'',cat:'工作流',week:[3],desc:'根据任务场景动态选择不同模型的工程机制。平衡效果与成本，如简单任务用 GPT-3.5 / 复杂任务用 GPT-4 / 视觉任务用 VLM。OLO 平台五类 Agent 分工协同的关键技术。'},
+{term:'战略地图',full:'Strategy Map',zh:'',cat:'产品方法论',week:[3],desc:'组织战略目标与关键绩效的可视化工具。包含业务节点 + 方向连线 + 角色标识，常与平衡计分卡(BSC)配合使用。'},
+{term:'业务流程图',full:'Business Process Diagram',zh:'',cat:'产品方法论',week:[3],desc:'梳理完整业务链路的可视化图表，标注 AI 可介入节点与预期效果。是 PRD 与服务蓝图的前置产出。'},
+{term:'价值汇报四步',full:'',zh:'',cat:'产品方法论',week:[3],desc:'项目价值传递路径：价值梳理 → 文档编写 → 业务方认可 → 高层汇报。必须先获得业务方认可再上报。'}
 ];
 
 // ---- 参考文献与标准 (shown at bottom of glossary) ----
@@ -4363,6 +4408,23 @@ let nhSwimlaneHighlight=null;
 function nhRenderSwimlane(){
   const mc=document.getElementById('nh-main-content');if(!mc)return;
   const dk=isDark;
+  // W3: 非单一流程型内容 → 友好占位
+  if(nhWeek===2){
+    const txt3=dk?'#f5f5f7':'#1d1d1f';
+    const sub3=dk?'#a1a1aa':'rgba(0,0,0,.48)';
+    const acc3='#10b981';
+    let h3='<div class="nh-animate" style="text-align:center;padding:72px 20px;max-width:640px;margin:0 auto">';
+    h3+='<div style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;color:'+acc3+'">WEEK 3 NOTES</div>';
+    h3+='<div style="font-size:56px;margin-bottom:14px">🧩</div>';
+    h3+='<h2 style="font-size:24px;font-weight:700;letter-spacing:-.3px;margin-bottom:12px;color:'+txt3+'">第三周以 Agent 认知架构 × 项目评审为主</h2>';
+    h3+='<p style="font-size:14px;line-height:1.6;margin-bottom:28px;color:'+sub3+'">本周聚焦 AI Agent 六模块认知闭环、项目价值量化、工作流实操、知识库构建、项目评审与产品六层架构，<br>知识形态更接近"结构化认知图谱"，不适合映射到单一泳道流程。<br>建议通过<strong style="color:'+acc3+'">"笔记总览"或"一周知识全览"</strong>查看完整内容。</p>';
+    h3+='<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">';
+    h3+='<button onclick="nhShowOverview()" style="padding:10px 20px;border-radius:980px;border:1px solid '+acc3+'40;background:'+acc3+'10;color:'+acc3+';font-size:13px;font-weight:600;cursor:pointer;transition:all .2s" class="hover:opacity-80">📘 笔记总览</button>';
+    h3+='<button onclick="nhShowCourseware()" style="padding:10px 20px;border-radius:980px;border:1.5px solid '+acc3+';background:'+acc3+';color:#fff;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s" class="hover:opacity-90">🎞️ 一周知识全览</button>';
+    h3+='</div></div>';
+    mc.innerHTML=h3;
+    return;
+  }
   const isW2=nhWeek===1;
   const roles=isW2?SWIMLANE_ROLES_W2:SWIMLANE_ROLES;
   const stages=isW2?SWIMLANE_STAGES_W2:SWIMLANE_STAGES;
@@ -4575,6 +4637,9 @@ const CW_SLIDES_W3=[
   {key:'w3-maturity',title:'能力成熟度模型',icon:'📊',day:2},
   {key:'w3-workflow-dev',title:'工作流开发实操',icon:'⚙️',day:2},
   {key:'w3-badcase',title:'Bad Case 优化',icon:'🐛',day:2},
+  {key:'w3-kb-tools',title:'知识库 × AI 工具',icon:'📚',day:3},
+  {key:'w3-project-review',title:'五组项目评审',icon:'🎭',day:4},
+  {key:'w3-six-layer',title:'产品六层架构',icon:'🏛️',day:5},
   {key:'w3-summary',title:'总结与行动',icon:'🎯',day:0}
 ];
 function nhRenderCourseware(){
@@ -4593,7 +4658,7 @@ function nhRenderCourseware(){
   const secBg=dk?'#000000':'#f5f5f7';
   const shadow=dk?'none':'rgba(0,0,0,.22) 3px 5px 30px 0px';
   const slide=CW_SLIDES[cwSlide];
-  const dayLabel=isW3?(slide.day===1?'Day 1 · 4月11日(周五)':slide.day===2?'Day 2 · 4月12日(周六)':''):isW2?(slide.day===1?'Day 1 · 4月4日(周六)':slide.day===2?'Day 2 · 4月5日(周日·上午)':slide.day===3?'Day 3 · 4月5日(周日·下午)':slide.day===4?'Day 4 · 4月9日(周三)':''):(slide.day===1?'Day 1 · 3月28日':slide.day===2?'Day 2 · 3月29日':slide.day===3?'Day 3 · 4月2日':'');
+  const dayLabel=isW3?(slide.day===1?'Day 1 · 4月11日(周五)':slide.day===2?'Day 2 · 4月12日(周六)':slide.day===3?'Day 3 · 4月13日(周一·思敏)':slide.day===4?'Day 4 · 4月15日(周三·项目评审)':slide.day===5?'Day 5 · 4月16日(周四·思敏)':''):isW2?(slide.day===1?'Day 1 · 4月4日(周六)':slide.day===2?'Day 2 · 4月5日(周日·上午)':slide.day===3?'Day 3 · 4月5日(周日·下午)':slide.day===4?'Day 4 · 4月9日(周三)':''):(slide.day===1?'Day 1 · 3月28日':slide.day===2?'Day 2 · 3月29日':slide.day===3?'Day 3 · 4月2日':'');
   let h='<div class="nh-animate">';
 
   // ======== TOP NAV ========
@@ -5475,24 +5540,27 @@ function nhRenderCourseware(){
     h+='<div style="text-align:center;padding:40px 0 32px">';
     h+='<div style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;color:'+accent+'">WEEK 3 COURSEWARE</div>';
     h+='<h1 style="font-size:clamp(32px,6vw,48px);font-weight:600;line-height:1.07;letter-spacing:-.5px;margin-bottom:16px;color:'+txt+'">第三周知识全景</h1>';
-    h+='<p style="font-size:17px;line-height:1.47;letter-spacing:-.37px;max-width:560px;margin:0 auto 40px;color:'+sub+'">4.11 – 4.12 · AI Agent认知架构 → 项目实战 → 价值量化 → 工作流实操<br>从智能体架构原理到工作流开发的完整链路</p>';
+    h+='<p style="font-size:17px;line-height:1.47;letter-spacing:-.37px;max-width:580px;margin:0 auto 40px;color:'+sub+'">4.11 – 4.16 · Agent 认知架构 → 项目实战 → 价值量化 → 工作流 → 知识库 → 项目评审 → 六层架构<br>从智能体架构原理到产品全栈拆解的完整认知链路</p>';
     h+='</div>';
     const w3days=[
-      {n:'Day 1',d:'4月11日(周五)',t:'AI Agent认知架构与项目实战',courses:2,icon:'🤖'},
-      {n:'Day 2',d:'4月12日(周六)',t:'项目价值量化与工作流实操',courses:2,icon:'💎'}
+      {n:'Day 1',d:'4月11日(周五)',t:'AI Agent 认知架构与项目实战',courses:2,icon:'🤖'},
+      {n:'Day 2',d:'4月12日(周六)',t:'项目价值量化与工作流实操',courses:2,icon:'💎'},
+      {n:'Day 3',d:'4月13日(周一·思敏)',t:'知识库构建与 AI 工具矩阵',courses:1,icon:'📚'},
+      {n:'Day 4',d:'4月15日(周三)',t:'五组项目评审',courses:1,icon:'🎭'},
+      {n:'Day 5',d:'4月16日(周四·思敏)',t:'产品六层架构 · OLO 案例',courses:1,icon:'🏛️'}
     ];
-    h+='<div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:32px">';
+    h+='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;justify-content:center;margin-bottom:32px;max-width:900px;margin-left:auto;margin-right:auto">';
     w3days.forEach(d=>{
-      h+='<div style="padding:20px 28px;border-radius:16px;background:'+card+';border:1px solid '+cardBd+';box-shadow:'+shadow+';min-width:220px;text-align:center">';
-      h+='<div style="font-size:28px;margin-bottom:8px">'+d.icon+'</div>';
-      h+='<div style="font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:'+accent+';margin-bottom:4px">'+d.n+'</div>';
-      h+='<div style="font-size:10px;color:'+sub+';margin-bottom:8px">'+d.d+'</div>';
-      h+='<div style="font-size:14px;font-weight:700;color:'+txt+';margin-bottom:4px">'+d.t+'</div>';
+      h+='<div style="padding:16px 18px;border-radius:16px;background:'+card+';border:1px solid '+cardBd+';box-shadow:'+shadow+';text-align:center">';
+      h+='<div style="font-size:24px;margin-bottom:6px">'+d.icon+'</div>';
+      h+='<div style="font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:'+accent+';margin-bottom:3px">'+d.n+'</div>';
+      h+='<div style="font-size:10px;color:'+sub+';margin-bottom:6px">'+d.d+'</div>';
+      h+='<div style="font-size:13px;font-weight:700;color:'+txt+';margin-bottom:3px;line-height:1.25">'+d.t+'</div>';
       h+='<div style="font-size:11px;color:'+sub+'">'+d.courses+' 节课</div></div>';
     });
     h+='</div>';
-    h+='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;max-width:480px;margin:0 auto">';
-    [{n:'4',l:'节课'},{n:'2',l:'天'},{n:'41',l:'个要点'},{n:'6',l:'大模块'}].forEach(s=>{
+    h+='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;max-width:560px;margin:0 auto">';
+    [{n:'7',l:'节课'},{n:'5',l:'天'},{n:'80+',l:'个要点'},{n:'6',l:'Agent 模块'}].forEach(s=>{
       h+='<div style="padding:12px;border-radius:10px;background:'+secBg+';text-align:center">';
       h+='<div style="font-size:20px;font-weight:800;color:'+accent+'">'+s.n+'</div>';
       h+='<div style="font-size:10px;color:'+sub+'">'+s.l+'</div></div>';
@@ -5830,6 +5898,89 @@ function nhRenderCourseware(){
     h+='<div style="padding:12px;border-radius:12px;background:'+secBg+';text-align:center">';
     h+='<div style="font-size:11px;color:'+sub+'">⚠️ 线上保护原则：<span style="font-weight:600;color:'+txt+'">不要大刀阔斧改动</span>，保证原有数据稳定正确</div></div>';
 
+  } else if(slide.key==='w3-kb-tools'){
+    h+='<div style="text-align:center;margin-bottom:24px">';
+    h+='<h2 style="font-size:clamp(22px,4vw,32px);font-weight:600;line-height:1.1;letter-spacing:-.4px;color:'+txt+'">知识库构建 × AI 工具四件套</h2>';
+    h+='<p style="font-size:14px;color:'+sub+';margin-top:6px">搭建<strong style="color:'+accent+'">AI 产品经理的"第二大脑"</strong></p></div>';
+    h+='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;max-width:680px;margin:0 auto 20px">';
+    [{icon:'📒',t:'NotebookLM',d:'Google 官方知识沉淀',c:'#06b6d4'},
+     {icon:'🤖',t:'Claude/Cloud Code',d:'AI 编辑器 · 原子笔记生成',c:'#10b981'},
+     {icon:'🔗',t:'Obsidian',d:'本地双向链接知识图谱',c:'#8b5cf6'},
+     {icon:'🧰',t:'Skills',d:'Claude Code 可扩展技能包',c:'#f59e0b'}
+    ].forEach(it=>{
+      h+='<div style="padding:16px 14px;border-radius:12px;background:'+card+';box-shadow:'+shadow+';text-align:center;border-top:3px solid '+it.c+'">';
+      h+='<div style="font-size:26px;margin-bottom:6px">'+it.icon+'</div>';
+      h+='<div style="font-size:13px;font-weight:700;color:'+it.c+';margin-bottom:2px">'+it.t+'</div>';
+      h+='<div style="font-size:10px;color:'+sub+';line-height:1.4">'+it.d+'</div></div>';
+    });
+    h+='</div>';
+    h+='<div style="max-width:680px;margin:0 auto;padding:14px 18px;border-radius:12px;background:'+card+';border:1px solid '+cardBd+';box-shadow:'+shadow+';border-left:3px solid '+accent+'">';
+    h+='<div style="font-size:12px;font-weight:700;color:'+accent+';margin-bottom:8px">📂 知识库四级结构</div>';
+    h+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:8px">';
+    ['课程 Course','主题 Topic','原子笔记 Atomic','索引 Index MOC'].forEach((s,i)=>{
+      h+='<div style="padding:8px;border-radius:8px;background:'+secBg+';text-align:center">';
+      h+='<div style="font-size:9px;color:'+sub+';margin-bottom:2px">L'+(i+1)+'</div>';
+      h+='<div style="font-size:10px;font-weight:700;color:'+txt+'">'+s+'</div></div>';
+    });
+    h+='</div>';
+    h+='<div style="font-size:10px;color:'+sub+';line-height:1.5">关键规范：双向链接 <code style="padding:1px 4px;border-radius:3px;background:'+accent+'15;color:'+accent+';font-size:10px">[[note-name]]</code> · 标签多维打标 · Index MOC 作为知识地图入口</div>';
+    h+='</div>';
+
+  } else if(slide.key==='w3-project-review'){
+    h+='<div style="text-align:center;margin-bottom:20px">';
+    h+='<h2 style="font-size:clamp(22px,4vw,32px);font-weight:600;line-height:1.1;letter-spacing:-.4px;color:'+txt+'">五组项目评审全景</h2>';
+    h+='<p style="font-size:14px;color:'+sub+';margin-top:6px">5 个赛道 · 5 份思路 · MVP 验证路径</p></div>';
+    h+='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;max-width:900px;margin:0 auto 16px">';
+    [{icon:'🔮',t:'AI 玄学社交',c:'#a855f7',u:'重度社交+重度玄学',m:'空白市场·订阅 28-38 元',r:'监管·大厂跟进'},
+     {icon:'👘',t:'AI 汉服妆造',c:'#ec4899',u:'汉服文化爱好者',m:'汉服 191 亿·线上+线下',r:'审美与选品'},
+     {icon:'🎵',t:'黑胶 AI 识别',c:'#06b6d4',u:'黑胶收藏者',m:'中国空白·毛利 50-93%',r:'识别准确率'},
+     {icon:'📖',t:'AI 同人文',c:'#f59e0b',u:'CP 粉·冷门 CP 粉',m:'二次元 5.03 亿·毛利 97%',r:'版权问题'},
+     {icon:'🐾',t:'AI 宠物殡葬',c:'#10b981',u:'Z 时代+超一线中产',m:'宠物经济·3 年回笼',r:'伦理+隐私'}
+    ].forEach(it=>{
+      h+='<div style="padding:14px;border-radius:12px;background:'+card+';box-shadow:'+shadow+';border-top:3px solid '+it.c+'">';
+      h+='<div style="display:flex;align-items:baseline;gap:6px;margin-bottom:8px"><span style="font-size:20px">'+it.icon+'</span>';
+      h+='<div style="font-size:13px;font-weight:700;color:'+it.c+'">'+it.t+'</div></div>';
+      h+='<div style="font-size:9px;color:'+sub+';margin-bottom:1px">目标用户</div>';
+      h+='<div style="font-size:10px;color:'+txt+';margin-bottom:6px">'+it.u+'</div>';
+      h+='<div style="font-size:9px;color:'+sub+';margin-bottom:1px">市场模式</div>';
+      h+='<div style="font-size:10px;color:'+txt+';margin-bottom:6px">'+it.m+'</div>';
+      h+='<div style="font-size:10px;color:'+it.c+';font-weight:600;padding:3px 6px;border-radius:5px;background:'+it.c+'10;display:inline-block">⚠️ '+it.r+'</div>';
+      h+='</div>';
+    });
+    h+='</div>';
+    h+='<div style="max-width:720px;margin:0 auto;padding:12px 16px;border-radius:12px;background:'+secBg+';border-left:3px solid '+accent+'">';
+    h+='<div style="font-size:10px;font-weight:700;letter-spacing:.3px;color:'+accent+';margin-bottom:4px;text-transform:uppercase">评审五问 + MVP 三段式</div>';
+    h+='<div style="font-size:11px;color:'+txt+';line-height:1.55"><strong>评审五问</strong>：用户清晰度/竞品扎实度/商业闭环/风险识别/MVP 可验证<br><strong>MVP 三段式</strong>：1 周验证需求 → 1 周付费验证 → 1 周优化，30 天快速跑通</div>';
+    h+='</div>';
+
+  } else if(slide.key==='w3-six-layer'){
+    h+='<div style="text-align:center;margin-bottom:20px">';
+    h+='<h2 style="font-size:clamp(22px,4vw,32px);font-weight:600;line-height:1.1;letter-spacing:-.4px;color:'+txt+'">产品六层架构 · OLO 案例</h2>';
+    h+='<p style="font-size:14px;color:'+sub+';margin-top:6px">PM 的"<strong style="color:'+accent+'">CT 扫描仪</strong>"：从市场到基础的全栈视角</p></div>';
+    h+='<div style="max-width:720px;margin:0 auto 16px">';
+    [{l:'6',t:'市场层',en:'Market',q:'是否值得进入',c:'#ec4899',olo:'AI 视频创作赛道'},
+     {l:'5',t:'商业层',en:'Business',q:'商业模式与定位',c:'#f59e0b',olo:'订阅 + 分成模式'},
+     {l:'4',t:'用户层',en:'User',q:'用户需求与任务',c:'#10b981',olo:'项目创作 + 角色库'},
+     {l:'3',t:'技术层',en:'Technical',q:'核心节点与结构',c:'#06b6d4',olo:'5 节点 + 5 类 Agent'},
+     {l:'2',t:'模型层',en:'Model',q:'能力与成本控制',c:'#8b5cf6',olo:'模型路由按需匹配'},
+     {l:'1',t:'基础层',en:'Foundation',q:'数据与算力',c:'#a855f7',olo:'风格库 + 视频知识库'}
+    ].forEach(ly=>{
+      h+='<div style="display:grid;grid-template-columns:36px 1fr 1fr 1fr;gap:10px;align-items:center;padding:8px 12px;border-radius:10px;background:'+card+';box-shadow:'+shadow+';margin-bottom:5px;border-left:3px solid '+ly.c+'">';
+      h+='<div style="font-size:20px;font-weight:800;color:'+ly.c+';letter-spacing:-.5px;text-align:center">L'+ly.l+'</div>';
+      h+='<div><div style="font-size:12px;font-weight:700;color:'+txt+'">'+ly.t+'</div>';
+      h+='<div style="font-size:9px;color:'+sub+'">'+ly.en+'</div></div>';
+      h+='<div><div style="font-size:9px;color:'+sub+';margin-bottom:1px">关键问题</div>';
+      h+='<div style="font-size:10px;color:'+txt+'">'+ly.q+'</div></div>';
+      h+='<div><div style="font-size:9px;color:'+sub+';margin-bottom:1px">OLO 案例</div>';
+      h+='<div style="font-size:10px;color:'+ly.c+';font-weight:600">'+ly.olo+'</div></div>';
+      h+='</div>';
+    });
+    h+='</div>';
+    h+='<div style="max-width:720px;margin:0 auto;padding:12px 16px;border-radius:12px;background:'+secBg+';border-left:3px solid '+accent2+'">';
+    h+='<div style="font-size:10px;font-weight:700;letter-spacing:.3px;color:'+accent2+';margin-bottom:4px;text-transform:uppercase">提示词 + 上下文工程</div>';
+    h+='<div style="font-size:11px;color:'+txt+';line-height:1.55"><strong>提示词</strong>：角色 + 技能 + 任务流程三段式 · <strong>上下文</strong>：全局 ID 管理（项目/角色/分镜）+ 增删改查 + 版本管理</div>';
+    h+='</div>';
+
   } else if(slide.key==='w3-summary'){
     h+='<div style="text-align:center;padding:32px 0 24px">';
     h+='<div style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;color:'+accent+'">WEEK 3 SUMMARY</div>';
@@ -5849,7 +6000,10 @@ function nhRenderCourseware(){
       {n:'11',t:'价值三维度',d:'增收 + 降本 + 提效，数据量化项目贡献',color:'#ef4444'},
       {n:'12',t:'能力成熟度',d:'L1 Chatbot → L2 Workflow → L3 Agent',color:'#ef4444'},
       {n:'13',t:'工作流实操',d:'打标助手全流程 + Temperature 调参',color:'#ec4899'},
-      {n:'14',t:'Bad Case 优化',d:'明确错误→补充信息→调整规则→验证效果',color:'#ec4899'}
+      {n:'14',t:'Bad Case 优化',d:'明确错误→补充信息→调整规则→验证效果',color:'#ec4899'},
+      {n:'15',t:'知识库四件套',d:'NotebookLM + Claude + Obsidian + Skills',color:'#06b6d4'},
+      {n:'16',t:'评审五问',d:'用户 / 竞品 / 商业闭环 / 风险 / MVP 可验证',color:'#a855f7'},
+      {n:'17',t:'产品六层架构',d:'市场 → 商业 → 用户 → 技术 → 模型 → 基础',color:'#ec4899'}
     ];
     h+='<div style="max-width:560px;margin:0 auto 28px;columns:2;column-gap:20px">';
     w3pts.forEach(p=>{
@@ -5861,8 +6015,8 @@ function nhRenderCourseware(){
     h+='</div>';
     h+='<div style="text-align:center;padding:16px;border-radius:12px;background:'+secBg+'">';
     h+='<div style="font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px;color:'+sub+'">课程来源</div>';
-    h+='<div style="font-size:12px;color:'+txt+'">且曼 AI 产品经理前瞻学院 · 第三周 · 1天2节课</div>';
-    h+='<div style="font-size:11px;color:'+sub+';margin-top:4px">AI Agent认知架构 → 项目实战 → 团队协作</div>';
+    h+='<div style="font-size:12px;color:'+txt+'">且曼 AI 产品经理前瞻学院 · 第三周 · 4.11 – 4.16 · 5 天 7 节课</div>';
+    h+='<div style="font-size:11px;color:'+sub+';margin-top:4px">Agent 架构 → 项目实战 → 价值量化 → 工作流 → 知识库 → 项目评审 → 六层架构</div>';
     h+='</div>';
   }
 
