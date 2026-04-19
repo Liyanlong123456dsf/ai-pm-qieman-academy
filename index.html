@@ -6681,7 +6681,7 @@ function nhRenderGlossary(){
   h+='<input id="nh-glossary-search" type="text" value="'+nhGlossaryQ+'" oninput="nhGlossaryQ=this.value;nhRenderGlossary()" placeholder="搜索术语、英文全称或描述…" class="w-full pl-9 pr-3 py-2 rounded-lg text-xs dark:bg-white/[0.03] bg-black/[0.03] dark:text-white text-gray-900 border dark:border-white/10 border-black/10 focus:outline-none focus:dark:border-cyan-500/50 focus:border-cyan-500/50 transition-colors nh-search"></div>';
   // Week filter
   h+='<div class="flex gap-1 p-1 rounded-lg dark:bg-white/[0.03] bg-black/[0.03]">';
-  [{v:0,l:'全部'},{v:1,l:'W1'},{v:2,l:'W2'},{v:3,l:'W3'}].forEach(f=>{
+  [{v:0,l:'全部'},{v:1,l:'W1'},{v:2,l:'W2'},{v:3,l:'W3'},{v:4,l:'W4'}].forEach(f=>{
     const act=nhGlossaryWeek===f.v;
     h+='<button onclick="nhGlossaryWeek='+f.v+';nhRenderGlossary()" class="px-3 py-1.5 rounded-md text-[10px] font-bold transition-all '+(act?'dark:bg-white/10 bg-black/10 dark:text-white text-gray-900':'dark:text-gray-500 text-gray-400 hover:dark:text-gray-300')+'">'+f.l+'</button>';
   });
