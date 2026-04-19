@@ -1664,7 +1664,7 @@ function openObsidianVault(){
         <button onclick="this.closest('#obsidian-overlay').style.opacity='0';setTimeout(()=>document.getElementById('obsidian-overlay')?.remove(),300)" class="px-5 py-3 rounded-xl text-sm font-semibold ${isDk?'text-gray-400 hover:text-white':'text-gray-500 hover:text-gray-900'} transition-colors" style="background:${isDk?'rgba(255,255,255,.05)':'rgba(0,0,0,.05)'}">关闭</button>
       </div>
       <div class="mt-4 text-[10px] ${isDk?'text-gray-600':'text-gray-400'} text-center">
-        笔记路径：Obsidian Vault / 第一周笔记 + 第二周笔记 + 第三周笔记 / · 按天合并 · 含 RAG 专题 + 竞品分析 + Agent架构 + 知识库构建 + 项目评审 + 产品六层架构
+        笔记路径：Obsidian Vault / 第一周笔记 + 第二周笔记 + 第三周笔记 / · 按天合并 · 含 RAG 专题 + 竞品分析 + Agent架构 + 知识库构建 + 项目评审 + 产品六层架构 + 4.17 项目评审 II
       </div>
     </div>`;
     document.body.appendChild(overlay);
@@ -3468,8 +3468,8 @@ const NH_WEEKS=[
   ]
 },
 {
-  week:3, title:'第三周', subtitle:'AI Agent认知架构 → 项目实战 → 价值量化 → 工作流实操 → 知识库构建 → 项目评审 → 产品六层架构',
-  dateRange:'4.11 – 4.16', color:'#10b981', icon:'🤖',
+  week:3, title:'第三周', subtitle:'AI Agent认知架构 → 项目实战 → 价值量化 → 工作流实操 → 知识库构建 → 项目评审 → 产品六层架构 → 项目评审 II（三组新赛道）',
+  dateRange:'4.11 – 4.17', color:'#10b981', icon:'🤖',
   highlights:[
     {icon:'🧠',title:'Agent认知架构',desc:'Memory/Planning/Tools/Action/Observation/Reflection 六大模块'},
     {icon:'🔄',title:'ReAct循环',desc:'Reasoning + Acting 交替执行，感知→规划→执行→观察→反思闭环'},
@@ -3485,10 +3485,13 @@ const NH_WEEKS=[
     {icon:'🐛',title:'Bad Case优化',desc:'明确错误→补充信息→调整规则→验证效果，质量提升核心手段'},
     {icon:'📚',title:'知识库四件套',desc:'NotebookLM + Claude/Cloud Code + Obsidian + Skills 搭建第二大脑'},
     {icon:'🎭',title:'五组项目评审',desc:'玄学社交/汉服妆造/黑胶识别/同人文/宠物殡葬 · MVP三段式验证'},
-    {icon:'🏛️',title:'产品六层架构',desc:'市场→商业→用户→技术→模型→基础 · OLO/昆仑sky real 案例拆解'}
+    {icon:'🏛️',title:'产品六层架构',desc:'市场→商业→用户→技术→模型→基础 · OLO/昆仑sky real 案例拆解'},
+    {icon:'💗',title:'情绪疏导系统',desc:'六轴情绪识别 + 三角色(呼呼/小林/灰灰) + 478呼吸法UI + 心理危机热线兜底'},
+    {icon:'📊',title:'Data EGS 对话式数据分析',desc:'"所有操作通过对话完成" · 中文脏数据六类处理 · 上传→清洗→分析→可视化→PPT 端到端'},
+    {icon:'🚀',title:'双轨加漏斗模型',desc:'AI营销增长实验室 · AI资讯免费流量 → 一对一营销验证付费收敛 · 独立开发者赛道'}
   ],
-  quotes:['AI等级从推理转向智能体，这是行业共识','你会觉得越学越多越焦虑，但市场要求其实没那么高','似懂非懂的领导最难搞，完全不懂反而好沟通','商业的本质是创新','从现在就可以开始孵化自己的项目','芯片晶体管16-24个月翻倍，AI能处理的任务长度7个月翻一倍','用户跟AI对话的内容，是主动变成记忆还是被动添加记忆？这是值得思考的策略问题','每个人都是资源，都是信息源','项目价值远比复杂度更打动面试官，简单项目也能带来巨大影响','业务价值必须先获得业务方认可，不能直接向高层汇报','线上不要大刀阔斧改动，保证原有数据稳定正确','Bad Case是智能体质量提升的核心手段','不投递的失败概率是100%，投了至少有机会','NotebookLM + Claude + Skills = AI 产品经理的"第二大脑"','评审五问：用户清晰度 / 竞品扎实度 / 商业闭环 / 风险识别 / MVP可验证','产品六层架构是 PM 的 CT 扫描仪，任何 AI 产品都可按此全栈拆解','似懂非懂的客户需要技术可视化解释'],
-  tools:[{n:'豆包/Cloud Code',d:'AI会议转写与架构生成'},{n:'飞书COI',d:'在线画板架构图工具'},{n:'Kimi',d:'AI辅助知识整理与搜索'},{n:'扣子(Coze)',d:'智能体开发与发布平台'},{n:'MCP',d:'Model Context Protocol 模型上下文协议'},{n:'Windsurf',d:'AI编程IDE(Plan/Code模式)'},{n:'NotebookLM',d:'知识沉淀与结构化工具'},{n:'飞书',d:'团队协作与文档'},{n:'蜜桃AI',d:'用户画像辅助生成工具'},{n:'飞书多维表格',d:'字段与变量映射管理'},{n:'Dify工作流',d:'打标助手开发平台'},{n:'Obsidian',d:'本地双向链接知识图谱'},{n:'Claude Skills',d:'Claude Code 可扩展技能包'},{n:'OLO/昆仑sky real',d:'AI视频创作产品拆解案例'}],
+  quotes:['AI等级从推理转向智能体，这是行业共识','你会觉得越学越多越焦虑，但市场要求其实没那么高','似懂非懂的领导最难搞，完全不懂反而好沟通','商业的本质是创新','从现在就可以开始孵化自己的项目','芯片晶体管16-24个月翻倍，AI能处理的任务长度7个月翻一倍','用户跟AI对话的内容，是主动变成记忆还是被动添加记忆？这是值得思考的策略问题','每个人都是资源，都是信息源','项目价值远比复杂度更打动面试官，简单项目也能带来巨大影响','业务价值必须先获得业务方认可，不能直接向高层汇报','线上不要大刀阔斧改动，保证原有数据稳定正确','Bad Case是智能体质量提升的核心手段','不投递的失败概率是100%，投了至少有机会','NotebookLM + Claude + Skills = AI 产品经理的"第二大脑"','评审五问：用户清晰度 / 竞品扎实度 / 商业闭环 / 风险识别 / MVP可验证','产品六层架构是 PM 的 CT 扫描仪，任何 AI 产品都可按此全栈拆解','似懂非懂的客户需要技术可视化解释','情绪低落时，用户需要的不是建议，而是理解和接入他们的情绪','所有操作通过对话完成，所有结果在对话中呈现','免费 AI 资讯吸引，双轨漏斗收敛到营销验证','真实用户调研 + 项目信念感 = 评审过关核心'],
+  tools:[{n:'豆包/Cloud Code',d:'AI会议转写与架构生成'},{n:'飞书COI',d:'在线画板架构图工具'},{n:'Kimi',d:'AI辅助知识整理与搜索'},{n:'扣子(Coze)',d:'智能体开发与发布平台'},{n:'MCP',d:'Model Context Protocol 模型上下文协议'},{n:'Windsurf',d:'AI编程IDE(Plan/Code模式)'},{n:'NotebookLM',d:'知识沉淀与结构化工具'},{n:'飞书',d:'团队协作与文档'},{n:'蜜桃AI',d:'用户画像辅助生成工具'},{n:'飞书多维表格',d:'字段与变量映射管理'},{n:'Dify工作流',d:'打标助手开发平台'},{n:'Obsidian',d:'本地双向链接知识图谱'},{n:'Claude Skills',d:'Claude Code 可扩展技能包'},{n:'OLO/昆仑sky real',d:'AI视频创作产品拆解案例'},{n:'478呼吸法',d:'情绪疏导动态UI设计原则'},{n:'私有化部署',d:'企业级数据安全+全链路审计'},{n:'SWOT分析',d:'项目评审四象限工具'}],
   days:[
     {date:'4月11日（周五）',title:'AI Agent认知架构与项目实战',icon:'🤖',color:'#10b981',
      summary:'系统学习AI Agent认知架构六大模块（Memory/Planning/Tools/Action/Observation/Reflection），理解ReAct循环与Reflexion框架；并通过项目实战体验产品微度测试与团队协作。',
@@ -3537,6 +3540,14 @@ const NH_WEEKS=[
        relatedNodes:[{id:1,title:'需求收集与分析',why:'市场+用户两层对应需求输入'},{id:2,title:'需求定义与PRD撰写',why:'六层拆解=PRD 体系化产出'},{id:3,title:'原型设计与交互设计',why:'技术层的 Agent 设计与交互'},{id:5,title:'开发排期与立项',why:'模型层调用规则+基础层数据飞轮'}],
        points:['产品架构六层拆解：市场层→商业层→用户层→技术层→模型层→基础层','市场层：市场是否值得进入→年报分析+竞品分析报告','商业层：商业模式与用户定位→产品定位+商业模式设计','用户层：用户需求与任务完成→用户旅程图+功能设计','技术层：核心节点与技术结构→工作流设计+Agent+工具调用','模型层：模型能力与成本控制→模型列表+调用规则+模型路由','基础层：数据与算力支持→数据来源+数据飞轮设计','OLO 平台案例(用户层)：项目创作+角色库管理，服务半专业+小白用户','OLO 技术层：需求分析→剧本设计→角色设计→分镜生成→视频合成五大核心节点','OLO Agent 设计：艺术总监+编剧+角色设计师+分镜师+音乐总监五类 Agent 分工协同','模型路由(Model Routing)：根据场景与任务选择不同模型，平衡效果与成本','提示词工程：角色+技能+任务流程三段式；明确工具调用触发条件；定义交互准则','上下文工程(Context Engineering)：全局上下文(项目 ID/角色 ID/分镜 ID)+增删改查+版本管理','评测方法：定义打分规则(端到端能力/技术层表现)→测试输入→生成质量评分','迭代优化：提示词→模型路由→数据迭代三条线并行','昆仑 sky real 案例：电商场景商品视频生成+推广投流人货交互视频','产品设计模式：画板(需求理解+素材整合)+编辑器(视频编辑)双核','角色一致性：三视图设计(正/侧/背)保证跨镜头角色不变形','音频同步：分镜与口型对齐，工程上需单独的音视频对齐节点'],
        keyPoint:'产品六层架构=从市场到基础的完整拆解视角，PM 的"CT 扫描仪"',homework:'任选一个 AI 产品，用六层架构完整拆解一遍 + 为其中一层写一份详细规范'}
+    ]},
+    {date:'4月17日（周五·项目评审 II）',title:'三组新赛道项目评审：情绪疏导 / Data EGS / AI 营销增长',icon:'💗',color:'#10b981',
+     summary:'第二轮项目评审，聚焦三条新赛道：①情绪疏导系统（六轴情绪识别 + 三角色陪伴 + 478 呼吸法 UI）②Data EGS 对话式数据分析（中文脏数据 + 端到端闭环）③AI 营销增长实验室（双轨加漏斗 + 独立开发者服务）。每组完整汇报目标用户 → 市场调研 → 商业模式 → 风险评估 → 实施计划。',
+     courses:[
+      {id:'P-REVIEW-2',title:'三组新赛道项目评审：情绪疏导 × Data EGS × AI 营销',tags:['实战','评审'],
+       relatedNodes:[{id:1,title:'需求收集与分析',why:'真实用户调研决定评审成败'},{id:2,title:'需求定义与PRD撰写',why:'产品定位+商业模式设计'},{id:3,title:'原型设计与交互设计',why:'三角色UI/呼吸法UI/对话式界面原型落地'},{id:4,title:'需求评审与确认',why:'项目评审即需求评审'},{id:5,title:'开发排期与立项',why:'MVP验证路径决定立项'},{id:11,title:'复盘总结与迭代优化',why:'评审反馈→下次汇报迭代'}],
+       points:['组1·情绪疏导系统目标：中国 1.6-1.9 亿情绪困扰人群，定位情绪基础设施而非医疗服务','情绪疏导核心技术：六轴情绪识别引擎 + 自建情绪分类系统 + 长期记忆(20轮上下文)','三角色回复策略：呼呼(温暖型，情绪低落使用) + 小林(倾听型，焦虑场景使用) + 灰灰(克制型，极端情绪使用)','情绪疏导UI设计：478 呼吸法动态 UI 增强沉浸感，角色表情随对话情绪动态变化','情绪疏导安全机制：自杀倾向/重度抑郁自动触发心理危机热线接入，避免医疗风险','情绪疏导定价：标准版 18 元 / 推荐版 198 元 / 支持者终身 888 元，前 6 个月免费试用，12 个月盈利','情绪疏导竞品：林间聊愈室 / 静 / 新野，差异化在专业情绪疏导而非简单聊天','情绪疏导硬件推广：NFC 卡片 + 小米米家 + 毛绒玩具接入，延伸情感陪伴场景','组2·Data EGS 目标：中小企业财务/运营/市场/HR 岗位，解决 Excel 脏数据痛点','Data EGS 核心理念："所有操作通过对话完成，所有结果在对话中呈现"','Data EGS 端到端闭环：数据上传 → 清洗 → 分析 → 可视化 → PPT 生成，全流程自然语言触发','Data EGS 差异化：专门处理中国烂数据(六类脏数据模块) + 端到端闭环(竞品多为单点工具)','Data EGS 竞品：WPSAI / Copilot，选择做网页版避开微软 Excel Copilot 地盘','Data EGS 定价：个人 15-50 元/月 / 企业 50-250 元/月，专业版低于 Copilot','Data EGS 部署：私有化部署 + 全链路审计，解决企业数据安全顾虑','组3·AI 营销增长实验室目标：独立开发者 + 一人公司，市场 500 万从业者，目标 5 万付费用户','AI 营销核心模式：双轨加漏斗 — AI 资讯免费流量(高活跃/自带传播) → 一对一营销验证付费收敛','AI 营销差异化：提供商业价值提取 + 营销策略验证，而非仅资讯摘要(解决独立开发者"想赚钱但没方向")','AI 营销实施闭环：AI 资讯获取 → 痛点分析 → 产品验证 → 营销文案制作，一站式最小代价试错','评审通用反馈：调研真实用户 > 项目信念感 > 解决问题能力 > 商业化思考 > 团队参与度','评审进阶五问：用户留存关键是场景+价值/专家标签要有实质内容/UI≠场景/故事包装建立信任/差异化要精准对接需求','项目推进建议：解决问题为导向 + 定期汇报进度 + 利用课程知识优化项目 + 持续面试复盘'],
+       keyPoint:'真实用户调研 + 项目信念感 + 商业闭环 + 差异化定位 = 评审过关四要素',homework:'为本组项目完成评审反馈落地方案 + 识别 Top-3 用户留存机制 + 对标三组新赛道的差异化策略'}
     ]}
   ]
 }
@@ -3665,7 +3676,23 @@ const NH_GLOSSARY=[
 {term:'模型路由',full:'Model Routing',zh:'',cat:'工作流',week:[3],desc:'根据任务场景动态选择不同模型的工程机制。平衡效果与成本，如简单任务用 GPT-3.5 / 复杂任务用 GPT-4 / 视觉任务用 VLM。OLO 平台五类 Agent 分工协同的关键技术。'},
 {term:'战略地图',full:'Strategy Map',zh:'',cat:'产品方法论',week:[3],desc:'组织战略目标与关键绩效的可视化工具。包含业务节点 + 方向连线 + 角色标识，常与平衡计分卡(BSC)配合使用。'},
 {term:'业务流程图',full:'Business Process Diagram',zh:'',cat:'产品方法论',week:[3],desc:'梳理完整业务链路的可视化图表，标注 AI 可介入节点与预期效果。是 PRD 与服务蓝图的前置产出。'},
-{term:'价值汇报四步',full:'',zh:'',cat:'产品方法论',week:[3],desc:'项目价值传递路径：价值梳理 → 文档编写 → 业务方认可 → 高层汇报。必须先获得业务方认可再上报。'}
+{term:'价值汇报四步',full:'',zh:'',cat:'产品方法论',week:[3],desc:'项目价值传递路径：价值梳理 → 文档编写 → 业务方认可 → 高层汇报。必须先获得业务方认可再上报。'},
+// === 第三周 · 4.17 项目评审 II · 情绪疏导系统 ===
+{term:'六轴情绪识别',full:'Six-axis Emotion Recognition',zh:'',cat:'Agent架构',week:[3],desc:'情绪疏导系统的核心技术壁垒。六轴=低落/焦虑/愤怒/迷茫/喜悦/平静，实时识别用户情绪并匹配回复策略，是自建情绪分类系统的基础。'},
+{term:'478 呼吸法',full:'4-7-8 Breathing',zh:'',cat:'产品方法论',week:[3],desc:'情绪疏导 UI 设计原则：吸气 4 秒 → 屏息 7 秒 → 呼气 8 秒。动态 UI 随呼吸节奏伸缩，增强沉浸感，让用户在使用中自然放松。'},
+{term:'三角色回复策略',full:'Three-Role Response Strategy',zh:'',cat:'Agent架构',week:[3],desc:'情绪疏导系统的角色化设计：呼呼(温暖型·情绪低落时使用)/小林(倾听型·焦虑迷茫时使用)/灰灰(克制型·极端情绪时使用)。按用户实时情绪匹配角色，避免一刀切回复。'},
+{term:'情绪基础设施',full:'Emotional Infrastructure',zh:'',cat:'产品方法论',week:[3],desc:'情绪疏导系统的产品定位：不做医疗治疗，不做简单聊天，而做情绪的"水电煤"基础设施。专业疏导 + 长期陪伴，服务 1.9 亿情绪困扰用户。'},
+// === 第三周 · 4.17 项目评审 II · Data EGS 数据分析 ===
+{term:'Data EGS',full:'',zh:'对话式数据分析平台',cat:'工具平台',week:[3],desc:'项目评审 II 组 2 的产品，又名 Date Length。核心理念"所有操作通过对话完成，所有结果在对话中呈现"，服务中小企业财务/运营/市场/HR。'},
+{term:'中文脏数据',full:'Chinese Dirty Data',zh:'',cat:'RAG技术',week:[3],desc:'Data EGS 六类专项处理对象：乱码格式/合并单元格/非标日期/中英混杂/脱敏字段/异常缺失。是国内 Excel 数据处理的长期痛点，竞品 WPSAI 与 Copilot 未深度解决。'},
+{term:'对话式数据分析',full:'Conversational Data Analysis',zh:'',cat:'工作流',week:[3],desc:'以自然语言对话为单一交互入口的数据分析范式。上传→清洗→分析→可视化→PPT 全流程无需编程知识，通过对话触发与回传结果。'},
+// === 第三周 · 4.17 项目评审 II · AI 营销增长 ===
+{term:'双轨加漏斗模型',full:'Dual-track Funnel Model',zh:'',cat:'产品方法论',week:[3],desc:'AI 营销增长实验室的商业模式。轨道 1=AI 资讯免费流量(高活跃+自带传播)，轨道 2=一对一营销验证付费服务，用免费层筛选核心用户收敛到付费层。'},
+{term:'AI 资讯平台',full:'AI News Aggregator',zh:'',cat:'工具平台',week:[3],desc:'智能体封装网站自动抓取 AI 资讯 + 建立商业价值评分机制。区别于传统资讯平台，重点在"商业价值提取"而非信息摘要。'},
+{term:'商业价值提取',full:'Business Value Extraction',zh:'',cat:'产品方法论',week:[3],desc:'AI 营销增长实验室的差异化核心。解决独立开发者"想赚钱但没方向"的痛点：从 AI 资讯中识别商业机会 + 评估变现路径 + 提供验证方案。'},
+// === 第三周 · 方法论 + 企业级补充 ===
+{term:'SWOT 分析',full:'Strengths/Weaknesses/Opportunities/Threats',zh:'优劣机威四象限',cat:'产品方法论',week:[2,3],desc:'经典战略分析工具，四象限评估项目内部优劣势与外部机会威胁。项目评审汇报的标准收尾工具，常与双轨漏斗/市场调研配合使用。'},
+{term:'私有化部署',full:'On-Premise Deployment',zh:'',cat:'工具平台',week:[3],desc:'企业级 SaaS 产品的数据安全方案。代码+模型+数据全部部署在客户本地机房，避免云端风险，配合全链路审计是 Data EGS 企业版核心卖点。'}
 ];
 
 // ---- 参考文献与标准 (shown at bottom of glossary) ----
@@ -4640,6 +4667,9 @@ const CW_SLIDES_W3=[
   {key:'w3-kb-tools',title:'知识库 × AI 工具',icon:'📚',day:3},
   {key:'w3-project-review',title:'五组项目评审',icon:'🎭',day:4},
   {key:'w3-six-layer',title:'产品六层架构',icon:'🏛️',day:5},
+  {key:'w3-emotion',title:'情绪疏导系统',icon:'💗',day:6},
+  {key:'w3-data-egs',title:'Data EGS 对话式数据分析',icon:'📊',day:6},
+  {key:'w3-ai-marketing',title:'AI 营销增长实验室',icon:'🚀',day:6},
   {key:'w3-summary',title:'总结与行动',icon:'🎯',day:0}
 ];
 function nhRenderCourseware(){
@@ -4658,7 +4688,7 @@ function nhRenderCourseware(){
   const secBg=dk?'#000000':'#f5f5f7';
   const shadow=dk?'none':'rgba(0,0,0,.22) 3px 5px 30px 0px';
   const slide=CW_SLIDES[cwSlide];
-  const dayLabel=isW3?(slide.day===1?'Day 1 · 4月11日(周五)':slide.day===2?'Day 2 · 4月12日(周六)':slide.day===3?'Day 3 · 4月13日(周一·思敏)':slide.day===4?'Day 4 · 4月15日(周三·项目评审)':slide.day===5?'Day 5 · 4月16日(周四·思敏)':''):isW2?(slide.day===1?'Day 1 · 4月4日(周六)':slide.day===2?'Day 2 · 4月5日(周日·上午)':slide.day===3?'Day 3 · 4月5日(周日·下午)':slide.day===4?'Day 4 · 4月9日(周三)':''):(slide.day===1?'Day 1 · 3月28日':slide.day===2?'Day 2 · 3月29日':slide.day===3?'Day 3 · 4月2日':'');
+  const dayLabel=isW3?(slide.day===1?'Day 1 · 4月11日(周五)':slide.day===2?'Day 2 · 4月12日(周六)':slide.day===3?'Day 3 · 4月13日(周一·思敏)':slide.day===4?'Day 4 · 4月15日(周三·项目评审)':slide.day===5?'Day 5 · 4月16日(周四·思敏)':slide.day===6?'Day 6 · 4月17日(周五·项目评审 II)':''):isW2?(slide.day===1?'Day 1 · 4月4日(周六)':slide.day===2?'Day 2 · 4月5日(周日·上午)':slide.day===3?'Day 3 · 4月5日(周日·下午)':slide.day===4?'Day 4 · 4月9日(周三)':''):(slide.day===1?'Day 1 · 3月28日':slide.day===2?'Day 2 · 3月29日':slide.day===3?'Day 3 · 4月2日':'');
   let h='<div class="nh-animate">';
 
   // ======== TOP NAV ========
@@ -5540,14 +5570,15 @@ function nhRenderCourseware(){
     h+='<div style="text-align:center;padding:40px 0 32px">';
     h+='<div style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;color:'+accent+'">WEEK 3 COURSEWARE</div>';
     h+='<h1 style="font-size:clamp(32px,6vw,48px);font-weight:600;line-height:1.07;letter-spacing:-.5px;margin-bottom:16px;color:'+txt+'">第三周知识全景</h1>';
-    h+='<p style="font-size:17px;line-height:1.47;letter-spacing:-.37px;max-width:580px;margin:0 auto 40px;color:'+sub+'">4.11 – 4.16 · Agent 认知架构 → 项目实战 → 价值量化 → 工作流 → 知识库 → 项目评审 → 六层架构<br>从智能体架构原理到产品全栈拆解的完整认知链路</p>';
+    h+='<p style="font-size:17px;line-height:1.47;letter-spacing:-.37px;max-width:620px;margin:0 auto 40px;color:'+sub+'">4.11 – 4.17 · Agent 架构 → 项目实战 → 价值量化 → 工作流 → 知识库 → 项目评审 → 六层架构 → 项目评审 II<br>从智能体架构原理到三组新赛道拆解的完整认知链路</p>';
     h+='</div>';
     const w3days=[
       {n:'Day 1',d:'4月11日(周五)',t:'AI Agent 认知架构与项目实战',courses:2,icon:'🤖'},
       {n:'Day 2',d:'4月12日(周六)',t:'项目价值量化与工作流实操',courses:2,icon:'💎'},
       {n:'Day 3',d:'4月13日(周一·思敏)',t:'知识库构建与 AI 工具矩阵',courses:1,icon:'📚'},
       {n:'Day 4',d:'4月15日(周三)',t:'五组项目评审',courses:1,icon:'🎭'},
-      {n:'Day 5',d:'4月16日(周四·思敏)',t:'产品六层架构 · OLO 案例',courses:1,icon:'🏛️'}
+      {n:'Day 5',d:'4月16日(周四·思敏)',t:'产品六层架构 · OLO 案例',courses:1,icon:'🏛️'},
+      {n:'Day 6',d:'4月17日(周五·评审 II)',t:'三组新赛道：情绪/Data EGS/AI 营销',courses:1,icon:'💗'}
     ];
     h+='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;justify-content:center;margin-bottom:32px;max-width:900px;margin-left:auto;margin-right:auto">';
     w3days.forEach(d=>{
@@ -5560,7 +5591,7 @@ function nhRenderCourseware(){
     });
     h+='</div>';
     h+='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;max-width:560px;margin:0 auto">';
-    [{n:'7',l:'节课'},{n:'5',l:'天'},{n:'80+',l:'个要点'},{n:'6',l:'Agent 模块'}].forEach(s=>{
+    [{n:'8',l:'节课'},{n:'6',l:'天'},{n:'110+',l:'个要点'},{n:'6',l:'Agent 模块'}].forEach(s=>{
       h+='<div style="padding:12px;border-radius:10px;background:'+secBg+';text-align:center">';
       h+='<div style="font-size:20px;font-weight:800;color:'+accent+'">'+s.n+'</div>';
       h+='<div style="font-size:10px;color:'+sub+'">'+s.l+'</div></div>';
@@ -5981,6 +6012,118 @@ function nhRenderCourseware(){
     h+='<div style="font-size:11px;color:'+txt+';line-height:1.55"><strong>提示词</strong>：角色 + 技能 + 任务流程三段式 · <strong>上下文</strong>：全局 ID 管理（项目/角色/分镜）+ 增删改查 + 版本管理</div>';
     h+='</div>';
 
+  } else if(slide.key==='w3-emotion'){
+    h+='<div style="text-align:center;margin-bottom:20px">';
+    h+='<h2 style="font-size:clamp(22px,4vw,32px);font-weight:600;line-height:1.1;letter-spacing:-.4px;color:'+txt+'">情绪疏导系统</h2>';
+    h+='<p style="font-size:14px;color:'+sub+';margin-top:6px">1.9 亿情绪困扰用户 · 定位<strong style="color:'+accent+'">情绪基础设施</strong>而非医疗服务</p></div>';
+    h+='<div style="max-width:720px;margin:0 auto 16px">';
+    h+='<div style="font-size:11px;font-weight:700;letter-spacing:.3px;color:'+accent+';margin-bottom:8px;text-transform:uppercase;text-align:center">核心技术壁垒：六轴情绪识别引擎</div>';
+    h+='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-bottom:20px">';
+    [{n:'低落',c:'#3b82f6'},{n:'焦虑',c:'#f59e0b'},{n:'愤怒',c:'#ef4444'},{n:'迷茫',c:'#8b5cf6'},{n:'喜悦',c:'#10b981'},{n:'平静',c:'#06b6d4'}].forEach(e=>{
+      h+='<div style="padding:10px 8px;border-radius:10px;background:'+card+';box-shadow:'+shadow+';text-align:center;border-top:2px solid '+e.c+'">';
+      h+='<div style="font-size:13px;font-weight:700;color:'+e.c+'">'+e.n+'</div></div>';
+    });
+    h+='</div>';
+    h+='<div style="font-size:11px;font-weight:700;letter-spacing:.3px;color:'+accent+';margin-bottom:8px;text-transform:uppercase;text-align:center">三角色回复策略 · 按情绪匹配</div>';
+    h+='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:16px">';
+    [{icon:'🌸',name:'呼呼',t:'温暖型',d:'情绪低落/失落 · 共情包裹式陪伴',c:'#ec4899'},
+     {icon:'🌿',name:'小林',t:'倾听型',d:'焦虑/迷茫 · 非评价式倾听',c:'#10b981'},
+     {icon:'🌊',name:'灰灰',t:'克制型',d:'极端情绪/愤怒 · 冷静节制回应',c:'#06b6d4'}
+    ].forEach(r=>{
+      h+='<div style="padding:14px;border-radius:12px;background:'+card+';box-shadow:'+shadow+';border-top:3px solid '+r.c+'">';
+      h+='<div style="display:flex;align-items:baseline;gap:6px;margin-bottom:6px"><span style="font-size:22px">'+r.icon+'</span>';
+      h+='<div style="font-size:14px;font-weight:700;color:'+r.c+'">'+r.name+'</div>';
+      h+='<div style="font-size:10px;color:'+sub+'">'+r.t+'</div></div>';
+      h+='<div style="font-size:11px;color:'+txt+';line-height:1.5">'+r.d+'</div></div>';
+    });
+    h+='</div>';
+    h+='</div>';
+    h+='<div style="max-width:720px;margin:0 auto 12px;padding:12px 16px;border-radius:12px;background:#ef444410;border-left:3px solid #ef4444">';
+    h+='<div style="font-size:10px;font-weight:700;letter-spacing:.3px;color:#ef4444;margin-bottom:4px;text-transform:uppercase">⚠️ 安全兜底机制</div>';
+    h+='<div style="font-size:11px;color:'+txt+';line-height:1.55">自杀倾向 / 重度抑郁自动触发 → <strong>心理危机热线接入</strong>，避免医疗风险，情绪基础设施≠心理治疗</div>';
+    h+='</div>';
+    h+='<div style="max-width:720px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px">';
+    [{t:'标准版',p:'18 元',c:'#06b6d4'},{t:'推荐版',p:'198 元',c:'#10b981'},{t:'支持者终身',p:'888 元',c:'#ec4899'}].forEach(p=>{
+      h+='<div style="padding:10px;border-radius:10px;background:'+secBg+';text-align:center;border-top:2px solid '+p.c+'">';
+      h+='<div style="font-size:10px;color:'+sub+'">'+p.t+'</div>';
+      h+='<div style="font-size:16px;font-weight:800;color:'+p.c+'">'+p.p+'</div></div>';
+    });
+    h+='</div>';
+    h+='<div style="max-width:720px;margin:10px auto 0;font-size:10px;color:'+sub+';text-align:center;line-height:1.5">🌬️ <strong>478 呼吸法</strong>动态 UI · 前 6 个月免费试用 · 12 个月盈利 · 竞品：林间聊愈室 / 静 / 新野</div>';
+
+  } else if(slide.key==='w3-data-egs'){
+    h+='<div style="text-align:center;margin-bottom:20px">';
+    h+='<h2 style="font-size:clamp(22px,4vw,32px);font-weight:600;line-height:1.1;letter-spacing:-.4px;color:'+txt+'">Data EGS · 对话式数据分析</h2>';
+    h+='<p style="font-size:14px;color:'+sub+';margin-top:6px">目标：中小企业<strong style="color:'+accent+'">财务 / 运营 / 市场 / HR</strong> · 解决 Excel 脏数据痛点</p></div>';
+    h+='<div style="max-width:720px;margin:0 auto 20px;padding:18px 22px;border-radius:14px;background:'+card+';box-shadow:'+shadow+';border-left:4px solid '+accent+'">';
+    h+='<div style="font-size:10px;font-weight:700;letter-spacing:1px;color:'+accent+';margin-bottom:6px;text-transform:uppercase">核心理念</div>';
+    h+='<div style="font-size:16px;font-weight:700;color:'+txt+';letter-spacing:-.2px;line-height:1.4">"所有操作通过<span style="color:'+accent+'">对话</span>完成，所有结果在<span style="color:'+accent+'">对话</span>中呈现"</div>';
+    h+='</div>';
+    h+='<div style="font-size:11px;font-weight:700;letter-spacing:.3px;color:'+accent+';margin:0 0 10px;text-transform:uppercase;text-align:center">端到端闭环 · 五步流程</div>';
+    h+='<div style="max-width:720px;margin:0 auto 20px;display:flex;gap:6px;flex-wrap:wrap;justify-content:center">';
+    ['📁 上传','🧹 清洗','🔍 分析','📊 可视化','📽️ PPT'].forEach((s,i)=>{
+      h+='<div style="flex:1;min-width:100px;padding:10px;border-radius:10px;background:'+card+';box-shadow:'+shadow+';text-align:center">';
+      h+='<div style="font-size:9px;color:'+sub+'">Step '+(i+1)+'</div>';
+      h+='<div style="font-size:12px;font-weight:700;color:'+txt+';margin-top:2px">'+s+'</div></div>';
+      if(i<4)h+='<div style="display:flex;align-items:center;color:'+accent+';font-size:14px;padding:0 2px">→</div>';
+    });
+    h+='</div>';
+    h+='<div style="max-width:720px;margin:0 auto 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">';
+    h+='<div style="padding:14px;border-radius:12px;background:'+card+';box-shadow:'+shadow+';border-top:3px solid '+accent2+'">';
+    h+='<div style="font-size:12px;font-weight:700;color:'+accent2+';margin-bottom:6px">✨ 差异化 · 中文脏数据六类</div>';
+    h+='<div style="font-size:10px;color:'+sub+';line-height:1.7">乱码格式 · 合并单元格 · 非标日期 · 中英混杂 · 脱敏字段 · 异常缺失</div></div>';
+    h+='<div style="padding:14px;border-radius:12px;background:'+card+';box-shadow:'+shadow+';border-top:3px solid '+accent+'">';
+    h+='<div style="font-size:12px;font-weight:700;color:'+accent+';margin-bottom:6px">🎯 vs WPSAI / Copilot</div>';
+    h+='<div style="font-size:10px;color:'+sub+';line-height:1.7">避开微软 Excel 地盘 · 网页版跨设备 · 私有化部署 + 全链路审计</div></div>';
+    h+='</div>';
+    h+='<div style="max-width:720px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:8px">';
+    [{t:'免费版',p:'¥0',d:'尝鲜',c:'#06b6d4'},{t:'专业版',p:'¥15-50/月',d:'个人岗位',c:'#10b981'},{t:'企业版',p:'¥50-250/月',d:'私有部署',c:'#ec4899'}].forEach(p=>{
+      h+='<div style="padding:10px 8px;border-radius:10px;background:'+secBg+';text-align:center;border-top:2px solid '+p.c+'">';
+      h+='<div style="font-size:10px;color:'+sub+'">'+p.t+'</div>';
+      h+='<div style="font-size:14px;font-weight:800;color:'+p.c+'">'+p.p+'</div>';
+      h+='<div style="font-size:9px;color:'+sub+'">'+p.d+'</div></div>';
+    });
+    h+='</div>';
+
+  } else if(slide.key==='w3-ai-marketing'){
+    h+='<div style="text-align:center;margin-bottom:20px">';
+    h+='<h2 style="font-size:clamp(22px,4vw,32px);font-weight:600;line-height:1.1;letter-spacing:-.4px;color:'+txt+'">AI 营销增长实验室</h2>';
+    h+='<p style="font-size:14px;color:'+sub+';margin-top:6px">目标：<strong style="color:'+accent+'">独立开发者 + 一人公司</strong> · 市场 500 万从业者 · 目标 5 万付费用户</p></div>';
+    h+='<div style="max-width:740px;margin:0 auto 20px">';
+    h+='<div style="font-size:11px;font-weight:700;letter-spacing:.3px;color:'+accent+';margin-bottom:10px;text-transform:uppercase;text-align:center">核心模式 · 双轨加漏斗</div>';
+    h+='<div style="display:flex;gap:12px;align-items:stretch">';
+    h+='<div style="flex:1.2;padding:16px 14px;border-radius:12px;background:'+card+';box-shadow:'+shadow+';border-left:3px solid '+accent2+';position:relative">';
+    h+='<div style="font-size:10px;font-weight:700;color:'+accent2+';margin-bottom:4px">🆓 轨道 1 · 免费流量</div>';
+    h+='<div style="font-size:13px;font-weight:700;color:'+txt+';margin-bottom:4px">AI 资讯平台</div>';
+    h+='<div style="font-size:10px;color:'+sub+';line-height:1.55">智能体自动抓取 · 商业价值评估 · 高活跃 + 自带传播</div></div>';
+    h+='<div style="display:flex;align-items:center;color:'+accent+';font-size:22px;font-weight:800">⇢</div>';
+    h+='<div style="flex:1;padding:16px 14px;border-radius:12px;background:'+card+';box-shadow:'+shadow+';border-left:3px solid '+accent+'">';
+    h+='<div style="font-size:10px;font-weight:700;color:'+accent+';margin-bottom:4px">💰 轨道 2 · 付费收敛</div>';
+    h+='<div style="font-size:13px;font-weight:700;color:'+txt+';margin-bottom:4px">营销验证服务</div>';
+    h+='<div style="font-size:10px;color:'+sub+';line-height:1.55">一对一策略 · 市场验证 · 数据反馈 · 商业化转化</div></div>';
+    h+='</div>';
+    h+='<div style="margin-top:10px;padding:10px 14px;border-radius:10px;background:'+secBg+';font-size:10px;color:'+sub+';text-align:center;line-height:1.5"><strong style="color:'+txt+'">闭环</strong>：AI 资讯获取 → 痛点分析 → 产品验证 → 营销文案 · <strong style="color:'+accent+'">解决独立开发者"想赚钱但没方向"</strong></div>';
+    h+='</div>';
+    h+='<div style="font-size:11px;font-weight:700;letter-spacing:.3px;color:'+accent+';margin:0 0 8px;text-transform:uppercase;text-align:center">团队五角色分工</div>';
+    h+='<div style="max-width:740px;margin:0 auto 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px">';
+    [{n:'产品经理',c:'#10b981'},{n:'AI 训练师',c:'#06b6d4'},{n:'UI 设计师',c:'#8b5cf6'},{n:'IP 助理',c:'#ec4899'},{n:'AI 技术',c:'#f59e0b'}].forEach(r=>{
+      h+='<div style="padding:10px 6px;border-radius:10px;background:'+card+';box-shadow:'+shadow+';text-align:center;border-top:2px solid '+r.c+'">';
+      h+='<div style="font-size:11px;font-weight:700;color:'+r.c+'">'+r.n+'</div></div>';
+    });
+    h+='</div>';
+    h+='<div style="font-size:11px;font-weight:700;letter-spacing:.3px;color:'+accent+';margin:0 0 8px;text-transform:uppercase;text-align:center">SWOT 四象限</div>';
+    h+='<div style="max-width:740px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:8px">';
+    [{t:'S 优势',d:'独立开发者需求深度理解 · 灵感自带流量',c:'#10b981'},
+     {t:'W 劣势',d:'冷启动用户筛选机制待建立',c:'#f59e0b'},
+     {t:'O 机会',d:'国内无直接竞品 · AI 工具普及下市场增量',c:'#06b6d4'},
+     {t:'T 威胁',d:'资讯平台同质化 · 营销效果验证周期长',c:'#ef4444'}
+    ].forEach(sw=>{
+      h+='<div style="padding:12px 14px;border-radius:10px;background:'+card+';box-shadow:'+shadow+';border-left:3px solid '+sw.c+'">';
+      h+='<div style="font-size:11px;font-weight:800;color:'+sw.c+';margin-bottom:3px">'+sw.t+'</div>';
+      h+='<div style="font-size:10px;color:'+sub+';line-height:1.5">'+sw.d+'</div></div>';
+    });
+    h+='</div>';
+
   } else if(slide.key==='w3-summary'){
     h+='<div style="text-align:center;padding:32px 0 24px">';
     h+='<div style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;color:'+accent+'">WEEK 3 SUMMARY</div>';
@@ -6003,7 +6146,10 @@ function nhRenderCourseware(){
       {n:'14',t:'Bad Case 优化',d:'明确错误→补充信息→调整规则→验证效果',color:'#ec4899'},
       {n:'15',t:'知识库四件套',d:'NotebookLM + Claude + Obsidian + Skills',color:'#06b6d4'},
       {n:'16',t:'评审五问',d:'用户 / 竞品 / 商业闭环 / 风险 / MVP 可验证',color:'#a855f7'},
-      {n:'17',t:'产品六层架构',d:'市场 → 商业 → 用户 → 技术 → 模型 → 基础',color:'#ec4899'}
+      {n:'17',t:'产品六层架构',d:'市场 → 商业 → 用户 → 技术 → 模型 → 基础',color:'#ec4899'},
+      {n:'18',t:'情绪疏导系统',d:'六轴情绪识别 + 三角色(呼呼/小林/灰灰) + 478 呼吸法 UI',color:'#10b981'},
+      {n:'19',t:'Data EGS 对话式分析',d:'所有操作通过对话 · 中文脏数据六类 · 端到端闭环',color:'#06b6d4'},
+      {n:'20',t:'双轨加漏斗模型',d:'AI 资讯免费流量 → 营销验证付费收敛',color:'#f59e0b'}
     ];
     h+='<div style="max-width:560px;margin:0 auto 28px;columns:2;column-gap:20px">';
     w3pts.forEach(p=>{
@@ -6015,8 +6161,8 @@ function nhRenderCourseware(){
     h+='</div>';
     h+='<div style="text-align:center;padding:16px;border-radius:12px;background:'+secBg+'">';
     h+='<div style="font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px;color:'+sub+'">课程来源</div>';
-    h+='<div style="font-size:12px;color:'+txt+'">且曼 AI 产品经理前瞻学院 · 第三周 · 4.11 – 4.16 · 5 天 7 节课</div>';
-    h+='<div style="font-size:11px;color:'+sub+';margin-top:4px">Agent 架构 → 项目实战 → 价值量化 → 工作流 → 知识库 → 项目评审 → 六层架构</div>';
+    h+='<div style="font-size:12px;color:'+txt+'">且曼 AI 产品经理前瞻学院 · 第三周 · 4.11 – 4.17 · 6 天 8 节课</div>';
+    h+='<div style="font-size:11px;color:'+sub+';margin-top:4px">Agent 架构 → 项目实战 → 价值量化 → 工作流 → 知识库 → 项目评审 → 六层架构 → 项目评审 II</div>';
     h+='</div>';
   }
 
