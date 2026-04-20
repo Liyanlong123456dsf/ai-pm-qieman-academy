@@ -1,0 +1,509 @@
+/* ══════════════════════════════════════════════════════════════
+   AI 产品经理全流程教程 · 全局样式
+   设计语言：Apple 深色极简
+   ══════════════════════════════════════════════════════════════ */
+
+/* ─── Design Tokens ─── */
+:root {
+  --bg-base: #000000;
+  --bg-surface: #1d1d1f;
+  --bg-elevated: #2a2a2c;
+  --bg-card: #272729;
+  --bg-card-hover: #3a3a3c;
+
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-default: rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.2);
+
+  --text-primary: #f5f5f7;
+  --text-secondary: rgba(255, 255, 255, 0.72);
+  --text-tertiary: rgba(255, 255, 255, 0.48);
+  --text-quaternary: rgba(255, 255, 255, 0.32);
+
+  --accent-blue: #2997ff;
+  --accent-blue-dim: rgba(41, 151, 255, 0.15);
+  --accent-green: #30d158;
+  --accent-green-dim: rgba(48, 209, 88, 0.15);
+  --accent-amber: #ff9f0a;
+  --accent-amber-dim: rgba(255, 159, 10, 0.15);
+  --accent-rose: #ff375f;
+  --accent-rose-dim: rgba(255, 55, 95, 0.15);
+  --accent-purple: #bf5af2;
+  --accent-purple-dim: rgba(191, 90, 242, 0.15);
+  --accent-cyan: #64d2ff;
+  --accent-cyan-dim: rgba(100, 210, 255, 0.15);
+  --accent-teal: #30d1a3;
+  --accent-teal-dim: rgba(48, 209, 163, 0.15);
+
+  --font-sans: 'Noto Sans SC', -apple-system, 'SF Pro Display', 'PingFang SC', sans-serif;
+  --font-serif: 'Noto Serif SC', 'Songti SC', Georgia, serif;
+  --font-mono: 'DM Mono', 'SF Mono', 'Menlo', monospace;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-pill: 980px;
+}
+
+/* ─── Slidev 全局背景 ─── */
+.slidev-layout {
+  background: var(--bg-base) !important;
+  color: var(--text-primary) !important;
+  font-family: var(--font-sans);
+  padding: 48px 64px !important;
+}
+
+.slidev-layout.cover,
+.slidev-layout.center {
+  background: radial-gradient(ellipse at top, rgba(41, 151, 255, 0.08) 0%, var(--bg-base) 60%) !important;
+}
+
+.slidev-layout.section {
+  background: linear-gradient(180deg, var(--bg-base) 0%, var(--bg-surface) 100%) !important;
+}
+
+/* ─── Typography ─── */
+.slidev-layout h1 {
+  font-family: var(--font-serif) !important;
+  font-weight: 600 !important;
+  color: var(--text-primary) !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.2 !important;
+}
+
+.slidev-layout h2 {
+  font-family: var(--font-serif) !important;
+  font-weight: 500 !important;
+  color: var(--text-secondary) !important;
+}
+
+.slidev-layout h3 {
+  font-family: var(--font-sans) !important;
+  font-weight: 600 !important;
+  color: var(--text-primary) !important;
+}
+
+.slidev-layout p,
+.slidev-layout li {
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+/* ─── 眉标 ─── */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent-blue);
+  margin-bottom: 12px;
+  opacity: 0.85;
+}
+
+/* ─── 封面 ─── */
+.cover-hero {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+.cover-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--text-quaternary);
+  margin-bottom: 40px;
+}
+.cover-title {
+  font-family: var(--font-serif);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #2997ff 0%, #bf5af2 50%, #64d2ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.cover-subtitle {
+  font-size: 18px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-top: 16px;
+  max-width: 640px;
+}
+.cover-footer {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--text-quaternary);
+}
+
+/* ─── Section 分隔页 ─── */
+.section-hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  gap: 8px;
+}
+.section-number {
+  font-family: var(--font-mono);
+  font-size: 80px;
+  font-weight: 800;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0.3;
+}
+.section-name {
+  font-family: var(--font-serif);
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+.section-desc {
+  font-size: 16px;
+  color: var(--text-tertiary);
+  max-width: 540px;
+  line-height: 1.6;
+}
+
+/* ─── 卡片系统 ─── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  transition: all 0.2s ease;
+}
+.card:hover {
+  border-color: var(--border-default);
+  background: var(--bg-card-hover);
+}
+.card-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+.card-desc {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  line-height: 1.5;
+}
+
+/* ─── 统计数字 ─── */
+.stat {
+  font-family: var(--font-mono);
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.stat-unit {
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0.6;
+  margin-left: 2px;
+}
+.stat-label {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-top: 6px;
+}
+
+/* ─── 网格 ─── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.grid-compact { gap: 10px !important; }
+
+/* ─── 标签 ─── */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.tag-blue { background: var(--accent-blue-dim); color: var(--accent-blue); border: 1px solid rgba(41, 151, 255, 0.2); }
+.tag-green { background: var(--accent-green-dim); color: var(--accent-green); border: 1px solid rgba(48, 209, 88, 0.2); }
+.tag-amber { background: var(--accent-amber-dim); color: var(--accent-amber); border: 1px solid rgba(255, 159, 10, 0.2); }
+.tag-rose { background: var(--accent-rose-dim); color: var(--accent-rose); border: 1px solid rgba(255, 55, 95, 0.2); }
+.tag-purple { background: var(--accent-purple-dim); color: var(--accent-purple); border: 1px solid rgba(191, 90, 242, 0.2); }
+.tag-cyan { background: var(--accent-cyan-dim); color: var(--accent-cyan); border: 1px solid rgba(100, 210, 255, 0.2); }
+.tag-teal { background: var(--accent-teal-dim); color: var(--accent-teal); border: 1px solid rgba(48, 209, 163, 0.2); }
+
+/* ─── 引用 ─── */
+.quote {
+  position: relative;
+  padding: 14px 20px;
+  border-radius: var(--radius-md);
+  background: var(--accent-blue-dim);
+  border-left: 3px solid var(--accent-blue);
+  color: var(--text-secondary);
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ─── 时间线 ─── */
+.timeline {
+  position: relative;
+  padding-left: 24px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent-blue), var(--accent-purple), var(--accent-green));
+  border-radius: 2px;
+}
+.timeline-item {
+  position: relative;
+  padding: 8px 0 16px;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 14px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-blue);
+  border: 2px solid var(--bg-base);
+}
+.timeline-item:nth-child(2)::before { background: var(--accent-purple); }
+.timeline-item:nth-child(3)::before { background: var(--accent-cyan); }
+.timeline-item:nth-child(4)::before { background: var(--accent-green); }
+.timeline-item:nth-child(5)::before { background: var(--accent-amber); }
+.timeline-item:nth-child(6)::before { background: var(--accent-rose); }
+.timeline-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+.timeline-desc {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+/* ─── 流程箭头 ─── */
+.flow-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.flow-step {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+.flow-arrow {
+  color: var(--text-quaternary);
+  font-size: 16px;
+}
+
+/* ─── AI 协作标记 ─── */
+.ai-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  font-size: 10px;
+  font-weight: 700;
+  background: linear-gradient(135deg, rgba(41, 151, 255, 0.15), rgba(191, 90, 242, 0.15));
+  color: var(--accent-purple);
+  border: 1px solid rgba(191, 90, 242, 0.2);
+  letter-spacing: 0.05em;
+}
+
+/* ─── 代码对话 ─── */
+.chat-human, .chat-ai {
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  font-size: 12px;
+  line-height: 1.55;
+  max-width: 88%;
+  margin-bottom: 8px;
+}
+.chat-human {
+  background: var(--accent-blue);
+  color: white;
+  margin-left: auto;
+  border-bottom-right-radius: 4px;
+}
+.chat-ai {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  border-bottom-left-radius: 4px;
+}
+.chat-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-quaternary);
+  margin-bottom: 4px;
+  letter-spacing: 0.05em;
+}
+
+/* ─── 进度条 ─── */
+.progress-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--bg-elevated);
+  overflow: hidden;
+  margin: 8px 0;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+  transition: width 0.5s ease;
+}
+
+/* ─── Commit 标签 ─── */
+.commit {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-quaternary);
+  border: 1px solid var(--border-subtle);
+}
+
+/* ─── 对比表格 ─── */
+.slidev-layout table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.slidev-layout table th {
+  background: var(--bg-surface);
+  font-weight: 600;
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border-default);
+  color: var(--text-primary);
+}
+.slidev-layout table td {
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+/* ─── 工具图标行 ─── */
+.tool-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0;
+}
+.tool-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* ─── 高亮数字 ─── */
+.highlight-number {
+  font-family: var(--font-mono);
+  font-size: 48px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+
+/* ─── 两栏布局 ─── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* ─── Phase 标签 ─── */
+.phase-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+.phase-0 { background: var(--accent-blue-dim); color: var(--accent-blue); border: 1px solid rgba(41, 151, 255, 0.25); }
+.phase-1 { background: var(--accent-green-dim); color: var(--accent-green); border: 1px solid rgba(48, 209, 88, 0.25); }
+.phase-2 { background: var(--accent-purple-dim); color: var(--accent-purple); border: 1px solid rgba(191, 90, 242, 0.25); }
+.phase-3 { background: var(--accent-cyan-dim); color: var(--accent-cyan); border: 1px solid rgba(100, 210, 255, 0.25); }
+.phase-4 { background: var(--accent-amber-dim); color: var(--accent-amber); border: 1px solid rgba(255, 159, 10, 0.25); }
+.phase-5 { background: var(--accent-rose-dim); color: var(--accent-rose); border: 1px solid rgba(255, 55, 95, 0.25); }
+.phase-6 { background: var(--accent-teal-dim); color: var(--accent-teal); border: 1px solid rgba(48, 209, 163, 0.25); }
+
+/* ─── 小提示框 ─── */
+.tip-box {
+  background: var(--accent-green-dim);
+  border: 1px solid rgba(48, 209, 88, 0.2);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--accent-green);
+  line-height: 1.5;
+}
+.warn-box {
+  background: var(--accent-amber-dim);
+  border: 1px solid rgba(255, 159, 10, 0.2);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--accent-amber);
+  line-height: 1.5;
+}
+
+/* ─── 步骤编号 ─── */
+.step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent-blue);
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}

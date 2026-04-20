@@ -1,0 +1,23 @@
+{
+  "name": "ppt-ai-pm-full-tutorial",
+  "type": "module",
+  "private": true,
+  "version": "1.0.0",
+  "description": "AI 产品经理全流程教程 PPT — 从 0→1→100 的 AI 协作之旅（Slidev 驱动）",
+  "scripts": {
+    "dev": "slidev --open",
+    "build": "slidev build",
+    "export": "slidev export",
+    "export-pdf": "slidev export --output AI产品经理全流程教程.pdf",
+    "export-png": "slidev export --format png"
+  },
+  "dependencies": {
+    "@slidev/cli": "^0.50.0",
+    "@slidev/theme-default": "^0.25.0",
+    "@slidev/theme-seriph": "^0.25.0",
+    "vue": "^3.5.0"
+  },
+  "devDependencies": {
+    "playwright-chromium": "^1.59.1"
+  }
+}

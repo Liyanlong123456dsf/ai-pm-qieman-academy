@@ -26,6 +26,7 @@
     <div class="nav-links" id="navLinks">
       <a href="#overview">总览</a>
       <a href="#topic1">文档解析</a>
+      <a href="#chunking-strategy" style="color:#5e6ad2;font-weight:600">🆕 切分策略</a>
       <a href="#topic2">检索优化</a>
       <a href="#topic3">阅读理解</a>
       <a href="#topic4">多模态</a>
@@ -376,6 +377,127 @@
         </div>
       </div>
       <p class="split-note">一级片段包含完整语义信息，内部包含多个连续的二级片段。检索时用二级片段精准匹配，回答时用一级片段提供完整上下文。</p>
+    </div>
+
+    <!-- 4.5 · 2025 主流切分策略实战速查（PM 版） -->
+    <div id="chunking-strategy" style="margin:40px 0 24px;padding:24px;border-radius:16px;background:linear-gradient(135deg,rgba(94,106,210,.06),rgba(6,182,212,.04));border:1px solid rgba(94,106,210,.12)">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="display:inline-block;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.5px;background:#5e6ad2;color:#fff">PM 实战速查</span>
+        <span style="font-size:11px;color:#5e6ad2;font-weight:600">2025 主流切分策略</span>
+      </div>
+      <h4 style="font-size:22px;font-weight:700;margin:6px 0 10px;color:#1a1d21">切分实战策略：如何用 PM 视角选对切分方法</h4>
+      <p style="color:#5a5a5a;line-height:1.7;margin-bottom:20px">切分是 RAG 检索质量的第一道天花板。切太碎丢上下文，切太粗混噪声。本节从产品经理视角，带你速查 2025 市面上最常用的五种切分方法，并给出场景决策树、参数经验表和成本效益对比。</p>
+
+      <!-- 1. 调研渠道 -->
+      <h5 style="font-size:16px;font-weight:700;margin:20px 0 10px;color:#1a1d21">① 市面 RAG 调研四大渠道</h5>
+      <div class="vs-table">
+        <table>
+          <thead><tr><th>渠道</th><th>用途</th><th>推荐入口</th></tr></thead>
+          <tbody>
+            <tr><td><strong>权威出处</strong></td><td>理解原理 + 面试背书</td><td>RAG 原论文 (Facebook 2020) · Graph RAG (Microsoft 2024) · 信通院 RAG 白皮书</td></tr>
+            <tr><td><strong>开源框架</strong></td><td>看真实工程实现</td><td>LangChain · LlamaIndex · Unstructured.io · RAGFlow / Dify 源码</td></tr>
+            <tr><td><strong>厂商产品</strong></td><td>看默认参数 + 竞品对标</td><td>主流国内知识库平台 · 海外 Notion / Glean / Perplexity</td></tr>
+            <tr><td><strong>社区动态</strong></td><td>追踪新方案</td><td>GitHub Trending (关键词 rag) · Anthropic 博客 · Hugging Face Blog</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mc-win" style="margin-top:12px"><strong>PM 调研三步法：</strong>① 先定业务场景 → ② 扒 2-3 个头部竞品的切分参数 → ③ 与算法对齐技术边界</div>
+
+      <!-- 2. 五大方法对比 -->
+      <h5 style="font-size:16px;font-weight:700;margin:24px 0 10px;color:#1a1d21">② 五大主流切分方法对比（PM 决策用）</h5>
+      <div class="vs-table">
+        <table>
+          <thead><tr><th>方法</th><th>核心逻辑</th><th>最适场景</th><th>成本</th><th>召回提升</th></tr></thead>
+          <tbody>
+            <tr class="tr-new"><td><strong>递归字符切分</strong><br><span style="font-size:11px;color:#888">Recursive Character</span></td><td>按分隔符优先级(段落→句号→逗号)递归切</td><td>MVP / 通用文档 / 项目起步</td><td>低</td><td>基线</td></tr>
+            <tr><td><strong>语义切分</strong><br><span style="font-size:11px;color:#888">Semantic Chunking</span></td><td>相邻句 embedding 相似度，语义突变处下刀</td><td>高质量问答 / 信息密度高</td><td>中（需 Embedding 调用）</td><td>+8-15%</td></tr>
+            <tr><td><strong>父子切分</strong><br><span style="font-size:11px;color:#888">Parent-Child / Small-to-Big</span></td><td>小块(200字)检索 + 大块(2000字)送 LLM</td><td>法律 / 医疗 / 研报等长文</td><td>中（存储双倍）</td><td>+10-20%</td></tr>
+            <tr><td><strong>Contextual Chunking</strong><br><span style="font-size:11px;color:#888">Anthropic 2024</span></td><td>切分时用 LLM 给每块加 50-100 字上下文前缀</td><td>高精度要求 / 预算充裕</td><td>高（每块 1 次 LLM 调用）</td><td>+30-49%</td></tr>
+            <tr><td><strong>结构化切分</strong><br><span style="font-size:11px;color:#888">Document-aware</span></td><td>按文档天然结构(标题 / 章节 / 表格 / 代码)切</td><td>Markdown / PDF / 代码库</td><td>低</td><td>+15%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 3. 决策树 -->
+      <h5 style="font-size:16px;font-weight:700;margin:24px 0 10px;color:#1a1d21">③ 场景 → 策略决策树</h5>
+      <div style="padding:18px 20px;border-radius:12px;background:#fafbff;border:1px solid rgba(94,106,210,.15);font-family:'SF Mono','Monaco','Menlo',monospace;font-size:13px;line-height:1.9;color:#1a1d21;overflow-x:auto">
+        <div style="font-weight:700;color:#5e6ad2;margin-bottom:8px">◆ 按文档类型</div>
+        <div>├─ 通用文本（网页 / Word / TXT） → <strong style="color:#10b981">递归字符切分</strong> ✅ 起步首选</div>
+        <div>├─ 结构化文档（Markdown / 带标题 PDF） → <strong style="color:#10b981">结构化切分 + 递归兜底</strong></div>
+        <div>├─ 超长专业文档（法律 / 医疗 / 研报） → <strong style="color:#10b981">父子切分</strong>（小检索+大生成）</div>
+        <div>├─ 代码库 → <strong style="color:#10b981">按函数 / 类切分</strong></div>
+        <div>└─ 多类型混合 → <strong style="color:#10b981">分类路由 + 对应策略</strong></div>
+        <div style="font-weight:700;color:#5e6ad2;margin:16px 0 8px">◆ 按精度要求</div>
+        <div>├─ 高精度问答 → 递归字符 + 语义切分 + Contextual <strong style="color:#ef4444">三段式</strong></div>
+        <div>└─ 一般精度 → 递归字符起步，遇到 bad case 再升级</div>
+        <div style="font-weight:700;color:#5e6ad2;margin:16px 0 8px">◆ 按预算</div>
+        <div>├─ 紧张 → 递归字符 + <strong style="color:#10b981">metadata 增强</strong>（最低成本高性价比）</div>
+        <div>└─ 充裕 → 可尝试 <strong style="color:#10b981">Contextual Chunking</strong>（LLM 调用成本高）</div>
+      </div>
+
+      <!-- 4. 参数经验表 -->
+      <h5 style="font-size:16px;font-weight:700;margin:24px 0 10px;color:#1a1d21">④ 参数经验表（2025 生产参考）</h5>
+      <div class="vs-table">
+        <table>
+          <thead><tr><th>业务场景</th><th>chunk_size</th><th>overlap</th><th>推荐组合</th></tr></thead>
+          <tbody>
+            <tr><td>中文文档问答</td><td>300-500 字</td><td>50 字 (10%)</td><td>递归字符</td></tr>
+            <tr><td>英文技术文档</td><td>500-1000 tokens</td><td>10-20%</td><td>递归字符</td></tr>
+            <tr><td>法律 / 医疗报告</td><td>父 2000 / 子 200</td><td>20%</td><td>父子切分</td></tr>
+            <tr><td>学术论文</td><td>按小节（动态）</td><td>0</td><td>结构化切分</td></tr>
+            <tr><td>客服 FAQ</td><td>一问一答整条</td><td>0</td><td>不切，整条入库</td></tr>
+            <tr><td>高精度垂域</td><td>动态自适应</td><td>动态</td><td>语义 + Contextual</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="color:#ef4444;font-size:13px;margin-top:8px;font-weight:500">⚠️ 所有参数仅为起步参考。生产参数必须通过召回率 / 准确率 AB 实验确定。</p>
+
+      <!-- 5. 成本效益对比 -->
+      <h5 style="font-size:16px;font-weight:700;margin:24px 0 10px;color:#1a1d21">⑤ 成本效益对比（向老板汇报用）</h5>
+      <div class="vs-table">
+        <table>
+          <thead><tr><th>方法</th><th>离线成本</th><th>存储开销</th><th>在线延迟</th><th>效果提升</th><th>适用阶段</th></tr></thead>
+          <tbody>
+            <tr><td>递归字符</td><td>零</td><td>基线</td><td>基线</td><td>基线</td><td>MVP / POC</td></tr>
+            <tr><td>结构化</td><td>低</td><td>基线</td><td>基线</td><td>+15%</td><td>MVP / 优化</td></tr>
+            <tr><td>语义切分</td><td>中</td><td>+20%</td><td>基线</td><td>+8-15%</td><td>迭代 / 质量攻坚</td></tr>
+            <tr><td>父子切分</td><td>低</td><td>+80%</td><td>+20%</td><td>+10-20%</td><td>高端企业级</td></tr>
+            <tr class="tr-new"><td>Contextual</td><td>高（需 LLM）</td><td>+15%</td><td>基线</td><td>+30-49%</td><td>高价值场景</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 6. 2025 三大趋势 -->
+      <h5 style="font-size:16px;font-weight:700;margin:24px 0 10px;color:#1a1d21">⑥ 2025 行业三大趋势</h5>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px">
+        <div style="padding:16px;border-radius:12px;background:#fff;border:1px solid rgba(94,106,210,.15)">
+          <div style="font-size:24px;margin-bottom:6px">🔀</div>
+          <div style="font-weight:700;color:#1a1d21;margin-bottom:4px">从单一 → 混合切分</div>
+          <div style="font-size:12px;color:#5a5a5a;line-height:1.6">主检索用递归，精排 / 重排用语义。生产环境普遍采用混合策略。</div>
+        </div>
+        <div style="padding:16px;border-radius:12px;background:#fff;border:1px solid rgba(94,106,210,.15)">
+          <div style="font-size:24px;margin-bottom:6px">🏷️</div>
+          <div style="font-weight:700;color:#1a1d21;margin-bottom:4px">从纯切分 → 切分 + 增强</div>
+          <div style="font-size:12px;color:#5a5a5a;line-height:1.6">给每块 chunk 加标题 / 摘要 / 关键词作为 metadata，召回可提升 10%+。</div>
+        </div>
+        <div style="padding:16px;border-radius:12px;background:#fff;border:1px solid rgba(94,106,210,.15)">
+          <div style="font-size:24px;margin-bottom:6px">🤖</div>
+          <div style="font-weight:700;color:#1a1d21;margin-bottom:4px">从被动 → Agentic Chunking 萌芽</div>
+          <div style="font-size:12px;color:#5a5a5a;line-height:1.6">让 LLM 主动判断怎么切，仍在早期，成本高，适合超高价值场景。</div>
+        </div>
+      </div>
+
+      <!-- 7. PM 与算法对齐三问 -->
+      <h5 style="font-size:16px;font-weight:700;margin:24px 0 10px;color:#1a1d21">⑦ PM 与算法对齐三问（面试 / 对齐会必备）</h5>
+      <div style="padding:18px 20px;border-radius:12px;background:linear-gradient(135deg,#fff6ec,#ffefe0);border-left:4px solid #f97316">
+        <div style="margin-bottom:10px"><strong style="color:#f97316">Q1 ·</strong> 目标召回率和准确率是多少？<span style="color:#5a5a5a;font-size:13px"> → 通常 召回 ≥90% / 准确 ≥85%</span></div>
+        <div style="margin-bottom:10px"><strong style="color:#f97316">Q2 ·</strong> 长尾 bad case 有哪些？<span style="color:#5a5a5a;font-size:13px"> → 要求算法提供真实失败样例</span></div>
+        <div><strong style="color:#f97316">Q3 ·</strong> chunk_size / overlap 的 AB 实验方案怎么设计？<span style="color:#5a5a5a;font-size:13px"> → 对照组变量、样本量、显著性</span></div>
+      </div>
+
+      <div style="margin-top:20px;text-align:center">
+        <a href="../index.html#note=W2-0-1" class="xlink xlink-light"><span class="xlink-icon">📚</span>关联课程 008-2 · Pipeline D 文本分割</a>
+      </div>
     </div>
 
     <!-- 5. Semantic Vector Retrieval -->
