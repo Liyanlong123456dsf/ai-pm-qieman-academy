@@ -12,7 +12,7 @@ const path = require('path');
 // ===== 配置 =====
 const INDEX_HTML = path.join(__dirname, 'index.html');
 const OBSIDIAN_ROOT = path.resolve(__dirname, '../../且曼 ai 产品经理笔记');
-const WEEK_DIRS = ['第一周笔记/课程笔记', '第二周笔记/RAG笔记', '第三周/课程笔记'];
+const WEEK_DIRS = ['第一周笔记/课程笔记', '第二周笔记/RAG笔记', '第三周/课程笔记', '第四周/课程笔记', '第五周/课程笔记'];
 
 // ===== 从 index.html 提取 NH_WEEKS =====
 function extractNHWeeks(html) {
@@ -138,7 +138,7 @@ up: "[[${weekMocName}]]"`;
 
 // ===== 生成周MOC学习地图 =====
 function genWeekMoc(week, weekNum, allCourseNames) {
-  const weekLabel = ['一', '二', '三'][weekNum - 1] || weekNum;
+  const weekLabel = ['一', '二', '三', '四', '五'][weekNum - 1] || weekNum;
   const tags = [
     '  - MOC',
     '  - AI产品经理',
@@ -199,7 +199,7 @@ ${tags}
 
   // 跨周链接
   body += '## 🔗 跨周链接\n\n';
-  for (let i = 1; i <= 3; i++) {
+  for (let i = 1; i <= WEEK_DIRS.length; i++) {
     if (i !== weekNum) {
       body += `- [[00 Week0${i} 学习地图]]\n`;
     }
@@ -262,7 +262,7 @@ function sync() {
       totalFiles++;
     });
 
-    console.log(`   ✅ 第${['一','二','三'][wi]}周：${allCourses.length} 个课程笔记 + 1 个学习地图`);
+    console.log(`   ✅ 第${['一','二','三','四','五'][wi] || weekNum}周：${allCourses.length} 个课程笔记 + 1 个学习地图`);
   });
 
   console.log(`\n🎉 完成！共生成 ${totalFiles} 个md文件`);
