@@ -79,6 +79,10 @@ function parseDate(dateStr) {
   return `2026-${month}-${day}`;
 }
 
+function safeNoteName(name) {
+  return name.replace(/[\\/]/g, '／').trim();
+}
+
 // ===== 生成单个课程笔记 =====
 function genCourseNote(course, weekNum, date, weekMocName, prevName, nextName) {
   const tags = (course.tags || []).map(t => `  - ${t}`).join('\n');
@@ -232,7 +236,7 @@ function sync() {
     week.days.forEach((day, di) => {
       day.courses.forEach((course, ci) => {
         const idx = String(allCourses.length + 1).padStart(2, '0');
-        const name = `${idx} ${course.title}`;
+        const name = safeNoteName(`${idx} ${course.title}`);
         allCourses.push({
           id: course.id,
           name,
