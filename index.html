@@ -5302,7 +5302,7 @@ const KNOWLEDGE_MAP=[
   subtitle:'认知门槛 · LLM 原理 · Prompt 工程',
   definition:'理解 AI 技术底层逻辑与边界的起点，从 Transformer 架构到 Prompt 调优，构建 AI PM 对 LLM 的完整心智模型。',
   weeks:[1], courseCount:4,
-  concepts:['LLM','VLM','NLP','Transformer','Tokenization','Token','Embedding','Prompt','上下文窗口','上下文工程','Prompt Engineering','System Prompt','User Prompt','Few-shot Learning','ICL','COT','涌现能力','指令跟随','幻觉','预训练','SFT','Markdown'],
+  concepts:['LLM','VLM','NLP','Transformer','Tokenization','Token','Embedding','Prompt','上下文窗口','上下文工程','Prompt Engineering','System Prompt','User Prompt','Few-shot Learning','ICL','COT','涌现能力','指令跟随','幻觉','预训练','SFT','Markdown','Fine-tune vs Prompt','模型选型四维度','模型成本核算','模型 API SLA','多模型混合部署','模型灰度切换','模型安全与合规'],
   methodologies:[
     {name:'Prompt 四要素',desc:'角色 + 任务 + 限制 + 输出格式'},
     {name:'ICL · COT · 涌现 三能力',desc:'上下文学习 / 思维链 / 规模涌现'},
@@ -5318,12 +5318,14 @@ const KNOWLEDGE_MAP=[
   subtitle:'离线 Pipeline · 在线检索 · 切分策略',
   definition:'给大模型装"外挂知识库"的完整技术架构。从文档采集到语义检索，是 AI PM 必须深入的技术栈。',
   weeks:[2,6], courseCount:6,
-  concepts:['RAG','Pipeline','Chunk','递归字符切分','递归切分','章节切分','语义切分','父子切分','Contextual Chunking','结构化切分','冷热分层知识库','向量数据库','Query改写','多路检索','多路召回','Graph RAG','OCR','ASR','BGE-M3','pdfplumber','BeautifulSoup','DREAM 模型','召回率','离线链路','在线链路','RAG 元数据设计','truth_base'],
+  concepts:['RAG','Pipeline','Chunk','递归字符切分','递归切分','章节切分','语义切分','父子切分','Contextual Chunking','结构化切分','冷热分层知识库','向量数据库','Query改写','多路检索','多路召回','Graph RAG','OCR','ASR','BGE-M3','pdfplumber','BeautifulSoup','DREAM 模型','召回率','离线链路','在线链路','RAG 元数据设计','truth_base','RAG 数据五类分类','RAG 架构三代演进','Naive RAG','Advanced RAG','Modular RAG','Self-RAG','CRAG','RAG 检索路由','RAG 质量瓶颈','Lost in the Middle','RAG 产品化三要素','向量检索 vs 关键词检索'],
   methodologies:[
     {name:'离线 6 环节 Pipeline',desc:'A 采集 → B 解析 → C 清洗 → D 切分 → E 向量化 → F 索引'},
     {name:'在线 6 步流程',desc:'Query → 改写 → 多路检索 → 增强 → 生成 → 回答'},
     {name:'Query 改写六法',desc:'语义强化 / 歧义消除 / 上下文补全 / 意图拆解 / 领域术语 / 约束强化'},
-    {name:'2025 切分实战策略',desc:'5 方法对比 · 递归 60%+ 主流 · Contextual +30-49%'}
+    {name:'2025 切分实战策略',desc:'5 方法对比 · 递归 60%+ 主流 · Contextual +30-49%'},
+    {name:'RAG 三代演进',desc:'Naive(检索-拼接) → Advanced(前后优化) → Modular(组件化编排)'},
+    {name:'RAG 产品化三要素',desc:'数据治理 + 可观测评测 + 用户反馈闭环'}
   ],
   courses:[{week:1,key:'1-008'},{week:1,key:'1-008-2'},{week:1,key:'2-009'},{week:1,key:'2-009-2'},{week:1,key:'2-009-3'},{week:1,key:'2-009-4'}],
   slides:[{week:1,key:'w2-rag-intro'},{week:1,key:'w2-pipeline-abc'},{week:1,key:'w2-pipeline-def'},{week:1,key:'w2-chunking-strategy'},{week:1,key:'w2-online'},{week:1,key:'w2-query'},{week:1,key:'w2-graph-rag'},{week:1,key:'w2-dify'}],
@@ -5359,6 +5361,9 @@ const KNOWLEDGE_MAP=[
     {name:'四大分析框架',desc:'AARRR / UJM / OSM-OKR / 杜邦分析'},
     {name:'评测五步法',desc:'定指标 → 选方法 → 造评测集 → 执行 → 归因'},
     {name:'AI 产品四指标',desc:'意图识别 + 回答相关性 + 人工介入 + 多轮完成'},
+    {name:'模型选型 POC 方法',desc:'明确目标 → 准备用例 → 控制变量 → 多维打分 → 对比报告'},
+    {name:'自动化评测流水线',desc:'评测集管理 + 执行器 + 评分器(规则/LLM Judge) + 报告告警'},
+    {name:'评测集设计六原则',desc:'覆盖性 / 难度分级 / 边界覆盖 / 可复现 / 持续更新 / 独立性'},
     {name:'Prompt Pilot 六段闭环',desc:'生成→调试→批量→评分→优化→回归'},
     {name:'需求全生命周期',desc:'来源→需求池→翻译评估→PRD→评审开发→验收迭代'},
     {name:'AI 产品 PRD 框架',desc:'功能/非功能 + 数据/模型/Prompt/埋点/权限/并发/兜底'}
@@ -8540,7 +8545,37 @@ const NH_GLOSSARY=[
 {term:'学历包装话术',full:'',zh:'',cat:'求职方法论',week:[6],aliases:['自考话术','学历劣势包装','学历优势化'],desc:'低学历(自考本科 / 大专)在简历和面试中转化为优势的应对策略。核心思路：①简历教育经历如实填写，但不主动放大("非全日制"换成"自考本科" / 不写成"在读") + ②准备主动话术解释为何自考(强调工作中的求知欲与持续学习) + ③用"工作成果+技术研究能力"覆盖学历短板(项目案例+技术博客+开源贡献) + ④面试时主动转移焦点到能力证据。把"弱点"包装成"主动选择的成长路径"。'},
 {term:'跨行业简历包装',full:'',zh:'',cat:'求职方法论',week:[6],aliases:['转行简历','跨行业转岗','转行包装'],desc:'从 A 行业转到 B 行业的简历策略。思敏案例：医疗行业 10 年经验 → 转车企奇瑞，年薪 45 万 + 季度奖金。核心打法：①不强调"我懂车"(承认陌生) + ②强调"我懂全链路产品"(战略转型项目+商业收入增长，与具体行业无关的通用能力) + ③用 AI 辅助生成"匹配 JD 关键词"的简历(避免技术细节露怯) + ④面试中聚焦"非技术贡献"(战略 / 商业 / 用户) + ⑤承认技术面可能不过，但用其他维度赢得入职机会。'},
 {term:'精准投递策略',full:'',zh:'',cat:'求职方法论',week:[6],aliases:['投递策略','精准投递','城市分级投递'],desc:'求职投递的命中率优化方法。三阶段：①第一阶段投不想去的城市/公司(海投练手，提面试经验+心态) + ②第二阶段逐步提薪资期望(测试市场对自己的真实价格) + ③第三阶段精准投最想去的城市/公司(此时已积累话术 + 知道自己值多少 + 明确该公司业务和文化)。配合面试录音录像 + AI 复盘 → 每场面试都迭代回答。比"一开始就投目标公司"命中率高很多。'},
-{term:'面试反问三阶段',full:'',zh:'',cat:'求职方法论',week:[6],aliases:['反问策略三阶段','三阶段反问','反问技巧','反问三阶段','反问三阶段策略','反问环节','反问策略'],desc:'面试反问环节按面试官层级定制问题：①一面(技术面)反问"团队当前最关键的技术挑战 / 项目工具栈 / Code review 流程"，展示技术深度 + ②二面(管理面)反问"团队定位 / 跨部门协作模式 / 如何衡量产品经理绩效"，展示战略思维 + ③三面(HR/老板面)反问"未来一年公司的产品规划 / 关键里程碑 / 这个岗位 1-3 年成长路径"，展示长期匹配度。每个阶段反问内容应通过提前调研(官网/社交媒体/同事问询)定制，让面试官感到"这个人很在意我们公司"。'}
+{term:'面试反问三阶段',full:'',zh:'',cat:'求职方法论',week:[6],aliases:['反问策略三阶段','三阶段反问','反问技巧','反问三阶段','反问三阶段策略','反问环节','反问策略'],desc:'面试反问环节按面试官层级定制问题：①一面(技术面)反问"团队当前最关键的技术挑战 / 项目工具栈 / Code review 流程"，展示技术深度 + ②二面(管理面)反问"团队定位 / 跨部门协作模式 / 如何衡量产品经理绩效"，展示战略思维 + ③三面(HR/老板面)反问"未来一年公司的产品规划 / 关键里程碑 / 这个岗位 1-3 年成长路径"，展示长期匹配度。每个阶段反问内容应通过提前调研(官网/社交媒体/同事问询)定制，让面试官感到"这个人很在意我们公司"。'},
+// === 非课程知识源：飞书 wiki「RAG技术原理、架构演变与产品实践 5.6笔记」===
+{term:'RAG 数据五类分类',full:'RAG Data Classification',zh:'',cat:'RAG技术',source:'wiki',refs:['wiki:RAG技术原理架构演变与产品实践(5.6)'],aliases:['数据五类分类','RAG五类数据','5类数据分类'],desc:'RAG 系统中数据按用途分为五类：①结构化数据(数据库/表格/API) + ②半结构化数据(JSON/XML/Markdown) + ③非结构化数据(PDF/Word/网页/图片) + ④知识图谱数据(实体-关系三元组) + ⑤实时流式数据(日志/消息队列/传感器)。不同类型数据需要不同的解析和入库策略，是 RAG 离线 Pipeline 的第一个分支决策点。相关词条→离线链路、Pipeline。'},
+{term:'RAG 架构三代演进',full:'RAG Architecture Evolution',zh:'',cat:'RAG技术',source:'wiki',refs:['wiki:RAG技术原理架构演变与产品实践(5.6)'],aliases:['RAG三代架构','三代RAG','RAG演进'],desc:'RAG 架构从 Naive RAG → Advanced RAG → Modular RAG 三代演进：①Naive RAG(2020)：检索-拼接-生成，简单但召回质量低 + ②Advanced RAG(2023)：加入 Pre-Retrieval(Query改写/路由) + Post-Retrieval(Rerank/压缩) 优化 + ③Modular RAG(2024)：组件化拆分，支持任意组合编排(跳过检索/多次检索/自适应检索)。面试高频题。相关词条→Query改写、多路召回。'},
+{term:'Naive RAG',full:'',zh:'朴素检索增强生成',cat:'RAG技术',source:'wiki',refs:['wiki:RAG技术原理架构演变与产品实践(5.6)'],aliases:['基础RAG','简单RAG','naive rag'],desc:'RAG 第一代架构(2020)。流程：用户 Query → 向量化 → 相似度检索 Top-K → 拼接 Context → LLM 生成答案。优点：实现简单、成本低。缺点：①检索噪声大(无 Rerank) + ②无 Query 优化(一次检索定生死) + ③无法处理多跳问题。适用于内部知识问答等简单场景。相关词条→RAG 架构三代演进。'},
+{term:'Advanced RAG',full:'',zh:'增强型检索增强生成',cat:'RAG技术',source:'wiki',refs:['wiki:RAG技术原理架构演变与产品实践(5.6)'],aliases:['进阶RAG','高级RAG','advanced rag'],desc:'RAG 第二代架构(2023)。在 Naive RAG 基础上加入：①Pre-Retrieval 优化(Query 改写/拆解/路由选择检索器) + ②Retrieval 优化(混合检索/多路召回/元数据过滤) + ③Post-Retrieval 优化(Rerank 重排/Context 压缩/去重)。核心思想：检索前后各加一道"质检"，显著提升答案相关性。目前工业界主流方案。相关词条→Naive RAG、Modular RAG。'},
+{term:'Modular RAG',full:'',zh:'模块化检索增强生成',cat:'RAG技术',source:'wiki',refs:['wiki:RAG技术原理架构演变与产品实践(5.6)'],aliases:['模块化RAG','modular rag'],desc:'RAG 第三代架构(2024)。把 RAG 拆成独立可组合模块：Indexing / Pre-Retrieval / Retrieval / Post-Retrieval / Generation / Orchestration。特点：①支持跳过检索(LLM 直接回答) + ②支持多次迭代检索(Self-RAG/CRAG) + ③支持自适应路由(根据 Query 复杂度选择链路)。代表框架：LangChain、LlamaIndex。相关词条→Advanced RAG、Self-RAG。'},
+{term:'Self-RAG',full:'Self-Reflective RAG',zh:'自反思检索增强',cat:'RAG技术',source:'wiki',refs:['wiki:RAG技术原理架构演变与产品实践(5.6)'],aliases:['自反思RAG','self-rag','SRAG'],desc:'Modular RAG 的典型实现。LLM 生成答案后自我评估：①判断是否需要检索(不需要则直接回答) + ②检索后判断文档是否相关(不相关则丢弃) + ③生成后判断答案是否有支撑(无支撑则重新检索)。本质：给 RAG 加一个"自我纠错循环"。论文：Asai et al. 2023。相关词条→Modular RAG、Reflexion。'},
+{term:'CRAG',full:'Corrective RAG',zh:'纠正式检索增强',cat:'RAG技术',source:'wiki',refs:['wiki:RAG技术原理架构演变与产品实践(5.6)'],aliases:['纠正RAG','corrective rag','C-RAG'],desc:'另一种自适应 RAG 策略。流程：检索 → 评估检索质量(Correct/Ambiguous/Incorrect) → 分支处理：①Correct：直接用 + ②Ambiguous：补充网络搜索 + ③Incorrect：放弃检索结果，完全走网络搜索。核心思想：宁可不用烂文档，也不生成错答案。相关词条→Self-RAG、Modular RAG。'},
+{term:'RAG 检索路由',full:'Retrieval Router',zh:'',cat:'RAG技术',source:'wiki',refs:['wiki:RAG技术原理架构演变与产品实践(5.6)'],aliases:['检索路由','retrieval router','query router'],desc:'Advanced/Modular RAG 中的 Query 分发机制。根据 Query 类型/复杂度自动选择最优检索路径：①简单事实题 → 向量检索 + ②多跳推理题 → Graph RAG + ③实时题 → Web Search + ④代码题 → Code Search。实现方式：LLM 分类器 / 规则引擎 / 嵌入相似度。避免"一刀切"用同一条链路处理所有问题。相关词条→Query改写、Graph RAG。'},
+{term:'RAG 质量瓶颈',full:'',zh:'',cat:'RAG技术',source:'wiki',refs:['wiki:RAG技术原理架构演变与产品实践(5.6)'],aliases:['RAG瓶颈','RAG常见问题','RAG失败模式'],desc:'RAG 系统效果不佳的五大常见原因：①切分粒度不当(太粗丢细节/太细丢上下文) + ②Embedding 模型与数据领域不匹配(通用模型在专业领域效果差) + ③检索噪声(Top-K 中混入无关文档) + ④Context 超长导致 LLM "迷失在中间"(Lost in the Middle) + ⑤缺乏评测闭环(不知道哪里出了问题)。每个瓶颈对应不同优化策略。相关词条→离线链路、评测五步法。'},
+{term:'Lost in the Middle',full:'',zh:'中间迷失问题',cat:'RAG技术',source:'wiki',refs:['wiki:RAG技术原理架构演变与产品实践(5.6)'],aliases:['中间迷失','lost in middle'],desc:'LLM 处理长 Context 时的已知缺陷(Liu et al. 2023)：模型对开头和结尾的信息关注度高，对中间部分关注度显著下降。影响：RAG 检索出 10 篇文档拼在一起，排在第 5-7 位的关键信息可能被模型忽略。应对：①Rerank 后把最相关文档放首尾 + ②压缩 Context 减少总长度 + ③分段生成再合并。相关词条→RAG 质量瓶颈。'},
+{term:'RAG 产品化三要素',full:'',zh:'',cat:'RAG技术',source:'wiki',refs:['wiki:RAG技术原理架构演变与产品实践(5.6)'],aliases:['RAG产品化','RAG落地三要素'],desc:'RAG 从技术 Demo 到真正产品的三个必备要素：①数据治理体系(数据源管理 + 更新频率 + 版本控制 + 权限隔离) + ②可观测评测(端到端指标 + 分段归因 + Bad Case 库) + ③用户反馈闭环(点赞/踩 → 标注 → 回流训练数据)。缺任何一环都只是"Demo"不是"产品"。PM 需要推动工程团队建设这三个基础设施。相关词条→评测五步法、RAG 元数据设计。'},
+{term:'向量检索 vs 关键词检索',full:'',zh:'',cat:'RAG技术',source:'wiki',refs:['wiki:RAG技术原理架构演变与产品实践(5.6)'],aliases:['向量vs关键词','语义检索vs词匹配','vector vs keyword'],desc:'RAG 两大检索范式对比：向量检索(Embedding 相似度)擅长语义匹配("怎么减肥"能匹配"控制热量摄入")但对专有名词/数字/代码效果差；关键词检索(BM25/倒排索引)擅长精确匹配(型号/法条/API名)但无法理解语义。工业级方案=两者混合(Hybrid Search)后 Rerank。相关词条→多路召回、多路检索。'},
+// === 非课程知识源：PDF「AI产品-模型选型｜评测」===
+{term:'模型选型四维度',full:'Model Selection 4D Framework',zh:'',cat:'模型选型',source:'pdf',refs:['pdf:AI产品-模型选型与评测'],aliases:['选型四维度','模型选型框架','4D选型'],desc:'AI 产品模型选型的四个核心评估维度：①能力维度(任务匹配度/多模态/上下文长度/推理能力) + ②成本维度(Token 单价/并发成本/Fine-tune 成本/硬件需求) + ③服务维度(API 稳定性/SLA/限流策略/技术支持) + ④合规维度(数据驻留/内容安全/牌照资质/隐私协议)。四维度加权打分后形成选型矩阵。相关词条→模型服务化四种模式。'},
+{term:'模型能力评测',full:'Model Capability Evaluation',zh:'',cat:'模型选型',source:'pdf',refs:['pdf:AI产品-模型选型与评测'],aliases:['能力评测','模型能力测试','capability eval'],desc:'评估大模型核心能力的标准化方法。六大能力维度：①语言理解(阅读理解/摘要/分类) + ②逻辑推理(数学/代码/因果) + ③知识运用(事实问答/专业领域) + ④生成质量(流畅性/连贯性/创意) + ⑤指令遵循(格式/约束/多步指令) + ⑥安全对齐(拒绝有害/价值观)。需要针对具体业务场景定制评测集，公开 Benchmark 仅作参考。相关词条→Benchmark、评测五步法。'},
+{term:'Benchmark',full:'',zh:'基准评测集',cat:'模型选型',source:'pdf',refs:['pdf:AI产品-模型选型与评测'],aliases:['基准测试','公开评测','benchmark'],desc:'业界公开的标准化模型评测数据集。主流 Benchmark：①MMLU(多学科知识,57科) + ②HumanEval(代码生成) + ③GSM8K(小学数学推理) + ④MT-Bench(多轮对话) + ⑤C-Eval(中文综合) + ⑥CMMLU(中文多学科)。注意：Benchmark 分数高≠产品效果好，因为公开题可能被"刷"、且不代表你的业务场景。必须补充私有评测集。相关词条→模型能力评测、LMArena。'},
+{term:'模型成本核算',full:'Model Cost Analysis',zh:'',cat:'模型选型',source:'pdf',refs:['pdf:AI产品-模型选型与评测'],aliases:['成本核算','token成本','模型TCO'],desc:'AI 产品模型成本的完整核算框架。三层成本：①直接调用成本(Input Token × 单价 + Output Token × 单价 × 日均调用量) + ②隐性成本(重试/超时/缓存失效/Prompt 工程人力) + ③规模成本(并发峰值需预留 / Fine-tune 训练费 / 向量库存储)。关键公式：月成本 ≈ (平均 Token 数 × 单价) × 日调用量 × 30 × 冗余系数1.3。相关词条→Token、ARPU。'},
+{term:'模型 API SLA',full:'Service Level Agreement',zh:'服务等级协议',cat:'模型选型',source:'pdf',refs:['pdf:AI产品-模型选型与评测'],aliases:['SLA','服务等级','API SLA','可用性'],desc:'模型 API 服务商承诺的服务质量指标。核心 SLA 项：①可用性(99.9%=年停机<8.7h) + ②延迟(TTFT<2s / P99<5s) + ③限流(RPM/TPM 配额) + ④故障响应(工单SLA<1h) + ⑤数据保护(不训练/不存储)。选型时务必看实际 SLA 而非宣传，关注赔偿条款和历史故障频次。相关词条→TTFT、P90-P99。'},
+{term:'模型选型矩阵',full:'Model Selection Matrix',zh:'',cat:'模型选型',source:'pdf',refs:['pdf:AI产品-模型选型与评测'],aliases:['选型矩阵','决策矩阵','model matrix'],desc:'将多个候选模型按评估维度打分后形成的对比矩阵。构建步骤：①确定评估维度及权重(能力40%/成本30%/服务20%/合规10%) + ②每个维度设 1-5 分评分标准 + ③多人独立打分取均值 + ④加权总分排序 + ⑤Top-3 进入 POC 实测。避免"拍脑袋选模型"，让决策可追溯可复盘。相关词条→模型选型四维度、POC。'},
+{term:'模型灰度切换',full:'Model Gradual Migration',zh:'',cat:'模型选型',source:'pdf',refs:['pdf:AI产品-模型选型与评测'],aliases:['模型切换','灰度换模型','model migration'],desc:'线上产品替换底层模型时的安全策略。四步灰度流程：①影子模式(新模型跑但不出结果，只记录对比日志) + ②小流量验证(5%流量切新模型，观察指标) + ③逐步放量(5%→20%→50%→100%，每阶段评估) + ④回滚预案(指标下降超阈值自动回切旧模型)。核心原则：切模型=换引擎，必须像灰度发布一样谨慎。相关词条→灰度发布、AB 测试。'},
+{term:'多模型混合部署',full:'Multi-Model Ensemble',zh:'',cat:'模型选型',source:'pdf',refs:['pdf:AI产品-模型选型与评测'],aliases:['混合部署','多模型策略','model ensemble','模型路由'],desc:'同一产品同时使用多个模型的架构策略。三种模式：①任务路由(简单任务→小模型/复杂任务→大模型，降本40%+) + ②级联调用(小模型先答，置信度低时升级大模型) + ③投票/融合(多模型同时答，取多数或加权融合)。需要一个路由层判断Query复杂度。适用于对成本敏感但又不能牺牲效果的场景。相关词条→RAG 检索路由、模型成本核算。'},
+{term:'Fine-tune vs Prompt',full:'',zh:'微调 vs 提示词',cat:'模型选型',source:'pdf',refs:['pdf:AI产品-模型选型与评测'],aliases:['微调vs提示','fine-tune对比prompt','何时微调'],desc:'两种模型定制策略的选择决策。优先 Prompt/RAG：①数据量<1000条 + ②任务变化频繁 + ③需要快速验证。考虑 Fine-tune：①有大量高质量标注数据(>5000) + ②任务稳定不常变 + ③需要特定风格/格式 + ④需要缩短输出延迟(不再需要长 Prompt)。混合策略：Fine-tune 基础能力 + RAG 补充实时知识 + Prompt 控制输出格式。相关词条→SFT、Prompt Engineering。'},
+{term:'模型安全与合规',full:'Model Safety & Compliance',zh:'',cat:'模型选型',source:'pdf',refs:['pdf:AI产品-模型选型与评测'],aliases:['模型合规','AI安全合规','model compliance'],desc:'AI 产品模型选型中的合规必检项。四层合规：①数据合规(用户数据是否出境/是否用于训练/存储时限) + ②内容合规(输出过滤/敏感词/政治敏感) + ③资质合规(算法备案/生成式AI服务许可) + ④行业合规(金融/医疗/教育各有特殊要求)。国内产品必须检查：算法备案号 + 深度合成标识 + 用户协议明示。相关词条→模型选型四维度。'},
+{term:'评测集设计原则',full:'Eval Set Design Principles',zh:'',cat:'模型选型',source:'pdf',refs:['pdf:AI产品-模型选型与评测'],aliases:['评测集设计','eval set原则','测试集设计'],desc:'构建高质量评测集的六项原则：①覆盖性(核心场景100%覆盖) + ②难度分级(easy/medium/hard按3:4:3) + ③边界覆盖(正常+异常+极端) + ④可复现(固定seed/版本) + ⑤持续更新(Bad Case 自动回流) + ⑥独立性(评测集不能出现在训练数据中)。最小可用评测集建议>200条。相关词条→评测五步法、评测集来源。'},
+{term:'自动化评测流水线',full:'Automated Eval Pipeline',zh:'',cat:'模型选型',source:'pdf',refs:['pdf:AI产品-模型选型与评测'],aliases:['自动评测','eval pipeline','评测自动化'],desc:'把模型评测从手动变成自动化 CI/CD 的工程实践。四个组件：①评测集管理(版本化存储+标注工具) + ②评测执行器(批量调用+结果收集) + ③评分器(规则/LLM Judge/人工) + ④报告与告警(指标看板+回归检测)。每次模型更新/Prompt 修改自动触发评测，分数下降则阻断上线。相关词条→回归测试、Prompt Pilot。'},
+{term:'LLM Judge',full:'',zh:'大模型评分器',cat:'模型选型',source:'pdf',refs:['pdf:AI产品-模型选型与评测'],aliases:['LLM评分','模型评分器','AI评分器','LLM judge'],desc:'用一个 LLM 来评估另一个 LLM 输出质量的方法。优点：成本低(vs 人工)、速度快、可批量。风险：①自我偏好(GPT-4 倾向给自己高分) + ②位置偏差(先出现的答案得分高) + ③格式偏好(长答案≠好答案)。最佳实践：多个 Judge 交叉评 + 抽样人工校准 + 打乱顺序。适用于大规模评测(>1000条)的初筛。相关词条→LLM 评分器、GSB。'},
+{term:'模型选型 POC 方法',full:'',zh:'',cat:'模型选型',source:'pdf',refs:['pdf:AI产品-模型选型与评测'],aliases:['选型POC','模型POC','model POC'],desc:'模型选型阶段的 POC 验证标准流程：①明确验证目标(哪些能力/哪些场景) + ②准备测试用例(≥50条，覆盖核心+边界) + ③控制变量(同一Prompt/同一数据/只换模型) + ④多维度打分(准确率/延迟/成本/格式遵循) + ⑤输出对比报告(含 Bad Case 分析)。时间控制：单个模型 POC 不超过 3 天。结论格式："模型X在场景A达标/不达标，原因是..."。相关词条→POC、模型选型矩阵。'},
+{term:'Prompt 版本管理',full:'Prompt Version Control',zh:'',cat:'模型选型',source:'pdf',refs:['pdf:AI产品-模型选型与评测'],aliases:['prompt版本','提示词版本管理','prompt versioning'],desc:'产品级 Prompt 的版本化管理规范。要求：①每个 Prompt 有唯一 ID + 版本号(v1.0/v1.1) + ②每次修改记录变更原因 + 对应评测分数变化 + ③线上 Prompt 与代码分离(配置中心/数据库，非硬编码) + ④支持 A/B 测试(同时运行两个版本对比) + ⑤回滚机制(新版本效果差时 1 分钟内回切)。Prompt 是 AI 产品的核心资产，必须像代码一样管理。相关词条→Prompt Pilot、回归测试。'},
+{term:'模型效果归因',full:'Model Performance Attribution',zh:'',cat:'模型选型',source:'pdf',refs:['pdf:AI产品-模型选型与评测'],aliases:['效果归因','模型归因','performance attribution'],desc:'当 AI 产品效果不佳时，定位问题出在哪个环节的分析方法。RAG 场景归因链：①检索失败(该召回的没召回) → 检查 Embedding/索引 + ②检索正确但排序差(相关文档排在后面) → 检查 Rerank + ③Context 正确但生成错(模型理解/遵循问题) → 检查 Prompt/模型 + ④全链路正确但用户不满意 → 检查预期管理/UI 呈现。逐层排查，避免"一出问题就换模型"。相关词条→Bad Case 归因、评测层次。'}
 ];
 
 // ==========================================
