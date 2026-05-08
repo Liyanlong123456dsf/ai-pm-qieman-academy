@@ -107,6 +107,25 @@
       <div class="flow-arrow">→</div>
       <div class="flow-step"><div class="flow-icon">🤖</div><div class="flow-num">6</div><h3>生成回答</h3><p>大模型基于检索到的内容，生成准确、可追溯的回答</p></div>
     </div>
+    <!-- RAG 数据五类分类 (来自飞书 wiki: RAG技术原理架构演变与产品实践 5.6) -->
+    <div class="explain-block" style="margin-top:32px">
+      <h3>RAG 系统的数据分类（五大类型）</h3>
+      <p>RAG 系统处理的数据按用途分为五类，不同类型需要不同的解析和入库策略，是离线 Pipeline 的第一个分支决策点：</p>
+      <div class="vs-table">
+        <table>
+          <thead><tr><th>数据类型</th><th>示例</th><th>解析策略</th></tr></thead>
+          <tbody>
+            <tr><td><strong>① 结构化数据</strong></td><td>数据库、表格、API 返回</td><td>Text2SQL / Pandas 直接查询</td></tr>
+            <tr><td><strong>② 半结构化数据</strong></td><td>JSON、XML、Markdown</td><td>pdfplumber / BeautifulSoup 解析</td></tr>
+            <tr><td><strong>③ 非结构化数据</strong></td><td>PDF、Word、网页、图片</td><td>OCR + DREAM 模型 + 语义切分</td></tr>
+            <tr><td><strong>④ 知识图谱数据</strong></td><td>实体-关系三元组</td><td>Graph RAG / 图数据库</td></tr>
+            <tr><td><strong>⑤ 实时流式数据</strong></td><td>日志、消息队列、传感器</td><td>流处理 + 增量索引</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="glossary-note">💡 <strong>PM 决策点：</strong>先盘点业务数据属于哪几类，再选择对应的解析工具和入库路径。大多数企业场景以 ① + ③ 为主。</p>
+    </div>
+
     <div class="rag-why">
       <h3>为什么需要 RAG？</h3>
       <div class="why-grid">
@@ -516,6 +535,22 @@
         </div>
       </div>
     </details>
+
+    <!-- 向量检索 vs 关键词检索 (来自飞书 wiki: RAG技术原理架构演变与产品实践 5.6) -->
+    <h3 class="sub-heading">向量检索 vs 关键词检索：何时用哪种？</h3>
+    <p class="section-explain">选错检索方式是 RAG 质量问题的常见根因。两种检索各有适用场景：</p>
+    <div class="vs-table">
+      <table>
+        <thead><tr><th>维度</th><th>向量检索</th><th>关键词检索</th></tr></thead>
+        <tbody>
+          <tr><td><strong>匹配方式</strong></td><td>语义相似度（意思接近就能匹配）</td><td>精确/模糊字符匹配（必须出现关键词）</td></tr>
+          <tr><td><strong>擅长</strong></td><td>同义词、换说法、跨语言</td><td>专有名词、编号、短文本、低频词</td></tr>
+          <tr><td><strong>弱点</strong></td><td>精确匹配差，"编号查找"容易漏</td><td>语义扩展差，"换个说法"就找不到</td></tr>
+          <tr><td><strong>成本</strong></td><td>需 Embedding 模型 + 向量数据库</td><td>传统倒排索引，成本低</td></tr>
+          <tr><td><strong>最佳实践</strong></td><td colspan="2" style="text-align:center"><strong>混合搜索</strong>：两者结合 + Rerank 重排，取长补短 ✅</td></tr>
+        </tbody>
+      </table>
+    </div>
 
     <!-- 6. Three Search Strategies -->
     <h3 class="sub-heading">六、三大搜索策略 <a href="../index.html#note=W2-1-0" class="xlink xlink-light" title="课程009·混合搜索+多路查询"><span class="xlink-icon">📚</span>笔记: 多路查询</a></h3>
